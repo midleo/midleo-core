@@ -10,10 +10,10 @@ Midleo Core is software made by IT for IT. It can help people working in adminis
 Some screenshots from the Midleo app:
 
 ### Project management
-![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/service-management.png)
+![<img src="https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/service-management.png"  style="height:75%; width:75%" >](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/service-management.png)
 
 ### Application list
-![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/applications.png)
+![<img src="https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/applications.png"  style="height:75%; width:75%" >](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/applications.png)
 
 ### Create package for IBM MQ deployment
 ![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/ibm-mq-package.png)
