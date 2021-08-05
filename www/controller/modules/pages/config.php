@@ -954,7 +954,7 @@ if(isset($_POST['changepass'])){
                         </div>
                     </div>
 
-                    <div class="row"> <?php include "public/modules/license.php";?>
+                    <div class="row"> 
                         <div class="col-lg-4 col-md-12">
                             <div class="card">
                                 <div class="card-header">

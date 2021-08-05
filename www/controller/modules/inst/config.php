@@ -181,14 +181,12 @@ class Class_install{
       }   
       include "public/modules/css.php";    ?>
      </head>
-<body id="ngApp" ng-app="ngApp" ng-controller="instCtrl">
+<body id="ngApp" ng-app="ngApp" ng-controller="instCtrl" style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
 <section id="wrapper">
         <div class="login-register">
-        <div class="row">
-        <div class="col-md-6" style="background-image:url(/assets/images/login-idea.svg);background-position:right;background-repeat: no-repeat;">
-        </div>
-        <div class="col-md-6 text-start" style="height:100%;">
-        <div class="login-box card" style="width: 500px;">
+        <div class="row justify-content-center">
+        <div class="col-md-4">
+        <div class="card" style="width: 500px;">
                 <div class="card-body">
                     <form class="form-horizontal form-material text-center" id="loginform" action="" method="post" ng-app>
   
@@ -207,29 +205,17 @@ class Class_install{
       <div class="alert alert-info">Please install the scripts from /data/db/postgresql and then proceed</div>
       <?php } ?>
     
-          <div class="form-group row">
-              <label class="form-control-label text-lg-right col-md-4">Admin Fullname</label>
-              <div class="col-md-8">
-              <input name="admfname" type="text" class="form-control" required="">
-            </div>
+          <div class="form-group mb-2">
+              <input name="admfname" type="text" class="form-control" required="" placeholder="Admin Fullname">
           </div>
-          <div class="form-group row">
-              <label class="form-control-label text-lg-right col-md-4">Admin Email</label>
-              <div class="col-md-8">
-               <input name="admemail" type="text" class="form-control">
-            </div>
+          <div class="form-group mb-2">
+               <input name="admemail" type="text" class="form-control" placeholder="Admin Email">
           </div>
-          <div class="form-group row">
-              <label class="form-control-label text-lg-right col-md-4">Admin username</label>
-              <div class="col-md-8">
-              <input name="admuser" type="text" class="form-control" required="">
-            </div>
+          <div class="form-group mb-2">
+              <input name="admuser" type="text" class="form-control" required="" placeholder="Admin username">
           </div>
-          <div class="form-group row">
-              <label class="form-control-label text-lg-right col-md-4">Admin password</label>
-              <div class="col-md-8">
-               <input name="admpass" type="password" class="form-control" required="">
-            </div>
+          <div class="form-group mb-2">
+               <input name="admpass" type="password" class="form-control" required="" placeholder="Admin password">
           </div>
           <button type="submit" class="btn btn-success" name="doUserInst"><i class="mdi mdi-account-plus-outline"></i>&nbsp;Create</button>
          </form>
@@ -270,14 +256,12 @@ include "public/modules/template_end.php";
       }
       include "public/modules/css.php";?>
         </head>
-<body id="ngApp" ng-app="ngApp" ng-controller="instCtrl">
-<section id="wrapper">
+<body id="ngApp" ng-app="ngApp" ng-controller="instCtrl" style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+    <section id="wrapper">
         <div class="login-register">
-        <div class="row">
-        <div class="col-md-6" style="background-image:url(/assets/images/login-idea.svg);background-position:right;background-repeat: no-repeat;">
-        </div>
-        <div class="col-md-6 text-start" style="height:100%;">
-        <div class="login-box card" style="width: 500px;">
+        <div class="row justify-content-center">
+        <div class="col-md-4">
+        <div class="card" style="width: 500px;">
                 <div class="card-body">
                     <form class="form-material text-center" id="form" name="form" action="" method="post" ng-app>
   
@@ -291,67 +275,39 @@ include "public/modules/template_end.php";
 
 
         
-          <div class="form-group row">
-              <label class="form-control-label text-lg-right col-md-4" ng-class=" {'has-error':!db.type}">Database type</label>
-              <div class="col-md-8">
+                        <div class="form-group mb-2">
               <select ng-required="true" name="dbtype" ng-model="db.type" class="form-control">
-                <option value="">Please select</option>
+                <option value="">Database type</option>
                 <option value="mysql">Mysql Database</option>
                 <option value="mssql">Microsoft SQL Database</option>
                 <option value="sqlite">SQLite Database</option>
                 <option value="oracle">Oracle Database</option>
                 <option value="postgresql">PostgreSQL Database</option>
               </select>
-              </div>
           </div>
-          <div class="form-group row" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'">
-            
-              <label class="form-control-label text-lg-right col-md-4" ng-class=" {'has-error':!db.dbhost}">Database Host</label>
-              <div class="col-md-8">
-              <input ng-model="db.dbhost" name="dbhost" ng-required="true" type="text" class="form-control">
-            </div>
+          <div class="form-group mb-2" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'">
+              <input ng-model="db.dbhost" name="dbhost" ng-required="true" type="text" class="form-control" placeholder="Database Host">
           </div>
-          <div class="form-group row" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'">
-              <label class="form-control-label text-lg-right col-md-4" ng-class=" {'has-error':!db.dbname}">Database Name</label>
-              <div class="col-md-8">
-               <input ng-model="db.dbname" name="dbname" ng-required="true" type="text" class="form-control">
-            </div>
+          <div class="form-group mb-2" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'">
+               <input ng-model="db.dbname" name="dbname" ng-required="true" type="text" class="form-control" placeholder="Database Name">
           </div>
-          <div class="form-group row" ng-show="db.type=='oracle'">
-          <label class="form-control-label text-lg-right col-md-4">Oracle DB port</label>
-          <div class="col-md-8">
-              <input ng-model="db.oracle_port" name="oracle_port" type="text" class="form-control">
-            </div>
+          <div class="form-group mb-2" ng-show="db.type=='oracle'">
+              <input ng-model="db.oracle_port" name="oracle_port" type="text" class="form-control" placeholder="Oracle DB port">
           </div>
-          <div class="form-group row" ng-show="db.type=='oracle'">
-              <label class="form-control-label text-lg-right col-md-4">Oracle Service name</label>
-              <div class="col-md-8">
-                <input ng-model="db.oracle_sn" name="oracle_sn" type="text" class="form-control">
-            </div>
+          <div class="form-group mb-2" ng-show="db.type=='oracle'">
+                <input ng-model="db.oracle_sn" name="oracle_sn" type="text" class="form-control" placeholder="Oracle Service name">
           </div>
-          <div class="form-group row" ng-show="db.type=='oracle'">
-            <label class="form-control-label text-lg-right col-md-4">Oracle SID</label>
-            <div class="col-md-8">
-             <input ng-model="db.oracle_sid" name="oracle_sid" type="text" class="form-control">
-            </div>
+          <div class="form-group mb-2" ng-show="db.type=='oracle'">
+             <input ng-model="db.oracle_sid" name="oracle_sid" type="text" class="form-control" placeholder="Oracle SID">
           </div>
-          <div class="form-group row" ng-show="db.type=='mssql'">
-              <label class="form-control-label text-lg-right col-md-4">ODBC driver name</label>
-              <div class="col-md-8">
-              <input ng-model="db.odbc_name" name="odbc_name" type="text" class="form-control">
-            </div>
+          <div class="form-group mb-2" ng-show="db.type=='mssql'">
+              <input ng-model="db.odbc_name" name="odbc_name" type="text" class="form-control" placeholder="ODBC driver name">
           </div>
-          <div class="form-group row" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'">
-              <label class="form-control-label text-lg-right col-md-4" ng-class=" {'has-error':!db.dbuser}">Username</label>
-              <div class="col-md-8">
-              <input ng-required="true" name="dbuser" ng-model="db.dbuser" type="text" class="form-control">
-            </div>
+          <div class="form-group mb-2" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'">
+              <input ng-required="true" name="dbuser" ng-model="db.dbuser" type="text" class="form-control" placeholder="Username">
           </div>
-          <div class="form-group row" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'">
-              <label class="form-control-label text-lg-right col-md-4" ng-class=" {'has-error':!db.dbpass}">Password</label>
-              <div class="col-md-8">
-              <input ng-required="true" name="dbpass" ng-model="db.dbpass" type="password" class="form-control">
-            </div>
+          <div class="form-group mb-2" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'">
+              <input ng-required="true" name="dbpass" ng-model="db.dbpass" type="password" class="form-control" placeholder="Password">
           </div>
           <button id="btn-db-check" ng-show="db.type=='mysql' || db.type=='oracle' || db.type=='mssql' || db.type=='postgresql'" type="button" class="btn btn-light" ng-click="form.$valid && checkdb()"><i class="mdi mdi-cog-sync-outline"></i>&nbsp;Test connection</button>
           <button ng-hide="db.type=='sqlite'" id="btn-db-install" type="submit" name="doDBinstall" class="btn btn-light" style="display:none;" disabled="disabled"><i class="mdi mdi-database-import"></i>&nbsp;Install</button>

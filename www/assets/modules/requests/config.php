@@ -143,7 +143,7 @@ class Class_requests{
     echo '<div class="row"><div class="col-12">';
     ?>
     <?php if(!empty($thisarray["p1"])){ include "pages/".$thisarray["p1"].".php";} else {  ?>
-    <?php include "public/modules/license.php";?>
+    
     
 
 <div id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">

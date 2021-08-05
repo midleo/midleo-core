@@ -11,7 +11,7 @@
 <div class="page-wrapper"><div class="container-fluid">
 <?php  
 include "public/modules/breadcrumb.php";?>
-<?php include "public/modules/license.php";?>
+
     
        
         <form name="form" action="" enctype="multipart/form-data" method="post" class="form-horizontal">

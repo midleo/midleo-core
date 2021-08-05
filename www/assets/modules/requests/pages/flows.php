@@ -2,7 +2,7 @@
   $sql="select * from requests where sname=?";
   $q = $pdo->prepare($sql);
   $q->execute(array($thisarray["p2"]));
-  if($zobj = $q->fetch(PDO::FETCH_ASSOC)){ ?><?php include "public/modules/license.php";?>
+  if($zobj = $q->fetch(PDO::FETCH_ASSOC)){ ?>
 <div class="card">
   <div class="card-header">
     <h2>List of created Message flows/sets for request <b><?php echo $zobj['reqname'];?></b></h2>

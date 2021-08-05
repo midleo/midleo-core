@@ -36,7 +36,7 @@ class Class_server{
     CURLOPT_TIMEOUT=>30,
     CURLOPT_HTTPPROXYTUNNEL=>true,
     CURLOPT_SSL_VERIFYPEER=> false,
-    CURLOPT_POSTFIELDS=>"lickey=".$website['licensekey']."&lastupdate=".$lastupdate,
+    CURLOPT_POSTFIELDS=>"lastupdate=".$lastupdate,
     CURLOPT_USERAGENT => 'MidlEO app user agent:'.$website['licensekey']
     ));
     } else {
@@ -48,7 +48,7 @@ class Class_server{
     CURLOPT_CONNECTTIMEOUT => 30,
     CURLOPT_TIMEOUT=>30,
     CURLOPT_SSL_VERIFYPEER=> false,
-    CURLOPT_POSTFIELDS=>"lickey=".$website['licensekey']."&lastupdate=".$lastupdate,
+    CURLOPT_POSTFIELDS=>"lastupdate=".$lastupdate,
     CURLOPT_USERAGENT => 'MidlEO app user agent:'.$website['licensekey']
     ));
     }
@@ -119,7 +119,6 @@ class Class_server{
     CURLOPT_TIMEOUT=>30,
     CURLOPT_HTTPPROXYTUNNEL=>true,
     CURLOPT_SSL_VERIFYPEER=> false,
-    CURLOPT_POSTFIELDS=>"lickey=".$website['licensekey'],
     CURLOPT_USERAGENT => 'MidlEO app user agent:'.$website['licensekey']
     ));
     } else {
@@ -131,7 +130,6 @@ class Class_server{
     CURLOPT_CONNECTTIMEOUT => 30,
     CURLOPT_TIMEOUT=>30,
     CURLOPT_SSL_VERIFYPEER=> false,
-    CURLOPT_POSTFIELDS=>"lickey=".$website['licensekey'],
     CURLOPT_USERAGENT => 'MidlEO app user agent:'.$website['licensekey']
     ));
     }

@@ -3,7 +3,7 @@
   $q = $pdo->prepare($sql);
   $q->execute(array($thisarray["p2"]));
   if($zobj = $q->fetch(PDO::FETCH_ASSOC)){
-    ?><?php include "public/modules/license.php";?>
+    ?>
 <div class="card">
   <div class="card-header">
     <h2>MQFTE objects for request <b><?php echo $zobj['reqname'];?></b></h2>

@@ -26,7 +26,7 @@ class notiffClass{
       ."<body>".$body."</body></html>";
     return $htmlbody;
   }
-  public static function checkUpdate($lickey,$proxy="",$proxy_auth=""){
+  public static function checkUpdate($proxy="",$proxy_auth=""){
     $url="https://midleo.com/api/checkupdate";
     $ch = curl_init();
     if(!empty($proxy)){
@@ -39,9 +39,7 @@ class notiffClass{
     CURLOPT_CONNECTTIMEOUT => 300,
     CURLOPT_TIMEOUT=>300,
     CURLOPT_HTTPPROXYTUNNEL=>true,
-    CURLOPT_SSL_VERIFYPEER=> false,
-    CURLOPT_POSTFIELDS=>"lickey=".$lickey,
-    CURLOPT_USERAGENT => 'MidlEO app user agent:'.$lickey
+    CURLOPT_SSL_VERIFYPEER=> false
     ));
     } else {
     curl_setopt_array($ch, array(
@@ -50,9 +48,7 @@ class notiffClass{
     CURLOPT_POST =>1,
     CURLOPT_CONNECTTIMEOUT => 3,
     CURLOPT_TIMEOUT=>3,
-    CURLOPT_SSL_VERIFYPEER=> false,
-    CURLOPT_POSTFIELDS=>"lickey=".$lickey,
-    CURLOPT_USERAGENT => 'MidlEO app user agent:'.$lickey
+    CURLOPT_SSL_VERIFYPEER=> false
     ));
     }
    $result= curl_exec ($ch);

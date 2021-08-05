@@ -55,7 +55,7 @@ class Class_browse{
     ?>
     <div class="page-wrapper"><div class="container-fluid">
     <?php  include "public/modules/breadcrumb.php";?>
-  <?php include "public/modules/license.php";?>
+  
   <?php if(file_exists(__DIR__."/browse/".$thisarray['p1'].".php")){ include "browse/".$thisarray['p1'].".php";}   else { textClass::PageNotFound(); }?>
     </div>
 </div>

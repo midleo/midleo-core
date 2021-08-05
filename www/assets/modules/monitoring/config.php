@@ -257,7 +257,7 @@ class Class_monitoring{
         textClass::PageNotFound();
      }
         } else { ?>
-        <?php include "public/modules/license.php";?>
+        
 
         <div id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
             <div class="row p-0">

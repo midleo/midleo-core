@@ -75,7 +75,7 @@ include "public/modules/css.php"; ?>
 <?php include "public/modules/breadcrumb.php";
     echo '<div class="row"><div class="col-12">'; ?>
   
-  <?php include "public/modules/license.php";?>
+  
     
        
 <?php $sql="select deployed,assigned,reqname,reqtype from requests where sname=?";

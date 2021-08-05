@@ -16,9 +16,9 @@ class Class_cp{
     include "public/modules/css.php"; 
     if(empty($_SESSION['appnewver']) && $website['check_new_ver']==1){
     if(!empty($website['proxy_host'])){
-      $checkupdv=json_decode(notiffClass::checkUpdate($website['licensekey'],$website['proxy_host'].":".$website['proxy_port'],$_SESSION['user'].":".documentClass::decryptIt($_SESSION['usrpwd'])),true);
+      $checkupdv=json_decode(notiffClass::checkUpdate($website['proxy_host'].":".$website['proxy_port'],$_SESSION['user'].":".documentClass::decryptIt($_SESSION['usrpwd'])),true);
     } else {   
-      $checkupdv=json_decode(notiffClass::checkUpdate($website['licensekey']),true);  
+      $checkupdv=json_decode(notiffClass::checkUpdate(),true);  
     }
     if(bccomp($checkupdv['version'], $appver, 2)==1){ $_SESSION['lastupdate']=$lastupdate; $_SESSION['appnewver']=$checkupdv['version']; $_SESSION['appnewvernum']=$checkupdv['version']; } else { $_SESSION['appnewver']="no"; $_SESSION['appnewvernum']="0"; }
     $err[]=$checkupdv['errorlog']; 
@@ -90,7 +90,7 @@ if($zobj = $q->fetchAll()){
 </div>
 </div>
       <div class="row"><div class="col-md-6"> 
-        <?php include "public/modules/license.php";?>
+        
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -473,7 +473,7 @@ class Class_cpinfo{
     include "public/modules/headcontent.php"; ?>
     <div class="page-wrapper"><div class="container-fluid">
 <?php include "public/modules/breadcrumb.php"; ?>
-<?php include "public/modules/license.php";?>
+
     <?php if($thisarray['p1']=="new"){ ?>
       <form class="form-horizontal form-material" action="" method="post" enctype="multipart/form-data" name="frmUpload" onSubmit="return validateForm();">
 

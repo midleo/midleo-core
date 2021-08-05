@@ -24,7 +24,7 @@
   //    header("Location: /requests/files/".htmlspecialchars($thisarray["p2"])."/?");
     } 
     ?>
-    <?php include "public/modules/license.php";?>
+    
     <div class="row">
           <div class="col-md-3 position-relative">
               <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Search in logs">

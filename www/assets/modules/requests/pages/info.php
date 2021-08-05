@@ -55,7 +55,7 @@ $breadcrumb["link2"]=($thisarray["p1"]=="type"?"":"/reqinfo/".$thisarray["p1"]);
             <div class="container-fluid">
                
                 <?php  include "public/modules/breadcrumb.php";?>
-                <?php include "public/modules/license.php";?>
+                
 
 
                 <?php  if(!is_array($zobj) and empty($zobj)){?>

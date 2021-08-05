@@ -1,7 +1,7 @@
 <?php if (!empty($thisarray["p2"])) {
   $q=gTable::countAll("requests"," where sname='".$thisarray["p2"]."'");
   if($q>0){
-   ?><?php include "public/modules/license.php";?>
+   ?>
 
     <?php 
     $q=gTable::read("tracking",($dbtype=="oracle"?"to_char(what) as what,who,trackdate":"*"),(DBTYPE=="oracle"?" where reqid='".$thisarray["p2"]."' and ROWNUM <= 60":" where  reqid='".$thisarray["p2"]."' limit 60"));

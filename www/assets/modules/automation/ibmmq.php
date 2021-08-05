@@ -1,4 +1,3 @@
-<?php include "public/modules/license.php";?>
         <div id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
         <div class="row p-0">
                     <div class="col-md-4 position-relative">
