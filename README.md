@@ -10,4 +10,4 @@ Midleo Core is software made by IT for IT. It can help people working in adminis
 Some screenshots from the Midleo app:
 
 ### Project management
-![The Midleo web app](https://gitlab.assets/service-management.jpg)
+![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/service-management.png)
