@@ -10,16 +10,16 @@ Midleo Core is software made by IT for IT. It can help people working in adminis
 Some screenshots from the Midleo app:
 
 ### Project management
-<img src="https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/service-management.png"  style="height:50%; width:50%" >
+![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/service-management.png)
 
 ### Application list
-<img src="https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/applications.png"  style="height:50%; width:50%" >
+![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/applications.png)
 
 ### Create package for IBM MQ deployment
-<img src="https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/ibm-mq-package.png"  style="height:50%; width:50%" >
+![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/ibm-mq-package.png)
 
 ### Server information page
-<img src="https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/server-info.png"  style="height:50%; width:50%" >
+![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/server-info.png)
 
 ## Third party software
 
@@ -47,19 +47,13 @@ docker-compose up --build
 docker-compose up -d
 ```
 
-Once the containers are up and running, you need to create a user and provide permissions to the database.
-
-Database can be accessed via phpmyadmin on http://localhost:8082
-
-After that you need to start the application on address http://localhost , it will redirect to /install
-
-You need to select mysql, host: mariadb, database name and credentials: the one that you have created.
-
-Execute the script from www/data/db/mysql in the SQL window of the database.
-
-Go back to http://localhost/install and create your admin user account.
-
-You can now login with your credentials.
+- Once the containers are up and running, you need to create a user and provide permissions to the database.
+- Database can be accessed via phpmyadmin on http://localhost:8082
+- After that you need to start the application on address http://localhost , it will redirect to /install
+- You need to select mysql, host: mariadb, database name and credentials: the one that you have created.
+- Execute the script from www/data/db/mysql in the SQL window of the database.
+- Go back to http://localhost/install and create your admin user account.
+- You can now login with your credentials.
 
 
 ## License
