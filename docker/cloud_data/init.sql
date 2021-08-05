@@ -1,0 +1,5 @@
+CREATE DATABASE midleodb CHARACTER SET utf16 COLLATE utf16_general_ci;
+USE midleodb;
+GRANT ALL PRIVILEGES ON *.* TO `changeme`@`%` IDENTIFIED BY PASSWORD '*7ACE763ED393514FE0C162B93996ECD195FFC4F5' WITH GRANT OPTION; #changeme
+GRANT ALL PRIVILEGES ON `midleodb`.* TO `changeme`@`%`;
+#get tables from Midleo Team

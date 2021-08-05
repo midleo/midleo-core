@@ -1,0 +1,59 @@
+<?php
+class Class_drawapi{
+  public static function getPage($thisarray){
+    global $website;
+    global $maindir;
+    session_start();
+    $err = array();
+    $msg = array();
+    if(!empty($thisarray["p1"]) && !empty($_SESSION['user'])) {
+    switch($thisarray["p1"]) {
+      case 'editgraph': Class_drawapi::editGraph();  break;
+      case 'readdes':  Class_drawapi::readDesign();  break;
+      case 'deldesign': Class_drawapi::deleteDesign(); break;
+      default: echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"please use the API correctly."));exit;
+      }
+  } else { 
+    echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"please use the API correctly."));exit;  
+  }
+  }
+  public static function editGraph(){
+    $pdo = pdodb::connect();
+    $data = json_decode(file_get_contents("php://input"));
+    if(!empty($data->xml)){
+        $xml=simplexml_load_string(stripslashes($data->xml));
+        $sql="update config_diagrams set xmldata=?, imgdata=?  where desid=?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array(urldecode(gzinflate(base64_decode($xml->diagram))), $data->data, $data->desid));
+        echo "done";
+    } else {
+        echo "empty data";
+    }
+    pdodb::disconnect();
+    exit;
+  }
+  public static function readDesign(){
+    $pdo = pdodb::connect();
+    $data = json_decode(file_get_contents("php://input"));
+    $sql="select id,reqid,desid,desdate,desuser,desname,tags from config_diagrams";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $data=array();
+    $data = $stmt->fetchAll(PDO::FETCH_CLASS);
+    pdodb::disconnect();
+    echo json_encode($data,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE); exit;
+  }
+  public static function deleteDesign(){
+    $pdo = pdodb::connect();
+    $data = json_decode(file_get_contents("php://input"));    
+      $sql="delete from config_diagrams where id=?";
+      $stmt = $pdo->prepare($sql);
+      if($stmt->execute(array($data->id))){
+        gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid"=>"system"), "Deleted design with name:".htmlspecialchars($data->desid));
+        echo "Design was deleted.";
+      } else {
+        echo "Unable to delete design.";
+      }
+    pdodb::disconnect();
+  }
+}

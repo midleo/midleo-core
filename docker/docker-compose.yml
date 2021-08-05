@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+    web:
+        image: nginx:latest
+        ports:
+           - "80:80"
+           - '443:443'
+        volumes:
+           - ./cloud_data/midleo-selfsigned.key:/etc/ssl/private/midleo-selfsigned.key
+           - ./cloud_data/midleo-selfsigned.crt:/etc/ssl/certs/midleo-selfsigned.crt
+           - ../www:/content
+           - ./cloud_data/nginx.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+           - php
+           - mariadb
+        environment:
+           TZ: Europe/Berlin
+    mariadb:
+      image: mariadb:10.4
+      restart: always
+      volumes:
+        - cloud_data:/var/lib/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: changeme
+        TZ: Europe/Berlin
+    php:
+        container_name: php
+        image: php:7.4-fpm
+        build: .
+        environment:
+          XDEBUG_CONFIG: remote_host=midleo.local
+          TZ: Europe/Berlin
+        volumes:
+          - ../www:/content
+          - /cloud_data/custom.ini:/usr/local/etc/php/php.ini
+        depends_on:
+          - mariadb
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+          - mariadb
+        ports:
+          - "8082:80"
+        environment:
+          - PMA_HOST=mariadb
+          - PMA_ARBITRARY=1
+          - MYSQL_ROOT_PASSWORD=changeme
+          - PMA_PORT=3306
+          - TZ=Europe/Berlin
+    maildev:
+        image: djfarrelly/maildev
+        ports:
+          - "8081:80"
+volumes:
+    cloud_data:

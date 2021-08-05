@@ -1,0 +1,1 @@
+<?php  if(empty($website['licensekey'])){ ?><div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>You are using non licensed version.</strong><br>Please make purchase or you will not get support.</div><?php } ?>

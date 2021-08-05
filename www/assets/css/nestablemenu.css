@@ -1,0 +1,36 @@
+/*
+Powered by Vasilev.link
+*/
+.dd{position:relative;display:block;margin:0;padding:0;list-style:none;font-size:13px;line-height:20px;width:100%;}
+.dd-list{display:block;position:relative;margin:0;padding:0;list-style:none}
+.dd-list .dd-list{padding-left:30px}
+.dd-collapsed .dd-list{display:none}
+.dd-item{display:inline-table;position:relative;margin:0;padding:0;min-height:20px;font-size:13px;line-height:20px;margin-right: 20px;}
+.dd-empty,.dd-placeholder{display:inline-block;margin:0;padding:0;min-height:20px;font-size:13px;line-height:20px;position:relative;}
+.dd-handle{display:block;margin:5px 0;padding:5px 10px;text-decoration:none;font-weight:700;border:1px solid #ccc;box-sizing:border-box;-moz-box-sizing:border-box;width:150px;height:80px}
+.dd-item > button{display:block;position:relative;cursor:pointer;float:left;width:25px;height:20px;margin:5px 0;padding:0;text-indent:100%;white-space:nowrap;overflow:hidden;border:0;background:transparent;font-size:12px;line-height:1;text-align:center;font-weight:700}
+.dd-item > button:before{content:'+';display:block;position:absolute;width:100%;text-align:center;text-indent:0}
+.dd-item > button[data-action="collapse"]:before{content:'-'}
+.dd-placeholder,.dd-empty{margin:5px 0;padding:0;min-height:30px;background:#f2fbff;border:1px dashed #b6bcbf;box-sizing:border-box;-moz-box-sizing:border-box}
+.dd-empty{border:1px dashed #bbb;min-height:100px;background-color:#e5e5e5;background-image:-webkit-linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%,#fff),-webkit-linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%,#fff);background-image:-moz-linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%,#fff),-moz-linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%,#fff);background-image:linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%,#fff),linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%,#fff);background-size:60px 60px;background-position:0 0,30px 30px}
+.dd-dragel{position:absolute;pointer-events:none;z-index:9999}
+.dd-dragel > .dd-item .dd-handle{margin-top:0}
+.dd-dragel .dd-handle{-webkit-box-shadow:2px 4px 6px 0 rgba(0,0,0,.1);box-shadow:2px 4px 6px 0 rgba(0,0,0,.1)}
+#nestable-output{width:300px;height:150px;font-size:.75em;line-height:1.333333em;font-family:Consolas,monospace;padding:5px;box-sizing:border-box;-moz-box-sizing:border-box}
+.dd-hover > .dd-handle{background:#2ea8e5!important}
+.dd-content:hover{background:rgba(0,0,0,0.2)}
+.dd-content a{color:#fff}
+.dd-dragel > .dd-item > .dd-content{margin:0}
+.dd-item > button{margin-left:40px}
+.dd-handle.sample:before{content:'\F035C'}
+.dd-handle.dd-nest:before{content:'\F048B'}
+.dd-handlenone:before{content:'\F012C'}
+.dd-content .form-control{width:60%;height:30px;border-radius:0}
+.dd-content{font-size:15px}
+.dd-item i{font-size:18px}
+.dd-item:before{font-family:"Material Design Icons";content:'\F0734';display:block;position:absolute;left:-16px;top:33px;width:20px;text-align:left;text-indent:0;color:#000;font-size:13px}
+.dd-content.sample:before{display:none}
+.dd-content.sample{margin:10px 0}
+.dd-content.dd-nestcontent:before{display:none}
+.dd-content.dd-nestcontent{margin:10px 0}
+.dd-item:first-child:before{display:none;}

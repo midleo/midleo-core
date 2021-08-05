@@ -1,0 +1,10 @@
+com.ibm.SOAP.securityEnabled=false
+com.ibm.SOAP.authenticationTarget=BasicAuth
+com.ibm.SOAP.loginUserid=
+com.ibm.SOAP.loginPassword=
+com.ibm.SOAP.loginSource=prompt
+com.ibm.SOAP.krb5ConfigFile=
+com.ibm.SOAP.krb5CcacheFile=
+com.ibm.SOAP.krb5Service=
+com.ibm.SOAP.requestTimeout=180
+com.ibm.ssl.alias=DefaultSSLSettings
