@@ -21,6 +21,22 @@ Some screenshots from the Midleo app:
 ### Server information page
 ![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/server-info.png)
 
+## Third party software
+
+Midleo CORE is using:
+
+- DRAW.io -> https://github.com/jgraph/drawio
+- TinyMCE -> https://github.com/tinymce/tinymce
+- FullCalendar -> https://github.com/fullcalendar/fullcalendar
+- DropBox SDK -> https://github.com/dropbox/dropbox-sdk-js
+- PhpSpreadsheet -> https://github.com/PHPOffice/PhpSpreadsheet
+- PHP AMQLib -> https://github.com/php-amqplib/php-amqplib
+- OneDrive SDK -> https://docs.microsoft.com/en-us/onedrive/developer/rest-api/getting-started/msa-oauth?view=odsp-graph-online
+
+
+All vendor libraries are already installed in the app.
+
+
 ## How to install
 
 There is a folder Docker. It contains all up to date configuration to start a container on your server or computer.

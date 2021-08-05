@@ -16,7 +16,7 @@ services:
         environment:
            TZ: Europe/Berlin
     mariadb:
-      image: mariadb:10.4
+      image: mariadb:latest
       restart: always
       volumes:
         - cloud_data:/var/lib/mysql
