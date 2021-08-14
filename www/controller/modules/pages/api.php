@@ -53,11 +53,47 @@ class Class_api{
       case 'dlqh':  Class_api::createDlqh($thisarray["p2"]);  break;
       case 'fte':  Class_api::createFte($thisarray["p2"],$thisarray["p3"]);  break;  
       case 'appgroups': Class_api::appGroups($thisarray["p2"]);  break;  
+      case 'test': Class_api::test(); break;
       default: echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"please use the API correctly."));exit;
                     }
   } else { echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"please use the API correctly."));exit;  }
   }
-  
+   public static function test(){
+    require_once 'controller/vendor/autoload.php';
+    $parser = new \Smalot\PdfParser\Parser();
+    $pdf    = $parser->parseFile('public/temp/test.pdf');
+    $text = $pdf->getText();
+    echo $text;
+    $details  = $pdf->getDetails();
+ 
+    foreach ($details as $property => $value) {
+    if (is_array($value)) {
+        $value = implode(', ', $value);
+    }
+    echo $property . ' => ' . $value . "\n";
+   }
+  /*  $mpdf = new \Mpdf\Mpdf([
+      'format' => 'A4',
+      'margin_left' => 5,
+      'margin_right' => 5,
+      'margin_top' => 5,
+      'margin_bottom' => 10,
+      'margin_header' => 5,
+      'margin_footer' => 5,
+    ]);
+    $mpdf->SetProtection(array('print'));  
+        $mpdf->SetAuthor("MidlEO");
+        $mpdf->showWatermarkText = false;
+        $mpdf->SetDisplayMode('fullpage');  
+        $mpdf->SetTitle("Midleo core");
+        $html="test";
+        $pagecount = $mpdf->SetSourceFile('2021.07_vasil_vasilev_FITS_4500054819.pdf');
+        $tplId = $mpdf->importPage($pagecount);
+        $mpdf->useTemplate($tplId);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+*/
+   }
     public static function update($d1){
     $pdo = pdodb::connect();
     $nowtime = new DateTime();

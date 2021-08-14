@@ -1,5 +1,5 @@
 @REM wsadmin thin client
-@REM powered by Midleo Enterprise Middleware Services ltd. 
+@REM powered by Midleo ltd. 
 
 @echo off
 

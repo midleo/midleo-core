@@ -15,31 +15,25 @@ Some screenshots from the Midleo app:
 ### Application list
 ![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/applications.png)
 
+### Firewall import
+![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/firewall_import.png)
+
 ### Create package for IBM MQ deployment
 ![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/ibm-mq-package.png)
 
 ### Server information page
 ![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/server-info.png)
 
-## Third party software
-
-Midleo CORE is using:
-
-- DRAW.io -> https://github.com/jgraph/drawio
-- TinyMCE -> https://github.com/tinymce/tinymce
-- FullCalendar -> https://github.com/fullcalendar/fullcalendar
-- DropBox SDK -> https://github.com/dropbox/dropbox-sdk-js
-- PhpSpreadsheet -> https://github.com/PHPOffice/PhpSpreadsheet
-- PHP AMQLib -> https://github.com/php-amqplib/php-amqplib
-- OneDrive SDK -> https://docs.microsoft.com/en-us/onedrive/developer/rest-api/getting-started/msa-oauth?view=odsp-graph-online
-
-
-All vendor libraries are already installed in the app.
-
-
 ## How to install
 
-There is a folder Docker. It contains all up to date configuration to start a container on your server or computer.
+```bash
+cd /folder-you-want-to-install
+git clone https://gitlab.com/midleo/midleo-core.git
+cd midleo.core/www/controller
+composer install
+```
+
+Folder Docker contains all up to date configuration to start a container on your server or computer.
 
 ```bash
 docker-compose up --build
@@ -54,6 +48,19 @@ docker-compose up -d
 - Execute the script from www/data/db/mysql in the SQL window of the database.
 - Go back to http://localhost/install and create your admin user account.
 - You can now login with your credentials.
+
+
+## Third party software
+
+Midleo CORE is using:
+
+- DRAW.io -> https://github.com/jgraph/drawio
+- TinyMCE -> https://github.com/tinymce/tinymce
+- FullCalendar -> https://github.com/fullcalendar/fullcalendar
+- DropBox SDK -> https://github.com/dropbox/dropbox-sdk-js
+- PhpSpreadsheet -> https://github.com/PHPOffice/PhpSpreadsheet
+- PHP AMQLib -> https://github.com/php-amqplib/php-amqplib
+- OneDrive SDK -> https://docs.microsoft.com/en-us/onedrive/developer/rest-api/getting-started/msa-oauth?view=odsp-graph-online
 
 
 ## License

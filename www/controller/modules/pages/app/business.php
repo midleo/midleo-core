@@ -39,7 +39,7 @@
 </div>
 <?php } ?>
 <div style="z-index:9999;position:fixed;bottom:60px; right:24px;">
-<button type="submit" name="saveadm" id="saveadm"  data-bs-toggle="tooltip" data-bs-placement="top" title="Save the changes"  class="waves-effect waves-light btn btn-primary btn-circle btnnm" ><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save" /></svg></button>
+<button type="submit" name="saveadm" id="saveadm"  data-bs-toggle="tooltip" data-bs-placement="top" title="Save"  class="waves-effect waves-light btn btn-primary btn-circle btnnm" ><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save" /></svg></button>
 </div>
 </form>
 </div></div></div></div>

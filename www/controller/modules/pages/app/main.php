@@ -30,13 +30,6 @@ echo "<option value='".$val['timezone_id']."'>".$val['timezone_id']."</option>";
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-4">License Key</label>
-
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="conf#licensekey" value="<?php echo isset($_POST['conf#licensekey'])?$_POST['conf#licensekey']:$website['licensekey']; ?>">
-                        </div>
-                    </div>
 
                     <!--<div class="form-group">
 <label class="form-control-label text-lg-right col-md-4">Website logo</label>

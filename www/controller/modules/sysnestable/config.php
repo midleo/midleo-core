@@ -30,6 +30,8 @@ public static function createMenu($data,$reqrows=1){
       <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
       </div>
       </div>
+      </div>
+      </div>
       ';
     return $return;
   }

@@ -8,7 +8,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
       if (!file_exists($inputFileName)) { 
         exit("Please upload file first.");
       }
-      require_once("vendor/autoload.php"); 
+      require_once 'controller/vendor/autoload.php'; 
       if($inputFileType=="ibmmq"){
         $array_data['qm']=array(
           'A'=>'active',

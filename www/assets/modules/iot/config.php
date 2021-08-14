@@ -49,7 +49,7 @@ class mqttClass{
                "mq_vhost"=>"MIDLEO.AMQP");
   }
   public static function PublishMessage($messageBody){
-    require_once __DIR__.'/vendor/autoload.php';
+    require_once 'controller/vendor/autoload.php'; 
     $vars=mqttClass::getvars();
     $exchange="MIDLEO.TOPIC";
     $queue = "SYSTEM.MIDLEO.IOT.QUEUE";

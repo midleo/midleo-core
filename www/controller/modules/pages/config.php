@@ -4,7 +4,6 @@ $modulelist["mail"]["system"]=true;
 include_once "control_panel.php";
 include_once "api.php";
 include_once "pubapi.php";
-include_once "server.php";
 include_once "env.php";
 include_once "app.php";
 include_once "browse.php";

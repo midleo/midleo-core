@@ -257,15 +257,6 @@ class Class_env
             ));
           }
         }
-        if (sessionClass::checkAcc($acclist, "kafkaadm,kafkaview")) {
-            array_push($brarr,array(
-              "title"=>"Apache kafka",
-              "link"=>"/".$page."/kafka/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-              "midicon"=>"kafka",
-              "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-              "active"=>($thisarray['p1'] == "kafka")?"active":"",
-            ));
-        }
         if (sessionClass::checkAcc($acclist, "serveradm,serverview")) {
           if (method_exists("tibco", "execJava") && is_callable(array("tibco", "execJava"))) {
             array_push($brarr,array(

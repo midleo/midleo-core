@@ -1,6 +1,6 @@
 #!/bin/bash
 #wsadmin thin client
-#powered by Midleo Enterprise Middleware Services ltd. 
+#powered by Midleo ltd. 
 
 
 # Set the location of wsadmin.bat

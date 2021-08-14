@@ -169,12 +169,6 @@ class Class_appconfig
                 "link"=>"/".$page."/env",
                 "midicon"=>"enviro",
                 "active"=>($thisarray['p1'] == "env")?"active":"",
-              ),
-              array(
-                "title"=>"Update Midleo Application",
-                "link"=>"/".$page."/update",
-                "midicon"=>"update",
-                "active"=>($thisarray['p1'] == "update")?"active":"",
               )
 
 

@@ -1,0 +1,9 @@
+{
+    "require": {
+        "mpdf/mpdf": "^8.0",
+        "google/apiclient": "2.7",
+        "smalot/pdfparser": "^1.0",
+        "phpoffice/phpspreadsheet": "^1.18",
+        "php-amqplib/php-amqplib": "^3.0"
+    }
+}
