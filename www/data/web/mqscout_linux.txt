@@ -1,0 +1,21 @@
+#linux mqscout
+yum install httpd.x86_64 mod_ssl.x86_64
+yum install php php-pdo.x86_64 php-gd.x86_64 php-mysql php-odbc.x86_64 php71w-bcmath.x86_64 php71w-mcrypt.x86_64
+yum install php-pear php-cli.x86_64 php-devel.x86_64 php-ldap.x86_64
+#configure pdo_oci:
+##https://www.codeproject.com/Articles/1157101/Installing-OCI-on-RHEL
+##http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+##http://ccm.net/faq/4987-linux-redhat-oracle-installing-pdo-oci-and-oci8-modules
+##http://www.oracle.com/technetwork/articles/technote-php-instant-084410.html
+##https://medium.com/@vinyvicente/oracle-driver-to-pdo-php-7-linux-7d813fddef93
+##https://www.drupal.org/node/1298536
+##https://stackoverflow.com/questions/20342562/php-5-4-compilation-with-pdo-oci-driver-using-oracle-instant-client-10-2-0-4
+#enable .httaccess
+#install oracle-xe
+#root/123456
+#PLSQL login as SYS
+#mqscout=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=IP)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=XE)(SID=XE)))
+CREATE USER mqscout_adm IDENTIFIED BY N0asn49asl23;
+GRANT CONNECT, RESOURCE, DBA TO mqscout_adm;
+GRANT CREATE SESSION, GRANT ANY PRIVILEGE TO mqscout_adm;
+#install oracle scripts from mqscout/data/db/oracle

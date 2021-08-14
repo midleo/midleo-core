@@ -1,0 +1,10 @@
+install iis with php:
+https://technet.microsoft.com/en-us/library/hh994592(v=ws.11).aspx
+
+php v 7.0.11
+add 
+extension=php_pdo_oci.dll
+
+add mime type in IIS
+.woff - application/font-woff
+.woff2 - application/font-woff2
