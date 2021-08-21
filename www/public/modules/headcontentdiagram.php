@@ -66,7 +66,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a href="/info/?" class="dropdown-item waves-effect waves-dark"><svg
+                        <li><a href="/info/" class="dropdown-item waves-effect waves-dark"><svg
                                     class="midico midico-outline">
                                     <use href="/assets/images/icon/midleoicons.svg#i-kn-b"
                                         xlink:href="/assets/images/icon/midleoicons.svg#i-kn-b" />

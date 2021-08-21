@@ -17,10 +17,10 @@
             <ul class="navbar-nav me-auto mb-lg-0">
 
             <ol class="breadcrumb hide-xs">
-      <li class="breadcrumb-item"><a href="/info/?">Home</a></li>
+      <li class="breadcrumb-item"><a href="/info/">Home</a></li>
 <?php if ($forumcase == "posts") {?>
 <li class="breadcrumb-item"><a href="/info/category/<?php echo $blogcategory; ?>" title="<?php echo $blogcategoryname; ?>"><?php echo $blogcategoryname; ?></a></li>
-<li class="breadcrumb-item active"><?php echo $blogtitle; ?></li><?php } else {?><li class="breadcrumb-item active"><a href="<?php echo ($forumcase == "category") ? "/info/category/" . $keyws : (($forumcase == "tags") ? "/info/tags/" . $keyws : "/info/?"); ?>"><?php echo ($forumcase == "category") ? $blogcategory : (($forumcase == "tags") ? $keyws : "Latest posts"); ?></a></li><?php }?>
+<li class="breadcrumb-item active"><?php echo $blogtitle; ?></li><?php } else {?><li class="breadcrumb-item active"><a href="<?php echo ($forumcase == "category") ? "/info/category/" . $keyws : (($forumcase == "tags") ? "/info/tags/" . $keyws : "/info/"); ?>"><?php echo ($forumcase == "category") ? $blogcategory : (($forumcase == "tags") ? $keyws : "Latest posts"); ?></a></li><?php }?>
      </ol>
             </ul>
             <ul class="navbar-nav mb-lg-0 nlinks">
@@ -58,7 +58,7 @@
                 <?php }?>
                 <li class="nav-item">
                     <a data-bs-toggle="tooltip" title="Create new article"
-                        class="nav-link text-muted waves-effect waves-dark" href="/cpinfo/?"><span class="itemicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></span></a>
+                        class="nav-link text-muted waves-effect waves-dark" href="/cpinfo/"><span class="itemicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></span></a>
                 </li>
 
                 <?php if (!empty($_SESSION["user"])) {?>

@@ -1337,7 +1337,7 @@ class Class_welcome{
                                         <div class="card-body">
                                             <h4 class="card-title">Documentation</h4>
                                             <p class="card-text">Get help using and administering MidlEO</p><br>
-                                            <a href="/info/?" class="btn btn-light">Docs</a>
+                                            <a href="/info/" class="btn btn-light">Docs</a>
                                         </div>
                                     </div>
                                 </div>

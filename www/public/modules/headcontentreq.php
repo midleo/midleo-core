@@ -54,7 +54,7 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/info/?" class="waves-effect waves-dark"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-kn-b" xlink:href="/assets/images/icon/midleoicons.svg#i-kn-b"/></svg>&nbsp;Knowledge base<span class="text-end"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></span></a></li>
+                            <li><a href="/info/" class="waves-effect waves-dark"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-kn-b" xlink:href="/assets/images/icon/midleoicons.svg#i-kn-b"/></svg>&nbsp;Knowledge base<span class="text-end"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></span></a></li>
                             <li><a href="/reqlogout" class="waves-effect waves-dark"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg>&nbsp;Logout<span class="text-end"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></span></a></li>
                         </ul>
                     </div>

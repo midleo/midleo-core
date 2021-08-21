@@ -520,7 +520,7 @@ CREATE TABLE IF NOT EXISTS `env_firewall` (
   `destip` varchar(80) NOT NULL,
   `srcdns` varchar(120) NOT NULL,
   `destdns` varchar(120) NOT NULL,
-  `info` varchar(255) NOT NULL DEFAULT '',
+  `info` varchar(255) DEFAULT NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lockedby` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
