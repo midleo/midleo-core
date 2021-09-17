@@ -7,9 +7,6 @@ class pdodb
     private static $dbHost = DB_HOST ;
     private static $dbUsername = DB_USER;
     private static $dbUserPassword = DB_PASS;
-    private static $oracle_port = oracle_port;
-    private static $oracle_sn = oracle_sn;
-    private static $oracle_sid = oracle_sid;
     private static $cont  = null;
     public function __construct() {
       die('Init function is not allowed');
@@ -34,19 +31,7 @@ class pdodb
           } elseif(DBTYPE=="postgresql"){
             self::$cont =  new PDO("pgsql:host=".self::$dbHost.";port=5432;dbname=".self::$dbName.";user=".self::$dbUsername.";password=".self::$dbUserPassword );
             self::$cont->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          } elseif(DBTYPE=="oracle"){
-            $options = array(
-              // PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-              PDO::ATTR_EMULATE_PREPARES => false,
-              PDO::ATTR_CASE => PDO::CASE_LOWER,
-              PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-            );
-            $dbtns = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=".self::$dbHost.")(PORT=".self::$oracle_port."))(CONNECT_DATA=(SERVICE_NAME=".self::$oracle_sn.")(SID=".self::$oracle_sid.")))";
-            self::$cont = new PDO("oci:dbname=".$dbtns.";charset=utf8", self::$dbUsername, self::$dbUserPassword, $options);
-          } elseif(DBTYPE=="mssql"){
-            $mssqldriver = '{'.odbc_driver_name.'}';
-            self::$cont = new PDO("odbc:Driver=$mssqldriver;Server=".self::$dbHost.";Database=".self::$dbName, self::$dbUsername, self::$dbUserPassword);
-          } else {
+          }  else {
             self::$cont =  new PDO("demodb","demouser","demopass");
           }
         }

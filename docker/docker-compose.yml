@@ -25,7 +25,7 @@ services:
         TZ: Europe/Berlin
     php:
         container_name: php
-        image: php:7.4-fpm
+        image: php:fpm
         build: .
         environment:
           XDEBUG_CONFIG: remote_host=midleo.local

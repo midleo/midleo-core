@@ -2,7 +2,7 @@
 FROM nginx:latest
 RUN  apt-get update && apt-get install -q -y nano openssl 
 
-FROM php:7.4-fpm
+FROM php:fpm
 
 #RUN apt-get update && apt-get install -q -y ssmtp mailutils && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get install -y libpq-dev libzip-dev zip libpng-dev libjpeg-dev libfreetype6-dev  \ 

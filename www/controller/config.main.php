@@ -1,10 +1,11 @@
 <?php
-error_reporting(E_ERROR);
-ini_set('display_errors', '0');
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
 include "config.db.php";
 include "config.vars.php";
 $modulelist = array();
-if (!is_array($website)) {$website = json_decode($website, true);}
+if (!empty($website) && !is_array($website)) {$website = json_decode($website, true);}
 if (!empty($website['varheader'])) {define("varheader", $website['varheader']);}
 if (!empty($website['varfooter'])) {define("varfooter", $website['varfooter']);}
 $maindir = dirname(dirname(__FILE__));

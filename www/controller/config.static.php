@@ -12,9 +12,6 @@ class pdodb
       global $dbtype;
       global $dbname;
       global $dbhost;
-      global $oracle_port;
-      global $oracle_sn;
-      global $oracle_sid;
       if ( null == self::$cont )
       {   
         try

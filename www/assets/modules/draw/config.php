@@ -286,7 +286,7 @@ iframe {
           }
         include "public/modules/breadcrumb.php";?>
         <?php if (!empty($thisarray['p1'])) {
-            $sql = "SELECT tags, desuser, desname, reqid, " . (DBTYPE == 'oracle' ? "to_char(imgdata) as imgdata" : "imgdata") . " FROM config_diagrams where binary desid=?";
+            $sql = "SELECT tags, desuser, desname, reqid, imgdata FROM config_diagrams where binary desid=?";
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p1']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {?>

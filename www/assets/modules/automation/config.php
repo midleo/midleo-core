@@ -59,7 +59,7 @@ $brarr=array(
            include "ibmmq.php";
         } else {
         if(!empty($thisarray['p1'])){ 
-     $sql="select jobname,id,jobid,reqid,objname,jobtype,proj,env,deplenv,srv,jobstatus,lrun,nrun,objtype,created,".(DBTYPE=='oracle'?"to_char(jobdata) as jobdata":"jobdata")." from env_jobs where jobid=?";
+     $sql="select jobname,id,jobid,reqid,objname,jobtype,proj,env,deplenv,srv,jobstatus,lrun,nrun,objtype,created,jobdata from env_jobs where jobid=?";
      $q = $pdo->prepare($sql); 
      $q->execute(array($thisarray['p1']));  
      if($zobj = $q->fetch(PDO::FETCH_ASSOC)){ 
