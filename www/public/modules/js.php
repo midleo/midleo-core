@@ -2,7 +2,6 @@
 <?php if(isset($_SESSION["user"]) || isset($_SESSION["requser"])){?>
 <script src="/assets/js/jquery/jquery-ui.min.js" type="text/javascript"></script>
 <?php } ?>
-<script src="/assets/js/popper.min.js" type="text/javascript"></script>
 <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
 <!--[if IE 9 ]>
 <script src="/assets/js/jquery/jquery.placeholder.min.js"></script>
