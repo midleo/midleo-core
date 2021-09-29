@@ -108,7 +108,7 @@
 </div>
 <div class="form-group" ng-show="depl.repeat" >
  <label class="form-label">First run</label>
- <input name="jobnextrun" class="form-control date-time-picker-depl"  id="jobnextrun" data-bs-toggle="datetimepicker" data-target="#jobnextrun" type="text">
+ <input name="jobnextrun" class="form-control date-time-picker-depl"  id="jobnextrun" data-toggle="datetimepicker" data-target="#jobnextrun" type="text">
 </div>
 
         </div>

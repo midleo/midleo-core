@@ -197,7 +197,7 @@ ul.list-style-none{margin:0;padding:0}
 ul.list-style-none li{list-style:none}
 ul.list-style-none li a{color:#67757c;padding:8px 0;display:block;text-decoration:none}
 ul.list-style-none li a:hover{color:#'.$thiscolor.'}
-.card{border-radius:6px;box-shadow:0px 2px 4px rgba(0, 0, 0, 0.1);border:0px solid transparent;}
+.card{border-radius:6px;box-shadow:0 1px 1px rgba(0,0,0,.08);border:0px solid transparent;}
 /*.card-no-border .sidebar-nav > ul > li > a.active{background:#fff}*/
 .card-no-border .shadow-none{box-shadow:none}
 .card-fullscreen{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;overflow:auto}
@@ -1333,7 +1333,7 @@ body[data-color="light"] .page-titlesinfo .breadcrumb{padding:0;background:trans
 body[data-color="light"] .page-titlesinfo .breadcrumb li{margin-top:0;margin-bottom:0}
 body[data-color="light"] .page-titlesinfo .breadcrumb .breadcrumb-item + .breadcrumb-item::before{content:"\F0142";font-family:"Material Design Icons";color:#a6b7bf;font-size:22px}
 body[data-color="light"] .page-titlesinfo .breadcrumb .breadcrumb-item.active{color:#d5d6d8}
-body[data-color="light"] .page-wrapper{background:#F5F5F5;padding-bottom:60px}
+body[data-color="light"] .page-wrapper{background:#f3f3f4;padding-bottom:60px}
 body[data-color="light"] .preloader{width:100%;height:100%;top:0;position:fixed;z-index:99999;background:#fff}
 body[data-color="light"] .preloader .cssload-speeding-wheel{position:absolute;top:calc(50% - 3.5px);left:calc(50% - 3.5px)}
 body[data-color="light"] .btn-primary,.btn-outline-primary{box-shadow:0 2px 2px rgba(116,96,238,0.05)}
@@ -1390,7 +1390,7 @@ body[data-color="light"] .profile-tab li a.nav-link:hover,body[data-color="light
 body[data-color="light"] .btn-themecolor,body[data-color="light"] .btn-themecolor.disabled{background:#'.$thiscolor.';color:#fff;border:1px solid #'.$thiscolor.'}
 body[data-color="light"] .btn-themecolor:hover,body[data-color="light"] .btn-themecolor.disabled:hover{background:#'.$thiscolor.';opacity:.7;border:1px solid #'.$thiscolor.'}
 body[data-color="light"] .btn-themecolor.active,body[data-color="light"] .btn-themecolor:focus,.btn-themecolor.disabled.active,.btn-themecolor.disabled:focus{background:#028ee1}
-body[data-color="light"] .stylish-table tbody tr:nth-child(even) {background: #f5f5f5}
+/*body[data-color="light"] .stylish-table tbody tr:nth-child(even) {background: #f5f5f5}
 /*body[data-color="light"] .card {border:1px solid #c8c8c8;}*/
 body[data-color="light"] .sidebar-nav ul li.nav-small-cap{color:#d5d6d8}
 .sidebar-nav > ul > li > a i{color:#d5d6d8}
@@ -1409,7 +1409,7 @@ body[data-color="dark"] .dropdown-menu a{color:#fff!important;}
 body[data-color="dark"] .dropdown-menu > ul > li:hover a{background-color:#212529!important;}
 body[data-color="dark"] .loader{background:#263238;}
 body[data-color="dark"] .card {background: #49515e;}
-body[data-color="dark"] .stylish-table tbody tr:nth-child(even) {background: #414651}
+/*body[data-color="dark"] .stylish-table tbody tr:nth-child(even) {background: #414651}*/
 body[data-color="dark"] #loginform .rounded-title{color: #f1f1f1;}
 body[data-color="dark"] {background-color:#263238;}
 .table tr:hover td{border-color:#'.$thiscolor.';border-top:1px solid #'.$thiscolor.'!important;border-bottom:1px solid #'.$thiscolor.'!important;}
@@ -1417,6 +1417,7 @@ body[data-color="dark"] .h1, body[data-color="dark"] .h2, body[data-color="dark"
 body[data-color="dark"] .page-titles{background:#31353d;margin:0 -15px 15px;box-shadow: 0px 1px 0px #3d424d;}
 body[data-color="dark"] .page-titles h3{margin-bottom:0;margin-top:0px}
 body[data-color="dark"] .topbar{box-shadow: 0px 1px 0px #3d424d;}
+body[data-color="dark"] .navbar{background:#31353d;}
 body[data-color="dark"] .page-titles .breadcrumb{padding:0;background:transparent;font-size:14px}
 body[data-color="dark"] .page-titles .breadcrumb li{margin-top:0;margin-bottom:0}
 body[data-color="dark"] .page-titles .breadcrumb .breadcrumb-item + .breadcrumb-item::before{content:"\F0DBB";font-family:"Material Design Icons";color:#a6b7bf;font-size:15px}

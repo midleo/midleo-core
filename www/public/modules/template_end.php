@@ -6,9 +6,11 @@
   }
   if($GLOBALS){
     foreach (array_keys($GLOBALS) as $k) {
-      unset($$k);
-      unset($k);
-      unset($GLOBALS[$k]); 
+      if($k){
+        unset($$k);
+        unset($k);
+        unset($GLOBALS[$k]); 
+      }
      }
   unset($GLOBALS);
   }  

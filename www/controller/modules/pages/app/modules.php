@@ -29,8 +29,8 @@
               <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Find a module">
               <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
           </div>
-          <div class="col-md-9 text-end">
-          <a data-bs-toggle="modal" class="waves-effect waves-light btn btn-info" rel="tooltip" data-bs-placement="top" title="Install new module" href="#modal-module"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy" /></svg>&nbsp;Install</a>
+          <div class="col-md-9 text-end" >
+          <a data-bs-toggle="modal" class="waves-effect waves-light btn btn-info" href="#modal-module"><svg data-bs-toggle="tooltip" data-bs-placement="top" title="Install new module" class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy" /></svg>&nbsp;Install</a>
 
           </div>
   </div><br>
@@ -47,7 +47,7 @@
           </tr>
         </thead>
         <tbody><?php
- foreach($modulelist as $key=>$val){ if($key!="css" && $key!="js"){
+ foreach($modulelist as $key=>$val){ if($key!="css" && $key!="js" && $key){
           ?><tr id="mod<?php echo $key;?>"><td><?php echo $key;?></td><td><?php echo $val["name"];?></td><td><?php echo isset($val["system"])?"*":"";?></td><td></td></tr>
           <?php }} ?>
         </tbody>

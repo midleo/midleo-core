@@ -63,9 +63,9 @@ if($q->execute(array($zobj['reqapp']))){
         <br>
         
        <?php if($zobj['bstep']!="9999"){ ?>
-         <a class="list-group-item media" href="" style="border: 1px solid #<?php echo $usercolor;?>;margin-bottom:15px!important;">
+         <a class="list-group-item media" href="" style="margin-bottom:15px!important;">
         <div class="pull-left">
-          <i class="mdi mdi-account-outline mdi-24px" style="padding-top:5px;color:#<?php echo $usercolor;?>;"></i>
+          <i class="mdi mdi-account-outline mdi-24px" style="padding-top:5px;"></i>
          </div>
         <div class="media-body">
          <div class="lgi-heading">Assignment group</div>

@@ -43,7 +43,7 @@ include "public/modules/breadcrumb.php";?>
                     </div>
             <div class="form-group row">
                       <label class="form-control-label text-lg-right col-md-3">Requested date</label>
-                      <div class="col-md-9"><input name="reqdate" value="<?php echo !empty($_POST['reqdate'])?htmlspecialchars($_POST['reqdate']):"";?>" class="form-control date-picker-unl" id="reqdate" data-bs-toggle="datetimepicker" data-target="#reqdate" type="text"></div>
+                      <div class="col-md-9"><input name="reqdate" value="<?php echo !empty($_POST['reqdate'])?htmlspecialchars($_POST['reqdate']):"";?>" class="form-control date-picker-unl" id="reqdate" data-toggle="datetimepicker" data-target="#reqdate" type="text"></div>
                     </div>
           <?php if (method_exists("Class_draw", "getPage") && is_callable(array("Class_draw", "getPage"))){?>
        <div class="form-group row">

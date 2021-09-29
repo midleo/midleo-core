@@ -16,7 +16,6 @@ define("DB_HOST", $dbhost);
 define("DB_USER", $dbuser);
 define("DB_PASS", $dbpass);
 define("DB_NAME", $dbname);
-define("US_COLOR", $website['usercolor']);
 if (!empty($website['datetime'])) {date_default_timezone_set($website['datetime']);}
 define("COOKIE_TIME_OUT", 2);
 if (!empty($odbc_driver_name)) {define("odbc_driver_name", $odbc_driver_name);}

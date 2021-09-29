@@ -7,7 +7,6 @@
 <meta name="author" content="Vasilev.link">
 <meta property="description" content='MidlEO Core - Organize your Middleware platform | Request Sytem, IT service desk and tracking of your Middleware Environment'/>
 <meta name="keywords" content="Middleware, Source Control, Request system">
-<meta name="theme-color" content="<?php echo !empty($website['usercolor'])?$website['usercolor']:US_COLOR;?>">
 <meta name="application-name" content="MidlEO">
 <link rel="shortcut icon" href="/favicon.ico">
 <title><?php if($blogtitle){ echo $blogtitle." :: MIDLEO"; } elseif($website["env_name"]){ echo $website["env_name"]." :: MIDLEO"; } else { ?>Middleware Enteprise Organizer - Organize your Middleware platform<?php } ?></title>

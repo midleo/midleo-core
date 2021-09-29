@@ -175,8 +175,7 @@ class Class_appconfig
             );
 
         }
-        include "public/modules/breadcrumb.php";
-        include "public/modules/license.php";?>
+        include "public/modules/breadcrumb.php";?>
 
 <?php if (file_exists(__DIR__ . "/app/" . $thisarray['p1'] . ".php")) {include "app/" . $thisarray['p1'] . ".php";} else {textClass::PageNotFound();}?>
 
@@ -356,7 +355,7 @@ $(document).ready(function() {
             "render": function(data, type, row, meta) {
                 return (row[2] == "*" ?
                     "<button type=\"button\" class=\"btn btn-light btn-sm\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-x' xlink:href='/assets/images/icon/midleoicons.svg#i-x' /></svg></button>" :
-                    "<button type=\"button\" class=\"btn btn-light btn-sm command-delete\" data-row-id=\"" +
+                    "<button type=\"button\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Delete module\" class=\"btn btn-light btn-sm command-delete\" data-row-id=\"" +
                     row[0] + "\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-trash' xlink:href='/assets/images/icon/midleoicons.svg#i-trash' /></svg></button>");
             }
         }]

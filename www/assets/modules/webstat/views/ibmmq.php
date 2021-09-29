@@ -230,7 +230,7 @@ $(document).ready(function() {
 <?php if(!empty($_GET["qid"]) || !empty($_GET["chlid"])){?>
 <script src="/assets/js/chart.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-var thiscolor = "<?php echo empty($website['usercolor']) ? '#000': $website['usercolor'];?>";
+var thiscolor = "#000";
 var thiscolorreq = "rgb(255, 54, 54)";
 var color = Chart.helpers.color;
 var messdata = [

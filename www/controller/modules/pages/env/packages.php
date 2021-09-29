@@ -340,7 +340,7 @@
                                 <a class="card-header text-decoration-none" id="headingd{{i}}{{j}}">
 
                                     <button class="btn btn-light" data-bs-toggle="collapse"
-                                        data-target="#collapsed{{i}}{{j}}" aria-expanded="true"
+                                        data-bs-target="#collapsed{{i}}{{j}}" aria-expanded="true"
                                         aria-controls="collapsed{{i}}{{j}}">
                                         <svg class="midico midico-outline">
                                             <use href="/assets/images/icon/midleoicons.svg#i-up"
@@ -383,7 +383,7 @@
                                 <div class="ribbon ribbon-default ribbon-right">{{key}}</div>
                                 <a class="card-header text-decoration-none" id="headingl{{i}}{{j}}">
                                     <button class="btn btn-light" data-bs-toggle="collapse"
-                                        data-target="#collapsel{{i}}{{j}}" aria-expanded="true"
+                                        data-bs-target="#collapsel{{i}}{{j}}" aria-expanded="true"
                                         aria-controls="collapsel{{i}}{{j}}">
                                         <svg class="midico midico-outline">
                                             <use href="/assets/images/icon/midleoicons.svg#i-up"

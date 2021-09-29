@@ -181,7 +181,7 @@ $sql="select ".(DBTYPE=='oracle'?"to_char(recentdata) as recentdata":"recentdata
 <script type="text/javascript" src="/assets/modules/requests/assets/js/ng-controller.js"></script>
 <script src="/assets/js/chart.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var thiscolor = "<?php echo empty($website['usercolor']) ? '#000': $website['usercolor'];?>";
+    var thiscolor = "#000";
     var thiscolorreq = "rgb(255, 54, 54)";
     var chdata=[ <?php $thismonth=date('Y-m-d',strtotime('today -1 week')); 
                if(DBTYPE=="oracle"){
@@ -416,9 +416,9 @@ class Class_cpinfo{
     }
   }
      if(isset($_POST['updpost'])) {
-       $sql="update knowledge_info set tags=?, category=?, cat_name=?, cattext=? where cat_latname=?";
+       $sql="update knowledge_info set tags=?, category=?, cat_name=?, cattext=? , public=?, accgroups=? where cat_latname=?";
        $q = $pdo->prepare($sql);
-       $q->execute(array(htmlspecialchars($_POST["tags"]),htmlspecialchars($_POST["category"]),htmlspecialchars($_POST["posttitle"]),$_POST["postcontent"],$thisarray['p2']));
+       $q->execute(array(htmlspecialchars($_POST["tags"]),htmlspecialchars($_POST["category"]),htmlspecialchars($_POST["posttitle"]),$_POST["postcontent"],htmlspecialchars($_POST['cattype']),(!empty($_POST["respgrsel"])?$_POST["respgrsel"]:""),$thisarray['p2']));
        textClass::replaceMentions($_POST["postcontent"],$_SERVER["HTTP_HOST"]."/info/posts/".$thisarray['p2']);
        $msg[]='The post was updated.';
      }
@@ -478,17 +478,15 @@ class Class_cpinfo{
       <form class="form-horizontal form-material" action="" method="post" enctype="multipart/form-data" name="frmUpload" onSubmit="return validateForm();">
 
       <div class="row"><div class="col-md-9">
-      <div class="form-group">
-              <input type="text" placeholder="Title" name="posttitle" id="posttitle" value="<?php echo $_POST["posttitle"];?>" class="form-control" required><span class="form-control-feedback"></span>
-              </div>
+      
                <textarea name="postcontent"  rows="10" class="textarea"><?php echo $_POST["postcontent"];?></textarea>
                  
               </div>
               <div class="col-md-3">
-              <div class="form-group text-end">
-              <button type="submit" name="addpost" class="btn btn-info"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Create article</button>
-     </div>
-             
+              
+     <div class="form-group">
+              <input type="text" placeholder="Title" name="posttitle" id="posttitle" value="<?php echo $_POST["posttitle"];?>" class="form-control" required><span class="form-control-feedback"></span>
+              </div>
               <div class="form-group">
                    <input placeholder="Tags" type="text" name="tags" id="tags" value="<?php echo $_POST["tags"];?>" class="form-control validatefield" data-role="tagsinput" required><span class="form-control-feedback"></span>
                   </div>
@@ -519,8 +517,10 @@ class Class_cpinfo{
                     <div class="col-md-3 text-start">
                         <button type="button" data-bs-toggle="modal" class="waves-effect btn btn-light btn-sm" href="#modal-category-form"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg></button>
                     </div>
-                    </div>
-
+                    </div><br>
+                    <div class="form-group text-start">
+              <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Post this content" name="addpost" class="btn btn-light"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg></button>
+     </div>
 
 
               </div>
@@ -534,21 +534,27 @@ class Class_cpinfo{
 
     ?><form action="" class="form-horizontal form-material" method="post">
     <div class="row"><div class="col-md-9">
-    <div class="form-group">
-               <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name'];?>" class="form-control" required><span class="form-control-feedback"></span>
-         </div>
+  
     <textarea name="postcontent"  rows="10" class="textarea"><?php echo $zobj['cattext'];?></textarea>
        </div>
        <div class="col-md-3">
-       <div class="text-end">
-        <button type="submit" name="updpost" class="btn btn-info btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Update</button>&nbsp;
-        <button type="submit" name="delpost" class="btn btn-secondary btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Delete</button>&nbsp;
-        <button type="button" onclick="location.href='/cpinfo'" class="btn btn-secondary btn-sm"><i class="mdi mdi-history"></i>&nbsp;Back</button>
-       </div><br>
        
+       <div class="form-group">
+               <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name'];?>" class="form-control" required><span class="form-control-feedback"></span>
+         </div>
          <div class="form-group">
              <input type="text" placeholder="Tags" name="tags" value="<?php echo $zobj['tags'];?>" class="form-control" data-role="tagsinput"><span class="form-control-feedback"></span>
          </div>
+         <div class="form-group">
+                <select name="cattype" class="form-control">
+                      <option value="1" onclick="document.getElementById('accgroups').style.display = 'none';">Visible to Public</option>
+                      <option value="0" onclick="document.getElementById('accgroups').style.display = 'flex';">Private</option>
+                    </select>
+                  </div>  
+                  <div class="form-group" id="accgroups" style="display:none;">
+                          <input name="users" id="autogroups" type="text" class="form-control" placeholder="Access groups">
+                          <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+                  </div>
          <div class="form-group row">
           <div class="col-md-9"><select name="category" class="form-control">
                         <option value="<?php echo $zobj['category'];?>"><?php echo $zobj['category'];?></option>
@@ -562,8 +568,12 @@ class Class_cpinfo{
                         <div class="col-md-3">
                         <button type="button" data-bs-toggle="modal" class="waves-effect btn btn-light btn-sm" href="#modal-category-form"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg></button>
                         </div>
-                  </div>
-
+                  </div><br>
+                  <div class="text-start d-grid gap-2 d-md-block">
+        <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Update" name="updpost" class="btn btn-light"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg></button>
+        <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Back" onclick="location.href='/cpinfo'" class="btn btn-light"><i class="mdi mdi-history"></i></button>
+       <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" name="delpost" class="btn btn-danger"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button>
+         </div>
        </div>
        </div>
        <input type="hidden" name="catid" value="<?php echo $zobj['id'];?>">

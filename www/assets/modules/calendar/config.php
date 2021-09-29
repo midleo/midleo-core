@@ -56,18 +56,27 @@ class calendarClass
         for ($x = 1; $x <= 8; $x++) {$hours .= '<option value="' . $x . '">' . $x . ' Hours</option>';}
         ?>
 <div class="row">
-    <div class="col-md-3">
-
-        <div class="card">
-            <div class="card-header"><h4>Add new efforts</h4></div>
-            <div class="card-body">
-                <form name="form" action="" method="post">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group showselect">
-                                <label class="control-label">Request</label>
+<div class="col-md-11">
+    <div id='calendar' class="card">
+        <div class="text-info text-center calalert"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</div>
+    </div>
+    <input id="username" style="display:none" value="<?php echo $_SESSION["user"]; ?>">
+</div>
+<div class="col-md-1 text-end">
+<button class="waves-effect waves-light btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#modeff"><svg data-bs-toggle="tooltip" data-bs-placement="top" title="Add new efforts" class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg>&nbsp;Add</button>
+<!-- Modal -->
+<div class="modal" id="modeff" tabindex="-1" aria-labelledby="modefflbl" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form name="form" action="" method="post">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modefflbl">Add new efforts</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="form-group showselect">
                                 <input type="text" id="reqeffauto" class="form-control"
-                                    placeholder="write reqid or name" required /> <input type="text" id="reqid"
+                                    placeholder="Request ID or Name" required /> <input type="text" id="reqid"
                                     name="reqid" style="display:none;" />
                             </div>
                             <div class="form-group showinput" style="display:none;">
@@ -80,14 +89,12 @@ class calendarClass
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Start time</label>
                                 <input name="starttime" class="form-control date-time-picker-cal" id="datetimepick"
-                                    data-bs-toggle="datetimepicker" data-target="#datetimepick" type="text" required>
+                                    data-toggle="datetimepicker" data-target="#datetimepick" placeholder="Start time" type="text" required>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Duration</label>
                                 <select class="form-control" name="timeperiod" required>
-                                    <option value="">Please select</option>
+                                    <option value="">Duration</option>
                                     <?php echo $hours; ?>
                                 </select>
                             </div>
@@ -107,25 +114,17 @@ class calendarClass
   <label class="btn btn-outline-warning" for="evc6">&nbsp;&nbsp;&nbsp;</label>
 </div>
                             </div>
-
-                            <button type="submit" name="savecal"
-                                class="btn mt-4 btn-info btn-block waves-effect waves-light font-14">
-                                <svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add" /></svg> Save
-                            </button>
-                        </div>
-                </form>
-            </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>
+        <button type="submit" name="savecal" class="btn btn-sm btn-info waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add" /></svg>&nbsp;Save</button>
+      </div>
+    </form>
     </div>
-
+  </div>
 </div>
-<div class="col-md-9">
-    <div id='calendar' class="card">
-        <div class="text-info text-center calalert"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</div>
+<!-- Modal -->
     </div>
-    <input id="username" style="display:none" value="<?php echo $_SESSION["user"]; ?>">
-</div>
-
 </div>
 <?php
 unset($hours);
@@ -217,8 +216,8 @@ class Class_timesheets
         $month = str_pad($month, 2, 0, STR_PAD_LEFT);
         $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
         include "public/modules/css.php";
-        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap4.min.css">';
-        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/fixedColumns.bootstrap4.min.css">';
+        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">';
+        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/fixedColumns.bootstrap5.min.css">';
         echo '</head><body class="card-no-border"> <div id="main-wrapper">';
         $breadcrumb["text"] = "Timesheets";
         include "public/modules/headcontent.php";

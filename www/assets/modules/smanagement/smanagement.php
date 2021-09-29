@@ -758,10 +758,10 @@ if(!empty($thisarray["p1"])){
                                                 <div class="input-group">
                                                     <input type="text" class="form-control text-center date-picker-unl"
                                                         placeholder="Start Date" name="projstart" id="projstart"
-                                                        data-bs-toggle="datetimepicker" data-target="#projstart" value="" />
+                                                        data-toggle="datetimepicker" data-target="#projstart" value="" />
                                                     <input type="text" class="form-control text-center date-picker-unl"
                                                         placeholder="End Date" name="projend" id="projend"
-                                                        data-bs-toggle="datetimepicker" data-target="#projend" value="" />
+                                                        data-toggle="datetimepicker" data-target="#projend" value="" />
                                                 </div>
                                             </div>
         

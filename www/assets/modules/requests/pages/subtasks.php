@@ -182,7 +182,7 @@ foreach($wfdatagroups as $key=>$val){ ?>
 	 </div>
               <div class="form-group row">
                       <label class="form-control-label text-lg-right col-md-3">Deadline</label>
-                      <div class="col-md-9"> <input name="taskdeadline" type="text" class="form-control date-picker" id="datepick" data-bs-toggle="datetimepicker" data-target="#datepick" value="<?php echo $zobjin['deadline'];?>">
+                      <div class="col-md-9"> <input name="taskdeadline" type="text" class="form-control date-picker" id="datepick" data-toggle="datetimepicker" data-target="#datepick" value="<?php echo $zobjin['deadline'];?>">
                     </div> </div>
             <div class="form-group row">
               <label class="form-control-label text-lg-right col-md-3"></label>

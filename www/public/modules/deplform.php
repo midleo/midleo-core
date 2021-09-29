@@ -46,7 +46,7 @@
                     <div class="form-group row" ng-show="depl.qm">
                         <label class="form-control-label text-lg-right col-md-3">Job time</label>
                         <div class="col-md-9">
-                        <input name="jobnextrun" class="form-control date-time-picker-depl"  id="jobnextrun" data-bs-toggle="datetimepicker" data-target="#jobnextrun" type="text">
+                        <input name="jobnextrun" class="form-control date-time-picker-depl"  id="jobnextrun" data-toggle="datetimepicker" data-target="#jobnextrun" type="text">
                         </div>
                     </div>
                     <div style="display:block;" class="text-center">

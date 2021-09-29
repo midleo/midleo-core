@@ -772,7 +772,7 @@ include "public/modules/css.php";    ?>
                                                                 xlink:href="/assets/images/icon/midleoicons.svg#i-login" />
                                                         </svg>&nbsp;Log In</button>
                                                 </div>
-                                                <?php if($website["registration"]==1){?>
+                                                <?php if($website["registration"] && $website["registration"]==1){?>
                                                 <div class="form-group mb-0">
                                                     <div class="col-sm-12 text-center">
                                                         Don't have an account? <a href="/mregister"
@@ -926,7 +926,7 @@ if(isset($_POST['changepass'])){
                                                     onChange="sub(this,'fileupload')"
                                                     accept=".bmp, .gif, .jpeg, .jpg, .png, .tif, .tiff, image/jpeg"
                                                     size="1" /></div>
-                                            <div class="cropit-image-preview profileprev" style="margin: 10px auto;">
+                                            <div class="cropit-preview profileprev" style="margin: 10px auto;">
                                             </div>
                                             <div class="image-size-label">Resize image</div>
                                             <input type="range" class="cropit-image-zoom-input" id="input-slider">
@@ -971,7 +971,7 @@ if(isset($_POST['changepass'])){
                                                 method="post" action=""><input type="hidden" name="avatarid"
                                                     value="<?php echo $uavatar;?>"><?php } ?>
                                                 <div class="btn-group">
-                                                    <button type="button" data-bs-toggle="modal" data-target="#chgpic"
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#chgpic"
                                                         class="btn btn-info waves-effect waves-dark btn-sm">
                                                         <i class="mdi mdi-camera"></i> <span
                                                             class="hidden-xs">Upload</span>

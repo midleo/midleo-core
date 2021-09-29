@@ -20,7 +20,7 @@
             
             </ul>
             <ul class="navbar-nav mb-lg-0 nlinks">
-            <li class="nav-item d-none d-md-block search-box"> <a
+            <li class="nav-item d-none d-md-block search-box"> <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search"
                         class="nav-link d-none d-md-block text-muted waves-effect waves-dark"
                         href="javascript:void(0)"><span class="itemicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg></span></a>
                     <?php if(!empty($_SESSION["user"])){?>
@@ -48,10 +48,10 @@
                 </li>
                 <?php if(!empty($_SESSION["user"])){?>
                 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" >
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="usrdrdown">
-                        <img alt="user" class="img-fluid" src="<?php echo !empty($uavatar)?$uavatar:"/assets/images/avatar.svg";?>" style="width:22px;margin-top: -3px;">
+                        <img alt="user" class="img-fluid rounded" src="<?php echo !empty($uavatar)?$uavatar:"/assets/images/avatar.svg";?>" style="width:22px;margin-top: -3px;">
                           
                         </a>
                         <ul class="dropdown-menu usrdrdown" aria-labelledby="usrdrdown">

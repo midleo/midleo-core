@@ -11,7 +11,7 @@ class sessionClass{
     }    
   }
   public static function getSessUserData(){
-    if(!isset($_SESSION["userdata"])){
+    if(!isset($_SESSION["userdata"]) || isset($_POST["addfile"]) || isset($_POST["delavatar"])){
       $q=gTable::read("users","*"," where mainuser='".$_SESSION['user']."'");
       $zobj = $q->fetch(PDO::FETCH_ASSOC);
       $tmparr=array("user_online_show"=>$zobj['user_online_show'],"user_activity_show"=>$zobj['user_activity_show'],"ugroups"=>json_decode($zobj['ugroups'],true),"effgroup"=>$zobj['effgroup'],"userphone"=>$zobj['phone'],"usertitle"=>$zobj['utitle'],"usemail"=>$zobj['email'],"uavatar"=>$zobj['avatar'],"usname"=>$zobj['fullname'],"uavatar"=>$zobj['avatar']);
