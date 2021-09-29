@@ -7,5 +7,5 @@ www/data/flows
 www/data/packages
 #ignore node_modeles
 www/data/projects
-www/assets/images/users
+www/assets/images/users/*
 www/controller/vendor/*

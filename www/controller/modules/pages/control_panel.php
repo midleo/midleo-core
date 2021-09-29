@@ -437,11 +437,23 @@ class Class_cpinfo{
      $brarr=array();
      if (sessionClass::checkAcc($acclist, "knowledge")) {
       array_push($brarr,array(
-          "title"=>"Create/edit articles",
-          "link"=>"/cpinfo",
-          "midicon"=>"kn-b",
-          "active"=>($page=="cpinfo")?"active":"",
-        ));
+        "title"=>"Create/edit articles",
+        "link"=>"/cpinfo",
+        "midicon"=>"kn-b",
+        "active"=>($page=="cpinfo")?"active":"",
+      ));
+      array_push($brarr,array(
+        "title"=>"Import/View PDF",
+        "link"=>"/pdf",
+        "midicon"=>"documents",
+        "active"=>($page=="pdf")?"active":"",
+      ));
+      array_push($brarr,array(
+        "title"=>"Import Word documents",
+        "link"=>"/word",
+        "midicon"=>"documents",
+        "active"=>($page=="word")?"active":"",
+      ));
    }
    if (sessionClass::checkAcc($acclist, "designer")) {
     array_push($brarr,array(

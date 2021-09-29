@@ -32,7 +32,10 @@ services:
           TZ: Europe/Berlin
         volumes:
           - ../www:/content
-          - /cloud_data/custom.ini:/usr/local/etc/php/php.ini
+          - type: bind
+            source: ./cloud_data/php.ini
+            target: /usr/local/etc/php/php.ini
+            read_only: true
         depends_on:
           - mariadb
     phpmyadmin:

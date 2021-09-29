@@ -4,6 +4,7 @@ Source code for Midleo Core application
 
 ## What is Midleo Core?
 Midleo Core is software made by IT for IT. It can help people working in administration and development section to better organize their resources - servers, firewal rules, application servers, documents, visio diagrams. It can help for better organize your daily tasks and collaborate more with the colleagues.
+With Midleo Core, you can import Word , PDF, Visio documents and save them as text in database. You can batch import multiple documents from shared drive - recursive import.
 
 ## Take a look
 
@@ -59,6 +60,7 @@ Midleo CORE is using:
 - FullCalendar -> https://github.com/fullcalendar/fullcalendar
 - DropBox SDK -> https://github.com/dropbox/dropbox-sdk-js
 - PhpSpreadsheet -> https://github.com/PHPOffice/PhpSpreadsheet
+- PHPWord -> https://github.com/PHPOffice/PHPWord
 - PHP AMQLib -> https://github.com/php-amqplib/php-amqplib
 - OneDrive SDK -> https://docs.microsoft.com/en-us/onedrive/developer/rest-api/getting-started/msa-oauth?view=odsp-graph-online
 
