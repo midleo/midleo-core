@@ -598,7 +598,7 @@ class Class_cpinfo{
               <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
           </div>
           <div class="col-md-9 text-end">
-                  <a class="waves-effect waves-light btn btn-info" rel="tooltip" data-bs-placement="top" title="Create new article" href="/cpinfo/new" target="_parent"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg>&nbsp;New</a>
+                  <a class="waves-effect waves-light btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new article" href="/cpinfo/new" target="_parent"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg>&nbsp;New</a>
           </div>
   </div><br>
    <div class="card">

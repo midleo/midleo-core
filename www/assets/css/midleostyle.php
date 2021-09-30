@@ -1326,6 +1326,8 @@ body[data-color="light"] .h1,body[data-color="light"] .h2,body[data-color="light
 body[data-color="light"] .page-titles h3{margin-bottom:0;margin-top:0px}
 body[data-color="light"] .page-titlesinfo{margin:0 -15px 15px;}
 body[data-color="light"] .btn-light{background-color:transparent;border-color:transparent;}
+body[data-color="light"] .btn-white{background-color:#fff;border-color:transparent;}
+body[data-color="light"] .btn-white:hover{background-color:#fdfdfd;}
 body[data-color="light"] .btn-w{background-color:#fff;border-color:#fff;}
 body[data-color="light"] .btn-light:hover, body[data-color="light"] .maincard:hover .btn-light,body[data-color="light"] .btn-w:hover{background-color:#0000001A;}
 body[data-color="light"] .page-titlesinfo h3{margin-bottom:0;margin-top:0px}

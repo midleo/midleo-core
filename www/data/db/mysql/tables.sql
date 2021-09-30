@@ -452,6 +452,7 @@ CREATE TABLE IF NOT EXISTS `knowledge_categories` (
   `cattype` int(2) NOT NULL DEFAULT '0',
   `category` varchar(255) NOT NULL,
   `catname` varchar(255) NOT NULL,
+  `public` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -604,16 +605,20 @@ CREATE TABLE IF NOT EXISTS `requests_efforts_all` (
 CREATE TABLE IF NOT EXISTS `config_diagrams` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `tags` varchar(255) DEFAULT NULL,
-  `reqid` varchar(50) NOT NULL,
+  `reqid` varchar(20) NOT NULL,
   `appcode` varchar(20) DEFAULT NULL,
   `srvlist` varchar(250) DEFAULT NULL,
   `appsrvlist` varchar(250) DEFAULT NULL,
   `desid` varchar(50) DEFAULT NULL,
-  `desname` varchar(150) NOT NULL,
-  `desdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `desname` varchar(150) CHARACTER SET utf16 DEFAULT NULL,
+  `desdate` timestamp NOT NULL DEFAULT current_timestamp(),
   `desuser` varchar(100) NOT NULL,
-  `imgdata` longtext CHARACTER SET utf16,
-  `xmldata` longtext DEFAULT NULL,
+  `imgdata` longtext CHARACTER SET utf16 DEFAULT NULL,
+  `xmldata` longtext NOT NULL,
+  `public` int(1) NOT NULL DEFAULT 1,
+  `accgroups` varchar(255) DEFAULT NULL,
+  `author` varchar(100) DEFAULT NULL,
+  `category` varchar(100) DEFAULT NULL,
    PRIMARY KEY (`id`),
    UNIQUE KEY `desid` (`desid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

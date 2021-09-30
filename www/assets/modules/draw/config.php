@@ -292,25 +292,20 @@ iframe {
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {?>
         <div class="row">
         <?php if($_SESSION["user"]==$zobj["desuser"]){?>
-            <div class="col-md-4 formcard">
+            <div class="col-md-3 formcard">
                 <div class="card">
                 <form method="post" action="" >
-                <div class="card-header"><h4>Diagram info</h4>
-                </div>
                     <div class="card-body">
                    
                         <div class="form-group">
-                            <label class="form-control-label text-lg-right">Name</label>
-                                <input type="text" name="desname" value="<?php echo $zobj["desname"];?>" class="form-control" placeholder="diagram name"> 
+                                <input type="text" placeholder="Diagram Name" name="desname" value="<?php echo $zobj["desname"];?>" class="form-control" placeholder="diagram name"> 
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label text-lg-right">Tags</label>
-                            <input name="tags" id="tags" data-role="tagsinput" type="text" value="<?php echo $zobj["tags"];?>"
+                            <input name="tags" placeholder="Tags" id="tags" data-role="tagsinput" type="text" value="<?php echo $zobj["tags"];?>"
                                         class="form-control">
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label text-lg-right">Request</label>
-                            <input type="text" id="reqauto" class="form-control" value="<?php echo $zobj["reqid"];?>" />
+                            <input type="text" placeholder="Tracking ID" id="reqauto" class="form-control" value="<?php echo $zobj["reqid"];?>" />
                                     <input type="text" id="reqname" name="reqname" value="<?php echo $zobj["reqid"];?>" style="display:none;" /> 
                         </div>
                                           </div>
@@ -325,7 +320,7 @@ iframe {
                 </div>
                 </form>
             </div>
-            <div class="col-md-8 drawcard">
+            <div class="col-md-9 drawcard">
         <?php } else { ?>
             <div class="col-md-12 drawcard">
        <?php  } ?>
@@ -350,9 +345,9 @@ iframe {
                         <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg><span>
                     </div>
                     <div class="col-md-9 text-end">
-                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Create new diagram" >
+                    <div  >
             <a data-bs-toggle="modal" href="#mnewdes"
-                class="waves-effect waves-light btn btn-info"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;New</a>
+                class="waves-effect waves-light btn btn-light"><svg data-bs-toggle="tooltip" data-bs-placement="top" title="Create new diagram" class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;New</a>
         </div>
                     </div>
                 </div><br>

@@ -10,6 +10,18 @@ class documentClass{
     }
    return true;
   }
+  public static function getDirCont($dir, $filter = '', &$results = array()) {
+    $files = scandir($dir);
+    foreach($files as $key => $value){
+        $path = realpath($dir.DIRECTORY_SEPARATOR.$value); 
+        if(!is_dir($path)) {
+            if(empty($filter) || preg_match('/\.'.$filter.'$/', $path)) $results[] = $path;
+        } elseif($value != "." && $value != "..") {
+          documentClass::getDirCont($path, $filter, $results);
+        }
+    }
+    return $results;
+ }
  public static function rCopy($src,$dst) { 
   $dir = opendir($src); 
   @mkdir($dst); 

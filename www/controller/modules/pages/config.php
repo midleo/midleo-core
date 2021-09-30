@@ -235,7 +235,7 @@ $q->execute(array($zobj['id']));
                 <div class="card-body card-padding">
                     <div class="text-center">
                         <p class="lead">There are no posts in this category</p>
-                        <p class="lead"><a href="/cpinfo">Create one</a></p>
+                        <p class="lead"><a href="/cpinfo/new">Create one</a></p>
                     </div>
                 </div>
             </div><?php } ?>

@@ -19,23 +19,7 @@ class Class_word
         include "public/modules/css.php";
        echo '</head><body>'; ?>
 
-<?php
-$source = "test.docx";
-if(file_exists($source)){
 
-    $phpWord = \PhpOffice\PhpWord\IOFactory::load($source);
-    $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
-    ob_start();
-    $objWriter->save("php://output");
-    $document = ob_get_clean();
-    if($document){
-        preg_match("/<body[^>]*>(.*?)<\/body>/is", $document, $matches);
-        $string = trim(preg_replace('/\s+/', ' ', $matches[1]));
-        echo($string);
-    }
-
-} 
-?>
 
 <?php include "public/modules/footer.php";
         echo "</div></div>";

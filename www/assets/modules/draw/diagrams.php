@@ -163,7 +163,7 @@ class Class_diagrams
                           <div class="card-body card-padding">
                               <div class="text-center">
                                   <p class="lead">There are no diagrams in this category</p>
-                                  <p class="lead"><a href="/draw/new">Create one</a></p>
+                                  <p class="lead"><a href="/draw">Create one</a></p>
                               </div>
                           </div>
                       </div><?php } ?>

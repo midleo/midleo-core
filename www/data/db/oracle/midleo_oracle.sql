@@ -404,6 +404,7 @@ CREATE TABLE knowledge_categories (
   cattype number(10) DEFAULT '0' NOT NULL,
   category varchar2(255) NOT NULL,
   catname varchar2(255) NOT NULL,
+  public number(10) DEFAULT '1' NOT NULL,
   PRIMARY KEY (id)
 )    ;
 BEGIN EXECUTE IMMEDIATE 'drop sequence knowledge_categories_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -735,6 +736,10 @@ CREATE TABLE config_diagrams (
   desuser varchar2(100) DEFAULT NULL,
   imgdata clob DEFAULT '',
   xmldata clob DEFAULT '',
+  public number(1) NOT NULL DEFAULT 1,
+  accgroups varchar2(255) DEFAULT NULL,
+  author varchar2(100) DEFAULT NULL,
+  category varchar2(100) DEFAULT NULL,
   PRIMARY KEY (id),
   CONSTRAINT desid UNIQUE  (desid)
 );

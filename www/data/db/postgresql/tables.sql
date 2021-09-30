@@ -400,7 +400,8 @@ CREATE TABLE IF NOT EXISTS knowledge_categories (
  id SERIAL PRIMARY KEY,
   cattype NUMERIC(2) NOT NULL DEFAULT '0',
   category varchar(255) NOT NULL,
-  catname varchar(255) NOT NULL
+  catname varchar(255) NOT NULL,
+  public NUMERIC(1) NOT NULL DEFAULT '1'
 )  ;
 
 CREATE TABLE IF NOT EXISTS knowledge_info (
@@ -551,6 +552,10 @@ CREATE TABLE IF NOT EXISTS config_diagrams (
   desuser varchar(100) NOT NULL,
   imgdata text DEFAULT NULL,
   xmldata text DEFAULT NULL,
+  public NUMERIC(1) NOT NULL DEFAULT 1,
+  accgroups varchar(255) DEFAULT NULL,
+  author varchar(100) DEFAULT NULL,
+  category varchar(100) DEFAULT NULL,
    UNIQUE(desid)
 ) ;
 
