@@ -9,3 +9,5 @@ www/data/packages
 www/data/projects
 www/assets/images/users/*
 www/controller/vendor/*
+www/controller/composer.lock
+www/controller/composer.json
