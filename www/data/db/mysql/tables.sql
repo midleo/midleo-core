@@ -923,3 +923,12 @@ CREATE TABLE IF NOT EXISTS `config_projrequest` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `env_worddoc` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `fileid` varchar(255) DEFAULT NULL,
+  `importedon` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tags` varchar(255) NOT NULL DEFAULT '',
+  `author` varchar(50) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

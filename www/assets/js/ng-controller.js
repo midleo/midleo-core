@@ -11,6 +11,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
   $('.updinfo').hide();
   $scope.contentLoaded = false;
   $scope.textlimit = 20;
+  //start main functions
   $scope.parJson = function (json) {
     if (json) { return JSON.parse(json); }
   };
@@ -20,10 +21,29 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
   $scope.decode64 = function (str) {
     return atob(str);
   };
-  $scope.copyToClipboard = function(thistext){ 
+  $scope.copyToClipboard = function (thistext) {
     navigator.clipboard.writeText(thistext);
-    notify("Copied to clipboard","success");
+    notify("Copied to clipboard", "success");
   };
+  $scope.toggle = function (item, list) {
+    var idx = list.indexOf(item);
+    if (idx > -1) { list.splice(idx, 1); } else { list.push(item); }
+  };
+  $scope.addexist = function (item, list) {
+    var idx = list.indexOf(item);
+    if (idx > -1) { } else { list.push(item); }
+  };
+  $scope.exists = function (item, list) { return list.indexOf(item) > -1; };
+  $scope.redirect = function (url, refresh) {
+    if (refresh || $scope.$$phase) {
+      $window.location.href = url;
+    } else {
+      $location.path(url);
+      $scope.$apply();
+    }
+  };
+  $scope.exportData = function (what) { alasql('SELECT * INTO XLSX("MidleoData_' + what + '.xlsx",{sheetid:"' + what + '",headers:true}) FROM ?', [$scope.names]); };
+  //end main functions 
   $scope.getAll = function (what, projid, type) {
     if ($('#contloaded')[0]) { angular.element(document.querySelector('#contloaded')).removeClass('hide'); }
     $http({
@@ -1062,15 +1082,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
   $scope.clearFormpack = function () { $scope.package = {}; };
   $scope.clearFormuser = function () { $scope.user = {}; };
   $scope.clearFormgroup = function () { $scope.group = {}; };
-  $scope.toggle = function (item, list) {
-    var idx = list.indexOf(item);
-    if (idx > -1) { list.splice(idx, 1); } else { list.push(item); }
-  };
-  $scope.addexist = function (item, list) {
-    var idx = list.indexOf(item);
-    if (idx > -1) { } else { list.push(item); }
-  };
-  $scope.exists = function (item, list) { return list.indexOf(item) > -1; };
   $scope.deployPKG = function (thisapp) {
     if ($("#deplpkgid").val()) { $scope.depl.pkgid = $("#deplpkgid").val(); }
     if ($("#reqname").val()) { $scope.depl.reqid = $("#reqname").val(); }
@@ -1489,14 +1500,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       })
     });
   };
-  $scope.redirect = function (url, refresh) {
-    if (refresh || $scope.$$phase) {
-      $window.location.href = url;
-    } else {
-      $location.path(url);
-      $scope.$apply();
-    }
-  };
   $scope.uploadXMLFile = function (thistype, appid) {
     $(".uplbut").hide();
     $(".uplwait").show();
@@ -1525,9 +1528,9 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       if (thistype == 'importfw') {
         $scope.getAllfw(appid);
       }
-   //   if (thistype == 'importpj') {
-    //    $scope.getAllproj();
-    //  }
+      //   if (thistype == 'importpj') {
+      //    $scope.getAllproj();
+      //  }
     });
     // return false;        
   };
@@ -1714,7 +1717,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       $('#modal-obj-form').modal('show');
     });
   }
-  $scope.getGitInfo = function(packuid,thisid){
+  $scope.getGitInfo = function (packuid, thisid) {
     $(".gl" + thisid).html('<i class="mdi mdi-loading iconspin"></i>');
     $(".gl" + thisid).prop("disabled", true);
     $(".gl" + thisid).removeClass('btn-light').addClass('btn-secondary');

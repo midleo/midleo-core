@@ -445,13 +445,13 @@ class Class_cpinfo{
       array_push($brarr,array(
         "title"=>"Import/View PDF",
         "link"=>"/pdf",
-        "midicon"=>"documents",
+        "icon"=>"mdi-file-pdf-box",
         "active"=>($page=="pdf")?"active":"",
       ));
       array_push($brarr,array(
         "title"=>"Import Word documents",
         "link"=>"/word",
-        "midicon"=>"documents",
+        "icon"=>"mdi-file-word-outline",
         "active"=>($page=="word")?"active":"",
       ));
    }

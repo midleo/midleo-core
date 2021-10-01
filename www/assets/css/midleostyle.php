@@ -8,7 +8,7 @@ header("Content-type: text/css");
 $css='
 :root { --border-radius: '.$borderradius.'; --usercolor:#'.$thiscolor.'; --fc-button-active-bg-color:#0380FE;}
 /*.cardtr .list-group-item,.stickyside .list-group-item,.list-group .list-group-item{background-color:transparent;border:none;}*/
-.list-group .list-group-item{background-color:transparent;border:none;}
+.list-group:not(.listdoc) .list-group-item{background-color:transparent;border:none;}
 .loader{width:100%;height:100%;top:0;bottom:0;left:0;right:0;position:fixed;z-index:99999;background:#fff;}
 .loader .cssload-speeding-wheel{position:absolute;top:calc(50% - 3.5px);left:calc(50% - 3.5px)}
 .loading{ height:60px;display:none;position:relative;}
