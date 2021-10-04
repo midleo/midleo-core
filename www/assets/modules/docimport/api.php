@@ -212,8 +212,6 @@ class Class_docapi
 
 }
 
-echo Class_docapi::odt2text("/content/data/temp/VasilevCV.odt");
-
 /*
 require_once 'controller/vendor/autoload.php';
 
