@@ -44,16 +44,26 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
   };
   $scope.exportData = function (what) { alasql('SELECT * INTO XLSX("MidleoData_' + what + '.xlsx",{sheetid:"' + what + '",headers:true}) FROM ?', [$scope.names]); };
 //end main functions 
-  $scope.getAllword = function () {
+  $scope.getAlldocs = function () {
     if ($('#contloaded')[0]) { angular.element(document.querySelector('#contloaded')).removeClass('hide'); }
     $http({
       method: 'POST',
       data: { },
-      url: '/wordapi/readimp'
+      url: '/docapi/readimp'
     }).then(function successCallback(response) {
       $scope.contentLoaded = true;
       if (response.data != "null") { $scope.names = response.data; } else { $scope.names = []; }
     });
+  };
+  $scope.deldoc = function(thisid,thisname){
+    $http({
+      method: 'POST',
+      data: { 'thisid': thisid, 'thisname': thisname },
+      url: '/docapi/deldoc'
+    }).then(function successCallback(response) {
+      notify(response.data.resp,"success");
+    });
+    $scope.getAlldocs();
   };
   $scope.clearFormdoc = function () { $scope.doc = {}; };
   $scope.scandir = function(){
@@ -62,7 +72,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
     $http({
       method: 'POST',
       data: { 'dir': $scope.doc.fileloc, 'ext': $scope.doc.filetype },
-      url: '/wordapi/getdoclist'
+      url: '/docapi/getdoclist'
     }).then(function successCallback(response) {
      // $scope.contentLoaded = true;
       if (response.data != "null") { 
@@ -82,7 +92,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
         $http({
           method: 'POST',
           data: { 'filename': value, 'ext': $scope.doc.filetype },
-          url: '/wordapi/import'
+          url: '/docapi/import'
         }).then(function successCallback(response) {
           if (response.data != "null") { 
             if(response.data.error){
@@ -97,7 +107,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
     } else {
       nalert("This step is already done !","warning");
     }
-    $scope.getAllword();
+    $scope.getAlldocs();
   };
 });
 angular.bootstrap(document.getElementById("ngApp"), ['ngApp']);

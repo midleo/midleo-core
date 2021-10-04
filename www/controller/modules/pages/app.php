@@ -101,7 +101,7 @@ class Class_appconfig
 <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">
 <?php }
         if ($thisarray['p1'] == "modules") {?>
-<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
 <?php }
         if ($thisarray['p1'] == "env" || $thisarray['p1'] == "business") {?>

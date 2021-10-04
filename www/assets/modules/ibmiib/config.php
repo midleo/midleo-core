@@ -14,7 +14,7 @@ class Class_flows{
     $pdo = pdodb::connect();
     include "public/modules/css.php";
     $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
-    if (!sessionClass::checkAcc($acclist, "iibadm,iibview")) { header("Location: /cp/?"); }
+    if (!sessionClass::checkAcc($acclist, "ibmadm,ibmview")) { header("Location: /cp/?"); }
     echo '</head><body class="card-no-border"> <div id="main-wrapper">';
     $sql="select * from iibenv_flows where flowid=? limit 1";
     $q = $pdo->prepare($sql);
@@ -81,7 +81,7 @@ class Class_flows{
                     <td class="text-center">{{ d.size }}</td>
                     <td class="text-center">{{ d.changed }}</td>
                     <td class="text-center">
-                      <?php if(sessionClass::checkAcc($acclist, "iibadm")){ ?> 
+                      <?php if(sessionClass::checkAcc($acclist, "ibmadm")){ ?> 
                       <button type="button" ng-click="deleteflow('<?php echo $thisarray['p2']=="env"?"":$zobj['projid'];?>','<?php echo $_SESSION['user'];?>','<?php echo $thisarray['1'];?>',d.file,'<?php echo $thisarray['2']=="env"?"env":"requests";?>','<?php echo $zobj['flowname'];?>')" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button>
                       <?php } else {?>
                         <button type="button" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x" /></svg></button>
@@ -96,7 +96,7 @@ class Class_flows{
         </div>
       </div>
     </div>
-    <?php if(sessionClass::checkAcc($acclist, "iibadm")){ ?>
+    <?php if(sessionClass::checkAcc($acclist, "ibmadm")){ ?>
     <div class="modal" id="modal-flow-form" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">

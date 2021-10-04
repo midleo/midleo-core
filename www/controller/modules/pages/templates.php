@@ -22,7 +22,7 @@ class Class_template{
     echo '</head><body class="card-no-border"><div id="main-wrapper">';
     include "public/modules/headcontentmain.php";
     echo '<div class="page-wrapper"><div class="container-fluid">';
-    include "public/modules/breadcrumbinfo.php";
+    include "public/modules/breadcrumb.php";
     echo '<div class="row"><div class="col-12">';
 	
 	

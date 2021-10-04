@@ -4,6 +4,7 @@ www/controller/config.vars.php
 #ignore py client config file
 www/data/requests
 www/data/flows
+www/data/temp
 www/data/packages
 #ignore node_modeles
 www/data/projects

@@ -88,7 +88,7 @@ class Class_requests{
    if(isset($_POST['savereqdata'])){ $q=requestFunctions::savereqdata($thisarray["p3"],$thisarray["p2"],$_SESSION["user"],$wid); $err=$q["err"];  $msg=$q["msg"];  }
    if($thisarray["p1"]=="type"){ echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';   }
    if($thisarray["p1"]=="log" || $thisarray["p1"]=="files"){ ?>
-  <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
 <?php }  
    echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';

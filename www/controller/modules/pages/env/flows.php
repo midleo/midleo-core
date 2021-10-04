@@ -32,7 +32,7 @@
                              <a ng-click="gitInit(d.flowid,'env')" class="dropdown-item waves-effect"><i class="mdi mdi-git"></i>&nbsp;GIT init</a>
                              <a ng-click="gitCommit(d.flowid,'env')" class="dropdown-item waves-effect"><i class="mdi mdi-git"></i>&nbsp;GIT commit</a>
                              <a href="/requests/flow/env/{{ d.flowid }}/log" target="_parent" class="dropdown-item waves-effect"><i class="mdi mdi-history"></i>&nbsp;Log history</a>
-                             <?php if(sessionClass::checkAcc($acclist, "iibadm")){?>
+                             <?php if(sessionClass::checkAcc($acclist, "ibmadm")){?>
                               <a ng-show="d.insvn=='1'" ng-click="deleteflowsgit('',d.flowid,'<?php echo $_SESSION['user'];?>','env')" class="dropdown-item waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Delete</a>
                               <a ng-show="d.insvn=='0'" ng-click="deleteflows('',d.flowid,'<?php echo $_SESSION['user'];?>','env')" class="dropdown-item waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Delete</a>
                              <?php } ?>

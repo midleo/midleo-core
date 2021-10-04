@@ -12,11 +12,11 @@ class Class_drawedit
         global $modulelist;
         global $maindir;
         if ($installedapp != "yes") {header("Location: /install");}
-        sessionClass::page_protect(base64_encode("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+        sessionClass::page_protect(base64_encode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
         $err = array();
         $msg = array();
         $pdo = pdodb::connect();
-        $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
+        $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
         include "public/modules/css.php";?>
 <script type="text/javascript">
 var urlParams = (function() {
@@ -131,19 +131,19 @@ class Class_draw
         global $modulelist;
         global $maindir;
         if ($installedapp != "yes") {header("Location: /install");}
-        sessionClass::page_protect(base64_encode("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+        sessionClass::page_protect(base64_encode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
         $err = array();
         $msg = array();
         $pdo = pdodb::connect();
-        $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
-        if (!sessionClass::checkAcc($acclist, "designer")) { header("Location:/?");}
+        $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
+        if (!sessionClass::checkAcc($acclist, "designer")) {header("Location:/?");}
         if (isset($_POST["savedesdata"])) {
             $hash = textClass::getRandomStr();
             $sql = "insert into config_diagrams(tags,reqid,appcode,srvlist,appsrvlist,desid,desuser,desname,imgdata,xmldata) values(?,?,?,?,?,?,?,?,?,?)";
             $q = $pdo->prepare($sql);
-            if ($q->execute(array(htmlspecialchars($_POST["tags"]), htmlspecialchars($_POST["reqname"]), htmlspecialchars($_POST["appname"]),htmlspecialchars($_POST["serverlist"]),htmlspecialchars($_POST["appserverlist"]), $hash, $_SESSION['user'], htmlspecialchars($_POST["destitle"]), "",""))) {
-                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid"=>htmlspecialchars($_POST["appname"]),"reqid"=>htmlspecialchars($_POST["reqname"]),"srvid"=>htmlspecialchars($_POST["serverlist"]),"appsrvid"=>htmlspecialchars($_POST["appserverlist"])), "Created new diagram <a href='/draw/".$hash."'>".htmlspecialchars($_POST["destitle"])."</a>");
-                    if (!empty(htmlspecialchars($_POST["tags"]))) {
+            if ($q->execute(array(htmlspecialchars($_POST["tags"]), htmlspecialchars($_POST["reqname"]), htmlspecialchars($_POST["appname"]), htmlspecialchars($_POST["serverlist"]), htmlspecialchars($_POST["appserverlist"]), $hash, $_SESSION['user'], htmlspecialchars($_POST["destitle"]), "", ""))) {
+                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($_POST["appname"]), "reqid" => htmlspecialchars($_POST["reqname"]), "srvid" => htmlspecialchars($_POST["serverlist"]), "appsrvid" => htmlspecialchars($_POST["appserverlist"])), "Created new diagram <a href='/draw/" . $hash . "'>" . htmlspecialchars($_POST["destitle"]) . "</a>");
+                if (!empty(htmlspecialchars($_POST["tags"]))) {
                     gTable::dbsearch($hash, $_SERVER["HTTP_REFERER"], htmlspecialchars($_POST["tags"]));
                 }
                 header("Location: /draw/" . $hash);
@@ -151,14 +151,14 @@ class Class_draw
                 $err[] = "This name already exist. Please use different one";
             }
         }
-        if(isset($_POST["savefd"])){
-          $sql="update config_diagrams set desname=?, tags=?, reqid=? where desid=?";
-          $q = $pdo->prepare($sql);
-          $q->execute(array(htmlspecialchars($_POST["desname"]),htmlspecialchars($_POST["tags"]),htmlspecialchars($_POST["reqname"]),$thisarray['p1']));
-          if (!empty(htmlspecialchars($_POST["tags"]))) {
-            gTable::dbsearch($thisarray['p1'], $_SERVER["HTTP_REFERER"], htmlspecialchars($_POST["tags"]));
-          }
-          $msg[]="Diagram info updated";
+        if (isset($_POST["savefd"])) {
+            $sql = "update config_diagrams set desname=?, tags=?, reqid=? where desid=?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array(htmlspecialchars($_POST["desname"]), htmlspecialchars($_POST["tags"]), htmlspecialchars($_POST["reqname"]), $thisarray['p1']));
+            if (!empty(htmlspecialchars($_POST["tags"]))) {
+                gTable::dbsearch($thisarray['p1'], $_SERVER["HTTP_REFERER"], htmlspecialchars($_POST["tags"]));
+            }
+            $msg[] = "Diagram info updated";
         }
         include "public/modules/css.php";
         echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
@@ -253,37 +253,41 @@ iframe {
 <div class="page-wrapper">
     <div class="container-fluid">
         <?php
-         $brarr=array();
-         if (sessionClass::checkAcc($acclist, "knowledge")) {
-            array_push($brarr,array(
-                "title"=>"Create/edit articles",
-                "link"=>"/cpinfo",
-                "midicon"=>"kn-b",
-                "active"=>($page=="cpinfo")?"active":"",
-              ));
-         }
-          array_push($brarr,array(
-            "title"=>"View/Edit diagrams",
-            "link"=>"/draw",
-            "midicon"=>"diagram",
-            "active"=>($page=="draw")?"active":"",
-          ));
-          if (sessionClass::checkAcc($acclist, "odfiles")) {
-            array_push($brarr,array(
-                "title"=>"View/Map OneDrive files",
-              "link"=>"/onedrive",
-              "midicon"=>"onedrive",
-              "active"=>($page=="onedrive")?"active":"",
+$brarr = array();
+        array_push($brarr, array(
+            "title" => "Create/edit articles",
+            "link" => "/cpinfo",
+            "midicon" => "kn-b",
+            "active" => ($page == "cpinfo") ? "active" : "",
+        ));
+        array_push($brarr, array(
+            "title" => "Import documents",
+            "link" => "/docimport",
+            "midicon" => "deploy",
+            "active" => ($page == "docimport") ? "active" : "",
+        ));
+        array_push($brarr, array(
+            "title" => "View/Edit diagrams",
+            "link" => "/draw",
+            "midicon" => "diagram",
+            "active" => ($page == "draw") ? "active" : "",
+        ));
+        if (sessionClass::checkAcc($acclist, "odfiles")) {
+            array_push($brarr, array(
+                "title" => "View/Map OneDrive files",
+                "link" => "/onedrive",
+                "midicon" => "onedrive",
+                "active" => ($page == "onedrive") ? "active" : "",
             ));
-          }
-          if (sessionClass::checkAcc($acclist, "dbfiles")) {
-            array_push($brarr,array(
-                "title"=>"View/Map Dropbox files",
-              "link"=>"/dropbox",
-              "midicon"=>"dropbox",
-              "active"=>($page=="dropbox")?"active":"",
+        }
+        if (sessionClass::checkAcc($acclist, "dbfiles")) {
+            array_push($brarr, array(
+                "title" => "View/Map Dropbox files",
+                "link" => "/dropbox",
+                "midicon" => "dropbox",
+                "active" => ($page == "dropbox") ? "active" : "",
             ));
-          }
+        }
         include "public/modules/breadcrumb.php";?>
         <?php if (!empty($thisarray['p1'])) {
             $sql = "SELECT tags, desuser, desname, reqid, imgdata FROM config_diagrams where binary desid=?";
@@ -291,22 +295,22 @@ iframe {
             $q->execute(array($thisarray['p1']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {?>
         <div class="row">
-        <?php if($_SESSION["user"]==$zobj["desuser"]){?>
+        <?php if ($_SESSION["user"] == $zobj["desuser"]) {?>
             <div class="col-md-3 formcard">
                 <div class="card">
                 <form method="post" action="" >
                     <div class="card-body">
-                   
+
                         <div class="form-group">
-                                <input type="text" placeholder="Diagram Name" name="desname" value="<?php echo $zobj["desname"];?>" class="form-control" placeholder="diagram name"> 
+                                <input type="text" placeholder="Diagram Name" name="desname" value="<?php echo $zobj["desname"]; ?>" class="form-control" placeholder="diagram name">
                         </div>
                         <div class="form-group">
-                            <input name="tags" placeholder="Tags" id="tags" data-role="tagsinput" type="text" value="<?php echo $zobj["tags"];?>"
+                            <input name="tags" placeholder="Tags" id="tags" data-role="tagsinput" type="text" value="<?php echo $zobj["tags"]; ?>"
                                         class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Tracking ID" id="reqauto" class="form-control" value="<?php echo $zobj["reqid"];?>" />
-                                    <input type="text" id="reqname" name="reqname" value="<?php echo $zobj["reqid"];?>" style="display:none;" /> 
+                            <input type="text" placeholder="Tracking ID" id="reqauto" class="form-control" value="<?php echo $zobj["reqid"]; ?>" />
+                                    <input type="text" id="reqname" name="reqname" value="<?php echo $zobj["reqid"]; ?>" style="display:none;" />
                         </div>
                                           </div>
                     <div class="card-footer">
@@ -316,20 +320,20 @@ iframe {
   <button type="submit" name="savefd" class="btn btn-light" data-bs-toggle="tooltip" title="Save"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save" /></svg></button>
 </div>
   </div>
-                   
+
                 </div>
                 </form>
             </div>
             <div class="col-md-9 drawcard">
-        <?php } else { ?>
+        <?php } else {?>
             <div class="col-md-12 drawcard">
-       <?php  } ?>
+       <?php }?>
                 <div class="card">
                     <div class="card-body" id="drawid">
                         <img id="image" style="max-width:100%;" src="<?php echo $zobj["imgdata"]; ?>" />
                     </div>
                 </div>
-               
+
             </div>
         </div>
 
@@ -337,7 +341,7 @@ iframe {
                 textClass::PageNotFound();
             }
         } else {?>
-    
+
         <div class=" ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
         <div class="row">
                     <div class="col-md-3 position-relative">
@@ -353,7 +357,7 @@ iframe {
                 </div><br>
             <div class="card">
             <div class="card-body p-0">
-               
+
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table  table-vmiddle table-hover stylish-table">
@@ -407,11 +411,11 @@ iframe {
             </div>
         <div class="modal" id="mnewdes" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
-            
+
                 <div class="modal-content">
                 <form name="form" action="" method="post">
                 <div class="modal-header text-center"><h4>Create new diagram</h4></div>
-                    
+
                         <div class="modal-body"><br>
                             <div class="form-group row">
                                 <label class="form-control-label text-lg-right col-md-3"
@@ -474,18 +478,18 @@ iframe {
                                 </div>
                             </div>
                         </div>
-                                       
+
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
                     <button class="btn btn-info btn-sm" type="submit" name="savedesdata"><i
                                     class="mdi mdi-content-save"></i>&nbsp;Create</button>&nbsp;
-                            
+
             </div>
             </form>
                 </div>
             </div>
         </div>
-       
+
         <?php }?>
     </div>
 </div>

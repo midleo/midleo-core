@@ -34,7 +34,7 @@ class Class_onedrive
         if ($thisarray["p1"] == "auth") {
             echo '<script>onAuthCallback();</script>';
         }
-        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap4.min.css">
+        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">';
     echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
@@ -54,14 +54,18 @@ class Class_onedrive
             }
             echo '<div class="page-wrapper"><div class="container-fluid">';
             $brarr=array();
-            if (sessionClass::checkAcc($acclist, "knowledge")) {
             array_push($brarr,array(
                 "title"=>"Create/edit articles",
                 "link"=>"/cpinfo",
                 "midicon"=>"kn-b",
                 "active"=>($page=="cpinfo")?"active":"",
               ));
-            }
+              array_push($brarr, array(
+                "title" => "Import documents",
+                "link" => "/docimport",
+                "midicon" => "deploy",
+                "active" => ($page == "docimport") ? "active" : "",
+            ));
             if (sessionClass::checkAcc($acclist, "designer")) {
             array_push($brarr,array(
             "title"=>"View/Edit diagrams",

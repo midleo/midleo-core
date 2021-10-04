@@ -1,12 +1,14 @@
 <?php
-$modulelist["dropbox"]["name"]="Dropbox controller";
+$modulelist["dropbox"]["name"] = "Dropbox controller";
 $modulelist["dropbox"]["js"][] = str_replace($maindir, "", dirname($filename)) . "/assets/js/Dropbox-sdk.min.js";
 $modulelist["dropbox"]["js"][] = str_replace($maindir, "", dirname($filename)) . "/assets/js/fetch.js";
 $modulelist["dropbox"]["js"][] = str_replace($maindir, "", dirname($filename)) . "/assets/js/polyfill.min.js";
 $modulelist["dropbox"]["js"][] = str_replace($maindir, "", dirname($filename)) . "/assets/js/utils.js";
 include_once "api.php";
-class Class_dropbox{
-    public static function getPage(){
+class Class_dropbox
+{
+    public static function getPage()
+    {
         global $installedapp;
         global $website;
         global $page;
@@ -26,13 +28,13 @@ class Class_dropbox{
             if (!empty($jslink)) {?><script type="text/javascript" src="<?php echo $jslink; ?>"></script>
 <?php }
         }
-        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap4.min.css">
+        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">';
-    echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
+        echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "DropBox";
-            $breadcrumb["link"] = "/cp/?";
-            $breadcrumb["special"] = '
+        $breadcrumb["link"] = "/cp/?";
+        $breadcrumb["special"] = '
         <h8 class="pre-auth-section" style="display:none;"><a href="" id="authlink" data-bs-toggle="tooltip" title="Sign in to Dropbox"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg></a></h8>
         ';
         if ($thisarray["p1"] != "auth") {
@@ -44,42 +46,46 @@ class Class_dropbox{
                 include "public/modules/headcontentmain.php";
             }
             echo '<div class="page-wrapper"><div class="container-fluid">';
-            $brarr=array();
-            if (sessionClass::checkAcc($acclist, "knowledge")) {
-            array_push($brarr,array(
-                "title"=>"Create/edit articles",
-                "link"=>"/cpinfo",
-                "midicon"=>"kn-b",
-                "active"=>($page=="cpinfo")?"active":"",
-              ));
-            }
+            $brarr = array();
+            array_push($brarr, array(
+                "title" => "Create/edit articles",
+                "link" => "/cpinfo",
+                "midicon" => "kn-b",
+                "active" => ($page == "cpinfo") ? "active" : "",
+            ));
+            array_push($brarr, array(
+                "title" => "Import documents",
+                "link" => "/docimport",
+                "midicon" => "deploy",
+                "active" => ($page == "docimport") ? "active" : "",
+            ));
             if (sessionClass::checkAcc($acclist, "designer")) {
-            array_push($brarr,array(
-            "title"=>"View/Edit diagrams",
-            "link"=>"/draw",
-            "midicon"=>"diagram",
-            "active"=>($page=="draw")?"active":"",
-             ));
-             }
-              if (sessionClass::checkAcc($acclist, "odfiles")) {
-                array_push($brarr,array(
-                    "title"=>"View/Map OneDrive files",
-                  "link"=>"/onedrive",
-                  "midicon"=>"onedrive",
-                  "active"=>($page=="onedrive")?"active":"",
+                array_push($brarr, array(
+                    "title" => "View/Edit diagrams",
+                    "link" => "/draw",
+                    "midicon" => "diagram",
+                    "active" => ($page == "draw") ? "active" : "",
                 ));
-              }
-              if (sessionClass::checkAcc($acclist, "dbfiles")) {
-                array_push($brarr,array(
-                    "title"=>"View/Map Dropbox files",
-                  "link"=>"/dropbox",
-                  "midicon"=>"dropbox",
-                  "active"=>($page=="dropbox")?"active":"",
+            }
+            if (sessionClass::checkAcc($acclist, "odfiles")) {
+                array_push($brarr, array(
+                    "title" => "View/Map OneDrive files",
+                    "link" => "/onedrive",
+                    "midicon" => "onedrive",
+                    "active" => ($page == "onedrive") ? "active" : "",
                 ));
-              }
-            include "public/modules/breadcrumb.php"; ?>
-            
-        <?php    echo '<div class="card"><div class="card-header"><h4>DropBox files</h4></div><div class="card-body">  ';?>
+            }
+            if (sessionClass::checkAcc($acclist, "dbfiles")) {
+                array_push($brarr, array(
+                    "title" => "View/Map Dropbox files",
+                    "link" => "/dropbox",
+                    "midicon" => "dropbox",
+                    "active" => ($page == "dropbox") ? "active" : "",
+                ));
+            }
+            include "public/modules/breadcrumb.php";?>
+
+        <?php echo '<div class="card"><div class="card-header"><h4>DropBox files</h4></div><div class="card-body">  '; ?>
 <div class="row ">
     <div class="col-md-12">
     <nav class="breadcrumb authed-section" style="display:none;" id="od-breadcrumb"></nav><br>
@@ -187,7 +193,7 @@ class Class_dropbox{
 
                             <div class="modal-footer">
                                 <button class="btn btn-light btn-sm" type="button"
-                                    onclick="updtag('<?php echo $_SESSION["user"];?>');" name="addfiletag"><i
+                                    onclick="updtag('<?php echo $_SESSION["user"]; ?>');" name="addfiletag"><i
                                         class="mdi mdi-content-save"></i>&nbsp;Save</button>&nbsp;
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i
                                         class="mdi mdi-close"></i>&nbsp;Close</button>
@@ -203,20 +209,20 @@ class Class_dropbox{
 </div>
 </div>
 <?php echo '</div></div>';
- include "public/modules/footer.php";
- echo '</div></div>';
- }
- include "public/modules/js.php"; ?>
+            include "public/modules/footer.php";
+            echo '</div></div>';
+        }
+        include "public/modules/js.php"; ?>
 <script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>
 <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
 <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
-<script>$('#data-table').DataTable({  
+<script>$('#data-table').DataTable({
             "oLanguage": {
              "sSearch": ""
             },
             dom: 'Bfrtip' });</script>
 <script>
-var CLIENT_ID = '<?php echo $website["dbclid"];?>';
+var CLIENT_ID = '<?php echo $website["dbclid"]; ?>';
 var data = loadFromCookie();
 if (data.access_token) {
     function getAccessTokenFromUrl() {
@@ -286,7 +292,7 @@ if (isAuthenticated()) {
         clientId: CLIENT_ID
     });
     var authUrl = dbx.auth.getAuthenticationUrl(
-        '<?php echo $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"];?>/dropbox');
+        '<?php echo $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"]; ?>/dropbox');
     document.getElementById('authlink').href = authUrl;
 }
 </script>

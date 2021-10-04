@@ -1,6 +1,6 @@
 <div class="btn-group " role="group" aria-label="Info btns">
-<?php if($forumcase=="posts"){?><a data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Article" type="button" class="waves-effect waves-light btn btn-w" >Edit</a><?php } ?>
-<a href="/cpinfo/new" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article" type="button" class="waves-effect waves-light btn btn-w" >New</a>
+<?php if($forumcase=="posts"){?><a data-bs-toggle="tooltip" href="/cpinfo/edit/<?php echo $keyws;?>" data-bs-placement="top" title="Edit this Article" class="waves-effect waves-light btn btn-w" >Edit</a><?php } ?>
+<a href="/cpinfo/new" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article" class="waves-effect waves-light btn btn-w" >New</a>
 </div>
 
 <?php  $clientkeyws="";

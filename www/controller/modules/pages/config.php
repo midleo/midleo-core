@@ -123,10 +123,54 @@ if ($forumcase=="posts") {
   } else { $blogcatname="Category is empty!"; }}
   include "public/modules/css.php";   
   echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
+  $breadcrumb["text"]="Knowledge base"; 
+     $brarr=array();
+      array_push($brarr,array(
+        "title"=>"Knowledge Base",
+        "link"=>"/info",
+        "midicon"=>"kn-b",
+        "active"=>($page=="cpinfo")?"active":"",
+      ));
+      array_push($brarr,array(
+        "title"=>"Import/View PDF",
+        "link"=>"/pdf",
+        "icon"=>"mdi-file-pdf-box",
+        "active"=>($page=="pdf")?"active":"",
+      ));
+      array_push($brarr,array(
+        "title"=>"Import Word documents",
+        "link"=>"/word",
+        "icon"=>"mdi-file-word-outline",
+        "active"=>($page=="word")?"active":"",
+      ));
+   if (sessionClass::checkAcc($acclist, "designer")) {
+    array_push($brarr,array(
+      "title"=>"Diagrams",
+      "link"=>"/diagrams",
+      "midicon"=>"diagram",
+      "active"=>($page=="draw")?"active":"",
+    ));
+  }
+    if (sessionClass::checkAcc($acclist, "odfiles")) {
+      array_push($brarr,array(
+          "title"=>"View/Map OneDrive files",
+        "link"=>"/onedrive",
+        "midicon"=>"onedrive",
+        "active"=>($page=="onedrive")?"active":"",
+      ));
+    }
+    if (sessionClass::checkAcc($acclist, "dbfiles")) {
+      array_push($brarr,array(
+          "title"=>"View/Map Dropbox files",
+        "link"=>"/dropbox",
+        "midicon"=>"dropbox",
+        "active"=>($page=="dropbox")?"active":"",
+      ));
+    }
   include "public/modules/headcontentinfo.php";   
   echo '<div class="page-wrapper">'; ?>
         <div class="container-fluid">
-            <?php include "public/modules/breadcrumbinfo.php"; ?>
+            <?php include "public/modules/breadcrumb.php"; ?>
 
             <?php     echo '<div class="row"><div class="col-md-10">';
       if ($forumcase=="posts") { 
@@ -191,7 +235,7 @@ $q->execute(array($zobj['id']));
     $q = $pdo->prepare($sql);
     $q->execute(array());  
   } elseif($forumcase=="category"){
-    $sql="SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where category=? ".(!empty($sactcat)?" and ".$sactcat:"")." order by id desc";
+    $sql="SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where category=? ".(!empty($sactcat)?" and (".$sactcat.")":"")." order by id desc";
     $q = $pdo->prepare($sql);
     $q->execute(array($keyws));
   } else {

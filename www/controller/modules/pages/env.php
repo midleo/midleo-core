@@ -170,7 +170,7 @@ class Class_env
           )
           );
         }
-        if (sessionClass::checkAcc($acclist, "fwadmin,fwview")) {
+        if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
           array_push($brarr,array(
             "title"=>"Firewall entries",
             "link"=>"/".$page."/firewall/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
@@ -179,7 +179,7 @@ class Class_env
             "active"=>($thisarray['p1'] == "firewall")?"active":"",
           ));
         }
-        if (sessionClass::checkAcc($acclist, "dnsadmin,dnsvew")) {
+        if (sessionClass::checkAcc($acclist, "unixadm,dnsvew")) {
           array_push($brarr,array(
             "title"=>"DNS Configuration",
             "link"=>"/".$page."/dns/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
@@ -188,7 +188,7 @@ class Class_env
             "active"=>($thisarray['p1'] == "dns")?"active":"",
           ));
         }
-        if (sessionClass::checkAcc($acclist, "serveradm,serverview")) {
+        if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
           array_push($brarr,array(
             "title"=>"Server information",
             "link"=>"/".$page."/servers/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
@@ -215,7 +215,7 @@ class Class_env
             "active"=>($thisarray['p1'] == "vars")?"active":"",
           ));
         }
-        if (sessionClass::checkAcc($acclist, "mqadm,mqview")) {
+        if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {
           if (method_exists("IBMMQ", "execJava") && is_callable(array("IBMMQ", "execJava"))) {
           array_push($brarr,array(
             "title"=>"IBM MQ",
@@ -227,7 +227,7 @@ class Class_env
           ));
         }
         }
-        if (sessionClass::checkAcc($acclist, "mqfteadm,mqfteview")) {
+        if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {
           array_push($brarr,array(
             "title"=>"IBM MQ File transfer",
             "link"=>"/".$page."/fte/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
@@ -236,7 +236,7 @@ class Class_env
             "active"=>($thisarray['p1'] == "fte")?"active":"",
           ));
         }
-        if (sessionClass::checkAcc($acclist, "iibadm,iibview")) {
+        if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {
           array_push($brarr,array(
             "title"=>"IBM ACE/IIB",
             "link"=>"/".$page."/flows/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
@@ -257,7 +257,7 @@ class Class_env
             ));
           }
         }
-        if (sessionClass::checkAcc($acclist, "serveradm,serverview")) {
+        if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
           if (method_exists("tibco", "execJava") && is_callable(array("tibco", "execJava"))) {
             array_push($brarr,array(
               "title"=>"Places",
@@ -280,7 +280,7 @@ class Class_env
 
 
     <div class="tab-content">
-    <?php if (sessionClass::checkAcc($acclist, "mqadm,mqview")) {?>
+    <?php if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {?>
       <div class="tab-pane <?php echo in_array($thisarray['p1'], $arrayibmmqtab) ? "active" : ""; ?>" id="ibmmq" role="tabpanel">
       <ul class="nav nav-tabs customtab">
       <?php if (method_exists("Excel", "import") && is_callable(array("Excel", "import"))) {?>

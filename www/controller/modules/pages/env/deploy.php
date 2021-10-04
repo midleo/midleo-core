@@ -71,7 +71,7 @@ if (sessionClass::checkAcc($acclist, "appadm,appview")) {
                         can download "Java Cryptography Extension (JCE) Unlimited Strength" for your java version and
                         extract the archive in folder: $JAVA_HOME\lib\security<br>
                         &nbsp;&nbsp;&nbsp;- create a SVRCONN channel with user and give permissions to it. It is good to
-                        use mqm/mqadmin as an MCA user for the channel, but if you want to use another user, here are
+                        use mqm/ibmadmin as an MCA user for the channel, but if you want to use another user, here are
                         the authority configuration that needs to be added:<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- run the script auth-qm.sh under data/mqsc folder<br>
                         &nbsp;&nbsp;&nbsp;- secure the channel with SSL and configure correct SSLPEERNAME<br>

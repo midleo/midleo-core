@@ -1,6 +1,6 @@
 <div class="btn-group " role="group" aria-label="Info btns">
 <?php if($forumcase=="v"){?><a href="/draw/<?php echo $thisarray["last"];?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Article" type="button" class="waves-effect waves-light btn btn-w" >Edit</a><?php } ?>
-<a href="/draw/new" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article" type="button" class="waves-effect waves-light btn btn-w" >New</a>
+<a href="/draw" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article" type="button" class="waves-effect waves-light btn btn-w" >New</a>
 </div>
 <br><br>
 <?php if($clientkeyws){?>

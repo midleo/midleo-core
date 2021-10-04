@@ -398,10 +398,10 @@ CREATE TABLE IF NOT EXISTS env_appservers (
 
 CREATE TABLE IF NOT EXISTS knowledge_categories (
  id SERIAL PRIMARY KEY,
-  cattype NUMERIC(2) NOT NULL DEFAULT '0',
+  public NUMERIC(2) NOT NULL DEFAULT '0',
   category varchar(255) NOT NULL,
   catname varchar(255) NOT NULL,
-  public NUMERIC(1) NOT NULL DEFAULT '1'
+  accgroups varchar(255) DEFAULT NULL
 )  ;
 
 CREATE TABLE IF NOT EXISTS knowledge_info (

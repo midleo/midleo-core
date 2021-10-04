@@ -47,7 +47,7 @@ class Class_monitoring{
     }
     include "public/modules/css.php";
     if(!empty($thisarray['p1'])){ 
-        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap4.min.css">
+        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">';
         }
     echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
@@ -339,7 +339,7 @@ echo "</div>";
     }
     if(!empty($thisarray['p1'])){ 
         echo '<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-        <script src="/assets/js/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/js/datatables/dataTables.bootstrap5.min.js"></script>
         <script src="/assets/js/datatables/dataTables.fixedColumns.min.js"></script>'; ?>
        <script type="text/javascript">
         let dtable=$('#data-table').DataTable({

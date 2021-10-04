@@ -6,7 +6,7 @@
   </div>
   <div class="col-md-9 text-end">
 <?php if ($_SESSION['user_level'] >= 3){?><span><button data-bs-toggle="tooltip" data-bs-placement="top" title="Export the objects in excel" type="button" class="waves-effect waves-light btn btn-light" ng-click="exportData('<?php echo $thisarray['p1']; ?>')">Export&nbsp;<svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-up" xlink:href="/assets/images/icon/midleoicons.svg#i-up"/></svg></button> </span><?php }?>
-<?php if (sessionClass::checkAcc($acclist, "fwadmin")) { ?>
+<?php if (sessionClass::checkAcc($acclist, "unixadm")) { ?>
   <span data-bs-toggle="tooltip" data-bs-placement="top" title="Import firewall rules from Excel file"><button type="button" class="waves-effect waves-light btn btn-light" data-bs-toggle="modal" href="#modal-imp-form" ><i class="mdi mdi-database-import"></i>&nbsp;Import</button></span>
 <span data-bs-toggle="tooltip" data-bs-placement="top" title="Add new firewall rule"><button type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal" href="#modal-obj-form" ng-click="showCreateFormFw()"><svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;Create</button></span>
  <?php }?>
@@ -100,7 +100,7 @@
   </div>
 </div>
 <?php if (method_exists("Excel", "import") && is_callable(array("Excel", "import"))) { 
-  if (sessionClass::checkAcc($acclist, "fwadmin")) {
+  if (sessionClass::checkAcc($acclist, "unixadm")) {
    ?>
   <div class="modal" id="modal-imp-form" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">

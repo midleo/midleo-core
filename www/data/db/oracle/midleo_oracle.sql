@@ -401,10 +401,10 @@ BEGIN EXECUTE IMMEDIATE 'DROP TABLE knowledge_categories'; EXCEPTION WHEN OTHERS
 /
 CREATE TABLE knowledge_categories (
   id number(10) NOT NULL,
-  cattype number(10) DEFAULT '0' NOT NULL,
+  public number(10) DEFAULT '0' NOT NULL,
   category varchar2(255) NOT NULL,
   catname varchar2(255) NOT NULL,
-  public number(10) DEFAULT '1' NOT NULL,
+  accgroups varchar2(255) DEFAULT NULL,
   PRIMARY KEY (id)
 )    ;
 BEGIN EXECUTE IMMEDIATE 'drop sequence knowledge_categories_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;

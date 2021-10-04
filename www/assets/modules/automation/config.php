@@ -42,7 +42,7 @@ $brarr=array(
         "active"=>($thisarray["p2"]=="disabled")?"active":"",
       )
   );
-  if (sessionClass::checkAcc($acclist, "mqadm,mqview")) {
+  if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {
     if (method_exists("IBMMQ", "execJava") && is_callable(array("IBMMQ", "execJava"))) {
     array_push($brarr,array(
       "title"=>"IBM MQ inventory jobs",

@@ -1,7 +1,7 @@
 <?php
-$modulelist["word"]["name"] = "Import Microsoft Word files and view the content";
+$modulelist["docimport"]["name"] = "Import Documents";
 include_once "api.php";
-class Class_word
+class Class_docimport
 {
     public static function getPage($thisarray)
     {
@@ -11,61 +11,53 @@ class Class_word
         global $modulelist;
         global $maindir;
         if ($installedapp != "yes") {header("Location: /install");}
-        sessionClass::page_protect(base64_encode("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+        sessionClass::page_protect(base64_encode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
         $err = array();
         $msg = array();
         $pdo = pdodb::connect();
-        $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
+        $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
         include "public/modules/css.php";
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
-        $breadcrumb["text"] = "Word documents";
+        $breadcrumb["text"] = "Import documents";
         include "public/modules/headcontent.php";?>
 <div class="page-wrapper">
     <div class="container-fluid" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
         <?php
-         $brarr=array();
-         if (sessionClass::checkAcc($acclist, "knowledge")) {
-            array_push($brarr,array(
-                "title"=>"Create/edit articles",
-                "link"=>"/cpinfo",
-                "midicon"=>"kn-b",
-                "active"=>($page=="cpinfo")?"active":"",
-              ));
-              array_push($brarr,array(
-                "title"=>"Import/View PDF",
-                "link"=>"/pdf",
-                "icon"=>"mdi-file-pdf-box",
-                "active"=>($page=="pdf")?"active":"",
-              ));
-              array_push($brarr,array(
-                "title"=>"Import Word documents",
-                "link"=>"/word",
-                "icon"=>"mdi-file-word-outline",
-                "active"=>($page=="word")?"active":"",
-              ));
-         }
-          array_push($brarr,array(
-            "title"=>"View/Edit diagrams",
-            "link"=>"/draw",
-            "midicon"=>"diagram",
-            "active"=>($page=="draw")?"active":"",
-          ));
-          if (sessionClass::checkAcc($acclist, "odfiles")) {
-            array_push($brarr,array(
-                "title"=>"View/Map OneDrive files",
-              "link"=>"/onedrive",
-              "midicon"=>"onedrive",
-              "active"=>($page=="onedrive")?"active":"",
+$brarr = array();
+        array_push($brarr, array(
+            "title" => "Create/edit articles",
+            "link" => "/cpinfo",
+            "midicon" => "kn-b",
+            "active" => ($page == "cpinfo") ? "active" : "",
+        ));
+        array_push($brarr, array(
+            "title" => "Import documents",
+            "link" => "/docimport",
+            "midicon" => "deploy",
+            "active" => ($page == "docimport") ? "active" : "",
+        ));
+        array_push($brarr, array(
+            "title" => "View/Edit diagrams",
+            "link" => "/draw",
+            "midicon" => "diagram",
+            "active" => ($page == "draw") ? "active" : "",
+        ));
+        if (sessionClass::checkAcc($acclist, "odfiles")) {
+            array_push($brarr, array(
+                "title" => "View/Map OneDrive files",
+                "link" => "/onedrive",
+                "midicon" => "onedrive",
+                "active" => ($page == "onedrive") ? "active" : "",
             ));
-          }
-          if (sessionClass::checkAcc($acclist, "dbfiles")) {
-            array_push($brarr,array(
-                "title"=>"View/Map Dropbox files",
-              "link"=>"/dropbox",
-              "midicon"=>"dropbox",
-              "active"=>($page=="dropbox")?"active":"",
+        }
+        if (sessionClass::checkAcc($acclist, "dbfiles")) {
+            array_push($brarr, array(
+                "title" => "View/Map Dropbox files",
+                "link" => "/dropbox",
+                "midicon" => "dropbox",
+                "active" => ($page == "dropbox") ? "active" : "",
             ));
-          }
+        }
         include "public/modules/breadcrumb.php";?>
         <div class=" ngctrl" >
             <div class="row">
@@ -102,7 +94,7 @@ class Class_word
                                         <th class="text-center" style="width:60px;">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody ng-init="getAllword()">
+                                <tbody ng-init="getAlldocs()">
                                     <tr ng-hide="contentLoaded">
                                         <td colspan="5" style="text-align:center;font-size:1.1em;"><i
                                                 class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
@@ -112,7 +104,7 @@ class Class_word
                                         pagination-id="prodx" ng-hide="d.fileid==''">
                                         <td class="text-center">{{ d.fileid}}</td>
                                         <td class="text-center">{{ d.importedon }}</td>
-                                        <td class="text-center">{{ d.author }}</td>
+                                        <td class="text-center"><a href="/browse/user/{{ d.author }}" target="_blank">{{ d.author }}</a></td>
                                         <td class="text-center"><a ng-repeat="tag in d.tags.split(',')"
                                                 class="btn btn-sm btn-info waves-effect"
                                                 style="margin-right:5px;margin-top:5px;"
@@ -120,7 +112,7 @@ class Class_word
                                         <td>
                                             <?php if ($_SESSION['user_level'] >= "5") {?>
                                             <button type="button"
-                                                ng-click="delword(d.id,'<?php echo $_SESSION["user"]; ?>')"
+                                                ng-click="deldoc(d.id,d.fileorigid)"
                                                 class="btn btn-light btn-sm bg waves-effect"><svg
                                                     class="midico midico-outline">
                                                     <use href="/assets/images/icon/midleoicons.svg#i-trash"
@@ -162,6 +154,7 @@ class Class_word
                                     <option value="doc">.doc</option>
                                     <option value="odt">.odt</option>
                                     <option value="html">.html</option>
+                                    <option value="pdf">.pdf</option>
                                 </select>
                             </div>
                             <div class="col-sm">
@@ -181,7 +174,7 @@ class Class_word
                                 <use href="/assets/images/icon/midleoicons.svg#i-x"
                                     xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
                             </svg>&nbsp;Close</button>
-                        
+
 
                     </div>
                 </div>
@@ -194,7 +187,7 @@ class Class_word
         echo "</div></div>";
         include "public/modules/js.php";
         echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';
-        echo '<script  type="text/javascript" src="/assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/word/assets/js/ng-controller.js"></script>';
+        echo '<script  type="text/javascript" src="/assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/docimport/assets/js/ng-controller.js"></script>';
         include "public/modules/template_end.php";
         echo '</body></html>';
 

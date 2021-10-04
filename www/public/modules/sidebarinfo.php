@@ -20,7 +20,7 @@ foreach ($zobjin as $val) {?>
                         class="mdi mdi-chevron-<?php echo ($val['category']==$keyws || $val['category']==$blogcategory)?"down":"right";?>"></i>&nbsp;<span
                         class="hide-menu"><?php echo $val['catname']; ?></span></a>
                 <?php if($val['category']==$keyws || $val['category']==$blogcategory){
-$sqlin="SELECT id,cat_latname,cat_name FROM knowledge_info where category=? ".(!empty($sactcat)?" and ".$sactcat:"");
+$sqlin="SELECT id,cat_latname,cat_name FROM knowledge_info where category=? ".(!empty($sactcat)?" and (".$sactcat.")":"");
 $qin = $pdo->prepare($sqlin); 
 $qin->execute(array($val['category']));
 if($zobjin = $qin->rowCount()>0){
@@ -30,7 +30,7 @@ if($zobjin = $qin->rowCount()>0){
                     <?php foreach($zobjin as $val) { ?>
                     <li><a href="/info/posts/<?php echo $val['cat_latname'];?>" data-bs-toggle="tooltip"
                             data-bs-placement="top" alt="<?php echo $val['cat_name'];?>"
-                            title="<?php echo $val['cat_name'];?>"><?php echo strip_tags(textClass::word_limiter($val['cat_name'],15,25));?></a>
+                            title="<?php echo $val['cat_name'];?>"><?php echo strip_tags($val['cat_name']);?></a>
                     </li>
                     <?php } ?>
                 </ul>

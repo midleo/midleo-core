@@ -146,7 +146,6 @@ class Class_calendar
         $msg = array();
         $pdo = pdodb::connect();
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
-        if (!sessionClass::checkAcc($acclist, "calendar")) {header("Location:/cp/?");}
         include "public/modules/css.php";
         echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
         foreach ($modulelist["calendar"]["css"] as $csskey => $csslink) {
@@ -338,7 +337,7 @@ echo '<div class="p-2"><br><div class="text-info">Summary for: <br><br>Year: <b>
         echo '</div></div>';
         include "public/modules/js.php"; ?>
         <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-        <script src="/assets/js/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/js/datatables/dataTables.bootstrap5.min.js"></script>
         <script src="/assets/js/datatables/dataTables.fixedColumns.min.js"></script>
         <script src="/assets/js/datatables/dataTables.buttons.min.js"></script>
         <script src="/assets/js/datatables/buttons.flash.min.js"></script>
@@ -390,7 +389,6 @@ class Class_tasks
         $msg = array();
         $pdo = pdodb::connect();
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
-        if (!sessionClass::checkAcc($acclist, "tasks")) {header("Location:/cp/?");}
         if (isset($_POST["savetask"])) {
             $sql = "insert into tasks(mainuser,taskinfo) values(?,?)";
             $q = $pdo->prepare($sql);
@@ -399,7 +397,7 @@ class Class_tasks
                 $err[] = "Error creating the task";}
         }
         include "public/modules/css.php";?>
-        <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
         </head>
         <body class="fix-header card-no-border">

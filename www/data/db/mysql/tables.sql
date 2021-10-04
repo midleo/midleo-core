@@ -449,10 +449,10 @@ CREATE TABLE IF NOT EXISTS `env_appservers` (
 
 CREATE TABLE IF NOT EXISTS `knowledge_categories` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cattype` int(2) NOT NULL DEFAULT '0',
+  `public` int(2) NOT NULL DEFAULT '0',
   `category` varchar(255) NOT NULL,
   `catname` varchar(255) NOT NULL,
-  `public` int(1) NOT NULL DEFAULT '1',
+  `accgroups` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -924,7 +924,7 @@ CREATE TABLE IF NOT EXISTS `config_projrequest` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `env_worddoc` (
+CREATE TABLE IF NOT EXISTS `env_docimport` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `fileid` varchar(255) DEFAULT NULL,
   `importedon` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -932,3 +932,16 @@ CREATE TABLE IF NOT EXISTS `env_worddoc` (
   `author` varchar(50) DEFAULT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Create default roles
+-- madmin/admin
+--
+
+INSERT INTO `user_groups` (`id`, `group_latname`, `group_name`, `group_email`, `group_avatar`, `users`, `wid`, `appid`, `pjid`, `wsteps`, `acclist`) VALUES
+(1, 'defadm', 'Default Admin Group', 'admin@local.lan', NULL, '{\"madmin\":\"Default Admin\"}', NULL, NULL, NULL, NULL, '[\"tibcoview\",\"tibcoadm\",\"pjm\",\"pja\",\"pjv\",\"unixadm\",\"unixview\",\"appadm\",\"appview\",\"ibmadm\",\"ibmview\",\"appconfig\",\"environment\",\"monview\",\"monadm\",\"designer\",\"automation\",\"smanagement\",\"smanagementadm\"]');
+
+INSERT INTO `users` (`id`, `uuid`, `ldap`, `ldapserver`, `mainuser`, `email`, `pwd`, `users_ip`, `fullname`, `active`, `user_level`, `wsteps`, `ugroups`, `effgroup`, `ckey`, `ctime`, `user_online`, `user_online_show`, `user_activity_show`, `online_time`, `avatar`, `phone`, `utitle`, `uaddress`, `modules`, `wid`, `appid`, `pjid`, `navfav`) VALUES
+(1, '365cd45fa661b5795e9747c6b416bbca', 0, NULL, 'madmin', 'admin@local.lan', '$2y$11$h4EXDS5YAx8DeQiTlO6ouOaGGBIIlTKtASzz/V7KuS37SHwc2tGfe', '', 'Default Admin', 0, 5, NULL, '{\"defadm\":\"Default admin group\"}', NULL, '', '', 0, 1, 0, '', '', '', '', NULL, NULL, NULL, '{\"test\":\"1\"}', NULL, '[\"1\"]');
+
+INSERT INTO `knowledge_categories` (`id`, `public`, `category`, `catname`) VALUES (NULL, '1', 'documentation', 'Documentation'); 

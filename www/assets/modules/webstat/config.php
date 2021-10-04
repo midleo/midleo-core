@@ -17,7 +17,6 @@ class Class_webstat
         $msg = array();
         $pdo = pdodb::connect();
         $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
-        if (!sessionClass::checkAcc($acclist, "statistics")) { header("Location:/cp/?");}
         include "public/modules/css.php";
         echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';

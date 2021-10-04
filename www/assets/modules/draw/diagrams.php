@@ -53,10 +53,54 @@ class Class_diagrams
           } else { $blogcatname="Category is empty!"; }}
         include "public/modules/css.php";   
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
+        $breadcrumb["text"]="Diagrams"; 
+     $brarr=array();
+      array_push($brarr,array(
+        "title"=>"Knowledge Base",
+        "link"=>"/info",
+        "midicon"=>"kn-b",
+        "active"=>($page=="cpinfo")?"active":"",
+      ));
+      array_push($brarr,array(
+        "title"=>"Import/View PDF",
+        "link"=>"/pdf",
+        "icon"=>"mdi-file-pdf-box",
+        "active"=>($page=="pdf")?"active":"",
+      ));
+      array_push($brarr,array(
+        "title"=>"Import Word documents",
+        "link"=>"/word",
+        "icon"=>"mdi-file-word-outline",
+        "active"=>($page=="word")?"active":"",
+      ));
+   if (sessionClass::checkAcc($acclist, "designer")) {
+    array_push($brarr,array(
+      "title"=>"View/Edit diagrams",
+      "link"=>"/draw",
+      "midicon"=>"diagram",
+      "active"=>($page=="draw")?"active":"",
+    ));
+  }
+    if (sessionClass::checkAcc($acclist, "odfiles")) {
+      array_push($brarr,array(
+          "title"=>"View/Map OneDrive files",
+        "link"=>"/onedrive",
+        "midicon"=>"onedrive",
+        "active"=>($page=="onedrive")?"active":"",
+      ));
+    }
+    if (sessionClass::checkAcc($acclist, "dbfiles")) {
+      array_push($brarr,array(
+          "title"=>"View/Map Dropbox files",
+        "link"=>"/dropbox",
+        "midicon"=>"dropbox",
+        "active"=>($page=="dropbox")?"active":"",
+      ));
+    }
         include "public/modules/headcontentdiagram.php";   
         echo '<div class="page-wrapper">'; ?>
               <div class="container-fluid">
-                  <?php include "public/modules/breadcrumbinfo.php"; ?>
+                  <?php include "public/modules/breadcrumb.php"; ?>
       
                   <?php     echo '<div class="row"><div class="col-md-10">';
 
@@ -117,7 +161,7 @@ class Class_diagrams
               $q->execute();
             }
             if($zobj = $q->fetchAll()){
-                echo "<ul class='row'>";
+                echo "<ul class='row' style='padding:0px;'>";
               foreach($zobj as $val) {
                 ?>
 

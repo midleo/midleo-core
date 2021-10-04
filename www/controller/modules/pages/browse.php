@@ -18,7 +18,7 @@ class Class_browse{
    
     include "public/modules/css.php";
     if($thisarray['p1']=="server" || $thisarray['p1']=="appserver" || $thisarray['p1']=="serverlist"){?>
-    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
     <?php if($thisarray['p3']=="obj"){?>
     <script type="text/javascript" src="/assets/js/vis-network.min.js"></script>
