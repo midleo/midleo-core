@@ -61,18 +61,12 @@ class Class_diagrams
         "midicon"=>"kn-b",
         "active"=>($page=="cpinfo")?"active":"",
       ));
-      array_push($brarr,array(
-        "title"=>"Import/View PDF",
-        "link"=>"/pdf",
-        "icon"=>"mdi-file-pdf-box",
-        "active"=>($page=="pdf")?"active":"",
-      ));
-      array_push($brarr,array(
-        "title"=>"Import Word documents",
-        "link"=>"/word",
-        "icon"=>"mdi-file-word-outline",
-        "active"=>($page=="word")?"active":"",
-      ));
+      array_push($brarr, array(
+        "title" => "Import documents",
+        "link" => "/docimport",
+        "midicon" => "deploy",
+        "active" => ($page == "docimport") ? "active" : "",
+    ));
    if (sessionClass::checkAcc($acclist, "designer")) {
     array_push($brarr,array(
       "title"=>"View/Edit diagrams",

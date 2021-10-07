@@ -131,18 +131,12 @@ if ($forumcase=="posts") {
         "midicon"=>"kn-b",
         "active"=>($page=="cpinfo")?"active":"",
       ));
-      array_push($brarr,array(
-        "title"=>"Import/View PDF",
-        "link"=>"/pdf",
-        "icon"=>"mdi-file-pdf-box",
-        "active"=>($page=="pdf")?"active":"",
-      ));
-      array_push($brarr,array(
-        "title"=>"Import Word documents",
-        "link"=>"/word",
-        "icon"=>"mdi-file-word-outline",
-        "active"=>($page=="word")?"active":"",
-      ));
+      array_push($brarr, array(
+        "title" => "Import documents",
+        "link" => "/docimport",
+        "midicon" => "deploy",
+        "active" => ($page == "docimport") ? "active" : "",
+    ));
    if (sessionClass::checkAcc($acclist, "designer")) {
     array_push($brarr,array(
       "title"=>"Diagrams",
@@ -172,7 +166,7 @@ if ($forumcase=="posts") {
         <div class="container-fluid">
             <?php include "public/modules/breadcrumb.php"; ?>
 
-            <?php     echo '<div class="row"><div class="col-md-10">';
+            <?php     echo '<div class="row"><div class="col-lg-9">';
       if ($forumcase=="posts") { 
   $sql="SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where cat_latname=?".(!empty($sactive)?" and (".$sactive.")":""); 
   $q = $pdo->prepare($sql);
@@ -313,7 +307,7 @@ if($page < $total_pages)
       }    
 
 
-   echo '</div><div class="col-md-2">'; 
+   echo '</div><div class="col-lg-3">'; 
 
 
 
