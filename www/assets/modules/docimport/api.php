@@ -66,7 +66,7 @@ class Class_docapi
             if ($q->execute(array($data->thisid))) {
                 $latname = textClass::cyr2lat(base64_decode($data->thisname));
                 $latname = textClass::strreplace($latname);
-                $sql="delete from knowledge_info where cat_latname=?";
+                $sql = "delete from knowledge_info where cat_latname=?";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($latname));
                 gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Deleted document:" . base64_decode($data->thisname));
@@ -123,13 +123,11 @@ class Class_docapi
     {
         require_once 'controller/vendor/autoload.php';
         $phpWord = \PhpOffice\PhpWord\IOFactory::load($source, 'ODText');
-        $text = "";
-        foreach ($phpWord->getSections() as $section) {
-            foreach ($section->getElements() as $ele1) {
-
-            }
-        }
-
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
+        ob_start();
+        $objWriter->save("php://output");
+        $document = ob_get_clean();
+        return $document;
     }
     public static function doc2text($source)
     {
@@ -211,6 +209,7 @@ class Class_docapi
     }
 
 }
+
 
 /*
 require_once 'controller/vendor/autoload.php';

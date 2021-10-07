@@ -8,7 +8,7 @@
         </a>
         <ul id="sidebarnav" class="sidebarinfo">
             <?php
-$sqlin = "SELECT catname, category FROM knowledge_categories" . (!empty($sactcat) ? " where" . $sactcat : "");
+$sqlin = "SELECT catname, category FROM knowledge_categories" . (!empty($sactcat) ? " where (" . $sactcat.")" : "");
 $qin = $pdo->prepare($sqlin);
 $qin->execute();
 $zobjin = $qin->fetchAll();
