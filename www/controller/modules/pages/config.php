@@ -92,7 +92,7 @@ class Class_info{
     }
     $sactive=" author='".$_SESSION["user"]."'";
     $sactive.=" or public='1'".$tmp["likesearch"];
-    $sactcat=" public='1'".$tmp["likesearch"];
+    $sactcat=" 1=1".$tmp["likesearch"];
 $sql="select count(id) from knowledge_info".(!empty($sactive)?" where".$sactive:"");
 $q = $pdo->prepare($sql);
 $q->execute();
