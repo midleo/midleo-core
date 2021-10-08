@@ -45,13 +45,7 @@ class Class_onedrive
         <h8 class="od-logoff" style="display: none;"><a href="#" onclick="signOut()" data-bs-toggle="tooltip" title="Sign Out from OneDrive"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg></a></h8>
         ';
         if ($thisarray["p1"] != "auth") {
-            if (!empty($_SESSION["user"])) {
-                include "public/modules/headcontent.php";
-            } else if (!empty($_SESSION["requser"])) {
-                include "public/modules/headcontentreq.php";
-            } else {
-                include "public/modules/headcontentmain.php";
-            }
+            include "public/modules/headcontent.php";
             echo '<div class="page-wrapper"><div class="container-fluid">';
             $brarr=array();
             array_push($brarr,array(

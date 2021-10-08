@@ -5,14 +5,14 @@ let logoimgicon = $(".mli");
 if (currentTheme) {
   $('body').attr('data-color', currentTheme);
   if (currentTheme === 'dark') {
-    logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
-    logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
+ //   logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
+ //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
     if (toggleSwitch) {
       toggleSwitch.checked = true;
     }
   } else {
-    logoimg.attr("src", "/assets/images/midleo-logo-dark.svg");
-    logoimgicon.attr("src", "/assets/images/midleo-icon-logo-dark.svg");
+  //  logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
+ //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
   }
 } else {
   $('body').attr('data-color', "light");
@@ -128,16 +128,16 @@ function switchTheme(e) {
     $("body").data("color", "dark");
     $('body').attr('data-color', "dark");
     localStorage.setItem('theme', 'dark');
-    logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
-    logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
+  //  logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
+  //  logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
     $(".slidersw").html('<svg class="itemicon midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-day" xlink:href="/assets/images/icon/midleoicons.svg#i-day"/></svg> ');
   }
   else {
     $("body").data("color", "light");
     $('body').attr('data-color', "light");
     localStorage.setItem('theme', 'light');
-    logoimg.attr("src", "/assets/images/midleo-logo-dark.svg");
-    logoimgicon.attr("src", "/assets/images/midleo-icon-logo-dark.svg");
+ //   logoimg.attr("src", "/assets/images/midleo-logo-dark.svg");
+ //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-dark.svg");
     $(".slidersw").html('<svg class="itemicon midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-night" xlink:href="/assets/images/icon/midleoicons.svg#i-night"/></svg> ');
   }
 }

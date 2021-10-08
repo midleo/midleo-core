@@ -1,6 +1,15 @@
 <nav class="navbar top-navbar navbar-expand-md navbar-light">
     <div class="container">
-
+    <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
+            
+            <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-white.svg"
+                alt="Midleo CORE" title="Midleo CORE"
+                class="light-logo ml" />
+            <img data-bs-toggle="tooltip" src="/assets/images/midleo-icon-logo-white.svg"
+                alt="Midleo CORE" title="Midleo CORE"
+                class="light-logo-icon mli" />
+       
+    </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#midnav"
             aria-controls="midnav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -114,4 +123,3 @@
         </div>
     </div>
 </nav>
-<aside class="left-sidebar" ng-app="ngSysApp" ng-controller="ngsysCtrl"><?php include "sidebarinfo.php";?></aside>

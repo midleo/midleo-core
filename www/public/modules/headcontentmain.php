@@ -1,11 +1,11 @@
-    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+    <nav class="navbar top-navbar navbar-expand-md navbar-light ml-0">
     <div class="container">
             <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
             
-                    <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-dark.svg"
+                    <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-white.svg"
                         alt="Midleo CORE" title="Midleo CORE"
                         class="light-logo ml" />
-                    <img data-bs-toggle="tooltip" src="/assets/images/midleo-icon-logo-dark.svg"
+                    <img data-bs-toggle="tooltip" src="/assets/images/midleo-icon-logo-white.svg"
                         alt="Midleo CORE" title="Midleo CORE"
                         class="light-logo-icon mli" />
                

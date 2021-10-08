@@ -164,9 +164,12 @@ if ($forumcase=="posts") {
   include "public/modules/headcontentinfo.php";   
   echo '<div class="page-wrapper">'; ?>
         <div class="container-fluid">
-            <?php include "public/modules/breadcrumb.php"; ?>
 
-            <?php     echo '<div class="row"><div class="col-lg-9">';
+            <?php     echo '<div class="row pt-3">
+            <div class="col-lg-2" style="overflow-x:auto;">';
+            include "public/modules/sidebarinfo.php";
+            echo '</div>
+            <div class="col-lg-7">';
       if ($forumcase=="posts") { 
   $sql="SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where cat_latname=?".(!empty($sactive)?" and (".$sactive.")":""); 
   $q = $pdo->prepare($sql);
@@ -203,7 +206,7 @@ if ($forumcase=="posts") {
   foreach($kt as $key=>$val){ if($val<>" " and strlen($val) < 70 and strlen($val) > 0){
     $val=ltrim($val, ' ');
     $val=rtrim($val, ' ');
-    echo '<a class="btn btn-light btn-sm waves-effect" style="margin-right:5px;margin-top:5px;" href="/info/tags/'.$val.'"><i class="mdi mdi-tag"></i>&nbsp;'.$val.'</a>';
+    echo '<a class="btn btn-light btn-sm waves-effect" style="margin-right:5px;margin-top:5px;" href="/info/tags/'.$val.'"><i class="mdi mdi-pound"></i>&nbsp;'.$val.'</a>';
   }}  ?></div><?php } ?>
             <?php
 $sql="update knowledge_info set views=views+1 where id=?"; 
@@ -308,18 +311,8 @@ if($page < $total_pages)
 
 
    echo '</div><div class="col-lg-3">'; 
-
-
-
    include "blogsidebar.php";
-
-
-
-
    echo '<div class="stickyside h2menu"><div class="list-group h2-menu" id="top-menu"></div>   </div></div></div></div></div></div></div>';
-   
-   
-   
    include "public/modules/footer.php";
    include "public/modules/js.php";
    include "public/modules/template_end.php";
@@ -945,7 +938,6 @@ if(isset($_POST['changepass'])){
    $breadcrumb["text"]="Profile settings";
     include "public/modules/headcontent.php";
      echo '<div class="page-wrapper"><div class="container-fluid">';
-    
     include "public/modules/breadcrumb.php"; ?>
 
 
@@ -1361,7 +1353,6 @@ class Class_welcome{
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
-                    <h4 class="mb-0">Browse resources</h4>
                     <br>
                     <div class="row">
                         <div class="col-md-6">

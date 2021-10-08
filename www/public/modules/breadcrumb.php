@@ -1,5 +1,8 @@
+<br>
+<h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
+<br>
 <?php if($breadcrumb){ ?>
-<div class="row page-titles">
+<div class="row">
   <div class="col-md-10 align-self-center" style="min-height:50px;">
   <?php if($brarr){?>
     <ul class="nav nav-tabs customtab">

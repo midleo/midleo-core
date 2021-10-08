@@ -20,14 +20,17 @@ class Class_template{
     $pdo = pdodb::connect();
     include "public/modules/css.php";
     echo '</head><body class="card-no-border"><div id="main-wrapper">';
-    include "public/modules/headcontentmain.php";
+    include "public/modules/headcontent.php";
     echo '<div class="page-wrapper"><div class="container-fluid">';
-    include "public/modules/breadcrumb.php";
-    echo '<div class="row"><div class="col-12">';
+    echo '<div class="row pt-3"><div class="col-lg-2">';
+    include "public/modules/sidebar.php";
+    echo '</div><div class="col-lg-8">';
 	
 	
 	
-    echo '</div></div>';
+    echo '<div class="col-md-2">';
+    include "public/modules/breadcrumbin.php";
+    echo '</div></div></div>';
     include "public/modules/footer.php";
 	echo '</div></div>';
     include "public/modules/js.php"; 

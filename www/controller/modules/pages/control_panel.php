@@ -35,19 +35,45 @@ class Class_cp
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         include "public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
-        include "public/modules/breadcrumb.php";
-
+        
         ?>
-<div id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-<div class="row">
-<div class="col-md-6">
-<div class="card">
-          <div class="card-body p-0">
-          <table class="table table-vmiddle table-hover stylish-table mb-0">
-<thead><tr><th colspan="2" class="text-start" style="vertical-align:top;"><h4>Latest projects</h4></th><th colspan="2" class="text-end" style="vertical-align:top;"><a href="/projects">All Projects</a></th></tr></thead>
-<tbody>
-<tr style="display:none;"><td colspan="4"></td></tr>
-<?php
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php  include "public/modules/sidebar.php";?></div>
+    <div class="col-lg-8">
+        <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Activity chart</h4>
+                            </div>
+                            <div class="card-body p-1">
+                                <div class="chart-edge">
+                                    <canvas id="line-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-vmiddle table-hover stylish-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="text-start" style="vertical-align:top;">
+                                        <h4>Latest projects</h4>
+                                    </th>
+                                    <th colspan="2" class="text-end" style="vertical-align:top;"><a href="/projects">All
+                                            Projects</a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="display:none;">
+                                    <td colspan="4"></td>
+                                </tr>
+                                <?php
 if (empty($_SESSION["userdata"]["pjarr"])) {$_SESSION["userdata"]["pjarr"] = array();
             $argpjarr = 0;} else { $argpjarr = 1;}
 
@@ -61,90 +87,44 @@ if (empty($_SESSION["userdata"]["pjarr"])) {$_SESSION["userdata"]["pjarr"] = arr
 
         if ($zobj = $q->fetchAll()) {
             foreach ($zobj as $val) {?>
-<tr><td><?php echo $val["projname"]; ?></td><td style="width:100px;" class="text-center"><span class="badge badge-<?php echo $projcodes[$val['projstatus']]["badge"]; ?>"><?php echo $projcodes[$val['projstatus']]["name"]; ?></span></td><td style="width:100px;" class="text-start"><?php echo date("d/m/Y", strtotime($val["projduedate"])); ?></td><td style="width:50px;"><a href="/projects/?pjid=<?php echo $val["projcode"]; ?>"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></a></td></tr>
- <?php }
+                                <tr>
+                                    <td><?php echo $val["projname"]; ?></td>
+                                    <td style="width:100px;" class="text-center"><span
+                                            class="badge badge-<?php echo $projcodes[$val['projstatus']]["badge"]; ?>"><?php echo $projcodes[$val['projstatus']]["name"]; ?></span>
+                                    </td>
+                                    <td style="width:100px;" class="text-start">
+                                        <?php echo date("d/m/Y", strtotime($val["projduedate"])); ?></td>
+                                    <td style="width:50px;"><a
+                                            href="/projects/?pjid=<?php echo $val["projcode"]; ?>"><svg
+                                                class="midico midico-outline">
+                                                <use href="/assets/images/icon/midleoicons.svg#i-right"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-right" />
+                                            </svg></a></td>
+                                </tr>
+                                <?php }
         }
         ?>
-
-
-</tbody>
-</table>
-
-          </div>
-          </div>
-</div>
-<div class="col-md-6">
-<div class="card">
-          <div class="card-body p-0">
-          <table class="table table-vmiddle table-hover stylish-table mb-0">
-<thead><tr><th colspan="2" class="text-start" style="vertical-align:top;"><h4>Latest requests</h4></th><th colspan="2" class="text-end" style="vertical-align:top;"><a href="/requests">All Requests</a></th></tr></thead>
-<tbody ng-init="getAllreq('<?php echo $ugr; ?>','')">
-<tr ng-hide="contentLoaded"><td colspan="4" style="text-align:center;font-size:1.1em;"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td></tr>
-<tr id="contloaded" dir-paginate="d in names | filter:search | orderBy:'deadline' | orderBy:'status':reverse| orderBy:'-priorityval' | itemsPerPage:5"  ng-class="d.reqactive==1 ? 'hide active' : 'hide none'" pagination-id="prodx">
-<td class="text-start">{{ d.name }}</td>
-<td class="text-center" style="width:80px;">{{ d.deadline }}</td>
-<td class="text-end"><span class="badge badge-{{ d.statusinfo }}">{{ d.statusinfotxt }}</span></td>
-<td style="width:50px;"><a href="/reqinfo/{{ d.sname }}" target="_parent"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></a></td>
-</tr>
-</tbody>
-</table>
-
-          </div>
-          </div>
-
-</div>
-</div>
-      <div class="row"><div class="col-md-6">
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-            <div class="card-header">
-            <h4>Activity chart</h4>
-             </div>
-          <div class="card-body p-1">
-                <div class="chart-edge">
-                <canvas id="line-chart"></canvas>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-      <div class="card">
-          <div class="card-body p-0">
-
-          <table class="table table-vmiddle table-hover stylish-table mb-0">
-<thead><tr><th  class="text-start" style="vertical-align:top;"><h4>Recently used apps</h4></th><th colspan="2" class="text-end" style="vertical-align:top;"><a href="/env/apps">All Applications</a></th></tr></thead>
-<tbody>
-<tr style="display:none;"><td colspan="3"></td></tr>
-<?php
-$sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "recentdata") . " from users_recent where uuid=?";
-        $q = $pdo->prepare($sql);
-        $q->execute(array($_SESSION["user_id"]));
-        if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
-            foreach (json_decode($zobj["recentdata"], true) as $key => $val) {
-                ?>
-<tr><td class="text-start"><?php echo $val["name"]; ?></td><td></td><td style="width:50px" class="text-end"><a target="_parent" href="/env/apps/<?php echo $val["id"]; ?>"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></a></td></tr>
-<?php }
-        }?>
-</tbody>
-</table>
-
-          </div>
-          </div>
-      </div>
-    </div>
-    <div class="row">
-    <div class="col-md-6">
-    <div class="card">
-          <div class="card-body p-0">
-          <table class="table table-vmiddle table-hover stylish-table mb-0">
-<thead><tr><th colspan="3"><h4>Recent activity</h4></th></tr></thead>
-<tbody>
-<tr style="display:none;"><td colspan="3"></td></tr>
-<?php if (empty($_SESSION["userdata"]["apparr"])) {$_SESSION["userdata"]["apparr"] = array();
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-vmiddle table-hover stylish-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th colspan="3">
+                                        <h4>Recent activity</h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="display:none;">
+                                    <td colspan="3"></td>
+                                </tr>
+                                <?php if (empty($_SESSION["userdata"]["apparr"])) {$_SESSION["userdata"]["apparr"] = array();
             $argapparr = 0;} else { $argapparr = 1;}
         if (empty($_SESSION["userdata"]["widarr"])) {$_SESSION["userdata"]["widarr"] = array();
             $argwidarr = 0;} else { $argwidarr = 1;}
@@ -164,33 +144,77 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
         }
         if ($zobj = $q->fetchAll()) {
             foreach ($zobj as $val) {
-                ?><tr><td class="text-start"><a href="/browse/user/<?php echo $val['whoid']; ?>" target="_blank"><?php echo $val['who']; ?></a></td>
-      <td class="text-start"><?php echo $val['what']; ?></td>
-      <td class="text-end"><?php echo textClass::getTheDay($val['trackdate']); ?></td>
-                 </tr>
-                 <?php }} else {?>
-                  <tr style="display:none;"><td colspan="3">No activity yet</td></tr>
-              <?php }?>
-</tbody>
-             </table>
-          </div>
+                ?><tr>
+                                    <td class="text-start"><a href="/browse/user/<?php echo $val['whoid']; ?>"
+                                            target="_blank"><?php echo $val['who']; ?></a></td>
+                                    <td class="text-start"><?php echo $val['what']; ?></td>
+                                    <td class="text-end"><?php echo textClass::getTheDay($val['trackdate']); ?></td>
+                                </tr>
+                                <?php }} else {?>
+                                <tr style="display:none;">
+                                    <td colspan="3">No activity yet</td>
+                                </tr>
+                                <?php }?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-vmiddle table-hover stylish-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-start" style="vertical-align:top;">
+                                        <h4>Recently used apps</h4>
+                                    </th>
+                                    <th colspan="2" class="text-end" style="vertical-align:top;"><a href="/env/apps">All
+                                            Applications</a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="display:none;">
+                                    <td colspan="3"></td>
+                                </tr>
+                                <?php
+$sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "recentdata") . " from users_recent where uuid=?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($_SESSION["user_id"]));
+        if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
+            foreach (json_decode($zobj["recentdata"], true) as $key => $val) {
+                ?>
+                                <tr>
+                                    <td class="text-start"><?php echo $val["name"]; ?></td>
+                                    <td></td>
+                                    <td style="width:50px" class="text-end"><a target="_parent"
+                                            href="/env/apps/<?php echo $val["id"]; ?>"><svg
+                                                class="midico midico-outline">
+                                                <use href="/assets/images/icon/midleoicons.svg#i-right"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-right" />
+                                            </svg></a></td>
+                                </tr>
+                                <?php }
+        }?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-        <div class="col-md-6">
-
-        </div>
-        </div>
-        </div>
+    </div>
+    <div class="col-lg-2">
+        <?php  include "public/modules/breadcrumb.php"; ?>
+    </div>
+</div>
 <?php
 include "public/modules/footer.php";
         include "public/modules/js.php";?>
-    <script src="/assets/js/dirPagination.js"></script>
+<script src="/assets/js/dirPagination.js"></script>
 <script type="text/javascript" src="/assets/modules/requests/assets/js/ng-controller.js"></script>
 <script src="/assets/js/chart.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var thiscolor = "#000";
-    var thiscolorreq = "rgb(255, 54, 54)";
-    var chdata=[ <?php $thismonth = date('Y-m-d', strtotime('today -1 week'));
+var thiscolor = "#000";
+var thiscolorreq = "rgb(255, 54, 54)";
+var chdata = [<?php $thismonth = date('Y-m-d', strtotime('today -1 week'));
         if (DBTYPE == "oracle") {
             $sql = "SELECT * FROM (SELECT days.day as thisdate, count(id) as num
                FROM
@@ -253,8 +277,8 @@ include "public/modules/footer.php";
             $q->execute($_SESSION["userdata"]["apparr"]);
         }
         $zobj = $q->fetchAll();
-        foreach ($zobj as $val) {echo "{ x: new Date('" . $val['thisdate'] . "'),y: " . $val['num'] . "},";}?> ];
-	var reqdata=[ <?php $thismonth = date('Y-m-d', strtotime('today -1 week'));
+        foreach ($zobj as $val) {echo "{ x: new Date('" . $val['thisdate'] . "'),y: " . $val['num'] . "},";}?>];
+var reqdata = [<?php $thismonth = date('Y-m-d', strtotime('today -1 week'));
         if (DBTYPE == "oracle") {
             $sql = "SELECT * FROM (SELECT days.day as thisdate, count(id) as num
                FROM
@@ -317,52 +341,68 @@ include "public/modules/footer.php";
             $q->execute($_SESSION["userdata"]["widarr"]);
         }
         $zobj = $q->fetchAll();
-        foreach ($zobj as $val) {echo "{ x: new Date('" . $val['thisdate'] . "'),y: " . $val['num'] . "},";}?> ];
-		var color = Chart.helpers.color;
-		var config = {
-			type: 'line',
-			data: {
-				datasets: [{
-					label: 'changes per day',
-					backgroundColor: color("#fff").rgbString(),
-					borderColor: thiscolor,
-					fill: false,
-					data: chdata,
-          pointRadius: 5,
-          pointHoverRadius: 6,
-				},{
-					label: 'requests per day',
-					backgroundColor: color("#fff").rgbString(),
-					borderColor: thiscolorreq,
-					fill: false,
-					data: reqdata,
-          borderDash: [6, 4],
-          pointRadius: 5,
-          pointHoverRadius: 6,
-				}]
-			},
-			options: {
-				responsive: true,
-				title: {  display: false, /*	text: 'changes per day'*/	},
-				scales: {
-					xAxes: [{
-            type: 'time',
-            time: { unit: 'day' },
-						display: true,
-						scaleLabel: { display: true,labelString: 'Date'	},
-						ticks: { major: {	fontStyle: 'bold',	fontColor: '#FF0000'	}}
-					}],
-					yAxes: [{
-						display: true,
-						scaleLabel: {	display: true,	labelString: 'number'}
-					}]
-				}
-			}
-		};
-		window.onload = function() {
-			var ctx = document.getElementById('line-chart').getContext('2d');
-			window.myLine = new Chart(ctx, config);
-    };
+        foreach ($zobj as $val) {echo "{ x: new Date('" . $val['thisdate'] . "'),y: " . $val['num'] . "},";}?>];
+var color = Chart.helpers.color;
+var config = {
+    type: 'line',
+    data: {
+        datasets: [{
+            label: 'changes per day',
+            backgroundColor: color("#fff").rgbString(),
+            borderColor: thiscolor,
+            fill: false,
+            data: chdata,
+            pointRadius: 5,
+            pointHoverRadius: 6,
+        }, {
+            label: 'requests per day',
+            backgroundColor: color("#fff").rgbString(),
+            borderColor: thiscolorreq,
+            fill: false,
+            data: reqdata,
+            borderDash: [6, 4],
+            pointRadius: 5,
+            pointHoverRadius: 6,
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: false,
+            /*	text: 'changes per day'*/
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    unit: 'day'
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Date'
+                },
+                ticks: {
+                    major: {
+                        fontStyle: 'bold',
+                        fontColor: '#FF0000'
+                    }
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'number'
+                }
+            }]
+        }
+    }
+};
+window.onload = function() {
+    var ctx = document.getElementById('line-chart').getContext('2d');
+    window.myLine = new Chart(ctx, config);
+};
 </script><?php
 include "public/modules/template_end.php";
         echo '</body></html>';
@@ -431,22 +471,21 @@ class Class_cpinfo
             $msg[] = 'The post was updated.';
         }
         include "public/modules/css.php";?>
-     <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">
-    <style type="text/css">
-    .tox-tinymce {
-    height: 700px!important;
-    }
-
+<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">
+<style type="text/css">
+.tox-tinymce {
+    height: 700px !important;
+}
 </style>
-     <?php echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
+<?php echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Knowledge base";
         $brarr = array();
         array_push($brarr, array(
-            "title" => "Create/edit articles",
-            "link" => "/cpinfo",
-            "midicon" => "kn-b",
+            "title" => "New Page",
+            "link" => "/cpinfo/new",
+            "midicon" => "add",
             "active" => ($page == "cpinfo") ? "active" : "",
         ));
         array_push($brarr, array(
@@ -482,188 +521,248 @@ class Class_cpinfo
 
         // $breadcrumb["midicon"]="kn-b";
         include "public/modules/headcontent.php"; ?>
-    <div class="page-wrapper"><div class="container-fluid">
-<?php include "public/modules/breadcrumb.php";?>
+<div class="page-wrapper">
+    <div class="container-fluid">
 
-    <?php if ($thisarray['p1'] == "new") {?>
-      <form class="form-horizontal form-material" action="" method="post" enctype="multipart/form-data" name="frmUpload" onSubmit="return validateForm();">
+        <?php if ($thisarray['p1'] == "new") {?>
+        <form class="form-horizontal form-material" action="" method="post" enctype="multipart/form-data"
+            name="frmUpload" onSubmit="return validateForm();">
 
-      <div class="row"><div class="col-md-9">
+            <div class="row pt-3">
+                <div class="col-lg-2">
+                    <?php  include "public/modules/sidebar.php";?></div>
+                <div class="col-lg-8">
 
-               <textarea name="postcontent"  rows="10" class="textarea"><?php echo $_POST["postcontent"]; ?></textarea>
+                    <textarea name="postcontent" rows="10"
+                        class="textarea"><?php echo $_POST["postcontent"]; ?></textarea>
 
-              </div>
-              <div class="col-md-3">
+                </div>
+                <div class="col-md-2">
 
-     <div class="form-group">
-              <input type="text" placeholder="Title" name="posttitle" id="posttitle" value="<?php echo $_POST["posttitle"]; ?>" class="form-control" required><span class="form-control-feedback"></span>
-              </div>
-              <div class="form-group">
-                   <input placeholder="Tags" type="text" name="tags" id="tags" value="<?php echo $_POST["tags"]; ?>" class="form-control validatefield" data-role="tagsinput" required><span class="form-control-feedback"></span>
-                  </div>
-              <div class="form-group">
-                <select name="public" class="form-control">
-                      <option value="1" onclick="document.getElementById('accgroups').style.display = 'none';">Visible to Public</option>
-                      <option value="0" onclick="document.getElementById('accgroups').style.display = 'flex';">Private</option>
-                    </select>
-                  </div>
-                  <div class="form-group" id="accgroups" style="display:none;">
-                          <input name="users" id="autogroups" type="text" class="form-control" placeholder="Access groups">
-                          <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-md-9"><select name="category" style="width:100%;" class="form-control" data-live-search="true">
-                      <?php $sql = "SELECT * FROM knowledge_categories";
+                    <div class="form-group">
+                        <input type="text" placeholder="Title" name="posttitle" id="posttitle"
+                            value="<?php echo $_POST["posttitle"]; ?>" class="form-control" required><span
+                            class="form-control-feedback"></span>
+                    </div>
+                    <div class="form-group">
+                        <input placeholder="Tags" type="text" name="tags" id="tags"
+                            value="<?php echo $_POST["tags"]; ?>" class="form-control validatefield"
+                            data-role="tagsinput" required><span class="form-control-feedback"></span>
+                    </div>
+                    <div class="form-group">
+                        <select name="public" class="form-control">
+                            <option value="1" onclick="document.getElementById('accgroups').style.display = 'none';">
+                                Visible to Public</option>
+                            <option value="0" onclick="document.getElementById('accgroups').style.display = 'flex';">
+                                Private</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="accgroups" style="display:none;">
+                        <input name="users" id="autogroups" type="text" class="form-control"
+                            placeholder="Access groups">
+                        <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-9"><select name="category" style="width:100%;" class="form-control"
+                                data-live-search="true">
+                                <?php $sql = "SELECT * FROM knowledge_categories";
             $q = $pdo->prepare($sql);
             $q->execute();
             if ($zobj = $q->fetchAll()) {
                 foreach ($zobj as $val) {?>
-                      <option value="<?php echo $val['category']; ?>"><?php echo $val['catname']; ?></option><?php }} else {?>
-                      <option value="demo">Please add category</option>
-                      <?php }?>
-                    </select>
-                    </div>
-                    <div class="col-md-3 text-start">
-                        <button type="button" data-bs-toggle="modal" class="waves-effect btn btn-light btn-sm" href="#modal-category-form"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg></button>
-                    </div>
+                                <option value="<?php echo $val['category']; ?>"><?php echo $val['catname']; ?></option>
+                                <?php }} else {?>
+                                <option value="demo">Please add category</option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="col-md-3 text-start">
+                            <button type="button" data-bs-toggle="modal" class="waves-effect btn btn-light btn-sm"
+                                href="#modal-category-form"><svg class='midico midico-outline'>
+                                    <use href='/assets/images/icon/midleoicons.svg#i-add'
+                                        xlink:href='/assets/images/icon/midleoicons.svg#i-add' />
+                                </svg></button>
+                        </div>
                     </div><br>
                     <div class="form-group text-start">
-              <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Post this content" name="addpost" class="btn btn-light"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg></button>
-     </div>
+                        <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Post this content"
+                            name="addpost" class="btn btn-light"><svg class="midico midico-outline">
+                                <use href="/assets/images/icon/midleoicons.svg#i-save"
+                                    xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
+                            </svg></button>
+                    </div>
 
 
-              </div>
-              </div>
-              </form>
-    <?php } else if ($thisarray['p1'] == "edit") {
+                </div>
+            </div>
+        </form>
+        <?php } else if ($thisarray['p1'] == "edit") {
             $sql = "SELECT id,cat_latname,cat_name,category,cattext,tags FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and" . $sactive : "");
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p2']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
 
                 ?><form action="" class="form-horizontal form-material" method="post">
-    <div class="row"><div class="col-md-9">
+            <div class="row pt-3">
+                <div class="col-lg-2">
+                    <?php  include "public/modules/sidebar.php";?></div>
+                <div class="col-lg-8">
 
-    <textarea name="postcontent"  rows="10" class="textarea"><?php echo $zobj['cattext']; ?></textarea>
-       </div>
-       <div class="col-md-3">
+                    <textarea name="postcontent" rows="10" class="textarea"><?php echo $zobj['cattext']; ?></textarea>
+                </div>
+                <div class="col-md-2">
 
-       <div class="form-group">
-               <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name']; ?>" class="form-control" required><span class="form-control-feedback"></span>
-         </div>
-         <div class="form-group">
-             <input type="text" placeholder="Tags" name="tags" value="<?php echo $zobj['tags']; ?>" class="form-control" data-role="tagsinput"><span class="form-control-feedback"></span>
-         </div>
-         <div class="form-group">
-                <select name="public" class="form-control">
-                      <option value="1" onclick="document.getElementById('accgroups').style.display = 'none';">Visible to Public</option>
-                      <option value="0" onclick="document.getElementById('accgroups').style.display = 'flex';">Private</option>
-                    </select>
-                  </div>
-                  <div class="form-group" id="accgroups" style="display:none;">
-                          <input name="users" id="autogroups" type="text" class="form-control" placeholder="Access groups">
-                          <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
-                  </div>
-         <div class="form-group row">
-          <div class="col-md-9"><select name="category" class="form-control">
-                        <option value="<?php echo $zobj['category']; ?>"><?php echo $zobj['category']; ?></option>
-                        <?php $sqlin = "SELECT * FROM knowledge_categories";
+                    <div class="form-group">
+                        <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name']; ?>"
+                            class="form-control" required><span class="form-control-feedback"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Tags" name="tags" value="<?php echo $zobj['tags']; ?>"
+                            class="form-control" data-role="tagsinput"><span class="form-control-feedback"></span>
+                    </div>
+                    <div class="form-group">
+                        <select name="public" class="form-control">
+                            <option value="1" onclick="document.getElementById('accgroups').style.display = 'none';">
+                                Visible to Public</option>
+                            <option value="0" onclick="document.getElementById('accgroups').style.display = 'flex';">
+                                Private</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="accgroups" style="display:none;">
+                        <input name="users" id="autogroups" type="text" class="form-control"
+                            placeholder="Access groups">
+                        <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-9"><select name="category" class="form-control">
+                                <option value="<?php echo $zobj['category']; ?>"><?php echo $zobj['category']; ?>
+                                </option>
+                                <?php $sqlin = "SELECT * FROM knowledge_categories";
                 $qin = $pdo->prepare($sqlin);
                 $qin->execute();
                 $zobjin = $qin->fetchAll();
-                foreach ($zobjin as $val) {?><option value="<?php echo $val['category']; ?>"><?php echo $val['catname']; ?></option><?php }?>
-                        </select>
+                foreach ($zobjin as $val) {?><option value="<?php echo $val['category']; ?>">
+                                    <?php echo $val['catname']; ?></option><?php }?>
+                            </select>
                         </div>
                         <div class="col-md-3">
-                        <button type="button" data-bs-toggle="modal" class="waves-effect btn btn-light btn-sm" href="#modal-category-form"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg></button>
+                            <button type="button" data-bs-toggle="modal" class="waves-effect btn btn-light btn-sm"
+                                href="#modal-category-form"><svg class='midico midico-outline'>
+                                    <use href='/assets/images/icon/midleoicons.svg#i-add'
+                                        xlink:href='/assets/images/icon/midleoicons.svg#i-add' />
+                                </svg></button>
                         </div>
-                  </div><br>
-                  <div class="text-start d-grid gap-2 d-md-block">
-        <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Update" name="updpost" class="btn btn-light"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg></button>
-        <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Back" onclick="location.href='/cpinfo'" class="btn btn-light"><i class="mdi mdi-history"></i></button>
-       <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" name="delpost" class="btn btn-danger"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button>
-         </div>
-       </div>
-       </div>
-       <input type="hidden" name="catid" value="<?php echo $zobj['id']; ?>">
-       </form>
-    <?php
+                    </div><br>
+                    <div class="text-start d-grid gap-2 d-md-block">
+                        <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Update"
+                            name="updpost" class="btn btn-light"><svg class="midico midico-outline">
+                                <use href="/assets/images/icon/midleoicons.svg#i-save"
+                                    xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
+                            </svg></button>
+                        <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Back"
+                            onclick="location.href='/cpinfo'" class="btn btn-light"><i
+                                class="mdi mdi-history"></i></button>
+                        <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                            name="delpost" class="btn btn-danger"><svg class="midico midico-outline">
+                                <use href="/assets/images/icon/midleoicons.svg#i-x"
+                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="catid" value="<?php echo $zobj['id']; ?>">
+        </form>
+        <?php
 } else {textClass::PageNotFound();}} else {?>
-     <div class="row">
-          <div class="col-md-3 position-relative">
-              <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Find an article">
-              <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-          </div>
-          <div class="col-md-9 text-end">
-                  <a class="waves-effect waves-light btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new article" href="/cpinfo/new" target="_parent"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg>&nbsp;New</a>
-          </div>
-  </div><br>
-   <div class="card">
-
-            <table id="data-table-ki" class="table table-hover stylish-table" aria-busy="false" style="margin-top:0px !important;">
-    <thead>
-      <tr>
-	  <th data-column-id="id" data-identifier="true" data-visible="false" data-type="numeric">ID</th>
-       <th data-column-id="article">Article</th>
-        <th data-column-id="latname" data-visible="false"></th>
-        <th data-column-id="category">Category</th>
-        <th data-column-id="category">Views</th>
-        <th data-column-id="category">Public</th>
-          <th data-column-id="filedate">Date</th>
-          <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-align="center" data-width="100px">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-
-
-          <?php $sql = "select id,cat_name,cat_latname,category,catdate,views,public from knowledge_info where author='" . $_SESSION["user"] . "' order by id desc";
+        <div class="row pt-3">
+            <div class="col-lg-2">
+                <?php  include "public/modules/sidebar.php";?></div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="card p-0">
+                        <table id="data-table-ki" class="table table-hover stylish-table" aria-busy="false"
+                            style="margin-top:0px !important;">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-identifier="true" data-visible="false"
+                                        data-type="numeric">ID</th>
+                                    <th data-column-id="article">Article</th>
+                                    <th data-column-id="latname" data-visible="false"></th>
+                                    <th data-column-id="category">Category</th>
+                                    <th data-column-id="category">Views</th>
+                                    <th data-column-id="category">Public</th>
+                                    <th data-column-id="filedate">Date</th>
+                                    <th data-column-id="commands" data-formatter="commands" data-sortable="false"
+                                        data-align="center" data-width="100px">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $sql = "select id,cat_name,cat_latname,category,catdate,views,public from knowledge_info where author='" . $_SESSION["user"] . "' order by id desc";
             $q = $pdo->prepare($sql);
             $q->execute();
             if ($zobj = $q->fetchAll()) {?>
 
-<?php foreach ($zobj as $val) {
+                                <?php foreach ($zobj as $val) {
                 echo "<tr id='kb" . $val['id'] . "'><td >" . $val['id'] . "</td><td>" . $val['cat_name'] . "</td><td>" . $val['cat_latname'] . "</td><td >" . $val['category'] . "</td><td >" . $val['views'] . "</td><td >" . ($val['public'] == 0 ? "No" : "Yes") . "</td><td >" . date("d.m.Y", strtotime($val['catdate'])) . "</td><td></td></tr>";
             }?> <?php }?>
 
-  </tbody>
-  </table>
-
-
-
-      </div>
-        <br>
-    <?php }?>
-    <!--modal start -->
-    <div class="modal" id="modal-category-form" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog">
-
-                      <div class="modal-content">
-                      <div class="modal-header"><h4>Category information</h4></div>
-                <form action="" method="post">
-                          <div class="modal-body form-horizontal">
-                  <div class="form-group row">
-                  <label class="form-control-label text-lg-right col-md-3">Category name</label>
-                        <div class="col-md-9"> <input name="catname" type="text" class="form-control" required></div>
-                  </div>
-                  <div class="form-group row">
-                  <label class="form-control-label text-lg-right col-md-3">Visibility</label>
-                  <div class="col-md-9"> <select name="public" class="form-control">
-                      <option value="1">Public</option>
-                      <option value="0">Private</option>
-                    </select></div>
-                  </div>
-				              </div>
-                          <div class="modal-footer">
-                  <button type="submit" name="addnewcat" class="btn btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Add</button>
-				  </div>
-                </form>
-          </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div style="display:block;">
+                    <input type="text" ng-model="search" class="form-control topsearch dtfilter"
+                        placeholder="Find an article">
+                    <span class="searchicon"><svg class="midico midico-outline">
+                            <use href="/assets/images/icon/midleoicons.svg#i-search"
+                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                        </svg>
+                </div>
+                <?php include "public/modules/breadcrumbin.php";?>
+            </div>
         </div>
-          </div>
-		  <!--modal end-->
+        <br>
+        <?php }?>
+        <!--modal start -->
+        <div class="modal" id="modal-category-form" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Category information</h4>
+                    </div>
+                    <form action="" method="post">
+                        <div class="modal-body form-horizontal">
+                            <div class="form-group row">
+                                <label class="form-control-label text-lg-right col-md-3">Category name</label>
+                                <div class="col-md-9"> <input name="catname" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="form-control-label text-lg-right col-md-3">Visibility</label>
+                                <div class="col-md-9"> <select name="public" class="form-control">
+                                        <option value="1">Public</option>
+                                        <option value="0">Private</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="addnewcat" class="btn btn-light btn-sm"><svg
+                                    class="midico midico-outline">
+                                    <use href="/assets/images/icon/midleoicons.svg#i-save"
+                                        xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
+                                </svg>&nbsp;Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--modal end-->
     </div>
-      </div>
-    </div>
+</div>
+</div>
 
 
 </div>
@@ -672,44 +771,50 @@ include "public/modules/footer.php";
         echo "</div></div>";
         include "public/modules/js.php";
         echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';?>
-     <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
-    <script type="text/javascript">
-   $(document).ready(function(){
+<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
+<script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
 
-  let table=$('#data-table-ki').DataTable({
-    "oLanguage": {
-             "sSearch": "",
-             "sSearchPlaceholder": "Find an article"
-            },
-            dom: 'Bfrtip',
-          //  responsive: true,
-            columnDefs: [
-                { targets: -1,
-                  "data": null,
-                  "render": function ( data, type, row, meta ) {
-                    return "<div class=\"btn-group\"><button type='button' onclick=\"window.open('/info/posts/"+row[2]+"')\" class=\"btn btn-sm btn-light\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-search' xlink:href='/assets/images/icon/midleoicons.svg#i-search'/></svg></button><button type='button' onclick=\"location.href='/cpinfo/edit/"+row[2]+"'\" class=\"btn btn-sm btn-light\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-edit' xlink:href='/assets/images/icon/midleoicons.svg#i-edit'/></svg></button><button type=\"button\" class=\"btn btn-sm btn-light command-delete\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-trash' xlink:href='/assets/images/icon/midleoicons.svg#i-trash'/></svg></button></div>"
-                }
-              }
-            ]
-        });
-        $('.dtfilter').keyup(function(){
-          table.search($(this).val()).draw() ;
-        });
-        $('.command-delete').on( 'click', function () {
-        var data = table.row( $(this).parents('tr') ).data();
-        var dataString = 'thisid='+ data[0]+'&thisusr=<?php echo $_SESSION["user"]; ?>';
+    let table = $('#data-table-ki').DataTable({
+        "oLanguage": {
+            "sSearch": "",
+            "sSearchPlaceholder": "Find an article"
+        },
+        dom: 'Bfrtip',
+        //  responsive: true,
+        columnDefs: [{
+            targets: -1,
+            "data": null,
+            "render": function(data, type, row, meta) {
+                return "<div class=\"btn-group\"><button type='button' onclick=\"window.open('/info/posts/" +
+                    row[2] +
+                    "')\" class=\"btn btn-sm btn-light\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-search' xlink:href='/assets/images/icon/midleoicons.svg#i-search'/></svg></button><button type='button' onclick=\"location.href='/cpinfo/edit/" +
+                    row[2] +
+                    "'\" class=\"btn btn-sm btn-light\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-edit' xlink:href='/assets/images/icon/midleoicons.svg#i-edit'/></svg></button><button type=\"button\" class=\"btn btn-sm btn-light command-delete\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-trash' xlink:href='/assets/images/icon/midleoicons.svg#i-trash'/></svg></button></div>"
+            }
+        }]
+    });
+    $('.dtfilter').keyup(function() {
+        table.search($(this).val()).draw();
+    });
+    $('.command-delete').on('click', function() {
+        var data = table.row($(this).parents('tr')).data();
+        var dataString = 'thisid=' + data[0] + '&thisusr=<?php echo $_SESSION["user"]; ?>';
         $.ajax({
-          type:"POST",
-          url:"/api/delkni",
-          data: dataString,
-          success:function(html){ $("#kb"+data[0]).hide(); notify('Article deleted!', 'error'); }
+            type: "POST",
+            url: "/api/delkni",
+            data: dataString,
+            success: function(html) {
+                $("#kb" + data[0]).hide();
+                notify('Article deleted!', 'error');
+            }
         });
-       });
+    });
 
 });
 </script>
-  <?php include "public/modules/template_end.php";
+<?php include "public/modules/template_end.php";
         echo '</body></html>';
     }
 }
