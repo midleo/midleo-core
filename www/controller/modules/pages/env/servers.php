@@ -34,7 +34,7 @@ if(!empty($ugroups)){
         <td class="text-center">{{ d.serverip}}</td>
         <td class="text-center">{{ d.servupdated }}</td>
         <td class="text-center">
-        <div class="btn-group" role="group">
+        <div class="text-start d-grid gap-2 d-md-block">
           <button type="button" ng-click="readoneSrv(d.id)" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
          </div>
          </td>

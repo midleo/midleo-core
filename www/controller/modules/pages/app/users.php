@@ -34,7 +34,7 @@
                           <td class="text-center">{{ d.name | limitTo:textlimit }}{{d.name.length > textlimit ? '...' : ''}}</td>
                           <td class="text-center">{{ d.acc | limitTo:textlimit }}{{d.acc.length > textlimit ? '...' : ''}}</td>
                           <td>
-                          <div class="btn-group" role="group">
+                          <div class="text-start d-grid gap-2 d-md-block">
                              <button ng-click="readusr(d.name,'<?php echo $_SESSION['user'];?>')" type="button"  class="btn waves-effect btn-sm btn-light"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
                              <?php if($_SESSION['user_level']>=3){?><button ng-click="delusr(d.name,'<?php echo $_SESSION['user'];?>')" type="button" class="btn waves-effect btn-light btn-sm" ><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-trash" xlink:href="/assets/images/icon/midleoicons.svg#i-trash"/></svg></button><?php } ?>
                               </div>

@@ -42,7 +42,7 @@
         <td class="text-center">{{ d.maxmsgs }}</td>
         <td class="text-center">{{ d.maxbytes }}</td>
         <td class="text-center">
-        <div class="btn-group" role="group">
+        <div class="text-start d-grid gap-2 d-md-block">
           <button type="button" ng-click="readOneTib('topic',d.id,d.proj)" style="" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
           <?php if($_SESSION['user_level']>="3"){?>
             <button type="button" ng-click="duplicate('tibco','topic',d.id,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')" class="btn btn-light btn-sm bg waves-effect" title="Duplicate"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-documents" xlink:href="/assets/images/icon/midleoicons.svg#i-documents"/></svg></button>

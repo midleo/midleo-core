@@ -311,7 +311,7 @@ if($page < $total_pages)
 
 
    echo '</div><div class="col-lg-3">'; 
-   include "blogsidebar.php";
+   include "public/modules/blogsidebar.php";
    echo '<div class="stickyside h2menu"><div class="list-group h2-menu" id="top-menu"></div>   </div></div></div></div></div></div></div>';
    include "public/modules/footer.php";
    include "public/modules/js.php";

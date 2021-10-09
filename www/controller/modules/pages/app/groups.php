@@ -48,7 +48,7 @@
                                     </div>
                                 </td>
                                 <td style="vertical-align:top!important;">
-                                    <div class="btn-group" role="group">
+                                    <div class="text-start d-grid gap-2 d-md-block">
                                         <button ng-click="readgroup(d.id,'<?php echo $_SESSION['user'];?>')"
                                             type="button" class="btn waves-effect btn-sm btn-light"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
                                         <?php if($_SESSION['user_level']>=3){?><button

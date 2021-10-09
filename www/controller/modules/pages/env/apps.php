@@ -314,7 +314,7 @@ data-bs-placement="top" title="<?php echo $val["uname"];?>" class="rounded-circl
         <td class="text-center">{{ d.owner }}</td>
         <td class="text-center"><span ng-if="d.tags" class="badge badge-secondary mr-1 mt-1" ng-repeat="(key,val) in d.tags"><a class="text-white" href="/searchall/?sa=y&st=tag&fd={{ val }}">{{val}}</a></span></td>
         <td>
-        <div class="btn-group" role="group">
+        <div class="text-start d-grid gap-2 d-md-block">
           <a href="/env/apps/?app={{d.appcode}}" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg></a>
            <button ng-show="d.owner=='<?php echo $_SESSION["user"];?>'" type="button" ng-click="deleteapp(d.id,d.appcode,'<?php echo $_SESSION["user"];?>')" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-trash" xlink:href="/assets/images/icon/midleoicons.svg#i-trash"/></svg></button>
            </div>

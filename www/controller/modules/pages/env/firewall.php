@@ -38,7 +38,7 @@
         <td class="text-center">{{ d.srcdns }}</td>
         <td class="text-center">{{ d.destdns }}</td>
         <td class="text-center">
-        <div class="btn-group" role="group">
+        <div class="text-start d-grid gap-2 d-md-block">
           <button type="button" ng-click="readOnefw(d.id)" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
           <?php if($_SESSION['user_level']>=3){?><button type="button" ng-click="deletefw(d.id,'<?php echo $_SESSION['user'];?>',d.srcdns,'<?php echo $thisarray['p2'];?>')" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button><?php } ?>
          </div>

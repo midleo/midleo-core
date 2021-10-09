@@ -165,8 +165,8 @@ class Class_draw
         if (!empty($thisarray['p1'])) {?>
 <script type="text/javascript">
 function editDiagram(image) {
-  $('.formcard').hide();
-  $('.drawcard').removeClass('col-md-8').addClass('col-md-12');
+    $('.formcard').hide();
+    $('.drawcard').removeClass('col-md-8').addClass('col-md-12');
     var image = document.getElementById(image);
     var initial = image.getAttribute('src');
     var getRef = document.getElementById("drawid");
@@ -208,7 +208,7 @@ function editDiagram(image) {
     window.addEventListener('message', receive);
     iframe.setAttribute('src',
         '/drawedit/?embed=1&ui=atlas&spin=1&modified=unsavedChanges&proto=json&title=<?php echo $thisarray['p1']; ?>'
-        );
+    );
     parentDiv.insertBefore(iframe, getRef);
     $("#image").hide();
 };
@@ -254,6 +254,13 @@ iframe {
     <div class="container-fluid">
         <?php
 $brarr = array();
+array_push($brarr, array(
+    "title" => "Create new diagram",
+    "link" => "#mnewdes",
+    "midicon" => "add",
+    "modal" => true, 
+    "active" => false,
+));
         array_push($brarr, array(
             "title" => "Create/edit articles",
             "link" => "/cpinfo",
@@ -265,12 +272,6 @@ $brarr = array();
             "link" => "/docimport",
             "midicon" => "deploy",
             "active" => ($page == "docimport") ? "active" : "",
-        ));
-        array_push($brarr, array(
-            "title" => "View/Edit diagrams",
-            "link" => "/draw",
-            "midicon" => "diagram",
-            "active" => ($page == "draw") ? "active" : "",
         ));
         if (sessionClass::checkAcc($acclist, "odfiles")) {
             array_push($brarr, array(
@@ -288,212 +289,248 @@ $brarr = array();
                 "active" => ($page == "dropbox") ? "active" : "",
             ));
         }
-        include "public/modules/breadcrumb.php";?>
+        ?>
         <?php if (!empty($thisarray['p1'])) {
             $sql = "SELECT tags, desuser, desname, reqid, imgdata FROM config_diagrams where binary desid=?";
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p1']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {?>
-        <div class="row">
-        <?php if ($_SESSION["user"] == $zobj["desuser"]) {?>
-            <div class="col-md-3 formcard">
-                <div class="card">
-                <form method="post" action="" >
-                    <div class="card-body">
+        <div class="row pt-3">
+            <div class="col-lg-2">
+                <?php  include "public/modules/sidebar.php";?></div>
+            <div class="col-lg-10">
+                <div class="row">
+                    <?php if ($_SESSION["user"] == $zobj["desuser"]) {?>
 
-                        <div class="form-group">
-                                <input type="text" placeholder="Diagram Name" name="desname" value="<?php echo $zobj["desname"]; ?>" class="form-control" placeholder="diagram name">
-                        </div>
-                        <div class="form-group">
-                            <input name="tags" placeholder="Tags" id="tags" data-role="tagsinput" type="text" value="<?php echo $zobj["tags"]; ?>"
-                                        class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Tracking ID" id="reqauto" class="form-control" value="<?php echo $zobj["reqid"]; ?>" />
-                                    <input type="text" id="reqname" name="reqname" value="<?php echo $zobj["reqid"]; ?>" style="display:none;" />
-                        </div>
-                                          </div>
-                    <div class="card-footer">
-                    <div class="btn-group" role="group" >
-  <button type="button" class="btn btn-light" data-bs-toggle="tooltip" title="Embed in article" onclick="cpclip('[diagram=<?php echo $thisarray["p1"]; ?>]');"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-documents" xlink:href="/assets/images/icon/midleoicons.svg#i-documents" /></svg></button>
-  <button type="button" class="btn btn-light" data-bs-toggle="tooltip" title="Edit"  onclick="editDiagram('image');"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit" /></svg></button>
-  <button type="submit" name="savefd" class="btn btn-light" data-bs-toggle="tooltip" title="Save"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save" /></svg></button>
-</div>
-  </div>
+                    <div class="col-md-9 drawcard">
+                        <?php } else {?>
+                        <div class="col-md-12 drawcard">
+                            <?php }?>
+                            <div class="card">
+                                <div class="card-body" id="drawid">
+                                    <img id="image" style="max-width:100%;" src="<?php echo $zobj["imgdata"]; ?>" />
+                                </div>
+                            </div>
 
-                </div>
-                </form>
-            </div>
-            <div class="col-md-9 drawcard">
-        <?php } else {?>
-            <div class="col-md-12 drawcard">
-       <?php }?>
-                <div class="card">
-                    <div class="card-body" id="drawid">
-                        <img id="image" style="max-width:100%;" src="<?php echo $zobj["imgdata"]; ?>" />
+                        </div>
+                        <?php if ($_SESSION["user"] == $zobj["desuser"]) {?>
+                        <div class="col-md-3 formcard">
+                            <form method="post" action="">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Diagram Name" name="desname"
+                                        value="<?php echo $zobj["desname"]; ?>" class="form-control"
+                                        placeholder="diagram name">
+                                </div>
+                                <div class="form-group">
+                                    <input name="tags" placeholder="Tags" id="tags" data-role="tagsinput" type="text"
+                                        value="<?php echo $zobj["tags"]; ?>" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Tracking ID" id="reqauto" class="form-control"
+                                        value="<?php echo $zobj["reqid"]; ?>" />
+                                    <input type="text" id="reqname" name="reqname" value="<?php echo $zobj["reqid"]; ?>"
+                                        style="display:none;" />
+                                </div>
+                                <br>
+                                <div class="text-start d-grid gap-2 d-md-block">
+                                    <button type="button" class="btn btn-light" data-bs-toggle="tooltip"
+                                        title="Embed in article"
+                                        onclick="cpclip('[diagram=<?php echo $thisarray["p1"]; ?>]');"><svg
+                                            class="midico midico-outline">
+                                            <use href="/assets/images/icon/midleoicons.svg#i-documents"
+                                                xlink:href="/assets/images/icon/midleoicons.svg#i-documents" />
+                                        </svg></button>
+                                    <button type="button" class="btn btn-light" data-bs-toggle="tooltip" title="Edit"
+                                        onclick="editDiagram('image');"><svg class="midico midico-outline">
+                                            <use href="/assets/images/icon/midleoicons.svg#i-edit"
+                                                xlink:href="/assets/images/icon/midleoicons.svg#i-edit" />
+                                        </svg></button>
+                                    <button type="submit" name="savefd" class="btn btn-light" data-bs-toggle="tooltip"
+                                        title="Save"><svg class="midico midico-outline">
+                                            <use href="/assets/images/icon/midleoicons.svg#i-save"
+                                                xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
+                                        </svg></button>
+                                </div>
+                                <?php }?>
+                            </form>
+                        </div>
                     </div>
-                </div>
-
-            </div>
-        </div>
-
-        <?php } else {
+                    <?php } else {
                 textClass::PageNotFound();
             }
         } else {?>
-
-        <div class=" ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-        <div class="row">
-                    <div class="col-md-3 position-relative">
-                        <input type="text" ng-model="search" class="form-control  topsearch"  placeholder="Search name in diagrams...">
-                        <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg><span>
-                    </div>
-                    <div class="col-md-9 text-end">
-                    <div  >
-            <a data-bs-toggle="modal" href="#mnewdes"
-                class="waves-effect waves-light btn btn-light"><svg data-bs-toggle="tooltip" data-bs-placement="top" title="Create new diagram" class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;New</a>
-        </div>
-                    </div>
-                </div><br>
-            <div class="card">
-            <div class="card-body p-0">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table  table-vmiddle table-hover stylish-table">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">Name</th>
-                                    <th class="text-center">Created date</th>
-                                    <th class="text-center">Created by</th>
-                                    <th class="text-center">Tags</th>
-                                    <th class="text-center" style="width:60px;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody ng-init="getAllDes('grapheditor')">
-                                <tr ng-hide="contentLoaded">
-                                    <td colspan="5" style="text-align:center;font-size:1.1em;"><i
-                                            class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
-                                </tr>
-                                <tr id="contloaded" class="hide"
-                                    dir-paginate="d in names | filter:search | orderBy:'-released' | itemsPerPage:10"
-                                    pagination-id="prodx" ng-hide="d.deslatname==''">
-                                    <td class="text-center"><a href="/draw/{{ d.desid}}">{{ d.desname}}</a></td>
-                                    <td class="text-center">{{ d.desdate }}</td>
-                                    <td class="text-center">{{ d.desuser }}</td>
-                                    <td class="text-center"><a ng-repeat="tag in d.tags.split(',')"
-                                            class="badge badge-secondary waves-effect"
-                                            style="margin-right:5px;margin-top:5px;"
-                                            href="/searchall/?sa=y&st=tag&fd={{ tag }}">{{ tag }}</a></td>
-                                    <td>
-                                        <?php if ($_SESSION['user_level'] >= "5") {?>
-                                        <button type="button"
-                                            ng-click="deldes(d.id,d.desid,'<?php echo $_SESSION["user"]; ?>')"
-                                            class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-trash"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
-                            </svg></button>
-                                        <?php } else {?>
-                                        <button type="button" class="btn btn-light btn-sm bg waves-effect"><i
-                                                class="mdi mdi-close"></i></button>
-                                        <?php }?>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <dir-pagination-controls pagination-id="prodx" boundary-links="true"
-                            on-page-change="pageChangeHandler(newPageNumber)"
-                            template-url="/assets/templ/pagination.tpl.html"></dir-pagination-controls>
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>
-        <div class="modal" id="mnewdes" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-
-                <div class="modal-content">
-                <form name="form" action="" method="post">
-                <div class="modal-header text-center"><h4>Create new diagram</h4></div>
-
-                        <div class="modal-body"><br>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3"
-                                    for="diagram_title">Name</label>
-                                <div class="col-md-9"><input type="text" id="diagram_title" name="destitle"
-                                        class="form-control" required /> </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Tags</label>
-                                <div class="col-md-9"><input name="tags" id="tags" data-role="tagsinput" type="text"
-                                        class="form-control"></div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Request Number</label>
-                                <div class="col-md-9"> <input type="text" id="reqauto" class="form-control" required />
-                                    <input type="text" id="reqname" name="reqname" style="display:none;" /> </div>
-                            </div>
-                            <input type="hidden" name="destype" value="grapheditor">
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Application</label>
-                                <div class="col-md-9">
-                                    <input type="text" id="applauto" class="form-control" required
-                                        placeholder="write the application name or code" />
-                                    <input type="text" id="appname" name="appname" style="display:none;" />
+                    <div class="row pt-3">
+                        <div class="col-lg-2">
+                            <?php  include "public/modules/sidebar.php";?></div>
+                        <div class="col-lg-10" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <div class="card p-0">
+                                        <table class="table  table-vmiddle table-hover stylish-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">Name</th>
+                                                    <th class="text-center">Created date</th>
+                                                    <th class="text-center">Created by</th>
+                                                    <th class="text-center">Tags</th>
+                                                    <th class="text-center" style="width:60px;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-init="getAllDes('grapheditor')">
+                                                <tr ng-hide="contentLoaded">
+                                                    <td colspan="5" style="text-align:center;font-size:1.1em;"><i
+                                                            class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                                                </tr>
+                                                <tr id="contloaded" class="hide"
+                                                    dir-paginate="d in names | filter:search | orderBy:'-released' | itemsPerPage:10"
+                                                    pagination-id="prodx" ng-hide="d.deslatname==''">
+                                                    <td class="text-center"><a
+                                                            href="/draw/{{ d.desid}}">{{ d.desname}}</a></td>
+                                                    <td class="text-center">{{ d.desdate }}</td>
+                                                    <td class="text-center">{{ d.desuser }}</td>
+                                                    <td class="text-center"><a ng-repeat="tag in d.tags.split(',')"
+                                                            class="badge badge-secondary waves-effect"
+                                                            style="margin-right:5px;margin-top:5px;"
+                                                            href="/searchall/?sa=y&st=tag&fd={{ tag }}">{{ tag }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <?php if ($_SESSION['user_level'] >= "5") {?>
+                                                        <button type="button"
+                                                            ng-click="deldes(d.id,d.desid,'<?php echo $_SESSION["user"]; ?>')"
+                                                            class="btn btn-light btn-sm bg waves-effect"><svg
+                                                                class="midico midico-outline">
+                                                                <use href="/assets/images/icon/midleoicons.svg#i-trash"
+                                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
+                                                            </svg></button>
+                                                        <?php } else {?>
+                                                        <button type="button"
+                                                            class="btn btn-light btn-sm bg waves-effect"><i
+                                                                class="mdi mdi-close"></i></button>
+                                                        <?php }?>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls pagination-id="prodx" boundary-links="true"
+                                            on-page-change="pageChangeHandler(newPageNumber)"
+                                            template-url="/assets/templ/pagination.tpl.html"></dir-pagination-controls>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Server</label>
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control autocomplsrv"
-                                        placeholder="write the server name" />
-                                    <input type="text" name="server" id="server" style="display:none;" />
-                                    <input type="text" name="serverid" id="serverid" style="display:none;" />
-                                    <input type="text" name="serverip" id="serverip" style="display:none;" />
-                                    <input type="text" name="serverlist" id="serverlist" style="display:none;" />
-                                    <input type="text" name="serverlistnames" id="serverlistnames"
-                                        style="display:none;" />
-                                    <div id="srvlistnames"></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-light btn-sm" onclick="mkSrvlist()"><i
-                                            class="mdi mdi-plus mdi-24px"></i></button>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Application Server</label>
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control autocomplappsrv"
-                                        placeholder="write the applicaiton server name" />
-                                    <input type="text" name="appserver" id="appserver" style="display:none;" />
-                                    <input type="text" name="appserverid" id="appserverid" style="display:none;" />
-                                    <input type="text" name="appserverlist" id="appserverlist" style="display:none;" />
-                                    <input type="text" name="appserverlistnames" id="appserverlistnames"
-                                        style="display:none;" />
-                                    <div id="appsrvlistnames"></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-light btn-sm" onclick="mkAppSrvlist()"><i
-                                            class="mdi mdi-plus mdi-24px"></i></button>
+                                <div class="col-lg-3">
+                                    <div style="display:block;">
+                                        <input type="text" ng-model="search" class="form-control  topsearch"
+                                            placeholder="find a diagram">
+                                        <span class="searchicon"><svg class="midico midico-outline">
+                                                <use href="/assets/images/icon/midleoicons.svg#i-search"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                                            </svg><span>
+                                    </div>
+                                    <?php include "public/modules/breadcrumbin.php";?>
                                 </div>
                             </div>
                         </div>
-
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
-                    <button class="btn btn-info btn-sm" type="submit" name="savedesdata"><i
-                                    class="mdi mdi-content-save"></i>&nbsp;Create</button>&nbsp;
-
-            </div>
-            </form>
+                        <div class="modal" id="mnewdes" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form name="form" action="" method="post">
+                                        <div class="modal-header text-center">
+                                            <h4>Create new diagram</h4>
+                                        </div>
+                                        <div class="modal-body"><br>
+                                            <div class="form-group row">
+                                                <label class="form-control-label text-lg-right col-md-3"
+                                                    for="diagram_title">Name</label>
+                                                <div class="col-md-9"><input type="text" id="diagram_title"
+                                                        name="destitle" class="form-control" required /> </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="form-control-label text-lg-right col-md-3">Tags</label>
+                                                <div class="col-md-9"><input name="tags" id="tags" data-role="tagsinput"
+                                                        type="text" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="form-control-label text-lg-right col-md-3">Request
+                                                    Number</label>
+                                                <div class="col-md-9"> <input type="text" id="reqauto"
+                                                        class="form-control" required />
+                                                    <input type="text" id="reqname" name="reqname"
+                                                        style="display:none;" />
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="destype" value="grapheditor">
+                                            <div class="form-group row">
+                                                <label
+                                                    class="form-control-label text-lg-right col-md-3">Application</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="applauto" class="form-control" required
+                                                        placeholder="write the application name or code" />
+                                                    <input type="text" id="appname" name="appname"
+                                                        style="display:none;" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="form-control-label text-lg-right col-md-3">Server</label>
+                                                <div class="col-md-7">
+                                                    <input type="text" class="form-control autocomplsrv"
+                                                        placeholder="write the server name" />
+                                                    <input type="text" name="server" id="server"
+                                                        style="display:none;" />
+                                                    <input type="text" name="serverid" id="serverid"
+                                                        style="display:none;" />
+                                                    <input type="text" name="serverip" id="serverip"
+                                                        style="display:none;" />
+                                                    <input type="text" name="serverlist" id="serverlist"
+                                                        style="display:none;" />
+                                                    <input type="text" name="serverlistnames" id="serverlistnames"
+                                                        style="display:none;" />
+                                                    <div id="srvlistnames"></div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="button" class="btn btn-light btn-sm"
+                                                        onclick="mkSrvlist()"><i
+                                                            class="mdi mdi-plus mdi-24px"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="form-control-label text-lg-right col-md-3">Application
+                                                    Server</label>
+                                                <div class="col-md-7">
+                                                    <input type="text" class="form-control autocomplappsrv"
+                                                        placeholder="write the applicaiton server name" />
+                                                    <input type="text" name="appserver" id="appserver"
+                                                        style="display:none;" />
+                                                    <input type="text" name="appserverid" id="appserverid"
+                                                        style="display:none;" />
+                                                    <input type="text" name="appserverlist" id="appserverlist"
+                                                        style="display:none;" />
+                                                    <input type="text" name="appserverlistnames" id="appserverlistnames"
+                                                        style="display:none;" />
+                                                    <div id="appsrvlistnames"></div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="button" class="btn btn-light btn-sm"
+                                                        onclick="mkAppSrvlist()"><i
+                                                            class="mdi mdi-plus mdi-24px"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                data-bs-dismiss="modal"><svg class="midico midico-outline">
+                                                    <use href="/assets/images/icon/midleoicons.svg#i-x"
+                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                                                </svg>&nbsp;Close</button>
+                                            <button class="btn btn-info btn-sm" type="submit" name="savedesdata"><i
+                                                    class="mdi mdi-content-save"></i>&nbsp;Create</button>&nbsp;
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <?php }?>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <?php }?>
-    </div>
-</div>
-<?php include "public/modules/footer.php";
+                <?php include "public/modules/footer.php";
         echo "</div></div>";
         include "public/modules/js.php";
         echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';
@@ -502,6 +539,5 @@ $brarr = array();
         }
         include "public/modules/template_end.php";
         echo '</body></html>';
-
     }
 }

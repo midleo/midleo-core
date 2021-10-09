@@ -1,25 +1,22 @@
-<div class="row">
-          <div class="col-md-3 position-relative">
-              <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Filter">
-              <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-          </div>
-  </div><br>
-  <div class="card">
-<div class="card-body p-0">
-<div class="table-responsive">
-<table class="datainfo display nowrap table row-border"  cellspacing="0" width="100%" style="padding-top:0px !important;">
-<thead>
-<tr>
-<th>Status</th>
-<th data-priority="1">Server</th>
-<th>OS</th>
-<th data-priority="2">Server IP</th>
-<th>Last update</th>
-<th><i class="mdi mdi-tag"></i>&nbsp;Tags</th>
-</tr>
-</thead>
-<tbody>
-<?php
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php  include "public/modules/sidebar.php";?></div>
+    <div class="col-lg-8">
+
+        <div class="card p-0">
+            <table class="table  table-vmiddle table-hover stylish-table" style="margin-top:0px !important;">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th data-priority="1">Server</th>
+                        <th>OS</th>
+                        <th data-priority="2">Server IP</th>
+                        <th>Last update</th>
+                        <th><i class="mdi mdi-tag"></i>&nbsp;Tags</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
 if(isset($_SESSION["user"])){
     $ugr="";
     if(!empty($ugroups)){ 
@@ -38,13 +35,15 @@ if(isset($_SESSION["user"])){
     if ($zobjin = $qin->fetchAll()) {
     foreach ($zobjin as $valin) {
         ?>
- <tr>
-  <td><span class="badge badge-<?php if (round(abs(strtotime(date('Y-m-d H:i:s')) - strtotime($valin['servupdated'])) / 60) <= $valin["updperiod"]) {echo "success";} else {echo "danger";}?>"><?php if (round(abs(strtotime(date('Y-m-d H:i:s')) - strtotime($valin['servupdated'])) / 60) <= $valin["updperiod"]) {echo "Online";} else {echo "No update";}?></span></td>
-  <td><a href="/?" class="font-medium link"><?php echo $valin["serverdns"]; ?></a></td>
-  <td><a href="/?" class="font-bold link"><?php echo $valin["servertype"]; ?></a></td>
-  <td><?php echo $valin["serverip"]; ?></td>
-  <td><?php echo $valin["servupdated"]; ?></td>
-  <td><?php if (!empty($valin['tags'])) {
+                    <tr>
+                        <td><span
+                                class="badge badge-<?php if (round(abs(strtotime(date('Y-m-d H:i:s')) - strtotime($valin['servupdated'])) / 60) <= $valin["updperiod"]) {echo "success";} else {echo "danger";}?>"><?php if (round(abs(strtotime(date('Y-m-d H:i:s')) - strtotime($valin['servupdated'])) / 60) <= $valin["updperiod"]) {echo "Online";} else {echo "No update";}?></span>
+                        </td>
+                        <td><a href="/?" class="font-medium link"><?php echo $valin["serverdns"]; ?></a></td>
+                        <td><a href="/?" class="font-bold link"><?php echo $valin["servertype"]; ?></a></td>
+                        <td><?php echo $valin["serverip"]; ?></td>
+                        <td><?php echo $valin["servupdated"]; ?></td>
+                        <td><?php if (!empty($valin['tags'])) {
             $clientkeyws = $valin['tags'];
             $kt = explode(",", $clientkeyws);
             foreach ($kt as $key => $val) {if ($val != " " and strlen($val) < 70 and strlen($val) > 0) {
@@ -53,10 +52,20 @@ if(isset($_SESSION["user"])){
                 echo '<a class="badge badge-secondary waves-effect" style="margin-right:5px;margin-top:5px;" href="/searchall/?sa=y&st=tag&fd=' . $val . '">' . $val . '</a>';
             }}
         }?></td>
- </tr>
-<?php }}?>
-</tbody>
-</table>
-</div>
-</div>
+                    </tr>
+                    <?php }}?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div style="display:block;">
+            <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Filter">
+            <span class="searchicon"><svg class="midico midico-outline">
+                    <use href="/assets/images/icon/midleoicons.svg#i-search"
+                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                </svg>
+        </div>
+        <?php include "public/modules/breadcrumbin.php";?>
+    </div>
 </div>

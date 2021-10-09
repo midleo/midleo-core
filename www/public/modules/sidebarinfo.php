@@ -33,8 +33,6 @@ if($zobjin = $qin->rowCount()>0){
             <?php } ?>
             <?php   }
    ?>
-
-
         </li>
         <?php }?>
     </ul>

@@ -1,14 +1,14 @@
-<div class="btn-group " role="group" aria-label="Info btns">
-<?php if($forumcase=="v"){?><a href="/draw/<?php echo $thisarray["last"];?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Article" type="button" class="waves-effect waves-light btn btn-w" >Edit</a><?php } ?>
-<a href="/draw" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article" type="button" class="waves-effect waves-light btn btn-w" >New</a>
+<br>
+<h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
+<br>
+<div class="list-group">
+<a href="/draw" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action" ><i class="mdi mdi-plus"></i>&nbsp;New Diagram</a>
+<?php if($forumcase=="v"){?><a href="/draw/<?php echo $thisarray["last"];?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Article" type="button" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action" ><i class="mdi mdi-pencil-outline"></i>&nbsp;Edit this diagram</a><?php } ?>
 </div>
-<br><br>
 <?php if($clientkeyws){?>
-<div class="card cardtr" style="box-shadow:none;">
-<div class="card-header" style="background-color:transparent;">
-<span class="card-title"><i class="mdi mdi-tag-outline"></i>&nbsp;Tags</span>
-</div>
-<div style="padding:10px;">
+  <br><br>
+<h4><i class="mdi mdi-tag-outline"></i>&nbsp;Tags</h4>
+<br>
 <div class="nav tag-cloud">
 <?php  
   $kt=explode(",",$clientkeyws);
@@ -16,8 +16,7 @@
   shuffle($kt);
   foreach($kt as $key=>$val){ if($val<>" " and strlen($val) < 60 and strlen($val) > 0){ 
     $val=ltrim($val, ' ');
-    $val=rtrim($val, ' '); ?><a class="waves-effect btn btn-light btn-sm" style="margin: 0 4px 6px 0;" href="/diagrams/tags/<?php echo $val;?>"><i class="mdi mdi-tag"></i>&nbsp;<?php echo $val;?></a><?php }} ?>
-</div>
+    $val=rtrim($val, ' '); ?><a class="waves-effect btn btn-light btn-sm" style="margin: 0 4px 6px 0;" href="/diagrams/tags/<?php echo $val;?>"><i class="mdi mdi-pound"></i>&nbsp;<?php echo $val;?></a><?php }} ?>
 </div>
 </div>
 <?php } ?>

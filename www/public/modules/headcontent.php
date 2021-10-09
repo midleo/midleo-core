@@ -73,9 +73,9 @@
                         </ul>
                 </li>
                 <?php } else { ?>
-                <li class="nav-item">
-                    <a data-bs-toggle="tooltip" title="Login Console" class="dropdown-item nav-link text-muted waves-effect waves-dark"
-                        href="/mlogin/?"><i class="mdi mdi-power"></i></a>
+                    <li class="nav-item">
+                    <a data-bs-toggle="tooltip" title="Login Console" class="nav-link text-muted waves-effect waves-dark"
+                        href="/mlogin/?"><span class="itemicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg></a>
                 </li>
                 <?php } ?>&nbsp;
                 <div class="theme-switch-wrapper">

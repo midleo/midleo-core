@@ -34,9 +34,7 @@ class Class_dropbox
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "DropBox";
         $breadcrumb["link"] = "/cp/?";
-        $breadcrumb["special"] = '
-        <h8 class="pre-auth-section" style="display:none;"><a href="" id="authlink" data-bs-toggle="tooltip" title="Sign in to Dropbox"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg></a></h8>
-        ';
+        $breadcrumb["special"] = '<a href="" id="authlink" data-bs-toggle="tooltip" title="Sign in to Dropbox" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg>&nbsp;Sign in to Dropbox</a>';
         if ($thisarray["p1"] != "auth") {
             include "public/modules/headcontent.php";
             echo '<div class="page-wrapper"><div class="container-fluid">';

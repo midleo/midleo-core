@@ -86,7 +86,7 @@ div.mxWindow .geButton{margin:-1px 2px 2px;padding:1px 2px 2px 1px}
 .geHsplit{border-left:1px solid #e5e5e5;border-right:1px solid #e5e5e5}
 .geVSplit{border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5}
 .geHsplit:hover,.geVsplit:hover{background-color:#e0e0e0}
-.geDialog{position:absolute;background:#fff;line-height:1em;overflow:hidden;padding:30px;border:1px solid #acacac;-webkit-box-shadow:0 0 2px 2px #d5d5d5;-moz-box-shadow:0 0 2px 2px #d5d5d5;box-shadow:0 0 2px 2px #d5d5d5;_filter:progid:DXImageTransform.Microsoft.DropShadow(OffX=2,OffY=2,Color='#d5d5d5',Positive='true');z-index:2}
+.geDialog{position:absolute;background:#fff;line-height:1em;overflow:hidden;border:1px solid #acacac;-webkit-box-shadow:0 0 2px 2px #d5d5d5;-moz-box-shadow:0 0 2px 2px #d5d5d5;box-shadow:0 0 2px 2px #d5d5d5;_filter:progid:DXImageTransform.Microsoft.DropShadow(OffX=2,OffY=2,Color='#d5d5d5',Positive='true');z-index:2}
 .geTransDialog{position:absolute;overflow:hidden;padding:30px;z-index:2}
 .geDialogClose{position:absolute;width:9px;height:9px;opacity:.5;cursor:pointer;_filter:alpha(opacity=50)}
 .geDialogClose:hover{opacity:1}

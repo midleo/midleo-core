@@ -208,7 +208,7 @@ if($zobj = $q->fetchAll()){ ?>
                     <td class="text-center">{{ d.user }}</td>
                     <td>
                         <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
-                        <div class="btn-group" role="group">
+                        <div class="text-start d-grid gap-2 d-md-block">
                         <a  href="/env/places/<?php echo $thisarray['p2'];?>/?type=edit&uid={{d.id}}"
                                         class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></a>
                         <?php if($_SESSION['user_level']>=3){?><button type="button"

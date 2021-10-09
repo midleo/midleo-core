@@ -41,8 +41,8 @@ class Class_onedrive
         $breadcrumb["text"] = "One Drive";
             $breadcrumb["link"] = "/cp/?";
             $breadcrumb["special"] = '
-        <h8 class="od-login" style="display: none;"><a href="#" onclick="signInToOneDrive()" data-bs-toggle="tooltip" title="Sign in to OneDrive"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg></a></h8>
-        <h8 class="od-logoff" style="display: none;"><a href="#" onclick="signOut()" data-bs-toggle="tooltip" title="Sign Out from OneDrive"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg></a></h8>
+        <a href="#" onclick="signInToOneDrive()" data-bs-toggle="tooltip" title="Sign in to OneDrive" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action od-login" style="display:none;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg>&nbsp;Sign in to OneDrive</a>
+        <a href="#" onclick="signOut()" data-bs-toggle="tooltip" title="Sign Out from OneDrive" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action od-logoff" style="display: none;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg>&nbsp;Sign Out from OneDrive</a>
         ';
         if ($thisarray["p1"] != "auth") {
             include "public/modules/headcontent.php";

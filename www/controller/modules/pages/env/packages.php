@@ -177,7 +177,7 @@
                             </td>
                             <td>
                                 <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
-                                <div class="btn-group" role="group">
+                                <div class="text-start d-grid gap-2 d-md-block">
                                     <button ng-click="getQMlist('<?php echo $thisarray['p2'];?>',d.packuid,d.id)"
                                         class="btn btn-light mql{{d.id}}" ng-show="d.srvtype=='qm'"
                                         data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')"

@@ -15,4 +15,18 @@
             class="mdi <?php echo $val["icon"];?>"></i><?php } ?><?php if($val["img"]){ ?><img
             src="<?php echo $val["img"];?>" width="22px"></a><?php } ?>&nbsp;<?php echo $val["title"];?></a>
     <?php }}} ?>
+    <?php if($showr || $breadcrumb["special"]){?>
+       <?php if($showr){?> 
+        <a href="<?php echo $breadcrumb["linkr2"];?>" data-bs-toggle="tooltip" title="<?php echo $breadcrumb["textr2"];?>" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action">
+        <?php if($breadcrumb["midicon"]){?><svg
+            class="midico midico-outline">
+            <use href="/assets/images/icon/midleoicons.svg#i-<?php echo $breadcrumb["midicon"];?>"
+                xlink:href="/assets/images/icon/midleoicons.svg#i-<?php echo $breadcrumb["midicon"];?>" />
+        </svg>
+        <?php } ?><?php if($breadcrumb["icon"]){?><i
+            class="mdi <?php echo $breadcrumb["icon"];?>"></i><?php } ?><?php if($breadcrumb["img"]){ ?><img
+            src="<?php echo $breadcrumb["img"];?>" width="22px"></a><?php } ?>&nbsp;<?php echo $breadcrumb["textr2"];?>
+        </a><?php } ?>
+        <?php echo $breadcrumb["special"]?$breadcrumb["special"]:"";?>
+   <?php } ?>
 </div>

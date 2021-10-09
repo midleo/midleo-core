@@ -94,9 +94,10 @@ class Class_diagrams
         include "public/modules/headcontentdiagram.php";   
         echo '<div class="page-wrapper">'; ?>
               <div class="container-fluid">
-                  <?php include "public/modules/breadcrumb.php"; ?>
       
-                  <?php     echo '<div class="row"><div class="col-md-10">';
+                  <?php     echo '<div class="row pt-3"><div class="col-lg-2">';
+                  include "public/modules/sidebardiagrams.php";
+                  echo '</div><div class="col-md-8">';
 
 
         if ($forumcase=="v") { 
@@ -236,9 +237,7 @@ class Class_diagrams
 
         echo '</div><div class="col-md-2">'; 
         include "public/modules/diagramsidebar.php";
-
-        
-
+        echo '</div></div></div></div>'; 
         include "public/modules/footer.php";
         include "public/modules/js.php";
         include "public/modules/template_end.php";

@@ -15,7 +15,6 @@ class Class_browse{
     $pdo = pdodb::connect();
     if(!empty($_SESSION["user"])){ $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; }  } 
     if(!empty($_SESSION["requser"])){ $data=sessionClassreq::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val;  }  } 
-   
     include "public/modules/css.php";
     if($thisarray['p1']=="server" || $thisarray['p1']=="appserver" || $thisarray['p1']=="serverlist"){?>
     <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
@@ -31,14 +30,14 @@ class Class_browse{
             $showr=true;
             $breadcrumb["textr2"]="Back to application servers";
             $breadcrumb["linkr2"]="/env/appservers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""); 
-            $breadcrumb["textr"]=' <svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-app-srv" xlink:href="/assets/images/icon/midleoicons.svg#i-app-srv"/></svg>';
+            $breadcrumb["midicon"]="app-srv";
           } 
           elseif($thisarray['p1']=="server"){ 
             $breadcrumb["text"]="Server info"; 
             $showr=true;
             $breadcrumb["textr2"]="Back to servers";
             $breadcrumb["linkr2"]="/env/servers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""); 
-            $breadcrumb["textr"]=' <svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-server" xlink:href="/assets/images/icon/midleoicons.svg#i-server"/></svg>';
+            $breadcrumb["midicon"]="server";
           } 
           elseif($thisarray['p1']=="draw"){ 
             $breadcrumb["text"]="Diagram info"; 
@@ -48,15 +47,13 @@ class Class_browse{
             $showr=true;
             $breadcrumb["textr2"]="Back to home";
             $breadcrumb["linkr2"]="//{$_SERVER['HTTP_HOST']}//p=welcome"; 
-            $breadcrumb["textr"]=' <svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-dashboard" xlink:href="/assets/images/icon/midleoicons.svg#i-dashboard"/></svg>';
+            $breadcrumb["midicon"]="dashboard";
           } 
           else { $breadcrumb["text"]="User info"; } 
     include "public/modules/headcontent.php";
     ?>
     <div class="page-wrapper"><div class="container-fluid">
-    <?php  include "public/modules/breadcrumb.php";?>
-  
-  <?php if(file_exists(__DIR__."/browse/".$thisarray['p1'].".php")){ include "browse/".$thisarray['p1'].".php";}   else { textClass::PageNotFound(); }?>
+       <?php if(file_exists(__DIR__."/browse/".$thisarray['p1'].".php")){ include "browse/".$thisarray['p1'].".php";}   else { textClass::PageNotFound(); }?>
     </div>
 </div>
 <?php
@@ -64,7 +61,7 @@ class Class_browse{
     echo "</div></div>";
     include "public/modules/js.php"; 
     if($thisarray['p1']=="server" || $thisarray['p1']=="appserver" || $thisarray['p1']=="serverlist"){?>
-     <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
     <script>
         let dtable=$('.datainfo').DataTable({
@@ -110,8 +107,6 @@ nodesarr.push({  id: '<?php echo $val["serverdns"];?>',    group: 'server',    l
     $qin = $pdo->prepare($sqlin);
     $qin->execute(array(htmlspecialchars($val["qmname"])));
     if($zobjin = $qin->fetchAll()){ ?>
-    
-
 <?php
       foreach($zobjin as $keyin=>$valin) {
        if($valin["proj"]){ $temparr["proj"][]=$valin["proj"];
@@ -122,29 +117,20 @@ nodesarr.push({  id: '<?php echo $val["serverdns"];?>',    group: 'server',    l
        }
       }
     }
-  
-
   }
-  
   foreach(array_values(array_unique($temparr["proj"])) as $keyin){ ?>
     nodesarr.push({  id: '<?php echo $keyin;?>',    group: 'app',    label: '<?php echo $keyin;?>' , link: "/env/apps" });
     edgesarr.push({from: '<?php echo $val["serverdns"];?>', to: '<?php echo $keyin;?>', length: EDGE_LENGTH_MAIN});
-    
     <?php foreach($temparr["qm"] as $key){ ?>
     nodesarr.push({  id: '<?php echo $key.$keyin;?>',    group: 'object',    label: '<?php echo $typeobj[$key];?>' , link: "/env/<?php echo $key;?>/<?php echo $keyin;?>" });
     edgesarr.push({from: '<?php echo $keyin;?>', to: '<?php echo $key.$keyin;?>', length: EDGE_LENGTH_SUB});
     <?php }
    }
   ?>
-
-
-
   <?php } ?>
   var container = document.getElementById('myobj');
-
   var nodes = new vis.DataSet(nodesarr);
   var edges = new vis.DataSet(edgesarr);
-
   var data = { nodes: nodes,  edges: edges };
   var network = new vis.Network(container, data, options);
   network.on( 'click', function(properties) {
@@ -155,7 +141,6 @@ nodesarr.push({  id: '<?php echo $val["serverdns"];?>',    group: 'server',    l
     }
   });
 </script>
-
     <?php } 
     include "public/modules/template_end.php";
     echo '</body></html>'; 
