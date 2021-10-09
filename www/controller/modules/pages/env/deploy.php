@@ -4,10 +4,6 @@ if (sessionClass::checkAcc($acclist, "appadm,appview")) {
  ?>
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
     <div class="row">
-    <div class="col-md-4 position-relative">
-        <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a deployment">
-        <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-    </div>
     <div class="col-md-8 text-end">
     <span data-bs-toggle="tooltip" data-bs-placement="top" title="Important information for deployment process">
     <button type="button" class="waves-effect waves-light btn btn-light" data-bs-toggle="modal"

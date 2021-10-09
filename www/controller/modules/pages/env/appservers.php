@@ -1,9 +1,5 @@
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
   <div class="row">
-  <div class="col-md-3 position-relative">
-      <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a server">
-      <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-  </div>
   <div class="col-md-9 text-end">
  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Add configuration for a server"><button type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal" href="#modal-obj-form" ng-click="showCreateFormServ()"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;Create</button></span>
   </div>

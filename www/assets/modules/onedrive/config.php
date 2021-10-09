@@ -68,14 +68,6 @@ class Class_onedrive
             "active"=>($page=="draw")?"active":"",
              ));
              }
-              if (sessionClass::checkAcc($acclist, "odfiles")) {
-                array_push($brarr,array(
-                    "title"=>"View/Map OneDrive files",
-                  "link"=>"/onedrive",
-                  "midicon"=>"onedrive",
-                  "active"=>($page=="onedrive")?"active":"",
-                ));
-              }
               if (sessionClass::checkAcc($acclist, "dbfiles")) {
                 array_push($brarr,array(
                     "title"=>"View/Map Dropbox files",
@@ -84,25 +76,26 @@ class Class_onedrive
                   "active"=>($page=="dropbox")?"active":"",
                 ));
               }
-            include "public/modules/breadcrumb.php"; ?>
-         <?php   echo '<div class="card"><div class="card-header"><h4>Microsoft OneDrive files</h4></div><div class="card-body">  ';?>
-<div class="row ">
-    <div class="col-md-12">
+            ?>
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php  include "public/modules/sidebar.php";?></div>
+    <div class="col-lg-8">
         <div class="col-md-4 od-loading text-center">
             <div style="width:100%;"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</div>
         </div>
         <nav class="breadcrumb od-logoff-flex" id="od-breadcrumb"></nav><br>
         <div id="od-content ">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="od-login">
                     <div class="container">
-                        <h3 class="display-4">Not yet authorized </h3>
+                        <h4 class="display-4">Not yet authorized </h4>
                         <p class="lead">Please use the sign in button in the right top to login to Microsoft OneDrive
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="od-logoff">
+            <div class="od-logoff card p-0">
                 <table id="data-table-doc" class="table table-vmiddle table-hover stylish-table mb-0 ">
                     <thead>
                         <tr>
@@ -120,263 +113,286 @@ class Class_onedrive
                 </table>
 
                 <div class="modal" id="addmap" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-            
-                <div class="modal-content">
-                <div class="modal-header text-center">
-            Add mapping to application/server/request
-            </div>
-                    
-                        <div class="modal-body"><br>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3"
-                                    for="diagram_title">Name</label>
-                                <div class="col-md-9"><input type="text" id="file_title" name="file_title"
-                                        class="form-control" disabled /> </div>
-                                        <input type="text" id="file_name" name="file_name" value="" style="display:none;">
-                                        <input type="text" id="file_size" name="file_size" value="" style="display:none;">
-                                        <input type="text" id="file_id" name="file_id" value="" style="display:none;">
-                                        <input type="text" id="file_link" name="file_link" value="" style="display:none;">
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                Add mapping to application/server/request
                             </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Tags</label>
-                                <div class="col-md-9"><input name="tags" id="tags" data-role="tagsinput" type="text"
-                                        class="form-control"></div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Request Number</label>
-                                <div class="col-md-9"> <input type="text" id="reqauto" class="form-control"  />
-                                    <input type="text" id="reqname" name="reqname" style="display:none;" /> </div>
-                            </div>
-                            <input type="hidden" id="file_type" value="onedrive">
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Application</label>
-                                <div class="col-md-9">
-                                    <input type="text" id="applauto" class="form-control" 
-                                        placeholder="write the application name or code" />
-                                    <input type="text" id="appname" name="appname" style="display:none;" />
+
+                            <div class="modal-body"><br>
+                                <div class="form-group row">
+                                    <label class="form-control-label text-lg-right col-md-3"
+                                        for="diagram_title">Name</label>
+                                    <div class="col-md-9"><input type="text" id="file_title" name="file_title"
+                                            class="form-control" disabled /> </div>
+                                    <input type="text" id="file_name" name="file_name" value="" style="display:none;">
+                                    <input type="text" id="file_size" name="file_size" value="" style="display:none;">
+                                    <input type="text" id="file_id" name="file_id" value="" style="display:none;">
+                                    <input type="text" id="file_link" name="file_link" value="" style="display:none;">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="form-control-label text-lg-right col-md-3">Tags</label>
+                                    <div class="col-md-9"><input name="tags" id="tags" data-role="tagsinput" type="text"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="form-control-label text-lg-right col-md-3">Request Number</label>
+                                    <div class="col-md-9"> <input type="text" id="reqauto" class="form-control" />
+                                        <input type="text" id="reqname" name="reqname" style="display:none;" />
+                                    </div>
+                                </div>
+                                <input type="hidden" id="file_type" value="onedrive">
+                                <div class="form-group row">
+                                    <label class="form-control-label text-lg-right col-md-3">Application</label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="applauto" class="form-control"
+                                            placeholder="write the application name or code" />
+                                        <input type="text" id="appname" name="appname" style="display:none;" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="form-control-label text-lg-right col-md-3">Server</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control autocomplsrv"
+                                            placeholder="write the server name" />
+                                        <input type="text" name="server" id="server" style="display:none;" />
+                                        <input type="text" name="serverid" id="serverid" style="display:none;" />
+                                        <input type="text" name="serverip" id="serverip" style="display:none;" />
+                                        <input type="text" name="serverlist" id="serverlist" style="display:none;" />
+                                        <input type="text" name="serverlistnames" id="serverlistnames"
+                                            style="display:none;" />
+                                        <div id="srvlistnames"></div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-light btn-sm" onclick="mkSrvlist()"><i
+                                                class="mdi mdi-plus mdi-24px"></i></button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="form-control-label text-lg-right col-md-3">Application Server</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control autocomplappsrv"
+                                            placeholder="write the applicaiton server name" />
+                                        <input type="text" name="appserver" id="appserver" style="display:none;" />
+                                        <input type="text" name="appserverid" id="appserverid" style="display:none;" />
+                                        <input type="text" name="appserverlist" id="appserverlist"
+                                            style="display:none;" />
+                                        <input type="text" name="appserverlistnames" id="appserverlistnames"
+                                            style="display:none;" />
+                                        <div id="appsrvlistnames"></div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-light btn-sm" onclick="mkAppSrvlist()"><i
+                                                class="mdi mdi-plus mdi-24px"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Server</label>
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control autocomplsrv"
-                                        placeholder="write the server name" />
-                                    <input type="text" name="server" id="server" style="display:none;" />
-                                    <input type="text" name="serverid" id="serverid" style="display:none;" />
-                                    <input type="text" name="serverip" id="serverip" style="display:none;" />
-                                    <input type="text" name="serverlist" id="serverlist" style="display:none;" />
-                                    <input type="text" name="serverlistnames" id="serverlistnames"
-                                        style="display:none;" />
-                                    <div id="srvlistnames"></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-light btn-sm" onclick="mkSrvlist()"><i
-                                            class="mdi mdi-plus mdi-24px"></i></button>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Application Server</label>
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control autocomplappsrv"
-                                        placeholder="write the applicaiton server name" />
-                                    <input type="text" name="appserver" id="appserver" style="display:none;" />
-                                    <input type="text" name="appserverid" id="appserverid" style="display:none;" />
-                                    <input type="text" name="appserverlist" id="appserverlist" style="display:none;" />
-                                    <input type="text" name="appserverlistnames" id="appserverlistnames"
-                                        style="display:none;" />
-                                    <div id="appsrvlistnames"></div>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-light btn-sm" onclick="mkAppSrvlist()"><i
-                                            class="mdi mdi-plus mdi-24px"></i></button>
-                                </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-light btn-sm" type="button"
+                                    onclick="updtag('<?php echo $_SESSION["user"];?>');" name="addfiletag"><i
+                                        class="mdi mdi-content-save"></i>&nbsp;Save</button>&nbsp;
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i
+                                        class="mdi mdi-close"></i>&nbsp;Close</button>
                             </div>
                         </div>
-                                       
-                    <div class="modal-footer">
-                    <button class="btn btn-light btn-sm" type="button" onclick="updtag('<?php echo $_SESSION["user"];?>');" name="addfiletag"><i
-                                    class="mdi mdi-content-save"></i>&nbsp;Save</button>&nbsp;
-                            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i
-                                    class="mdi mdi-close"></i>&nbsp;Close</button>
-            </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
             </div><br>
-            
-           <!-- <div id="od-json"></div>-->
+
+            <!-- <div id="od-json"></div>-->
+
         </div>
     </div>
-</div>
-</div>
-<?php echo '</div></div>';
+    <div class="col-lg-2">
+    <?php include "public/modules/breadcrumbin.php";?>
+                </div>
+                </div>
+
+
+    <?php echo '</div></div>';
  include "public/modules/footer.php";
  echo '</div></div>';
  }
  include "public/modules/js.php"; ?>
-<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>
-<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-<script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
-<script>$('#data-table-doc').DataTable({ 
-    "oLanguage": {
-             "sSearch": ""
-            },
-    dom: 'Bfrtip' });</script>
-<script>
-var baseUrl = getQueryVariable("baseUrl")
-msGraphApiRoot = (baseUrl) ? baseUrl : "https://graph.microsoft.com/v1.0/me";
-var data = loadFromCookie();
-if (data) {
-    if (!baseUrl)
-        msGraphApiRoot = data.apiRoot;
-    showCustomLoginButton(!data.signedin)
-}
-var loadedForHash = "";
-$(window).bind('hashchange', function() {
-    if (window.location.hash != loadedForHash) {
-        loadedForHash = window.location.hash;
-        odauth();
+    <script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>
+    <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+    <script>
+    $('#data-table-doc').DataTable({
+        "oLanguage": {
+            "sSearch": ""
+        },
+        dom: 'Bfrtip'
+    });
+    </script>
+    <script>
+    var baseUrl = getQueryVariable("baseUrl")
+    msGraphApiRoot = (baseUrl) ? baseUrl : "https://graph.microsoft.com/v1.0/me";
+    var data = loadFromCookie();
+    if (data) {
+        if (!baseUrl)
+            msGraphApiRoot = data.apiRoot;
+        showCustomLoginButton(!data.signedin)
     }
-    return false;
-});
-/*
-$(document).on({
-    ajaxStart: function() {
-        $('body').addClass('loading');
-    },
-    ajaxStop: function() {
-        $('body').removeClass('loading');
-    }
-});
-*/
-function onAuthenticated(token, authWindow) {
-    if (token) {
-        if (authWindow) {
-            removeLoginButton();
-            authWindow.close();
+    var loadedForHash = "";
+    $(window).bind('hashchange', function() {
+        if (window.location.hash != loadedForHash) {
+            loadedForHash = window.location.hash;
+            odauth();
         }
-        (function($) {
-            var path = "";
-            var beforePath = "";
-            var afterPath = "";
-            if (window.location.hash.length > 1) {
-                path = window.location.hash.substr(1);
-                beforePath = ":";
-                afterPath = ":";
+        return false;
+    });
+    /*
+    $(document).on({
+        ajaxStart: function() {
+            $('body').addClass('loading');
+        },
+        ajaxStop: function() {
+            $('body').removeClass('loading');
+        }
+    });
+    */
+    function onAuthenticated(token, authWindow) {
+        if (token) {
+            if (authWindow) {
+                removeLoginButton();
+                authWindow.close();
             }
-            var odurl = msGraphApiRoot + "/drive/root" + beforePath + path + afterPath;
-            var thumbnailSize = "large"
-            var odquery = "?expand=thumbnails,children(expand=thumbnails(select=" + thumbnailSize + "))";
-            $.ajax({
-                url: odurl + odquery,
-                dataType: 'json',
-                headers: {
-                    "Authorization": "Bearer " + token
-                },
-                accept: "application/json;odata.metadata=none",
-                success: function(data) {
-                    if (data) {
-                        $('#od-items').empty();
-                     //   $('#od-json').empty();
-                        $('#data-table-doc').DataTable().clear().draw();
-                        //  $("<code>").html(JSON.stringify(data)).appendTo("#od-json");
-                        var decodedPath = decodeURIComponent(path);
-                        updateBreadcrumb(decodedPath);
-                        var children = data.children || data.value;
-                        if (children && children.length > 0) {
-                            $.each(children, function(i, item) {
-                                var tagSet = new Set();
-                                var tagsout = "";
-                                if (item.folder) {
+            (function($) {
+                var path = "";
+                var beforePath = "";
+                var afterPath = "";
+                if (window.location.hash.length > 1) {
+                    path = window.location.hash.substr(1);
+                    beforePath = ":";
+                    afterPath = ":";
+                }
+                var odurl = msGraphApiRoot + "/drive/root" + beforePath + path + afterPath;
+                var thumbnailSize = "large"
+                var odquery = "?expand=thumbnails,children(expand=thumbnails(select=" + thumbnailSize + "))";
+                $.ajax({
+                    url: odurl + odquery,
+                    dataType: 'json',
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    },
+                    accept: "application/json;odata.metadata=none",
+                    success: function(data) {
+                        if (data) {
+                            $('#od-items').empty();
+                            //   $('#od-json').empty();
+                            $('#data-table-doc').DataTable().clear().draw();
+                            //  $("<code>").html(JSON.stringify(data)).appendTo("#od-json");
+                            var decodedPath = decodeURIComponent(path);
+                            updateBreadcrumb(decodedPath);
+                            var children = data.children || data.value;
+                            if (children && children.length > 0) {
+                                $.each(children, function(i, item) {
+                                    var tagSet = new Set();
+                                    var tagsout = "";
+                                    if (item.folder) {
+                                        tagSet.add("folder");
+                                    }
+                                    if (item.file) {
+                                        tagSet.add("file");
+                                    }
+                                    tagSet.forEach(function(item) {
+                                        tagsout +=
+                                            "<span class='badge badge-info m-1'>" +
+                                            item + "</span>";
+                                    });
+                                    var itemdata = "<tr><td>" + item.id +
+                                        "</td><td><a href='#" +
+                                        path + "/" + encodeURIComponent(item.name) + "'>" + item
+                                        .name + "</a></td><td>" + moment(item.createdDateTime)
+                                        .format("YYYY-MM-DD H:mm") + "</td><td>" + moment(item
+                                            .lastModifiedDateTime).format("YYYY-MM-DD H:mm") +
+                                        "</td><td>" + formatBytes(item.size) + "</td><td>" + (
+                                            tagsout ? tagsout : "") + "</td><td></td></tr>"
+
+                                    /*
+                                        if (item.thumbnails && item.thumbnails.length > 0) {
+                                          var container = $("<div>").attr("class", "img-container").appendTo(tile)
+                                          $("<img>").
+                                            attr("src", item.thumbnails[0][thumbnailSize].url).
+                                            appendTo(container);
+                                        }
+                                          */
+                                    // $(itemdata).appendTo("#od-items");
+                                    $('#data-table-doc').DataTable().row.add($(itemdata)[0])
+                                        .draw(
+                                            false);
+                                });
+                            } else if (data.file) {
+                                let downloadUrl = data['@microsoft.graph.downloadUrl'];
+                                let tagSet = new Set();
+                                let mapbtn = false;
+                                let tagsout = "";
+                                if (data.folder) {
                                     tagSet.add("folder");
-                                }
-                                if (item.file) {
+                                } else {
                                     tagSet.add("file");
                                 }
+                                if (typeof data.shared !== 'undefined' && Object.keys(data.shared)
+                                    .length >
+                                    0) {
+                                    tagSet.add("shared");
+                                    mapbtn = true;
+                                }
                                 tagSet.forEach(function(item) {
-                                    tagsout += "<span class='badge badge-info m-1'>" +
-                                        item + "</span>";
+                                    tagsout += "<span class='badge badge-info m-1'>" + item +
+                                        "</span>";
                                 });
-                                var itemdata = "<tr><td>" + item.id + "</td><td><a href='#" +
-                                    path + "/" + encodeURIComponent(item.name) + "'>" + item
-                                    .name + "</a></td><td>" + moment(item.createdDateTime)
-                                    .format("YYYY-MM-DD H:mm") + "</td><td>" + moment(item
-                                        .lastModifiedDateTime).format("YYYY-MM-DD H:mm") +
-                                    "</td><td>" + formatBytes(item.size) + "</td><td>" + (
-                                        tagsout ? tagsout : "") + "</td><td></td></tr>"
 
+                                var itemdata = "<tr><td>" + data.id + "</td><td>" + data.name +
+                                    "</td><td>" + moment(data.createdDateTime).format(
+                                        "YYYY-MM-DD H:mm") +
+                                    "</td><td>" + moment(data.lastModifiedDateTime).format(
+                                        "YYYY-MM-DD H:mm") + "</td><td>" + formatBytes(data.size) +
+                                    "</td><td>" + (tagsout ? tagsout : "") +
+                                    "</td><td><div class='btn-group'><a data-bs-toggle='tooltip' data-bs-placement='top' title='Download' class='btn btn-light' href='" +
+                                    downloadUrl +
+                                    "'><i class='mdi mdi-cloud-download'></i></a>" +
+                                    (mapbtn ?
+                                        "<a data-bs-toggle='modal' href='#addmap' onclick='$(\"#file_title\").val(\"" +
+                                        data.name + "\");$(\"#file_size\").val(\"" + data.size +
+                                        "\");$(\"#file_name\").val(\"" + data.name +
+                                        "\");$(\"#file_id\").val(\"" + data.id +
+                                        "\");$(\"#file_link\").val(\"" + downloadUrl +
+                                        "\");' class='waves-effect waves-light btn btn-light'><i data-bs-toggle='tooltip' data-bs-placement='top' title='add mapping' class='mdi mdi-server-plus'></i></a>" :
+                                        "") +
+                                    "</div></td></tr>"
+                                //  $(itemdata).appendTo("#od-items");
+                                $('#data-table-doc').DataTable().row.add($(itemdata)[0]).draw(false);
+                                $('[data-bs-toggle="tooltip"]').tooltip();
                                 /*
-                                    if (item.thumbnails && item.thumbnails.length > 0) {
-                                      var container = $("<div>").attr("class", "img-container").appendTo(tile)
-                                      $("<img>").
-                                        attr("src", item.thumbnails[0][thumbnailSize].url).
-                                        appendTo(container);
-                                    }
-                                      */
-                                // $(itemdata).appendTo("#od-items");
-                                $('#data-table-doc').DataTable().row.add($(itemdata)[0]).draw(
-                                    false);
-                            });
-                        } else if (data.file) {
-                            let downloadUrl = data['@microsoft.graph.downloadUrl'];
-                            let tagSet = new Set();
-                            let mapbtn = false;
-                            let tagsout = "";
-                            if (data.folder) {
-                                tagSet.add("folder");
+                                                  if (data.thumbnails && data.thumbnails.length > 0) {
+                                                    $("<img>").
+                                                      attr("src", data.thumbnails[0].large.url).
+                                                      appendTo(tile);
+                                                  }
+                                */
                             } else {
-                                tagSet.add("file");
+                                $('<p>No items in this folder.</p>').appendTo('#od-items');
                             }
-                            if (typeof data.shared !== 'undefined' && Object.keys(data.shared).length >
-                                0) {
-                                tagSet.add("shared");
-                                mapbtn=true;
-                            }
-                            tagSet.forEach(function(item) {
-                                tagsout += "<span class='badge badge-info m-1'>" + item +
-                                    "</span>";
-                            });
-
-                            var itemdata = "<tr><td>" + data.id + "</td><td>" + data.name +
-                                "</td><td>" + moment(data.createdDateTime).format("YYYY-MM-DD H:mm") +
-                                "</td><td>" + moment(data.lastModifiedDateTime).format(
-                                    "YYYY-MM-DD H:mm") + "</td><td>" + formatBytes(data.size) +
-                                "</td><td>" + (tagsout ? tagsout : "") +
-                                "</td><td><div class='btn-group'><a data-bs-toggle='tooltip' data-bs-placement='top' title='Download' class='btn btn-light' href='" +
-                                downloadUrl +
-                                "'><i class='mdi mdi-cloud-download'></i></a>"+
-                                (mapbtn?"<a data-bs-toggle='modal' href='#addmap' onclick='$(\"#file_title\").val(\""+data.name+"\");$(\"#file_size\").val(\""+data.size+"\");$(\"#file_name\").val(\""+data.name+"\");$(\"#file_id\").val(\""+data.id+"\");$(\"#file_link\").val(\""+downloadUrl+"\");' class='waves-effect waves-light btn btn-light'><i data-bs-toggle='tooltip' data-bs-placement='top' title='add mapping' class='mdi mdi-server-plus'></i></a>":"")+
-                                "</div></td></tr>"
-                            //  $(itemdata).appendTo("#od-items");
-                            $('#data-table-doc').DataTable().row.add($(itemdata)[0]).draw(false);
-                            $('[data-bs-toggle="tooltip"]').tooltip();
-                            /*
-                                              if (data.thumbnails && data.thumbnails.length > 0) {
-                                                $("<img>").
-                                                  attr("src", data.thumbnails[0].large.url).
-                                                  appendTo(tile);
-                                              }
-                            */
                         } else {
-                            $('<p>No items in this folder.</p>').appendTo('#od-items');
+                            $('#od-items').empty();
+                            $('<p>error.</p>').appendTo('#od-items');
+                            //   $('#od-json').empty();
                         }
-                    } else {
-                        $('#od-items').empty();
-                        $('<p>error.</p>').appendTo('#od-items');
-                     //   $('#od-json').empty();
                     }
-                }
-            });
-        })(jQuery);
-    } else {
-        notify("Error signing in", "danger");
+                });
+            })(jQuery);
+        } else {
+            notify("Error signing in", "danger");
+        }
     }
-}
-odauth();
-</script>
-<?php echo '</body></html>';
+    odauth();
+    </script>
+    <?php echo '</body></html>';
         include "public/modules/template_end.php";
     }
 }

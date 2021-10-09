@@ -1,9 +1,5 @@
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
   <div class="row">
-  <div class="col-md-3 position-relative">
-      <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a firewall rule">
-      <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-  </div>
   <div class="col-md-9 text-end">
 <?php if ($_SESSION['user_level'] >= 3){?><span><button data-bs-toggle="tooltip" data-bs-placement="top" title="Export the objects in excel" type="button" class="waves-effect waves-light btn btn-light" ng-click="exportData('<?php echo $thisarray['p1']; ?>')">Export&nbsp;<svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-up" xlink:href="/assets/images/icon/midleoicons.svg#i-up"/></svg></button> </span><?php }?>
 <?php if (sessionClass::checkAcc($acclist, "unixadm")) { ?>

@@ -1,9 +1,5 @@
 <?php if (method_exists("Excel", "import") && is_callable(array("Excel", "import"))) {  ?>
   <div class="row">
-  <div class="col-md-3 position-relative">
-      <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find imported definitions">
-      <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-  </div>
   <div class="col-md-9 text-end">
  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Import MQ objects from Excel file"><button type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal" href="#modal-imp-form"><i class="mdi mdi-database-import"></i>&nbsp;Import</button></span>
   </div>

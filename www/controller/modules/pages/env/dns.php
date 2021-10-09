@@ -1,10 +1,5 @@
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
     <div class="row p-2">
-            <div class="col-md-3 position-relative">
-                <input type="text" ng-model="search" class="form-control topsearch"
-                    placeholder="Find a dns entry">
-                    <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-            </div>
             <div class="col-md-9 text-end">
                     <?php if ($_SESSION['user_level'] >= 3 && !in_array($thisarray['p1'], array("packages", "appservers", "servers", "import", "deploy", "flows", "fte"))) {?><span><button
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Export the objects in excel" type="button"

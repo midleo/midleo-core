@@ -98,8 +98,8 @@ class Class_projects
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Projects";
         $breadcrumb["midicon"] = "kanban";
-        include "public/modules/headcontent.php";
-        echo '<div class="page-wrapper"><div class="container-fluid">';
+include "public/modules/headcontent.php";
+echo '<div class="page-wrapper"><div class="container-fluid">';
         if (sessionClass::checkAcc($acclist, "smanagementadm")) { 
             $brarr=array(
               array(
@@ -151,8 +151,7 @@ class Class_projects
             ));
           }
         
-        include "public/modules/breadcrumb.php";
-        include "public/modules/license.php";
+    
            
             ?>
 

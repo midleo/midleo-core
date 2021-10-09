@@ -278,19 +278,22 @@ data-bs-placement="top" title="<?php echo $val["uname"];?>" class="rounded-circl
 </div>
 
 </div> 
-<?php } else { echo "<div class='alert alert-light'>Wrong ID</div>"; }} else { ?>
-<div class="row p-0">
-  <div class="col-md-4 position-relative">
-      <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find an application">
-      <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg> 
-</span>
-  </div>
-  <div class="col-md-8 text-end">
-<?php if ($_SESSION['user_level'] >= 3 && !in_array($thisarray['p1'], array("packages", "appservers", "servers", "import", "deploy", "flows", "fte"))) {?><button data-bs-toggle="tooltip" data-bs-placement="top" title="Export the objects in excel" type="button" class="waves-effect waves-light btn btn-light" ng-click="exportData('<?php echo $thisarray['p1']; ?>')">Export&nbsp;<svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-up" xlink:href="/assets/images/icon/midleoicons.svg#i-up"/></svg></button><?php }?>
- <span data-bs-toggle="tooltip" data-bs-placement="top" title="Create new application"><a href="/env/apps/?type=new" class="waves-effect waves-light btn btn-info" ><svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;Create
-</a></span>
-  </div>
-</div><br>
+<?php } else { echo "<div class='alert alert-light'>Wrong ID</div>"; }} else { 
+     array_push($brarr,array(
+        "title"=>"Export in excel",
+        "link"=>"#",
+        "nglink"=>"exportData('".$thisarray['p1']."')",
+        "midicon"=>"up",
+        "active"=>false,
+      ));
+      array_push($brarr,array(
+        "title"=>"Create new application",
+        "link"=>"/env/apps/?type=new",
+        "midicon"=>"add",
+        "active"=>false,
+      ));
+    
+    ?>
 
 <div class="card ">
 <div class="card-body p-0">

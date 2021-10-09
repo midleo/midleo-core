@@ -142,20 +142,23 @@ if (sessionClass::checkAcc($acclist, "pjm,pja,pjv")) {
       );
       
 }
-
-include "public/modules/breadcrumb.php";
-include "public/modules/license.php";?>
-
-
-
+?>
 <?php 
 
 if (sessionClass::checkAcc($acclist, "pjm,pja,pjv")) {
 if($thisarray["p2"]=="types"){ 
- 
+    array_push($brarr,array(
+        "title"=>"Define new type",
+        "link"=>"#",
+        "id"=>"add-nmitemicon",
+        "midicon"=>"add",
+        "active"=>true,
+      ));
+
   ?>
-<div class="row">
-    <div class="col-md-6">
+<div class="row pt-3"><div class="col-lg-2">
+<?php include "public/modules/sidebar.php"; ?>
+</div><div class="col-lg-8">
         <div class="card">
             <div class="card-header">
                 <h4>Define service types</h4>
@@ -169,7 +172,11 @@ if($thisarray["p2"]=="types"){
                 </form>
             </div>
         </div>
-    </div>
+        </div>
+        </div>
+    <div class="col-md-2">
+     <?php include "public/modules/breadcrumbin.php"; ?>
+                    </div>   
 </div>
 <?php } else {
   
@@ -180,6 +187,9 @@ if(!empty($thisarray["p1"])){
   if($zobj = $q->fetch(PDO::FETCH_ASSOC)){
    $menudata=!empty($zobj["wdata"])?json_decode($zobj["wdata"],true):json_decode("[{}]",true);   
   ?>
+  <div class="row pt-3"><div class="col-lg-2">
+<?php include "public/modules/sidebar.php"; ?>
+</div><div class="col-lg-8">
 <div class="card" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
     <div class="card-header border-bottom">
         <div class="row">
@@ -486,33 +496,43 @@ if(!empty($thisarray["p1"])){
 
         </div>
     </div>
+    </div>
+    </div>
+<div class="col-md-2">
+     <?php include "public/modules/breadcrumbin.php"; ?>
+</div>  
 </div>
-<?php } else { textClass::PageNotFound();  } } else { ?>
-<div id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-    <div class="row" style="padding:0 15px;">
-        <div class="col-md-4 position-relative">
-            <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a service">
-            <span class="searchicon"><svg class="midico midico-outline">
-                    <use href="/assets/images/icon/midleoicons.svg#i-search"
-                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                </svg></span>
-        </div>
-        <div class="col-md-8 text-end">
-            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Add new service">
-                <a data-bs-toggle="modal" class="waves-effect waves-light btn btn-info" href="#modalwf"><svg
-                        class="midico midico-outline">
-                        <use href="/assets/images/icon/midleoicons.svg#i-add"
-                            xlink:href="/assets/images/icon/midleoicons.svg#i-add" />
-                    </svg>&nbsp;Create</a>
-            </span>
-        </div>
-    </div><br>
+<?php } else { textClass::PageNotFound();  } } else { 
+     array_push($brarr,array(
+        "title"=>"Add new service",
+        "link"=>"#modalwf",
+        "midicon"=>"add",
+        "modal"=>true,
+      ));
+      
+      ?>
+    <div class="row pt-3"><div class="col-lg-2">
+<?php include "public/modules/sidebar.php"; ?>
+</div><div class="col-lg-10" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+<div class="row">
+    <div class="col-lg-9">
     <ul class="row" ng-init="getAllservice('<?php echo $wid;?>')" style="padding:0 15px;">
 
         <li class="col-md-4" style="text-align:center;font-size:1.1em;display:flex;" ng-hide="contentLoaded">
-            <div class="card waves-effect waves-dark" style="width:100%;">
-                <div class="card-body"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</div>
-            </div>
+        <div class="card" aria-hidden="true" style="width:100%;">
+                            <div class="card-body">
+                                <h5 class="card-title placeholder-glow">
+                                    <span class="placeholder col-6"></span>
+                                </h5>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-8"></span>
+                                </p>
+                            </div>
+                        </div>
         </li>
 
         <li class="col-md-4" id="contloaded" dir-paginate="d in names | filter:search | itemsPerPage:12" ng-class="hide"
@@ -548,9 +568,23 @@ if(!empty($thisarray["p1"])){
     </dir-pagination-controls>
 
 
+    </div>
+    
+
+<div class="col-md-3">
+    <div>
+    <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a service">
+            <span class="searchicon"><svg class="midico midico-outline">
+                    <use href="/assets/images/icon/midleoicons.svg#i-search"
+                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                </svg></span>
+    </div>
+     <?php include "public/modules/breadcrumbin.php"; ?>
+</div>  
 </div>
-
-
+</div>
+</div>
+</div>
 
 
 <div class="modal" id="modalwf" tabindex="-1" role="dialog" aria-hidden="true">

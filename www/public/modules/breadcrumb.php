@@ -1,12 +1,9 @@
-<br>
-<h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
-<br>
 <?php if($breadcrumb){ ?>
 <div class="row">
   <div class="col-md-10 align-self-center" style="min-height:50px;">
-  <?php if($brarr){?>
+  <?php if($brenvarr){?>
     <ul class="nav nav-tabs customtab">
-   <?php foreach($brarr as $key=>$val){ ?>
+   <?php foreach($brenvarr as $key=>$val){ ?>
    <li class="nav-item <?php echo $val["main"]?"border-arrow":"";?>" data-bs-toggle="tooltip" title="<?php echo $val["title"];?>"><a <?php if($val["tab"]){?>data-bs-toggle="tab" role="tab"<?php } ?> class="nav-link waves-effect <?php echo $val["disabled"];?> <?php echo $val["active"];?>" href="<?php echo $val["link"];?>"><?php if($val["midicon"]){?><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-<?php echo $val["midicon"];?>" xlink:href="/assets/images/icon/midleoicons.svg#i-<?php echo $val["midicon"];?>"/></svg> 
 <?php } ?><?php if($val["icon"]){?><i class="mdi <?php echo $val["icon"];?>"></i><?php } ?><?php if($val["img"]){ ?><img src="<?php echo $val["img"];?>" width="22px"></a><?php } ?><?php echo isset($val["text"])?"&nbsp;".$val["text"]:"";?>
 <?php if($val["main"]){ if(!empty($thisarray['p2'])){ echo "&nbsp;".$thisarray['p2']; } }?>

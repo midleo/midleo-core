@@ -67,30 +67,22 @@ class Class_dropbox
                     "active" => ($page == "onedrive") ? "active" : "",
                 ));
             }
-            if (sessionClass::checkAcc($acclist, "dbfiles")) {
-                array_push($brarr, array(
-                    "title" => "View/Map Dropbox files",
-                    "link" => "/dropbox",
-                    "midicon" => "dropbox",
-                    "active" => ($page == "dropbox") ? "active" : "",
-                ));
-            }
-            include "public/modules/breadcrumb.php";?>
-
-        <?php echo '<div class="card"><div class="card-header"><h4>DropBox files</h4></div><div class="card-body">  '; ?>
-<div class="row ">
-    <div class="col-md-12">
-    <nav class="breadcrumb authed-section" style="display:none;" id="od-breadcrumb"></nav><br>
+?><div class="row pt-3">
+    <div class="col-lg-2">
+        <?php  include "public/modules/sidebar.php";?></div>
+    <div class="col-lg-8">
+        <nav class="breadcrumb authed-section" style="display:none;" id="od-breadcrumb"></nav><br>
         <div id="db-content ">
-            <div class="col-lg-6 pre-auth-section" style="display:none;">
-                    <div class="container">
-                        <h3 class="display-4">Not yet authorized </h3>
-                        <p class="lead">Please use the sign in button in the right top to login to DropBox
-                        </p>
-                    </div>
+            <div class="col-lg-8 pre-auth-section" style="display:none;">
+                <div class="container">
+                    <h3 class="display-4">Not yet authorized </h3>
+                    <p class="lead">Please use the sign in button in the right top to login to DropBox
+                    </p>
+                </div>
             </div>
-            <div class="authed-section" style="display:none;">
-                <table id="data-table" class="table table-vmiddle table-hover stylish-table mb-0 " style="width:100%!important;">
+            <div class="authed-section card p-0" style="display:none;">
+                <table id="data-table" class="table table-vmiddle table-hover stylish-table mb-0 "
+                    style="width:100%!important;">
                     <thead>
                         <tr>
                             <th data-column-id="id" data-identifier="true" data-visible="false" class="text-center">ID
@@ -105,7 +97,6 @@ class Class_dropbox
                     </thead>
                     <tbody id="db-items"></tbody>
                 </table>
-
                 <div class="modal" id="addmap" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog">
 
@@ -198,7 +189,9 @@ class Class_dropbox
 
         </div>
     </div>
-</div>
+    <div class="col-lg-2">
+        <?php include "public/modules/breadcrumbin.php";?>
+    </div>
 </div>
 <?php echo '</div></div>';
             include "public/modules/footer.php";
@@ -208,11 +201,14 @@ class Class_dropbox
 <script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>
 <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
 <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
-<script>$('#data-table').DataTable({
-            "oLanguage": {
-             "sSearch": ""
-            },
-            dom: 'Bfrtip' });</script>
+<script>
+$('#data-table').DataTable({
+    "oLanguage": {
+        "sSearch": ""
+    },
+    dom: 'Bfrtip'
+});
+</script>
 <script>
 var CLIENT_ID = '<?php echo $website["dbclid"]; ?>';
 var data = loadFromCookie();
@@ -251,20 +247,26 @@ function renderItems(items) {
             tagsout += "<span class='badge badge-info m-1'>" +
                 item + "</span>";
         });
-        if (item['.tag'] == "file" && typeof item.sharing_info !== 'undefined' && Object.keys(item.sharing_info).length >
+        if (item['.tag'] == "file" && typeof item.sharing_info !== 'undefined' && Object.keys(item.sharing_info)
+            .length >
             0) {
             tagSet.add("shared");
             mapbtn = true;
         }
         var itemdata = "<tr><td>" + item.id + "</td><td><a href='#' " + (item['.tag'] == "folder" ?
                 'onclick="showItems(\'' + item.path_lower + '\')"' : 'onclick="getItems(\'' + item.path_lower +
-                '\', \''+item.id.replace("id:", "")+'\')"') + ">" + item.name + "</a></td><td>" + (item.client_modified ? moment(item.client_modified)
-                .format("YYYY-MM-DD H:mm") : "") + "</td><td>" + (item.server_modified ? moment(item.server_modified).format("YYYY-MM-DD H:mm") : "") +
+                '\', \'' + item.id.replace("id:", "") + '\')"') + ">" + item.name + "</a></td><td>" + (item
+                .client_modified ? moment(item.client_modified)
+                .format("YYYY-MM-DD H:mm") : "") + "</td><td>" + (item.server_modified ? moment(item
+                .server_modified).format("YYYY-MM-DD H:mm") : "") +
             "</td><td>" + (item.size ? formatBytes(item.size) : "") + "</td><td>" + (tagsout ? tagsout : "") +
-            "</td><td><div class='btn-group'><a data-bs-toggle='tooltip' data-bs-placement='top' title='Download' class='btn btn-light' id='downloaddb"+item.id.replace("id:", "")+"' style='display:none;'><i class='mdi mdi-cloud-download'></i></a>" +
-            (mapbtn ? "<a data-bs-toggle='modal' id='addtagdb"+item.id.replace("id:", "")+"' style='display:none;' href='#addmap' onclick='$(\"#file_title\").val(\"" + item.name +
+            "</td><td><div class='btn-group'><a data-bs-toggle='tooltip' data-bs-placement='top' title='Download' class='btn btn-light' id='downloaddb" +
+            item.id.replace("id:", "") + "' style='display:none;'><i class='mdi mdi-cloud-download'></i></a>" +
+            (mapbtn ? "<a data-bs-toggle='modal' id='addtagdb" + item.id.replace("id:", "") +
+                "' style='display:none;' href='#addmap' onclick='$(\"#file_title\").val(\"" + item.name +
                 "\");$(\"#file_size\").val(\"" + item.size + "\");$(\"#file_name\").val(\"" + item.name +
-                "\");$(\"#file_id\").val(\"" + item.id.replace("id:", "") + "\");' class='waves-effect waves-light btn btn-light'><i data-bs-toggle='tooltip' data-bs-placement='top' title='add mapping' class='mdi mdi-server-plus'></i></a>" :
+                "\");$(\"#file_id\").val(\"" + item.id.replace("id:", "") +
+                "\");' class='waves-effect waves-light btn btn-light'><i data-bs-toggle='tooltip' data-bs-placement='top' title='add mapping' class='mdi mdi-server-plus'></i></a>" :
                 "") +
             "</div></td></tr>"
         $('#data-table').DataTable().row.add($(itemdata)[0]).draw(

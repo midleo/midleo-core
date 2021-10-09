@@ -169,10 +169,6 @@ if($zobj = $q->fetchAll()){ ?>
 <?php } else { echo "Wrong ID";}} else { ?>
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
     <div class="row">
-    <div class="col-md-3 position-relative">
-        <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a place">
-        <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-    </div>
     <div class="col-md-9 text-end">
        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Define a new place"><a
                     class="waves-effect waves-light btn btn-info" href="/env/places/<?php echo $thisarray['p2'];?>/?type=new"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;New</a></span>

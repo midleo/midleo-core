@@ -1,9 +1,3 @@
-<div class="row p-0">
-  <div class="col-md-3 position-relative">
-      <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find an application">
-      <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-  </div>
-</div><br>
 <div class="card ">
 <div class="card-body p-0">
 <div class="row"><div class="col-md-12">

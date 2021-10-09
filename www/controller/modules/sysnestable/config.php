@@ -55,8 +55,6 @@ public static function createMenu($data,$reqrows=1){
   }
   public static function createMenuIcon($data,$reqrows=1){ 
     $return='';
-    if($reqrows==1){ $return.='<div style="z-index:9999;position:fixed;bottom:60px; right:87px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Add new step"><button id="add-nmitemicon" class="waves-effect waves-light btn btn-primary btn-circle btnnm" type="button"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add" /></svg></button>
-</div>'; }
     $return.='<ul id="listserial" class="list-group list-group-flush">';
     $return.=SysNestable::parseMenuIcon($data,"",$reqrows);
     $return.='</ul></div>';
