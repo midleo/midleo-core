@@ -1,7 +1,15 @@
-<?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
+<?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { 
+      array_push($brarr,array(
+        "title"=>"Create new place",
+        "link"=>"/env/places/".$thisarray['p2']."/?type=new",
+        "midicon"=>"add",
+        "active"=>false,
+      ));
+    
+    ?>
 <?php  if($_GET["type"]=="new"){ ?>
     <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
     <div class="card ">
     <div class="card-header"><h4>Region definition</h4></div>
 <div class="card-body form-material">
@@ -168,13 +176,6 @@ if($zobj = $q->fetchAll()){ ?>
     
 <?php } else { echo "Wrong ID";}} else { ?>
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-    <div class="row">
-    <div class="col-md-9 text-end">
-       <span data-bs-toggle="tooltip" data-bs-placement="top" title="Define a new place"><a
-                    class="waves-effect waves-light btn btn-info" href="/env/places/<?php echo $thisarray['p2'];?>/?type=new"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;New</a></span>
-      
-    </div>
-</div><br>
     <div class="card ">
 <div class="card-body p-0">
 

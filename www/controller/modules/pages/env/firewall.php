@@ -1,13 +1,29 @@
-<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-  <div class="row">
-  <div class="col-md-9 text-end">
-<?php if ($_SESSION['user_level'] >= 3){?><span><button data-bs-toggle="tooltip" data-bs-placement="top" title="Export the objects in excel" type="button" class="waves-effect waves-light btn btn-light" ng-click="exportData('<?php echo $thisarray['p1']; ?>')">Export&nbsp;<svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-up" xlink:href="/assets/images/icon/midleoicons.svg#i-up"/></svg></button> </span><?php }?>
-<?php if (sessionClass::checkAcc($acclist, "unixadm")) { ?>
-  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Import firewall rules from Excel file"><button type="button" class="waves-effect waves-light btn btn-light" data-bs-toggle="modal" href="#modal-imp-form" ><i class="mdi mdi-database-import"></i>&nbsp;Import</button></span>
-<span data-bs-toggle="tooltip" data-bs-placement="top" title="Add new firewall rule"><button type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal" href="#modal-obj-form" ng-click="showCreateFormFw()"><svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;Create</button></span>
- <?php }?>
-  </div>
-</div><br>
+<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { 
+  if (sessionClass::checkAcc($acclist, "unixadm")) {
+    array_push($brarr,array(
+    "title"=>"Export in excel",
+    "link"=>"#",
+    "nglink"=>"exportData('".$thisarray['p1']."')",
+    "midicon"=>"up",
+    "active"=>false,
+  ));
+  array_push($brarr,array(
+    "title"=>"Import from file",
+    "link"=>"#modal-imp-form",
+    "modal"=>true,
+    "icon"=>"mdi-database-import",
+    "active"=>false,
+  ));
+  array_push($brarr,array(
+    "title"=>"Define new",
+    "link"=>"#modal-obj-form",
+    "nglink"=>"showCreateFormFw()",
+    "modal"=>true,
+    "midicon"=>"add",
+    "active"=>false,
+  ));
+  }
+  ?>
   <div class="card ">
 <div class="card-body p-0">
 
@@ -21,7 +37,7 @@
         <th class="text-center">Destination IP</th>
         <th class="text-center">Source DNS</th>
         <th class="text-center">Destination DNS</th>
-        <th class="text-center" style="width:120px;">Action</th>
+        <th class="text-center" style="width:130px;">Action</th>
       </tr>
     </thead>
     <tbody ng-init="getAllfw('<?php echo $thisarray['p2'];?>')">

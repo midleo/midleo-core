@@ -559,7 +559,7 @@ from{width:0}
 .sidebar-nav > ul{padding:0 0 60px}
 .sidebar-nav ul{margin:0}
 .sidebar-nav ul li{list-style:none;margin:0 auto;}
-.sidebar-nav ul li a.active{font-weight:500;color:#212529}
+.sidebar-nav ul li a.active{font-weight:500;}
 .sidebar-nav ul li a .badge{padding:3px 10px;line-height:13px}
 .sidebar-nav ul li a span{vertical-align: middle;}
 .sidebar-nav ul li ul{padding-left:5px;padding-top:10px}
@@ -1402,8 +1402,9 @@ body[data-color="light"] .sidebar-nav ul li.nav-small-cap{color:#636464}
 
 .sidebar-nav > ul > li:active{font-weight:400;background:#414651;color:#'.$thiscolor.'}
 body[data-color="light"] .sidebar-nav > ul > li.active > a:after,body[data-color="light"] .sidebar-nav > ul > li.active:hover > a:after{border-color:#000}
-.sidebar-nav ul li a{text-decoration:none;color:#636464;padding:10px 35px 10px 15px;display:block;/*font-size:15px;border-radius:3px;*/white-space:nowrap;border:1px solid transparent;border-right:2px solid transparent;}
-.sidebar-nav ul li a.active,.sidebar-nav ul li a:hover{color:#000;}
+.sidebar-nav ul li a{text-decoration:none;padding:10px 35px 10px 15px;display:block;white-space:nowrap;border:1px solid transparent;border-right:2px solid transparent;}
+body[data-color="light"] .sidebar-nav ul li a{color:#636464;}
+body[data-color="light"] .sidebar-nav ul li a.active,body[data-color="light"] .sidebar-nav ul li a:hover{color:#000;}
 body[data-color="light"] .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{background:transparent;border-color:transparent;}
 .search-box .app-search{background:#fff;}
 body[data-color="dark"] .dropdown-menu{background-color:#414651;color:#fff;}

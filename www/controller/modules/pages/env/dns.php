@@ -1,18 +1,20 @@
-<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-    <div class="row p-2">
-            <div class="col-md-9 text-end">
-                    <?php if ($_SESSION['user_level'] >= 3 && !in_array($thisarray['p1'], array("packages", "appservers", "servers", "import", "deploy", "flows", "fte"))) {?><span><button
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Export the objects in excel" type="button"
-                            class="waves-effect waves-light btn btn-light"
-                            ng-click="exportData('<?php echo $thisarray['p1']; ?>')"><i
-                                class="mdi mdi-file-excel-outline "></i>Export&nbsp;<svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-up" xlink:href="/assets/images/icon/midleoicons.svg#i-up"/></svg></button> </span><?php }?>
-                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Add new dns rule"><button
-                            type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal"
-                            href="#modal-obj-form"
-                            ng-click="showCreateFormDns()"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;Create</button></span>
-                    
-            </div>
-        </div><br>
+<?php if(empty($thisarray['p2'])){ include "applist.php"; } else {
+    array_push($brarr,array(
+        "title"=>"Export in excel",
+        "link"=>"#",
+        "nglink"=>"exportData('".$thisarray['p1']."')",
+        "midicon"=>"up",
+        "active"=>false,
+      ));
+      array_push($brarr,array(
+        "title"=>"Define new",
+        "link"=>"#modal-obj-form",
+        "nglink"=>"showCreateFormDns()",
+        "modal"=>true,
+        "midicon"=>"add",
+        "active"=>false,
+      ));
+    ?>
 <div class="card ">
     <div class="card-body p-0">
         
@@ -27,7 +29,7 @@
                             <th class="text-center">Class</th>
                             <th class="text-center">Type</th>
                             <th class="text-center">Record</th>
-                            <th class="text-center" style="width:120px;">Action</th>
+                            <th class="text-center" style="width:130px;">Action</th>
                         </tr>
                     </thead>
                     <tbody ng-init="getAlldns('<?php echo $thisarray['p2'];?>')">

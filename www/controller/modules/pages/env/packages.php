@@ -1,4 +1,11 @@
-<?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
+<?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { 
+    array_push($brarr,array(
+        "title"=>"Create new package",
+        "link"=>"/env/packages/".$thisarray['p2']."/?type=new",
+        "midicon"=>"add",
+        "active"=>false,
+      ));
+      ?>
 <?php  if($_GET["type"]=="new"){ ?>
 <div class="card ">
     <div class="card-body p-0">
@@ -119,18 +126,6 @@
 </div>
 <?php } else { ?>
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-<div class="row">
-    <div class="col-md-9 text-end">
-
-        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Create new package"><a
-                class="waves-effect waves-light btn btn-info"
-                href="/env/packages/<?php echo $thisarray['p2'];?>/?type=new"><svg class="midico midico-outline">
-                    <use href="/assets/images/icon/midleoicons.svg#i-add"
-                        xlink:href="/assets/images/icon/midleoicons.svg#i-add" />
-                </svg>&nbsp;Create</a></span>
-
-    </div>
-</div><br>
 <div class="card ">
     <div class="card-body p-0">
         <div class="row">

@@ -49,21 +49,32 @@ class calendarClass
 
         pdodb::disconnect();
     }
-    public static function showCal()
+    public static function showCal($thisarr,$breadcrumb)
     {
         $pdo = pdodb::connect();
         $hours = "";
+        $brarr=$thisarr;
+        array_push($brarr,array(
+            "title"=>"Add hours",
+            "link"=>"#modeff",
+            "modal"=>true,
+            "midicon"=>"add",
+            "active"=>false,
+          )); 
         for ($x = 1; $x <= 8; $x++) {$hours .= '<option value="' . $x . '">' . $x . ' Hours</option>';}
         ?>
-<div class="row">
-<div class="col-md-11">
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-8">
     <div id='calendar' class="card">
         <div class="text-info text-center calalert"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</div>
     </div>
     <input id="username" style="display:none" value="<?php echo $_SESSION["user"]; ?>">
 </div>
-<div class="col-md-1 text-end">
-<button class="waves-effect waves-light btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#modeff"><svg data-bs-toggle="tooltip" data-bs-placement="top" title="Add new efforts" class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-add' xlink:href='/assets/images/icon/midleoicons.svg#i-add' /></svg>&nbsp;Add</button>
+<div class="col-md-2">
+<?php include "public/modules/breadcrumbin.php"; ?>
 <!-- Modal -->
 <div class="modal" id="modeff" tabindex="-1" aria-labelledby="modefflbl" aria-hidden="true">
   <div class="modal-dialog">
@@ -161,12 +172,6 @@ class Class_calendar
         echo '<div class="page-wrapper"><div class="container-fluid">';
         $brarr = array(
             array(
-                "title" => "View/Edit calendar",
-                "link" => "/calendar",
-                "midicon" => "cal",
-                "active" => ($page == "calendar") ? "active" : "",
-            ),
-            array(
                 "title" => "View/Edit your tasks",
                 "link" => "/tasks",
                 "midicon" => "tasks",
@@ -178,9 +183,8 @@ class Class_calendar
                 "midicon" => "timesheets",
                 "active" => ($page == "timesheets") ? "active" : "",
             ),
-        );
-        include "public/modules/breadcrumb.php";?>
-<?php echo calendarClass::showCal();
+        ); 
+        calendarClass::showCal($brarr,$breadcrumb);
         echo "<input type='hidden' id='working_start' value='{$website['working_start']}'>";
         echo "<input type='hidden' id='working_end' value='{$website['working_end']}'>";
         echo '</div>';
@@ -234,15 +238,13 @@ class Class_timesheets
                 "midicon" => "tasks",
                 "active" => ($page == "tasks") ? "active" : "",
             ),
-            array(
-                "title" => "View your timesheets",
-                "link" => "/timesheets",
-                "midicon" => "timesheets",
-                "active" => ($page == "timesheets") ? "active" : "",
-            ),
         );
-        include "public/modules/breadcrumb.php";
-        echo '<div class="row"><div class="col-12">';?>
+        
+        echo '<div class="row pt-3"><div class="col-2">';?>
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-8">
+
     <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -332,7 +334,9 @@ echo '<div class="p-2"><br><div class="text-info">Summary for: <br><br>Year: <b>
         } else {
             echo '<div class="p-2"><br><div class="text">No info found for:<br><br>Year: <b>' . $year . '</b><br>Month: <b>' . date('F', strtotime('01.' . $month . '.' . $year)) . '</b></div>';
         }
-        echo '</div></div></div></div></div>';
+        echo '</div></div></div><div class="col-md-2">';
+        include "public/modules/breadcrumbin.php";
+        echo '</div></div></div></div>';
         include "public/modules/footer.php";
         echo '</div></div>';
         include "public/modules/js.php"; ?>
@@ -414,22 +418,26 @@ $brarr = array(
                 "active" => ($page == "calendar") ? "active" : "",
             ),
             array(
-                "title" => "View/Edit your tasks",
-                "link" => "/tasks",
-                "midicon" => "tasks",
-                "active" => ($page == "tasks") ? "active" : "",
-            ),
-            array(
                 "title" => "View your timesheets",
                 "link" => "/timesheets",
                 "midicon" => "timesheets",
                 "active" => ($page == "timesheets") ? "active" : "",
             ),
+            array(
+                "title" => "Open a new task",
+                "link" => "#modal-cal",
+                "modal"=>true,
+                "midicon" => "add",
+                "active" => true,
+            ),
         );
-        include "public/modules/breadcrumb.php";?>
+        ?>
 
-                        <div class="row">
-                            <div class="col-md-10">
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-8">
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title">Task list</h3>
@@ -478,20 +486,22 @@ foreach ($zobj as $val) {
                                         </div>
                                         <?php } else {?>
                                         <div class="row"><br>
-                                            <div class="col-md-12">
-                                                <div class="alert alert-info">You have no tasks assigned.</div>
+                                            <div class="col-md-6">
+                                                <div class="alert alert-light">You have no tasks assigned.</div>
                                             </div>
                                         </div>
                                         <?php }?>
                                     </div>
                                 </div>
                             </div>
+                            
+
+                               
+                            
+
                             <div class="col-md-2">
-
-                                <button data-bs-toggle="modal" class="waves-effect waves-light br-but btn-info btn btn-circle pull-right ml-2" type="button"
-                                    href="#modal-cal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add" /></svg></button>
-
-
+                            <?php include "public/modules/breadcrumbin.php"; ?>
+                          
                                 <div class="modal" id="modal-cal" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -516,7 +526,7 @@ foreach ($zobj as $val) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div></div>
                         </div>
                     </div>
                     <?php include "public/modules/footer.php";

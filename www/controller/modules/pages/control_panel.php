@@ -31,6 +31,39 @@ class Class_cp
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
         $breadcrumb["text"] = "Dashboard";
         $breadcrumb["midicon"] = "dashboard";
+        $brarr = array();
+        array_push($brarr, array(
+            "title" => "Import documents",
+            "link" => "#mnewimp",
+            "midicon" => "add",
+            "modal" => true, 
+            "active" => false,
+        ));
+        array_push($brarr, array(
+            "title" => "Create/edit articles",
+            "link" => "/cpinfo",
+            "midicon" => "kn-b",
+            "active" => ($page == "cpinfo") ? "active" : "",
+        ));
+        array_push($brarr,array(
+            "title"=>"LDAP configuration",
+            "link"=>"/".$page."/ldap",
+            "midicon"=>"ldap",
+            "active"=>($thisarray['p1'] == "ldap")?"active":"",
+        ),array(
+            "title"=>"External connections",
+            "link"=>"/".$page."/external",
+            "midicon"=>"ext-config",
+            "active"=>($thisarray['p1'] == "external")?"active":"",
+        ),array(
+            "title"=>"Core Configuration",
+            "link"=>"/".$page."/main",
+            "midicon"=>"core-config",
+            "active"=>($thisarray['p1'] == "main")?"active":"",
+          ));
+
+
+
         $page = "dashboard";
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         include "public/modules/headcontent.php";
@@ -202,7 +235,7 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
         </div>
     </div>
     <div class="col-lg-2">
-        <?php  include "public/modules/breadcrumb.php"; ?>
+        <?php  include "public/modules/breadcrumbin.php"; ?>
     </div>
 </div>
 <?php

@@ -1,10 +1,20 @@
-<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-  <div class="row">
- <div class="col-md-9 text-end">
-<?php if ($_SESSION['user_level'] >= 3 ) {?><span><button data-bs-toggle="tooltip" data-bs-placement="top" title="Export the objects in excel" type="button" class="waves-effect waves-light btn btn-light" ng-click="exportData('<?php echo $thisarray['p1']; ?>')">Export&nbsp;<svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-up" xlink:href="/assets/images/icon/midleoicons.svg#i-up"/></svg></button> </span><?php }?>
- <span data-bs-toggle="tooltip" data-bs-placement="top" title="Define new ACL configuration"><button type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal" href="#modal-tibacl-form" ng-click="showCreateFormtibacl()"><svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;Create</button></span>
-  </div>
-</div><br>
+<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { 
+      array_push($brarr,array(
+        "title"=>"Export in excel",
+        "link"=>"#",
+        "nglink"=>"exportData('".$thisarray['p1']."')",
+        "midicon"=>"up",
+        "active"=>false,
+      ));
+      array_push($brarr,array(
+        "title"=>"Define new",
+        "link"=>"#modal-tibacl-form",
+        "nglink"=>"showCreateFormtibacl()",
+        "modal"=>true,
+        "midicon"=>"add",
+        "active"=>false,
+      ));
+      ?>
  <div class="card ">
 <div class="card-body p-0">
 
@@ -17,7 +27,7 @@
  <th class="text-center">ACL type</th>
  <th class="text-center">ACL name</th>
  <th class="text-center">Permissions</th>
- <th class="text-center" style="width:120px;">Action</th>
+ <th class="text-center" style="width:130px;">Action</th>
  </tr>
  </thead>
  <tbody ng-init="getAllTibacl('<?php echo $thisarray['p2'];?>')">

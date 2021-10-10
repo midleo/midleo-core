@@ -1,9 +1,13 @@
-<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-  <div class="row">
-  <div class="col-md-9 text-end">
- <span data-bs-toggle="tooltip" data-bs-placement="top" title="Add configuration for a server"><button type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal" href="#modal-obj-form" ng-click="showCreateFormServ()"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;Create</button></span>
-  </div>
-</div><br>
+<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { 
+  array_push($brarr,array(
+    "title"=>"Define new server",
+    "link"=>"#modal-obj-form",
+    "nglink"=>"showCreateFormServ()",
+    "modal"=>true,
+    "midicon"=>"add",
+    "active"=>false,
+  ));
+  ?>
  <div class="card ">
 <div class="card-body p-0">
 
@@ -17,7 +21,7 @@
         <th class="text-center">Port</th>
         <th class="text-center">Type</th>
         <th class="text-center">QM</th>
-        <th class="text-center" style="width:120px;">Action</th>
+        <th class="text-center" style="width:130px;">Action</th>
       </tr>
     </thead>
     <tbody ng-init="getAllAppserv('<?php echo $thisarray['p2'];?>')">

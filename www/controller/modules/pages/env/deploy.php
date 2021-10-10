@@ -2,19 +2,24 @@
 if (method_exists("IBMMQ", "execJava") && is_callable(array("IBMMQ", "execJava"))){ 
 if (sessionClass::checkAcc($acclist, "appadm,appview")) {
  ?>
-<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-    <div class="row">
-    <div class="col-md-8 text-end">
-    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Important information for deployment process">
-    <button type="button" class="waves-effect waves-light btn btn-light" data-bs-toggle="modal"
-                    href="#impinfo"><i class="mdi mdi-alert-outline"></i>&nbsp;Info</button></span>
- 
-            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Deploy package on the server"><button
-                    type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal"
-                    href="#modal-depl-form"
-                    ng-click="resetDeplForm()"> <svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy"/></svg> &nbsp;Deploy</button></span>
-    </div>
-</div><br>
+<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { 
+    array_push($brarr,array(
+        "title"=>"Information",
+        "link"=>"#impinfo",
+        "modal"=>true,
+        "icon"=>"mdi-alert-outline",
+        "active"=>false,
+      ));
+      array_push($brarr,array(
+        "title"=>"Deploy package",
+        "link"=>"#modal-depl-form",
+        "nglink"=>"resetDeplForm()",
+        "modal"=>true,
+        "midicon"=>"deploy",
+        "active"=>false,
+      ));
+    
+    ?>
     <div class="card ">
 <div class="card-body p-0">
 

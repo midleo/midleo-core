@@ -16,7 +16,7 @@ if(!empty($ugroups)){
         <th class="text-center">Type</th>
         <th class="text-center">IP</th>
         <th class="text-center">Updated</th>
-        <th class="text-center" style="width:120px;">Action</th>
+        <th class="text-center" style="width:130px;">Action</th>
       </tr>
     </thead>
     <tbody ng-init="getAllsrv('<?php echo $ugr;?>')">

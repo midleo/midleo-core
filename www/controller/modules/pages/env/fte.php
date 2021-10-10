@@ -1,10 +1,22 @@
-<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-  <div class="row">
- <div class="col-md-9 text-end">
-<span data-bs-toggle="tooltip" data-bs-placement="top" title="Deploy package on server"><a ng-show="selectedid.length" data-bs-toggle="modal"  class="waves-effect waves-info btn btn-info" href="#modal-depl-form" ng-click="showDeployForm()"><svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy"/></svg>&nbsp;Deploy</a></span>
- <span data-bs-toggle="tooltip" data-bs-placement="top" title="Define new File transfer configuration"><button type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal" href="#modal-fte-form" ng-click="showCreateFormfte()"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;New</button></span>
-  </div>
-</div><br>
+<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { 
+    array_push($brarr,array(
+      "title"=>"Define new",
+      "link"=>"#modal-fte-form",
+      "nglink"=>"showCreateFormfte()",
+      "modal"=>true,
+      "midicon"=>"add",
+      "active"=>false,
+    ));
+    array_push($brarr,array(
+      "title"=>"Deploy package on server",
+      "link"=>"#modal-depl-form",
+      "nglink"=>"showDeployForm()",
+      "modal"=>true,
+      "midicon"=>"deploy",
+      "ngshow"=>"selectedid.length",
+      "active"=>false,
+    ));
+  ?>
   <div class="card ">
 <div class="card-body p-0">
 
@@ -19,7 +31,7 @@
  <th class="text-center">Source Folder</th>
  <th class="text-center">Dest Agt</th>
  <th class="text-center">Dest Folder</th>
- <th class="text-center" style="width:120px;">Action</th>
+ <th class="text-center" style="width:130px;">Action</th>
  </tr>
  </thead>
  <tbody ng-init="getAllfte('<?php echo $thisarray['p2'];?>','env')">

@@ -1,9 +1,12 @@
-<?php if (method_exists("Excel", "import") && is_callable(array("Excel", "import"))) {  ?>
-  <div class="row">
-  <div class="col-md-9 text-end">
- <span data-bs-toggle="tooltip" data-bs-placement="top" title="Import MQ objects from Excel file"><button type="button" class="waves-effect waves-light btn btn-info" data-bs-toggle="modal" href="#modal-imp-form"><i class="mdi mdi-database-import"></i>&nbsp;Import</button></span>
-  </div>
-</div><br>
+<?php if (method_exists("Excel", "import") && is_callable(array("Excel", "import"))) { 
+    array_push($brarr,array(
+      "title"=>"Import from file",
+      "link"=>"#modal-imp-form",
+      "modal"=>true,
+      "icon"=>"mdi-database-import",
+      "active"=>false,
+    ));
+     ?>
   <div class="card ">
 <div class="card-body p-0">
 <div class="row"><div class="col-md-12">

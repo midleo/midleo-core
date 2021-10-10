@@ -129,43 +129,43 @@ class Class_appconfig
                   ));
               }
               array_push($brarr,array(
-                "title"=>"View/Edit ldap entries",
+                "title"=>"LDAP entries",
                 "link"=>"/".$page."/ldap",
                 "midicon"=>"ldap",
                 "active"=>($thisarray['p1'] == "ldap")?"active":"",
               ),
               array(
-                "title"=>"View/Edit external connections",
+                "title"=>"External connections",
                 "link"=>"/".$page."/external",
                 "midicon"=>"ext-config",
                 "active"=>($thisarray['p1'] == "external")?"active":"",
               ),
               array(
-                "title"=>"View/Edit Mail Config",
+                "title"=>"MAIL Configuration",
                 "link"=>"/".$page."/mail",
                 "midicon"=>"email-config",
                 "active"=>($thisarray['p1'] == "mail")?"active":"",
               ),
               array(
-                "title"=>"View/Edit Midleo Config",
+                "title"=>"Core Configuration",
                 "link"=>"/".$page."/main",
                 "midicon"=>"core-config",
                 "active"=>($thisarray['p1'] == "main")?"active":"",
               ),
               array(
-                "title"=>"View/Install Midleo Modules",
+                "title"=>"Core Modules",
                 "link"=>"/".$page."/modules",
                 "midicon"=>"modules",
                 "active"=>($thisarray['p1'] == "modules")?"active":"",
               ),
               array(
-                "title"=>"View/Install Business logic",
+                "title"=>"Business logic",
                 "link"=>"/".$page."/business",
                 "midicon"=>"b-logic",
                 "active"=>($thisarray['p1'] == "business")?"active":"",
               ),
               array(
-                "title"=>"View/Install Environment configuration",
+                "title"=>"Environment configuration",
                 "link"=>"/".$page."/env",
                 "midicon"=>"enviro",
                 "active"=>($thisarray['p1'] == "env")?"active":"",
