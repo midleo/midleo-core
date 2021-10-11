@@ -79,7 +79,8 @@ class Class_smanagement
 <?php } } else {
 if (empty($thisarray["p1"])) {
     foreach ($modulelist["kanban"]["css"] as $csskey => $csslink) {
-        if (!empty($csslink)) {?><link rel="stylesheet" type="text/css" href="<?php echo $csslink; ?>"><?php }
+        if (!empty($csslink)) {?>
+<link rel="stylesheet" type="text/css" href="<?php echo $csslink; ?>"><?php }
      }
     }
 } ?>
@@ -156,9 +157,11 @@ if($thisarray["p2"]=="types"){
       ));
 
   ?>
-<div class="row pt-3"><div class="col-lg-2">
-<?php include "public/modules/sidebar.php"; ?>
-</div><div class="col-lg-8">
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
                 <h4>Define service types</h4>
@@ -172,335 +175,349 @@ if($thisarray["p2"]=="types"){
                 </form>
             </div>
         </div>
-        </div>
-        </div>
-    <div class="col-md-2">
-     <?php include "public/modules/breadcrumbin.php"; ?>
-                    </div>   
+    </div>
+</div>
+<div class="col-md-2">
+    <?php include "public/modules/breadcrumbin.php"; ?>
+</div>
 </div>
 <?php } else {
   
 if(!empty($thisarray["p1"])){ 
+    array_push($brarr,array(
+        "title"=>"Back",
+        "link"=>"/smanagement",
+        "icon"=>"mdi-arrow-left",
+        "active"=>true,
+      ));
+
+
   $sql="select ".(DBTYPE=='oracle'?"to_char(wdata) as wdata":"wdata").",formid,wname,winfo,wtype,wfcost,wfcurcost,wowner,haveconf,haveappr from config_workflows where wid=?";
   $q = $pdo->prepare($sql);
   $q->execute(array($thisarray["p1"]));
   if($zobj = $q->fetch(PDO::FETCH_ASSOC)){
    $menudata=!empty($zobj["wdata"])?json_decode($zobj["wdata"],true):json_decode("[{}]",true);   
+   if($zobj["wowner"]==$_SESSION["user"]){
+    array_push($brarr,array(
+        "title"=>"Save workflow",
+        "link"=>"javascript:void(0)",
+        "midicon"=>"save",
+        "onclick"=>"_saveFlowchart();",
+        "active"=>true,
+      ));
+      array_push($brarr,array(
+        "title"=>"Delete workflow",
+        "link"=>"javascript:void(0)",
+        "midicon"=>"x",
+        "onclick"=>"_delFlowchart();",
+        "active"=>true,
+      ));
+   }
   ?>
-  <div class="row pt-3"><div class="col-lg-2">
-<?php include "public/modules/sidebar.php"; ?>
-</div><div class="col-lg-8">
-<div class="card" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-    <div class="card-header border-bottom">
-        <div class="row">
-            <div class="col-md-6 text-start">
-                <h4 style="margin-bottom: 0px;line-height: 34px;">Request workflow</h4>
-            </div>
-            <div class="col-md-6" style="text-align:right;">
-                <input id="wid" name="wid" value="<?php echo $thisarray["p1"];?>" type="text" style="display:none;">
-                <?php if($zobj["wowner"]==$_SESSION["user"]){?>
-                <button type="button" onclick="_saveFlowchart();" class="btn btn-light"><svg
-                        class="midico midico-outline">
-                        <use href="/assets/images/icon/midleoicons.svg#i-save"
-                            xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                    </svg>&nbsp;Save</button>&nbsp;<?php } ?>
-                <a href="/smanagement" class="btn btn-light" target="_parent"><i
-                        class="mdi mdi-history"></i>&nbsp;Back</a>&nbsp;
-                <?php if($zobj["wowner"]==$_SESSION["user"]){?><button onclick="_delFlowchart();" type="button"
-                    name="delwf" class="btn btn-light"><svg class="midico midico-outline">
-                        <use href="/assets/images/icon/midleoicons.svg#i-x"
-                            xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                    </svg>&nbsp;Delete</button><?php } ?>
-            </div>
-        </div>
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
     </div>
-    <div class="card-body">
+    <div class="col-lg-8">
+        <div class="card p-2" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+            <input id="wid" name="wid" value="<?php echo $thisarray["p1"];?>" type="text" style="display:none;">
 
-        <div class="row">
-            <div class="col-md-5">
-                <div class="form-group row">
-                    <label class="form-control-label text-lg-right col-md-4">Name</label>
-                    <div class="col-md-8"><input type="text" id="wname" value="<?php echo $zobj["wname"];?>"
-                            class="form-control" placeholder="eg. Workflow for team X" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="form-control-label text-lg-right col-md-4">Information</label>
-                    <div class="col-md-8"><input type="text" id="winfo" value="<?php echo $zobj["winfo"];?>"
-                            class="form-control" placeholder="eg. Workflow for team X" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="form-control-label text-lg-right col-md-4">Input form</label>
-                    <div class="col-md-8">
-                        <select id="formid" class="form-control">
-                        <option value="">Not necessary</option>
-                            <?php 
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group row">
+                            <label class="form-control-label text-lg-right col-md-4">Name</label>
+                            <div class="col-md-8"><input type="text" id="wname" value="<?php echo $zobj["wname"];?>"
+                                    class="form-control" placeholder="eg. Workflow for team X" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="form-control-label text-lg-right col-md-4">Information</label>
+                            <div class="col-md-8"><input type="text" id="winfo" value="<?php echo $zobj["winfo"];?>"
+                                    class="form-control" placeholder="eg. Workflow for team X" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="form-control-label text-lg-right col-md-4">Input form</label>
+                            <div class="col-md-8">
+                                <select id="formid" class="form-control">
+                                    <option value="">Not necessary</option>
+                                    <?php 
     foreach($typereq as $keyin=>$valin) { ?>
-                            <option value="<?php echo $keyin;?>"
-                                <?php if(!empty($keyin) && $keyin==$zobj['formid']){ echo "selected";}?>>
-                                <?php echo $valin;?></option>
-                            <?php  }
+                                    <option value="<?php echo $keyin;?>"
+                                        <?php if(!empty($keyin) && $keyin==$zobj['formid']){ echo "selected";}?>>
+                                        <?php echo $valin;?></option>
+                                    <?php  }
   ?>
-                        </select>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="form-control-label text-lg-right col-md-4">Efforts</label>
+                            <div class="col-md-4"><input type="number" min="0" oninput="validity.valid||(value='');"
+                                    id="wfcost" value="<?php echo $zobj["wfcost"];?>" class="form-control">
+                            </div>
+                            <div class="form-control-label text-lg-left col-md-4"><?php echo $website['effort_unit'];?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="form-control-label text-lg-right col-md-4">Costs</label>
+                            <div class="col-md-4"><input type="number" min="0" oninput="validity.valid||(value='');"
+                                    id="wfcurcost" value="<?php echo $zobj["wfcurcost"];?>" class="form-control">
+                            </div>
+                            <div class="form-control-label text-lg-left col-md-4">
+                                <?php echo $website['currency_unit'];?>
+                            </div>
+                        </div>
+                        <br><br>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="form-control-label text-lg-right col-md-4">Efforts</label>
-                    <div class="col-md-4"><input type="number" min="0" oninput="validity.valid||(value='');" id="wfcost"
-                            value="<?php echo $zobj["wfcost"];?>" class="form-control">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="toggle-switch">
+                                <input id="haveappr" name="haveappr" value="1" type="checkbox"
+                                    <?php if($zobj['haveappr']==1){?> checked="checked" <?php } ?>
+                                    style="display:none;">
+                                <label for="haveappr" class="ts-helper">Add approval (optional)</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="toggle-switch">
+                                <input id="haveconf" name="haveconf" value="1" type="checkbox"
+                                    <?php if($zobj['haveconf']==1){?>checked="checked" <?php } ?> style="display:none;">
+                                <label for="haveconf" class="ts-helper">Add confirmation (optional)</label>
+                            </div>
+                        </div>
+                        <div class="btn-group-vertical">
+                            <button type="button" class="btn btn-light text-start"
+                                ng-click="readrespusr('<?php echo $thisarray["p1"];?>','<?php echo $_SESSION['user'];?>')"><svg
+                                    class="midico midico-outline">
+                                    <use href="/assets/images/icon/midleoicons.svg#i-groups"
+                                        xlink:href="/assets/images/icon/midleoicons.svg#i-groups" />
+                                </svg>&nbsp;Responsible Groups</button>
+                        </div>
                     </div>
-                    <div class="form-control-label text-lg-left col-md-4"><?php echo $website['effort_unit'];?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="form-control-label text-lg-right col-md-4">Costs</label>
-                    <div class="col-md-4"><input type="number" min="0" oninput="validity.valid||(value='');"
-                            id="wfcurcost" value="<?php echo $zobj["wfcurcost"];?>" class="form-control">
-                    </div>
-                    <div class="form-control-label text-lg-left col-md-4"><?php echo $website['currency_unit'];?>
-                    </div>
-                </div>
-                <br><br>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <div class="toggle-switch">
-                        <input id="haveappr" name="haveappr" value="1" type="checkbox" <?php if($zobj['haveappr']==1){?>
-                            checked="checked" <?php } ?> style="display:none;">
-                        <label for="haveappr" class="ts-helper">Add approval (optional)</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="toggle-switch">
-                        <input id="haveconf" name="haveconf" value="1" type="checkbox"
-                            <?php if($zobj['haveconf']==1){?>checked="checked" <?php } ?> style="display:none;">
-                        <label for="haveconf" class="ts-helper">Add confirmation (optional)</label>
-                    </div>
-                </div>
-                <div class="btn-group-vertical">
-                    <button type="button" class="btn btn-light text-start"
-                        ng-click="readrespusr('<?php echo $thisarray["p1"];?>','<?php echo $_SESSION['user'];?>')"><svg
-                            class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-groups"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-groups" />
-                        </svg>&nbsp;Responsible Groups</button>
-                </div>
-            </div>
-            <div class="col-md-4">
+                    <div class="col-md-4">
 
-                <div class="form-group row">
-                    <div class="col-md-9">
-                        <select id="wtype" class="form-control">
-                            <option value="">Service type</option>
-                            <?php 
+                        <div class="form-group row">
+                            <div class="col-md-9">
+                                <select id="wtype" class="form-control">
+                                    <option value="">Service type</option>
+                                    <?php 
     foreach($tmp["stypes"] as $keyin=>$valin) { ?>
-                            <option value="<?php echo $valin["nameshort"];?>"
-                                <?php if(!empty($valin["nameshort"]) && $valin["nameshort"]==$zobj['wtype']){ echo "selected";}?>>
-                                <?php echo $valin["name"];?></option>
-                            <?php  }
+                                    <option value="<?php echo $valin["nameshort"];?>"
+                                        <?php if(!empty($valin["nameshort"]) && $valin["nameshort"]==$zobj['wtype']){ echo "selected";}?>>
+                                        <?php echo $valin["name"];?></option>
+                                    <?php  }
   ?>
-                        </select>
-                    </div>
-                    <div class="col-md-3 text-start">
-                        <a href="/smanagement//types" target="_parent" class="btn btn-light"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                            </svg></a>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-        <div class="row">
-            <div class="col-md-10 jtk-canvas canvas-wide flowchart jtk-surface  jtk-surface-nopan" id="canvas">
-            </div>
-            <div class="col-md-2 jtk-canvas flowchart">
-
-                <input id="currentST" style="display:none;" value="<?php echo $thisarray["p1"];?>">
-                <br />
-                <ul class="flowchartmenu">
-                    <li class="window start jsplumb-connected" id="startEv"><strong>
-                            <p>start</p>
-                        </strong></li>
-                    <li class="window step jsplumb-connected-step" id="stepEv"><strong>
-                            <p>step</p>
-                        </strong></li>
-                    <li class="window diamond jsplumb-connected-step" id="descEv"><strong>
-                            <p class="desc-text">decision</p>
-                        </strong></li>
-                    <li class="window end jsplumb-connected-end" id="endEv"><strong>
-                            <p>end</p>
-                        </strong></li>
-                </ul>
-                <div class="modal" id="nmModal" tabindex="-1" role="dialog" aria-labelledby="nmmodallbl">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4>Change step</h4>
+                                </select>
                             </div>
-                            <div class="modal-body form-material">
-                                <div class="form-group row">
-                                    <label class="form-control-label text-lg-right col-md-3" for="nmnameen">Name</label>
-                                    <div class="col-md-9"><input type="text" class="form-control" id="nmnameen">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="form-control-label text-lg-right col-md-3" for="nmassign">Assign
-                                        to</label>
-                                    <div class="col-md-9"> <select class="form-control" id="nmassign"></select>
-                                    </div>
-                                </div>
-                                <?php if(!empty($bsteps)){ $temp["bsteps"]=json_decode($bsteps,true); ?>
-                                <div class="form-group row">
-                                    <label class="form-control-label text-lg-right col-md-3" for="bstep">Business
-                                        step</label>
-                                    <div class="col-md-9"> <select class="form-control" id="bstep">
-                                            <option value="">Please select</option>
-                                            <?php foreach($temp["bsteps"] as $keyin=>$valin) { ?>
-                                            <option value="<?php echo $valin["nameshort"];?>">
-                                                <?php echo $valin["name"];?></option>
-                                            <?php  } ?>
-                                        </select></div>
-                                </div>
-                                <?php } ?>
-                                <?php if($zobj['haveappr']==1){ ?>
-                                <div class="form-group row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-8">
-                                        <div class="toggle-switch">
-                                            <input id="checkapprove" value="1" type="checkbox" style="display:none;">
-                                            <label for="checkapprove" class="ts-helper">Aproval (optional)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php } ?>
-                                <?php if($zobj['haveconf']==1){?>
-                                <div class="form-group row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-8">
-                                        <div class="toggle-switch">
-                                            <input id="canconfirm" value="1" type="checkbox" style="display:none;">
-                                            <label for="canconfirm" class="ts-helper">Confirmation
-                                                (optional)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php } ?>
-                                <div class="form-group row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-8">
-                                        <div class="toggle-switch">
-                                            <input id="candeploy" value="1" type="checkbox" style="display:none;">
-                                            <label for="candeploy" class="ts-helper">Deploy packages
-                                                (optional)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-8">
-                                        <div class="toggle-switch">
-                                            <input id="canefforts" value="1" type="checkbox" style="display:none;">
-                                            <label for="canefforts" class="ts-helper">Can give efforts
-                                                (optional)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-8">
-                                        <div class="toggle-switch">
-                                            <input id="canchtask" value="1" type="checkbox" style="display:none;">
-                                            <label for="canchtask" class="ts-helper">Create change task
-                                                (optional)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="text" value="" style="display:none;" id="nmid">
-                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg
+                            <div class="col-md-3 text-start">
+                                <a href="/smanagement//types" target="_parent" class="btn btn-light"><svg
                                         class="midico midico-outline">
-                                        <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                            xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                    </svg>&nbsp;Close</button>
-                                <button type="button" onclick="savethisnm()" class="btn btn-info btn-sm"><svg
-                                        class="midico midico-outline">
-                                        <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                            xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                                    </svg>&nbsp;Save changes</button>
+                                        <use href="/assets/images/icon/midleoicons.svg#i-search"
+                                            xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                                    </svg></a>
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
-                <div class="modal" id="modal-user-form" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4>Responsible groups</h4>
-                            </div>
-                            <div class="modal-body form-horizontal form-material">
-                                <div class="form-group row usersdiv">
-                                    <label class="form-control-label text-lg-right col-md-3">Users</label>
-                                    <div class="col-md-6"><input type="text" class="form-control" id="autocomplete">
-                                        <input type="text" ng-model="group.user" id="respusersselected"
-                                            style="display:none;" value="">
+                <div class="row">
+                    <div class="col-md-10 jtk-canvas canvas-wide flowchart jtk-surface  jtk-surface-nopan" id="canvas">
+                    </div>
+                    <div class="col-md-2 jtk-canvas flowchart">
+
+                        <input id="currentST" style="display:none;" value="<?php echo $thisarray["p1"];?>">
+                        <br />
+                        <ul class="flowchartmenu">
+                            <li class="window start jsplumb-connected" id="startEv"><strong>
+                                    <p>start</p>
+                                </strong></li>
+                            <li class="window step jsplumb-connected-step" id="stepEv"><strong>
+                                    <p>step</p>
+                                </strong></li>
+                            <li class="window diamond jsplumb-connected-step" id="descEv"><strong>
+                                    <p class="desc-text">decision</p>
+                                </strong></li>
+                            <li class="window end jsplumb-connected-end" id="endEv"><strong>
+                                    <p>end</p>
+                                </strong></li>
+                        </ul>
+                        <div class="modal" id="nmModal" tabindex="-1" role="dialog" aria-labelledby="nmmodallbl">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Change step</h4>
                                     </div>
-                                    <div class="col-md-3 mt-1"><button type="button"
-                                            class="waves-effect btn btn-info btn-sm"
-                                            ng-click="addrespusr('<?php echo $thisarray["p1"];?>','<?php echo $_SESSION["user"];?>')"><svg
+                                    <div class="modal-body form-material">
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3"
+                                                for="nmnameen">Name</label>
+                                            <div class="col-md-9"><input type="text" class="form-control" id="nmnameen">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3"
+                                                for="nmassign">Assign
+                                                to</label>
+                                            <div class="col-md-9"> <select class="form-control" id="nmassign"></select>
+                                            </div>
+                                        </div>
+                                        <?php if(!empty($bsteps)){ $temp["bsteps"]=json_decode($bsteps,true); ?>
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3"
+                                                for="bstep">Business
+                                                step</label>
+                                            <div class="col-md-9"> <select class="form-control" id="bstep">
+                                                    <option value="">Please select</option>
+                                                    <?php foreach($temp["bsteps"] as $keyin=>$valin) { ?>
+                                                    <option value="<?php echo $valin["nameshort"];?>">
+                                                        <?php echo $valin["name"];?></option>
+                                                    <?php  } ?>
+                                                </select></div>
+                                        </div>
+                                        <?php } ?>
+                                        <?php if($zobj['haveappr']==1){ ?>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-8">
+                                                <div class="toggle-switch">
+                                                    <input id="checkapprove" value="1" type="checkbox"
+                                                        style="display:none;">
+                                                    <label for="checkapprove" class="ts-helper">Aproval
+                                                        (optional)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php } ?>
+                                        <?php if($zobj['haveconf']==1){?>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-8">
+                                                <div class="toggle-switch">
+                                                    <input id="canconfirm" value="1" type="checkbox"
+                                                        style="display:none;">
+                                                    <label for="canconfirm" class="ts-helper">Confirmation
+                                                        (optional)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php } ?>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-8">
+                                                <div class="toggle-switch">
+                                                    <input id="candeploy" value="1" type="checkbox"
+                                                        style="display:none;">
+                                                    <label for="candeploy" class="ts-helper">Deploy packages
+                                                        (optional)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-8">
+                                                <div class="toggle-switch">
+                                                    <input id="canefforts" value="1" type="checkbox"
+                                                        style="display:none;">
+                                                    <label for="canefforts" class="ts-helper">Can give efforts
+                                                        (optional)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-8">
+                                                <div class="toggle-switch">
+                                                    <input id="canchtask" value="1" type="checkbox"
+                                                        style="display:none;">
+                                                    <label for="canchtask" class="ts-helper">Create change task
+                                                        (optional)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="text" value="" style="display:none;" id="nmid">
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            data-bs-dismiss="modal"><svg class="midico midico-outline">
+                                                <use href="/assets/images/icon/midleoicons.svg#i-x"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                                            </svg>&nbsp;Close</button>
+                                        <button type="button" onclick="savethisnm()" class="btn btn-info btn-sm"><svg
                                                 class="midico midico-outline">
-                                                <use href="/assets/images/icon/midleoicons.svg#i-add"
-                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-add" />
-                                            </svg>&nbsp;Add</button></div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-9">
-                                        <div class="grudivnt grudivtg" style="display:block;">
-                                            <ul style="margin: 0 auto;padding: 5px;"
-                                                class="list-group list-group-flush">
-                                                <li style="width:300px;padding:5px;"
-                                                    ng-repeat="(ukey, user) in respusers"
-                                                    class="list-group-item usr_{{ukey}}">{{user.uname}}<a
-                                                        class="float-end"
-                                                        ng-click="delusrsel('<?php echo $thisarray["p1"];?>',ukey,user.type,'<?php echo $_SESSION['user'];?>')"
-                                                        style="cursor:pointer;margin-bottom: 0px;line-height: inherit;"><svg
-                                                            class="midico midico-outline">
-                                                            <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                                                xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                                        </svg></a></li>
-                                            </ul>
-                                        </div>
+                                                <use href="/assets/images/icon/midleoicons.svg#i-check"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
+                                            </svg>&nbsp;Save changes</button>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" onclick="reloadgr();" class="btn btn-secondary btn-sm"
-                                    data-bs-dismiss="modal"><svg class="midico midico-outline">
-                                        <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                            xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                    </svg>&nbsp;Close</button>
+                        </div>
+                        <div class="modal" id="modal-user-form" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Responsible groups</h4>
+                                    </div>
+                                    <div class="modal-body form-horizontal form-material">
+                                        <div class="form-group row usersdiv">
+                                            <label class="form-control-label text-lg-right col-md-3">Users</label>
+                                            <div class="col-md-6"><input type="text" class="form-control"
+                                                    id="autocomplete">
+                                                <input type="text" ng-model="group.user" id="respusersselected"
+                                                    style="display:none;" value="">
+                                            </div>
+                                            <div class="col-md-3 mt-1"><button type="button"
+                                                    class="waves-effect btn btn-info btn-sm"
+                                                    ng-click="addrespusr('<?php echo $thisarray["p1"];?>','<?php echo $_SESSION["user"];?>')"><svg
+                                                        class="midico midico-outline">
+                                                        <use href="/assets/images/icon/midleoicons.svg#i-add"
+                                                            xlink:href="/assets/images/icon/midleoicons.svg#i-add" />
+                                                    </svg>&nbsp;Add</button></div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-9">
+                                                <div class="grudivnt grudivtg" style="display:block;">
+                                                    <ul style="margin: 0 auto;padding: 5px;"
+                                                        class="list-group list-group-flush">
+                                                        <li style="width:300px;padding:5px;"
+                                                            ng-repeat="(ukey, user) in respusers"
+                                                            class="list-group-item usr_{{ukey}}">{{user.uname}}<a
+                                                                class="float-end"
+                                                                ng-click="delusrsel('<?php echo $thisarray["p1"];?>',ukey,user.type,'<?php echo $_SESSION['user'];?>')"
+                                                                style="cursor:pointer;margin-bottom: 0px;line-height: inherit;"><svg
+                                                                    class="midico midico-outline">
+                                                                    <use href="/assets/images/icon/midleoicons.svg#i-x"
+                                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                                                                </svg></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" onclick="reloadgr();" class="btn btn-secondary btn-sm"
+                                            data-bs-dismiss="modal"><svg class="midico midico-outline">
+                                                <use href="/assets/images/icon/midleoicons.svg#i-x"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                                            </svg>&nbsp;Close</button>
+
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
 
-                </div>
             </div>
-
         </div>
     </div>
+    <div class="col-md-2">
+        <?php include "public/modules/breadcrumbin.php"; ?>
     </div>
-    </div>
-<div class="col-md-2">
-     <?php include "public/modules/breadcrumbin.php"; ?>
-</div>  
 </div>
 <?php } else { textClass::PageNotFound();  } } else { 
      array_push($brarr,array(
@@ -511,15 +528,18 @@ if(!empty($thisarray["p1"])){
       ));
       
       ?>
-    <div class="row pt-3"><div class="col-lg-2">
-<?php include "public/modules/sidebar.php"; ?>
-</div><div class="col-lg-10" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-<div class="row">
-    <div class="col-lg-9">
-    <ul class="row" ng-init="getAllservice('<?php echo $wid;?>')" style="padding:0 15px;">
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-10" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+        <div class="row">
+            <div class="col-lg-9">
+                <ul class="row" ng-init="getAllservice('<?php echo $wid;?>')" style="padding:0 15px;">
 
-        <li class="col-md-4" style="text-align:center;font-size:1.1em;display:flex;" ng-hide="contentLoaded">
-        <div class="card" aria-hidden="true" style="width:100%;">
+                    <li class="col-md-4" style="text-align:center;font-size:1.1em;display:flex;"
+                        ng-hide="contentLoaded">
+                        <div class="card" aria-hidden="true" style="width:100%;">
                             <div class="card-body">
                                 <h5 class="card-title placeholder-glow">
                                     <span class="placeholder col-6"></span>
@@ -533,56 +553,58 @@ if(!empty($thisarray["p1"])){
                                 </p>
                             </div>
                         </div>
-        </li>
+                    </li>
 
-        <li class="col-md-4" id="contloaded" dir-paginate="d in names | filter:search | itemsPerPage:12" ng-class="hide"
-            pagination-id="prodx" style="display: flex;">
-            <div ng-click="redirect('/smanagement/'+d.wid)" class="card waves-effect waves-dark" style="width:100%;">
+                    <li class="col-md-4" id="contloaded" dir-paginate="d in names | filter:search | itemsPerPage:12"
+                        ng-class="hide" pagination-id="prodx" style="display: flex;">
+                        <div ng-click="redirect('/smanagement/'+d.wid)" class="card waves-effect waves-dark"
+                            style="width:100%;">
 
-                <div class="card-header">
-                    <h4><i class="mdi mdi-account-clock"></i> Efforts: {{ d.wfcost }}
-                        <?php echo $website["effort_unit"];?></h4>
-                </div>
-                <div class="card-body">
+                            <div class="card-header">
+                                <h4><i class="mdi mdi-account-clock"></i> Efforts: {{ d.wfcost }}
+                                    <?php echo $website["effort_unit"];?></h4>
+                            </div>
+                            <div class="card-body">
 
-                    <div class="row ">
-                        <div class="col-md-12 text-start cardwf">
-                            <h5 class="font-normal">{{ d.wname }}</h5>
-                            <p class="card-text">
-                                {{ d.winfo | limitTo:4*textlimit }}{{d.winfo.length > 4*textlimit ? '...' : ''}}</p>
-                            <div class="d-flex no-block align-items-center mb-3">
-                                <span><i class="mdi mdi-calendar"></i> Last updated: {{ d.modified }}</span>
+                                <div class="row ">
+                                    <div class="col-md-12 text-start cardwf">
+                                        <h5 class="font-normal">{{ d.wname }}</h5>
+                                        <p class="card-text">
+                                            {{ d.winfo | limitTo:4*textlimit }}{{d.winfo.length > 4*textlimit ? '...' : ''}}
+                                        </p>
+                                        <div class="d-flex no-block align-items-center mb-3">
+                                            <span><i class="mdi mdi-calendar"></i> Last updated: {{ d.modified }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
+                    </li>
+                </ul>
 
-                </div>
+
+
+                <dir-pagination-controls pagination-id="prodx" boundary-links="true"
+                    on-page-change="pageChangeHandler(newPageNumber)" template-url="/assets/templ/pagination.tpl.html">
+                </dir-pagination-controls>
+
+
             </div>
-        </li>
-    </ul>
 
 
-
-    <dir-pagination-controls pagination-id="prodx" boundary-links="true"
-        on-page-change="pageChangeHandler(newPageNumber)" template-url="/assets/templ/pagination.tpl.html">
-    </dir-pagination-controls>
-
-
+            <div class="col-md-3">
+                <div>
+                    <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a service">
+                    <span class="searchicon"><svg class="midico midico-outline">
+                            <use href="/assets/images/icon/midleoicons.svg#i-search"
+                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                        </svg></span>
+                </div>
+                <?php include "public/modules/breadcrumbin.php"; ?>
+            </div>
+        </div>
     </div>
-    
-
-<div class="col-md-3">
-    <div>
-    <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a service">
-            <span class="searchicon"><svg class="midico midico-outline">
-                    <use href="/assets/images/icon/midleoicons.svg#i-search"
-                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                </svg></span>
-    </div>
-     <?php include "public/modules/breadcrumbin.php"; ?>
-</div>  
-</div>
-</div>
 </div>
 </div>
 
@@ -631,270 +653,272 @@ if(!empty($thisarray["p1"])){
 
 
     if($thisarray["p1"]=="new"){ ?>
-        <form name="projform" action="" method="post" class="ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-            <div class="row">
-                <div class="col-md-8">
-                    <h3 style="font-weight:bold;">Plan a New project</h3>
+<form name="projform" action="" method="post" class="ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 style="font-weight:bold;">Plan a New project</h3>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="/smanagement" target="_parent" class="btn btn-outline-secondary"><svg
+                    class="midico midico-outline">
+                    <use href="/assets/images/icon/midleoicons.svg#i-x"
+                        xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                </svg>&nbsp;Cancel</a>&nbsp;
+            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Submit the project"><button type="submit"
+                    name="addproj" ng-disabled="!pjinfo.templcode" class="waves-effect waves-light btn btn-info"><svg
+                        class="midico midico-outline">
+                        <use href="/assets/images/icon/midleoicons.svg#i-check"
+                            xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
+                    </svg>&nbsp;Submit</button></span>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header border-bottom">
+                    <h4 style="margin: 0 auto;">Step 1: Pick a Category</h4>
                 </div>
-                <div class="col-md-4 text-end">
-                    <a href="/smanagement" target="_parent" class="btn btn-outline-secondary"><svg
-                            class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                        </svg>&nbsp;Cancel</a>&nbsp;
-                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Submit the project"><button type="submit"
-                            name="addproj" ng-disabled="!pjinfo.templcode" class="waves-effect waves-light btn btn-info"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                            </svg>&nbsp;Submit</button></span>
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header border-bottom">
-                            <h4 style="margin: 0 auto;">Step 1: Pick a Category</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-        
-                                <?php if(!empty($tmp["stypes"])){ ?>
-                                <?php
+                <div class="card-body">
+                    <div class="row">
+
+                        <?php if(!empty($tmp["stypes"])){ ?>
+                        <?php
         foreach($tmp["stypes"] as $key=>$val){?>
-        
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="card card-border catcard"
-                                        ng-class="(catselected=='<?php echo $val["nameshort"];?>') ? 'selected' : ''"
-                                        style="cursor:pointer;"
-                                        ng-click="catselected='<?php echo $val["nameshort"];?>';showPJTempl('<?php echo $val["nameshort"];?>')">
-                                        <div class="card-body" style="padding:5px;">
-                                            <div class="selinfo"
-                                                ng-class="(catselected=='<?php echo $val["nameshort"];?>') ? 'selected' : ''">
-                                                <svg class="midico midico-outline midicoinfo">
-                                                    <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                                                </svg></div>
-                                            <div class="row">
-                                                <div class="col-md-3 round-lg d-inline-block text-center"
-                                                    style="padding-right: 0px;font-size:inherit;line-height: 58px;">
-                                                    <img src="/assets/images/stypes/<?php echo !empty($val["icon"])?$val["icon"]:"application";?>.svg"
-                                                        style="width:40px;height:40px;">
-                                                </div>
-                                                <div class="col-md-9 align-self-center">
-                                                    <?php echo $val["name"];?>
-                                                </div>
-                                            </div>
-        
-        
-        
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card card-border catcard"
+                                ng-class="(catselected=='<?php echo $val["nameshort"];?>') ? 'selected' : ''"
+                                style="cursor:pointer;"
+                                ng-click="catselected='<?php echo $val["nameshort"];?>';showPJTempl('<?php echo $val["nameshort"];?>')">
+                                <div class="card-body" style="padding:5px;">
+                                    <div class="selinfo"
+                                        ng-class="(catselected=='<?php echo $val["nameshort"];?>') ? 'selected' : ''">
+                                        <svg class="midico midico-outline midicoinfo">
+                                            <use href="/assets/images/icon/midleoicons.svg#i-check"
+                                                xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
+                                        </svg>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 round-lg d-inline-block text-center"
+                                            style="padding-right: 0px;font-size:inherit;line-height: 58px;">
+                                            <img src="/assets/images/stypes/<?php echo !empty($val["icon"])?$val["icon"]:"application";?>.svg"
+                                                style="width:40px;height:40px;">
+                                        </div>
+                                        <div class="col-md-9 align-self-center">
+                                            <?php echo $val["name"];?>
                                         </div>
                                     </div>
+
+
+
                                 </div>
-        
-        
-        
-                                <?php } ?>
-        
-                                <?php } else { echo "<div class='alert alert-light'>There are still no categories defined</div>";
+                            </div>
+                        </div>
+
+
+
+                        <?php } ?>
+
+                        <?php } else { echo "<div class='alert alert-light'>There are still no categories defined</div>";
         }?>
-                            </div>
-        
-                        </div>
                     </div>
+
                 </div>
             </div>
-        
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header border-bottom" id="templsel">
-                            <h4 style="margin: 0 auto;">Step 2: Select a Template</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header border-bottom" id="templsel">
+                    <h4 style="margin: 0 auto;">Step 2: Select a Template</h4>
+                </div>
+                <div class="card-body" ng-show="catselected">
+
+
+                    <div class="row">
+
+                        <div class="col-md-4" style="text-align:center;font-size:1.1em;display:flex;"
+                            ng-hide="contentLoaded">
+                            <i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...
                         </div>
-                        <div class="card-body" ng-show="catselected">
-        
-        
-                            <div class="row">
-        
-                                <div class="col-md-4" style="text-align:center;font-size:1.1em;display:flex;"
-                                    ng-hide="contentLoaded">
-                                    <i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...
+
+                        <div class="col-md-4" id="contloaded"
+                            dir-paginate="d in names | filter:search | itemsPerPage:12" ng-class="hide"
+                            pagination-id="prodx" style="display: flex;">
+                            <div class="card card-border catcard"
+                                ng-class="(templselected==d.templcode) ? 'selected' : ''"
+                                style="width:100%;cursor:pointer;" ng-click="showPJFinal(d.templcode);">
+                                <div class="card-header">
+                                    <h4>{{ d.templname }}</h4>
                                 </div>
-        
-                                <div class="col-md-4" id="contloaded"
-                                    dir-paginate="d in names | filter:search | itemsPerPage:12" ng-class="hide"
-                                    pagination-id="prodx" style="display: flex;">
-                                    <div class="card card-border catcard"
-                                        ng-class="(templselected==d.templcode) ? 'selected' : ''"
-                                        style="width:100%;cursor:pointer;" ng-click="showPJFinal(d.templcode);">
-                                        <div class="card-header">
-                                            <h4>{{ d.templname }}</h4>
+                                <div class="card-body pt-0 pb-1">
+                                    <div class="selinfo" ng-class="(templselected==d.templcode) ? 'selected' : ''"><svg
+                                            class="midico midico-outline midicoinfo">
+                                            <use href="/assets/images/icon/midleoicons.svg#i-check"
+                                                xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
+                                        </svg></div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-start cardpj pl-4">
+                                            <p class="card-text">
+                                                {{ d.templinfo | limitTo:4*textlimit }}{{d.templinfo.length > 4*textlimit ? '...' : ''}}
+                                            </p>
+                                            <ul class="assignedto list-style-none pb-2">
+                                                <li class="d-inline-block border-0 mr-1"
+                                                    ng-repeat="(key,val) in d.serviceid" ng-if="$index < 5">
+                                                    <span class="badge"
+                                                        ng-class="(key==catselected) ? 'badge-info' : 'badge-light'">{{val}}</span>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <div class="card-body pt-0 pb-1">
-                                            <div class="selinfo" ng-class="(templselected==d.templcode) ? 'selected' : ''"><svg
-                                                    class="midico midico-outline midicoinfo">
-                                                    <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                                                </svg></div>
-                                            <div class="row">
-                                                <div class="col-md-12 text-start cardpj pl-4">
-                                                    <p class="card-text">
-                                                        {{ d.templinfo | limitTo:4*textlimit }}{{d.templinfo.length > 4*textlimit ? '...' : ''}}
-                                                    </p>
-                                                    <ul class="assignedto list-style-none pb-2">
-                                                        <li class="d-inline-block border-0 mr-1"
-                                                            ng-repeat="(key,val) in d.serviceid" ng-if="$index < 5">
-                                                            <span class="badge"
-                                                                ng-class="(key==catselected) ? 'badge-info' : 'badge-light'">{{val}}</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-        
-                                        </div>
-        
                                     </div>
+
                                 </div>
+
                             </div>
-        
                         </div>
                     </div>
+
                 </div>
             </div>
-        
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header border-bottom" id="projsubm">
-                            <h4 style="margin: 0 auto;">Step 3: Project Details</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header border-bottom" id="projsubm">
+                    <h4 style="margin: 0 auto;">Step 3: Project Details</h4>
+                </div>
+                <div class="card-body" ng-show="templselected">
+                    <div class="row">
+                        <div class="col-md-4" style="text-align:center;font-size:1.1em;display:flex;"
+                            ng-hide="contentpjLoaded">
+                            <i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...
                         </div>
-                        <div class="card-body" ng-show="templselected">
+                        <div class="col-md-12" ng-show="contentpjLoaded">
                             <div class="row">
-                                <div class="col-md-4" style="text-align:center;font-size:1.1em;display:flex;"
-                                    ng-hide="contentpjLoaded">
-                                    <i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="font-weight:bold;">Project Name</label>
+                                        <input type="text" name="newpjname" ng-model="pjinfo.templname"
+                                            class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-weight:bold;">Template Description</label>
+                                        <textarea ui-tinymce="tinyOpts" name="newpjinfo"
+                                            ng-model="pjinfo.templinfo"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-weight:bold;">Project Date</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-center date-picker-unl"
+                                                placeholder="Start Date" name="projstart" id="projstart"
+                                                data-toggle="datetimepicker" data-target="#projstart" value="" />
+                                            <input type="text" class="form-control text-center date-picker-unl"
+                                                placeholder="End Date" name="projend" id="projend"
+                                                data-toggle="datetimepicker" data-target="#projend" value="" />
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                                <div class="col-md-12" ng-show="contentpjLoaded">
+                                <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;">Project Name</label>
-                                                <input type="text" name="newpjname" ng-model="pjinfo.templname"
-                                                    class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;">Template Description</label>
-                                                <textarea ui-tinymce="tinyOpts" name="newpjinfo"
-                                                    ng-model="pjinfo.templinfo"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-weight:bold;">Project Date</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control text-center date-picker-unl"
-                                                        placeholder="Start Date" name="projstart" id="projstart"
-                                                        data-toggle="datetimepicker" data-target="#projstart" value="" />
-                                                    <input type="text" class="form-control text-center date-picker-unl"
-                                                        placeholder="End Date" name="projend" id="projend"
-                                                        data-toggle="datetimepicker" data-target="#projend" value="" />
-                                                </div>
-                                            </div>
-        
-        
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <h4>Owner</h4>
-        
-                                                    <div class="contact-widget position-relative">
-                                                        <a href="/browse/user/{{pjinfo.owner.user}}" target="_blank"
-                                                            class="py-3 px-2 d-block text-decoration-none">
-                                                            <div class="user-img position-relative d-inline-block mr-2">
-                                                                <img src="{{pjinfo.owner.avatar}}" width="40"
-                                                                    alt="{{pjinfo.owner.fullname}}" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="{{pjinfo.owner.fullname}}"
-                                                                    class="rounded-circle">
-                                                                <span
-                                                                    class="profile-status pull-right d-inline-block position-absolute bg-{{pjinfo.owner.user_online}} rounded-circle"></span>
-                                                            </div>
-                                                            <div class="mail-contnet d-inline-block align-middle">
-                                                                <h5 class="my-1">{{pjinfo.owner.fullname}}</h5> <span
-                                                                    class="mail-desc font-12 text-truncate overflow-hidden badge badge-info">{{pjinfo.owner.utitle}}</span>
-                                                            </div>
-                                                        </a>
+                                            <h4>Owner</h4>
+
+                                            <div class="contact-widget position-relative">
+                                                <a href="/browse/user/{{pjinfo.owner.user}}" target="_blank"
+                                                    class="py-3 px-2 d-block text-decoration-none">
+                                                    <div class="user-img position-relative d-inline-block mr-2">
+                                                        <img src="{{pjinfo.owner.avatar}}" width="40"
+                                                            alt="{{pjinfo.owner.fullname}}" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" title="{{pjinfo.owner.fullname}}"
+                                                            class="rounded-circle">
+                                                        <span
+                                                            class="profile-status pull-right d-inline-block position-absolute bg-{{pjinfo.owner.user_online}} rounded-circle"></span>
                                                     </div>
-        
-                                                </div>
-                                                <div class="col-md-12" ng-if="pjinfo.servinfo"><br><br>
-                                                    <h4>Included services in this project</h4>
-                                                    <table class="table">
-                                                        <tr ng-repeat="(key,val) in pjinfo.servinfo">
-                                                            <td>{{val.name}}</td>
-                                                            <td class="text-end">{{val.curcost}}</td>
-                                                            <td><?php echo $website["currency_unit"];?></td>
-                                                        </tr>
-                                                        <tr class="table-active">
-                                                            <td>Total for this project</td>
-                                                            <td class="text-end">{{pjinfo.totalcost}}</td>
-                                                            <td><?php echo $website["currency_unit"];?></td>
-                                                        </tr>
-                                                    </table>
-                                                    <input type="text" name="totalcost" ng-model="pjinfo.totalcost"
-                                                        style="display:none;">
-                                                    <input type="text" name="owner" ng-model="pjinfo.owner.user"
-                                                        style="display:none;">
-                                                        <input type="text" name="serviceid" ng-model="pjinfo.serviceid"
-                                                        style="display:none;">
-                                                        <input type="text" name="formids" ng-model="pjinfo.formids"
-                                                        style="display:none;">
-                                                        <input type="text" name="finalpjinfo" ng-model="pjinfo.projinfo"
-                                                        style="display:none;">
-                                                        <input type="text" name="owneremail" ng-model="pjinfo.owner.email"
-                                                        style="display:none;">
-                                                        <input type="text" name="appcode" ng-model="pjinfo.appcode"
-                                                        style="display:none;">
-                                                </div>
-                                                <div class="col-md-12" ng-if="pjinfo.formid"><br><br>
-                                                    <h4>Additional forms in this template</h4>
-                                                    <div class="alert alert-light">You are required to fill additional form input once you open this project.</div>
-                                                </div>
+                                                    <div class="mail-contnet d-inline-block align-middle">
+                                                        <h5 class="my-1">{{pjinfo.owner.fullname}}</h5> <span
+                                                            class="mail-desc font-12 text-truncate overflow-hidden badge badge-info">{{pjinfo.owner.utitle}}</span>
+                                                    </div>
+                                                </a>
                                             </div>
-        
+
+                                        </div>
+                                        <div class="col-md-12" ng-if="pjinfo.servinfo"><br><br>
+                                            <h4>Included services in this project</h4>
+                                            <table class="table">
+                                                <tr ng-repeat="(key,val) in pjinfo.servinfo">
+                                                    <td>{{val.name}}</td>
+                                                    <td class="text-end">{{val.curcost}}</td>
+                                                    <td><?php echo $website["currency_unit"];?></td>
+                                                </tr>
+                                                <tr class="table-active">
+                                                    <td>Total for this project</td>
+                                                    <td class="text-end">{{pjinfo.totalcost}}</td>
+                                                    <td><?php echo $website["currency_unit"];?></td>
+                                                </tr>
+                                            </table>
+                                            <input type="text" name="totalcost" ng-model="pjinfo.totalcost"
+                                                style="display:none;">
+                                            <input type="text" name="owner" ng-model="pjinfo.owner.user"
+                                                style="display:none;">
+                                            <input type="text" name="serviceid" ng-model="pjinfo.serviceid"
+                                                style="display:none;">
+                                            <input type="text" name="formids" ng-model="pjinfo.formids"
+                                                style="display:none;">
+                                            <input type="text" name="finalpjinfo" ng-model="pjinfo.projinfo"
+                                                style="display:none;">
+                                            <input type="text" name="owneremail" ng-model="pjinfo.owner.email"
+                                                style="display:none;">
+                                            <input type="text" name="appcode" ng-model="pjinfo.appcode"
+                                                style="display:none;">
+                                        </div>
+                                        <div class="col-md-12" ng-if="pjinfo.formid"><br><br>
+                                            <h4>Additional forms in this template</h4>
+                                            <div class="alert alert-light">You are required to fill additional form
+                                                input once you open this project.</div>
                                         </div>
                                     </div>
-        
-        
+
                                 </div>
-        
                             </div>
+
+
                         </div>
+
                     </div>
                 </div>
             </div>
-        
-        
-        
-        
-            <div class="row">
-                <div class="col-md-8">
-                </div>
-                <div class="col-md-4 text-end">
-                    <a href="/smanagement" target="_parent" class="btn btn-outline-secondary"><svg
-                            class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                        </svg>&nbsp;Cancel</a>&nbsp;
-                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Submit the project"><button type="submit"
-                            name="addproj" ng-disabled="!pjinfo.templcode" class="waves-effect waves-light btn btn-info"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                            </svg>&nbsp;Submit</button></span>
-                </div>
-            </div>
-        
-        </form>
-        <?php } else {
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="/smanagement" target="_parent" class="btn btn-outline-secondary"><svg
+                    class="midico midico-outline">
+                    <use href="/assets/images/icon/midleoicons.svg#i-x"
+                        xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                </svg>&nbsp;Cancel</a>&nbsp;
+            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Submit the project"><button type="submit"
+                    name="addproj" ng-disabled="!pjinfo.templcode" class="waves-effect waves-light btn btn-info"><svg
+                        class="midico midico-outline">
+                        <use href="/assets/images/icon/midleoicons.svg#i-check"
+                            xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
+                    </svg>&nbsp;Submit</button></span>
+        </div>
+    </div>
+
+</form>
+<?php } else {
 
        if(empty($_GET["pjid"])){
            echo '<div id="kanban"></div>';
@@ -904,12 +928,12 @@ if(!empty($thisarray["p1"])){
         $q->execute(array(htmlspecialchars($_GET["pjid"]))); 
         if($zobj = $q->fetch(PDO::FETCH_ASSOC)){ ?>
 
-            
+
 <div class="row">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h4><?php echo $zobj["projname"];?> 
+                <h4><?php echo $zobj["projname"];?>
                 </h4>
             </div>
             <div class="card-body">
@@ -931,23 +955,25 @@ if(!empty($thisarray["p1"])){
                     </div>
                     <div class="form-group row">
                         <label class="form-control-label text-lg-left col-md-3">Project Description</label>
-                        <div class="col-md-9"><textarea name="projinfo" class="form-control textarea"><?php echo $zobj["projinfo"];?></textarea></div>
+                        <div class="col-md-9"><textarea name="projinfo"
+                                class="form-control textarea"><?php echo $zobj["projinfo"];?></textarea></div>
                     </div>
                     <div class="form-group row">
                         <label class="form-control-label text-lg-left col-md-3">Project Dates</label>
                         <div class="col-md-9">
                             <div class="input-group">
-                                <input type="text" class="form-control text-center"
-                                    placeholder="Start Date" name="projstart" value="Start: <?php echo $zobj["projstartdate"];?>" disabled />
-                                <input type="text" class="form-control text-center"
-                                    placeholder="End Date" name="projend" value="End: <?php echo $zobj["projduedate"];?>" disabled />
+                                <input type="text" class="form-control text-center" placeholder="Start Date"
+                                    name="projstart" value="Start: <?php echo $zobj["projstartdate"];?>" disabled />
+                                <input type="text" class="form-control text-center" placeholder="End Date"
+                                    name="projend" value="End: <?php echo $zobj["projduedate"];?>" disabled />
                             </div>
 
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="form-control-label text-lg-left col-md-3">Total cost</label>
-                        <div class="col-md-9 "><label class="form-control-label"><b><?php echo $zobj["totalcost"];?></b> <?php echo $website["currency_unit"];?></label></div>
+                        <div class="col-md-9 "><label class="form-control-label"><b><?php echo $zobj["totalcost"];?></b>
+                                <?php echo $website["currency_unit"];?></label></div>
                     </div>
 
                     <div class="form-group row">
@@ -965,33 +991,39 @@ if(!empty($thisarray["p1"])){
         </div>
     </div>
     <div class="col-md-4">
-    <?php if(!empty($zobj["reqinfo"])){ ?>
-<div class="card">
-<div class="card-header"><h4>Opened requests </h4></div>
+        <?php if(!empty($zobj["reqinfo"])){ ?>
+        <div class="card">
+            <div class="card-header">
+                <h4>Opened requests </h4>
+            </div>
             <div class="card-body">
-            <?php foreach(json_decode($zobj["reqinfo"],true) as $key=>$val){
+                <?php foreach(json_decode($zobj["reqinfo"],true) as $key=>$val){
                 $sql="select sname,reqapp,reqname from requests where sname=?";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($val));
                 if($zobjin = $q->fetchAll()){ ?>
                 <table class="table">
-                   <?php foreach($zobjin as $valin) { ?>
-                   <tr><td><a href="/browse/req/<?php echo $valin["sname"];?>" target="_parent"><?php echo $valin["reqname"];?></a></td><td class="text-end"><?php echo $valin["reqapp"];?></td></tr>
+                    <?php foreach($zobjin as $valin) { ?>
+                    <tr>
+                        <td><a href="/browse/req/<?php echo $valin["sname"];?>"
+                                target="_parent"><?php echo $valin["reqname"];?></a></td>
+                        <td class="text-end"><?php echo $valin["reqapp"];?></td>
+                    </tr>
                     <?php } ?>
                 </table>
                 <?php }
             } ?>
 
             </div>
-            </div>
+        </div>
 
-    <?php };?>
+        <?php };?>
     </div>
 </div>
 
 
 
-       <?php } else { echo "<div class='alert alert-light'>Wrong Project ID</div>"; }
+<?php } else { echo "<div class='alert alert-light'>Wrong Project ID</div>"; }
        } 
     } 
     } ?>
@@ -1036,15 +1068,15 @@ foreach ($modulelist["kanban"]["js"] as $jskey => $jslink) {
     if (!empty($jslink)) {?><script type="text/javascript" src="<?php echo $jslink; ?>"></script><?php }
 } ?>
 <script type="text/javascript">
-    $('#kanban').kanban({
-      <?php if (!empty($projcodes) && count($projcodes)>0) {?>
-        titles: [ <?php foreach ($projcodes as $keyin => $valin) {echo "'" . $valin["name"] . "',";}?>],
-        colours: [ <?php foreach ($projcodes as $keyin => $valin) {echo "'" . $valin["color"] . "',";}?>],
-      <?php } else {?>
-        titles: ['Not defined'],
-        colours: ['#000'],
-        <?php }?>
-        <?php $sql = "
+$('#kanban').kanban({
+    <?php if (!empty($projcodes) && count($projcodes)>0) {?>
+    titles: [<?php foreach ($projcodes as $keyin => $valin) {echo "'" . $valin["name"] . "',";}?>],
+    colours: [<?php foreach ($projcodes as $keyin => $valin) {echo "'" . $valin["color"] . "',";}?>],
+    <?php } else {?>
+    titles: ['Not defined'],
+    colours: ['#000'],
+    <?php }?>
+    <?php $sql = "
 SELECT config_projrequest.projcode,
 config_projrequest.projname,
 config_projrequest.totalcost,
@@ -1080,8 +1112,7 @@ WHERE  requser=?
             }
             echo "items: " . json_encode($arrreq);
         } else {echo "items: []";}?>
-    });
-
+});
 </script>
 <?php } 
 } ?>

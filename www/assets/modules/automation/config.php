@@ -67,9 +67,11 @@ $brarr=array(
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h4>Job output</h4></div>
+                    <div class="card-header">
+                        <h4>Job output</h4>
+                    </div>
                     <div class="card-body">
-                    <div class="form-group mb-1 row">
+                        <div class="form-group mb-1 row">
                             <label class="control-label text-lg-right col-lg-3 col-6">Name</label>
                             <div class="col-lg-9 col-6">
                                 <p class="form-control-static"><?php echo $zobj["jobname"];?></p>
@@ -96,7 +98,9 @@ $brarr=array(
                         <div class="form-group row mb-1">
                             <label class="control-label text-lg-right col-lg-3 col-6">Environment</label>
                             <div class="col-lg-9 col-6">
-                                <p class="form-control-static"><?php echo $env[array_search($zobj["env"], array_column($env, 'nameshort'))]["name"];?></p>
+                                <p class="form-control-static">
+                                    <?php echo $env[array_search($zobj["env"], array_column($env, 'nameshort'))]["name"];?>
+                                </p>
                             </div>
                         </div>
                         <div class="form-group row mb-1">
@@ -108,7 +112,8 @@ $brarr=array(
                         <div class="form-group row mb-1">
                             <label class="control-label text-lg-right col-lg-3 col-6">Object type</label>
                             <div class="col-lg-9 col-6">
-                                <p class="form-control-static"><?php echo str_replace("mqenv_","",$zobj["objtype"]);?></p>
+                                <p class="form-control-static"><?php echo str_replace("mqenv_","",$zobj["objtype"]);?>
+                                </p>
                             </div>
                         </div>
                         <div class="form-group row mb-1">
@@ -140,7 +145,9 @@ $brarr=array(
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header"><h4>Job status</h4></div>
+                    <div class="card-header">
+                        <h4>Job status</h4>
+                    </div>
                     <div class="card-body">
                         <span
                             class="badge badge-<?php echo $jobstatus[$zobj["jobstatus"]]["statcolor"];?>"><?php echo $jobstatus[$zobj["jobstatus"]]["name"];?></span>
@@ -152,66 +159,75 @@ $brarr=array(
     } else {
         textClass::PageNotFound();
      } } else {  ?>
-        <div id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-        <div class="row p-0">
-                    <div class="col-md-3 position-relative" >
-                        <input type="text" ng-model="search" class="form-control topsearch"
-                            placeholder="Find a job">
-                            <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-                    </div>
-                </div><br>
-        <div class="card ngctrl" >
-            <div class="card-body p-0">
-                
-                <div class="table-responsive">
-                    <table class="table table-vmiddle table-hover stylish-table mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="width:80px;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-show" xlink:href="/assets/images/icon/midleoicons.svg#i-show" /></svg></th>
-                                <th class="text-center">Job name</th>
-                                <th class="text-center">Object name</th>
-                                <th class="text-center">Application</th>
-                                <th class="text-center">Software</th>
-                                <th class="text-center">Server</th>
-                                <th class="text-center" style="width:110px">Status</th>
-                                <th class="text-center" style="width:120px;">Next run</th>
-                                <th class="text-center" style="width:50px;"></th>
-                            </tr>
-                        </thead>
-                        <tbody ng-init="getallCICD('<?php echo $thisarray["p2"];?>')">
-                            <tr ng-hide="contentLoaded">
-                                <td colspan="9" style="text-align:center;font-size:1.1em;"><i
-                                        class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
-                            </tr>
-                            <tr id="contloaded" class="hide"
-                                dir-paginate="d in names | filter:search | orderBy:'lrun' | itemsPerPage:10"
-                                pagination-id="prodx">
-                                <td class="text-center" style="padding: .5rem;"><a href="/automation/{{ d.jobid }}"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-a-enabled" xlink:href="/assets/images/icon/midleoicons.svg#i-a-enabled" /></svg></a></td>
-                                <td class="text-center">{{ d.jobname }}</td>
-                                <td class="text-center">{{ d.objname }}</td>
-                                <td class="text-center">{{ d.proj }}</td>
-                                <td class="text-center">{{ d.deplenv }}</td>
-                                <td class="text-center">{{ d.srv }}</td>
-                                <td class="text-center"><span
-                                        class="badge badge-{{ d.statusinfo }}">{{ d.statusinfotxt }}</span></td>
-                                <td class="text-center">{{ d.nrun }}</td>
-                                <td class="text-center"></td>
+     <div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-10">
+        <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+            <div class="col-lg-9">
+                <div class="card p-0">
+                        <table class="table table-vmiddle table-hover stylish-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width:80px;"><svg class="midico midico-outline">
+                                            <use href="/assets/images/icon/midleoicons.svg#i-show"
+                                                xlink:href="/assets/images/icon/midleoicons.svg#i-show" />
+                                        </svg></th>
+                                    <th class="text-center">Job name</th>
+                                    <th class="text-center">Object name</th>
+                                    <th class="text-center">Application</th>
+                                    <th class="text-center">Software</th>
+                                    <th class="text-center">Server</th>
+                                    <th class="text-center" style="width:110px">Status</th>
+                                    <th class="text-center" style="width:120px;">Next run</th>
+                                    <th class="text-center" style="width:50px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody ng-init="getallCICD('<?php echo $thisarray["p2"];?>')">
+                                <tr ng-hide="contentLoaded">
+                                    <td colspan="9" style="text-align:center;font-size:1.1em;"><i
+                                            class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                                </tr>
+                                <tr id="contloaded" class="hide"
+                                    dir-paginate="d in names | filter:search | orderBy:'lrun' | itemsPerPage:10"
+                                    pagination-id="prodx">
+                                    <td class="text-center" style="padding: .5rem;"><a
+                                            href="/automation/{{ d.jobid }}"><svg class="midico midico-outline">
+                                                <use href="/assets/images/icon/midleoicons.svg#i-a-enabled"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-a-enabled" />
+                                            </svg></a></td>
+                                    <td class="text-center">{{ d.jobname }}</td>
+                                    <td class="text-center">{{ d.objname }}</td>
+                                    <td class="text-center">{{ d.proj }}</td>
+                                    <td class="text-center">{{ d.deplenv }}</td>
+                                    <td class="text-center">{{ d.srv }}</td>
+                                    <td class="text-center"><span
+                                            class="badge badge-{{ d.statusinfo }}">{{ d.statusinfotxt }}</span></td>
+                                    <td class="text-center">{{ d.nrun }}</td>
+                                    <td class="text-center"></td>
 
-                            </tr>
-                        </tbody>
-                    </table>
-                    <dir-pagination-controls pagination-id="prodx" boundary-links="true"
-                        on-page-change="pageChangeHandler(newPageNumber)"
-                        template-url="/assets/templ/pagination.tpl.html"></dir-pagination-controls>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls pagination-id="prodx" boundary-links="true"
+                            on-page-change="pageChangeHandler(newPageNumber)"
+                            template-url="/assets/templ/pagination.tpl.html"></dir-pagination-controls>
+                            </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <input type="text" ng-model="search" class="form-control topsearch" placeholder="Filter">
+                    <span class="searchicon"><svg class="midico midico-outline">
+                            <use href="/assets/images/icon/midleoicons.svg#i-search"
+                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                        </svg>
                 </div>
-
-
-
+                <?php include "public/modules/breadcrumbin.php"; ?>
             </div>
         </div>
-        </div>
-        </div>
-
+    </div>
+</div>
 
     <?php } 
             }

@@ -106,13 +106,15 @@ class Class_appconfig
 <?php }
         if ($thisarray['p1'] == "env" || $thisarray['p1'] == "business") {?>
 <link rel="stylesheet" type="text/css" href="/assets/css/nestablemenu.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-datetimepicker.css">
 <?php }
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Midleo configuration";
         include "public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
+        $brarr=array();
         if($_SESSION["user_level"]>=3){
-            $brarr=array(
+            $brenvarr=array(
                 array(
                     "title"=>"View/Edit users",
                     "link"=>"/".$page."/users",
@@ -121,14 +123,14 @@ class Class_appconfig
                 )
               );
               if (sessionClass::checkAcc($acclist, "odfiles")) {
-                array_push($brarr,array(
+                array_push($brenvarr,array(
                     "title"=>"View/Edit groups",
                     "link"=>"/".$page."/groups",
                     "midicon"=>"groups",
                     "active"=>($thisarray['p1'] == "groups")?"active":"",
                   ));
               }
-              array_push($brarr,array(
+              array_push($brenvarr,array(
                 "title"=>"LDAP entries",
                 "link"=>"/".$page."/ldap",
                 "midicon"=>"ldap",
@@ -175,11 +177,32 @@ class Class_appconfig
             );
 
         }
-        include "public/modules/breadcrumb.php";?>
-
-<?php if (file_exists(__DIR__ . "/app/" . $thisarray['p1'] . ".php")) {include "app/" . $thisarray['p1'] . ".php";} else {textClass::PageNotFound();}?>
-
-</div>
+        ?>
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-10">
+        <div class="row ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+            <div class="col-md-9">
+                <?php include "public/modules/breadcrumb.php"; ?><br>
+                <?php if (file_exists(__DIR__ . "/app/" . $thisarray['p1'] . ".php")) {include "app/" . $thisarray['p1'] . ".php";} else {textClass::PageNotFound();}?>
+            </div>
+            <div class="col-md-3">
+                <?php if(!in_array($thisarray['p1'], array("external","mail","main"))){?>
+                <div>
+                    <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Filter">
+                    <span class="searchicon"><svg class="midico midico-outline">
+                            <use href="/assets/images/icon/midleoicons.svg#i-search"
+                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                        </svg>
+                </div>
+                
+                <?php }
+ ?><?php include "public/modules/breadcrumbin.php"; ?>
+            </div>
+        </div>
+    </div>
 </div>
 <?php
 include "public/modules/footer.php";
@@ -189,22 +212,22 @@ include "public/modules/footer.php";
 <script src="/assets/js/dirPagination.js" type="text/javascript"></script>
 <script type="text/javascript" src="/assets/js/ng-controller.js"></script>
 <?php }   if ($thisarray['p1'] == "external") {?>
-    <script type="text/javascript">
-        var app = angular.module('ngApp', []);
+<script type="text/javascript">
+var app = angular.module('ngApp', []);
 
-        app.config(['$compileProvider',
-            function($compileProvider) {
-                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
-            }
-        ]);
-        app.controller('ngCtrl', function($scope, $http) {
-            $scope.ext=[];
-            $scope.ext.gittype="<?php echo $website['gittype'];?>";
-        });
-        angular.bootstrap(document.getElementById("ngApp"), ['ngApp']);
-        </script>
+app.config(['$compileProvider',
+    function($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
+    }
+]);
+app.controller('ngCtrl', function($scope, $http) {
+    $scope.ext = [];
+    $scope.ext.gittype = "<?php echo $website['gittype'];?>";
+});
+angular.bootstrap(document.getElementById("ngApp"), ['ngApp']);
+</script>
 
-    <?php }  if ($thisarray['p1'] == "update") {?>
+<?php }  if ($thisarray['p1'] == "update") {?>
 <script type="text/javascript">
 function getChlist() {
     $(".loading").show();
@@ -219,17 +242,24 @@ function getChlist() {
         cache: false,
         success: function(data) {
             if (data.error) {
-                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.errorlog + "</li>");
+                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.errorlog +
+                    "</li>");
                 $(".loading").hide();
             } else if (data.resp.error) {
-                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.resp.errorlog + "</li>");
+                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.resp.errorlog +
+                    "</li>");
                 $(".loading").hide();
             } else {
                 $.each(data.resp.history, function(k, v) {
-                    $thisdiv.append("<li class='list-group-item list-group-item-action flex-column align-items-start'>"+
-                    "<div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>"+v.author_name+"</h5>"+
-                    "<small class='text-muted'>"+moment(v.committed_date).format('DD.MM.YYYY-HH:mm') +"</small></div><p class='mb-1'>"+v.message+"</p>"+
-                    "<small class='text-muted'><a href='"+v.web_url+"' target='_blank'>Commit #"+v.short_id+"</a></small></li>");
+                    $thisdiv.append(
+                        "<li class='list-group-item list-group-item-action flex-column align-items-start'>" +
+                        "<div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +
+                        v.author_name + "</h5>" +
+                        "<small class='text-muted'>" + moment(v.committed_date).format(
+                            'DD.MM.YYYY-HH:mm') + "</small></div><p class='mb-1'>" + v.message +
+                        "</p>" +
+                        "<small class='text-muted'><a href='" + v.web_url +
+                        "' target='_blank'>Commit #" + v.short_id + "</a></small></li>");
                 });
                 $(".loading").hide();
             }
@@ -270,10 +300,12 @@ function downloadupd() {
         cache: false,
         success: function(data) {
             if (data.error) {
-                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.errorlog + "</li>");
+                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.errorlog +
+                    "</li>");
                 $(".loading").hide();
             } else if (data.resp.error) {
-                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.resp.errorlog + "</li>");
+                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.resp.errorlog +
+                    "</li>");
                 $(".loading").hide();
             } else if (!data.resp) {
                 $thisdiv.append(
@@ -344,9 +376,9 @@ function saveupd() {
 $(document).ready(function() {
     let table = $('#data-table').DataTable({
         "oLanguage": {
-             "sSearch": "",
-             "sSearchPlaceholder": "Find a module",
-         },
+            "sSearch": "",
+            "sSearchPlaceholder": "Find a module",
+        },
         dom: 'Bfrtip',
         //  responsive: true,
         columnDefs: [{
@@ -356,17 +388,19 @@ $(document).ready(function() {
                 return (row[2] == "*" ?
                     "<button type=\"button\" class=\"btn btn-light btn-sm\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-x' xlink:href='/assets/images/icon/midleoicons.svg#i-x' /></svg></button>" :
                     "<button type=\"button\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Delete module\" class=\"btn btn-light btn-sm command-delete\" data-row-id=\"" +
-                    row[0] + "\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-trash' xlink:href='/assets/images/icon/midleoicons.svg#i-trash' /></svg></button>");
+                    row[0] +
+                    "\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-trash' xlink:href='/assets/images/icon/midleoicons.svg#i-trash' /></svg></button>"
+                    );
             }
         }]
     });
-    $('.dtfilter').keyup(function(){
-        table.search($(this).val()).draw() ;
-        });
+    $('.dtfilter').keyup(function() {
+        table.search($(this).val()).draw();
+    });
     $('.command-delete').on('click', function() {
-      var thisid = $(this).data("row-id");
-      $("#mod" + thisid).hide();
-      delmodule(thisid);
+        var thisid = $(this).data("row-id");
+        $("#mod" + thisid).hide();
+        delmodule(thisid);
     });
 
 });

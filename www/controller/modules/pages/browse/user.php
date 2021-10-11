@@ -1,5 +1,10 @@
 <?php
-
+array_push($brarr,array(
+    "title"=>"Back",
+    "link"=>"javascript:history.back(1)",
+    "icon"=>"mdi-arrow-left",
+    "active"=>true,
+  ));
  $sql="select t.email,t.fullname,t.ldapserver, t.avatar, t.user_online_show from users t where t.mainuser=?"; 
  $q = $pdo->prepare($sql);
  $q->execute(array($thisarray['p2']));
@@ -45,9 +50,7 @@ if(!empty($tmp["user"]) && is_array($tmp["user"])){ ?>
                     }
                   }
                   ?>
-                <br>
-                <a href="javascript:history.back(1)" class="btn btn-light btn-sm"><i
-                        class="mdi mdi-arrow-left"></i>&nbsp;Back</a>
+                
 
             </div>
 
@@ -56,7 +59,6 @@ if(!empty($tmp["user"]) && is_array($tmp["user"])){ ?>
 
     <div class="col-lg-8 col-md-12">
         <div class="card">
-            <div class="card-header"><h4>Timeline - last 20 activities</h4></div>
             <div class="card-body">
 
 <?php $sql="select * from tracking where whoid=? order by id desc limit 20";

@@ -20,67 +20,89 @@ if (!empty($bsteps) && !empty($ugrarr) && !empty($widarr)) {
     }
    }
   } else { $temp["bsteps"] = array(); } ?>
-  
-      <?php if ($thisarray['p1'] == "charts") {?>
-        <?php if (isset($modulelist["budget"]) && !empty($modulelist["budget"])) {?>
-          <form method="post" action="">
-      <div class="row"> <div class="col-md-4 position-relative">
-      <input type="text" id="applauto"  class="form-control topsearch" required placeholder="Find an application" />
-      <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-  <input type="text" id="appname" name="appname" style="display:none;" />
-</div>
-<div class="col-md-2">
-        <button type="submit" name="getforms" class="btn btn-info"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>&nbsp;Show</button>&nbsp;
-        <a href="/webstat/charts/?" class="btn btn-light">Reset</a>   
-      </div>     
-                        </div>
-                        </form><br>
-     <?php }?>
 
-      <div class="row">
-          <div class="col-md-6">
-           <div class="card">
-           <div class="card-header"><h4>Overview</h4></div>
-                <div class="card-body">
-                  <div class="chart-edge">
-                <canvas id="bar-chart-eff"></canvas>
-                </div>
+<?php if ($thisarray['p1'] == "charts") {?>
+  <div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-8">
+<?php if (isset($modulelist["budget"]) && !empty($modulelist["budget"])) {?>
+<form method="post" action="">
+    <div class="row">
+        <div class="col-md-4 position-relative">
+            <input type="text" id="applauto" class="form-control topsearch" required
+                placeholder="Find an application" />
+            <span class="searchicon"><svg class="midico midico-outline">
+                    <use href="/assets/images/icon/midleoicons.svg#i-search"
+                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                </svg>
+                <input type="text" id="appname" name="appname" style="display:none;" />
+        </div>
+        <div class="col-md-4">
+            <button type="submit" name="getforms" class="btn btn-info"><svg class="midico midico-outline">
+                    <use href="/assets/images/icon/midleoicons.svg#i-search"
+                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                </svg>&nbsp;Show</button>&nbsp;
+            <a href="/webstat/charts/?" class="btn btn-light">Reset</a>
+        </div>
+    </div>
+</form><br>
+<?php }?>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Overview</h4>
+            </div>
+            <div class="card-body">
+                <div class="chart-edge">
+                    <canvas id="bar-chart-eff"></canvas>
                 </div>
             </div>
-
-            
         </div>
-        <?php if (!empty($temp["bsteps"]) && count($temp["bsteps"])>0) {?>
-        <div class="col-md-6">
-                        <div class="card">
-                        <div class="card-header"><h4>Requests</h4></div>
-                            <div class="card-body">
-                                <div>
-                                    <canvas id="req-pie-chart" height="150"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        <?php } ?>
-      </div>
-      <?php } else {?>
-      <div class="alert alert-info">Please open the correct menu</div>
-      <?php }?>
+
+
     </div>
-  
+    <?php if (!empty($temp["bsteps"]) && count($temp["bsteps"])>0) {?>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Requests</h4>
+            </div>
+            <div class="card-body">
+                <div>
+                    <canvas id="req-pie-chart" height="150"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+</div>
+</div>
+    <div class="col-md-2">
+        <?php include "public/modules/breadcrumbin.php"; ?>
+    </div>
+    </div>
+<?php } else {?>
+<div class="alert alert-info">Please open the correct menu</div>
+<?php }?>
+</div>
+
 <?php 
 include "public/modules/footer.php";
 include "public/modules/js.php"; ?>
-    <script src="/assets/js/chart.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-    var coleff = "rgb(82,194,247)";
-    var coldepl = "rgb(0,200,83)";
-    var colnewreq = "rgb(69,90,100)";
-    var colapp = "rgb(98,0,234)";
+<script src="/assets/js/chart.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var coleff = "rgb(82,194,247)";
+var coldepl = "rgb(0,200,83)";
+var colnewreq = "rgb(69,90,100)";
+var colapp = "rgb(98,0,234)";
 
-   var ticks_months = [ <?php for ($i = 1; $i <= 6; $i++) {$offset = 6 - $i;
+var ticks_months = [<?php for ($i = 1; $i <= 6; $i++) {$offset = 6 - $i;
             echo '[' . $i . ',"' . date('F', strtotime("-$offset months")) . '"],';}?>];
-   var dataeff=[   <?php if (DBTYPE == "oracle") {
+var dataeff = [<?php if (DBTYPE == "oracle") {
             $sql = "SELECT TO_CHAR(months.month,'YYYY-MM') as month, COALESCE(SUM(effdays),0) as efforts
                  FROM
                  (select trunc(sysdate) as month from dual
@@ -123,8 +145,8 @@ include "public/modules/js.php"; ?>
             $q = $pdo->prepare($sql);
             $q->execute();
             $zobj = $q->fetchAll();
-            foreach ($zobj as $val) {echo "{ x: new Date('" . $val['month'] . "'),y: " . $val['efforts'] . "},";}?> ];
-    var dataappr=[   <?php if (DBTYPE == "oracle") {
+            foreach ($zobj as $val) {echo "{ x: new Date('" . $val['month'] . "'),y: " . $val['efforts'] . "},";}?>];
+var dataappr = [<?php if (DBTYPE == "oracle") {
                 $sql = "SELECT TO_CHAR(months.month,'YYYY-MM') as month, COALESCE(count(id),0) as requests
                  FROM
                  (select trunc(sysdate) as month from dual
@@ -167,8 +189,9 @@ include "public/modules/js.php"; ?>
             $q = $pdo->prepare($sql);
             $q->execute();
             $zobj = $q->fetchAll();
-            foreach ($zobj as $val) {echo "{ x: new Date('" . $val['month'] . "'),y: " . $val['requests'] . "},";}?> ];
-    var datadepl=[   <?php if (DBTYPE == "oracle") {
+            foreach ($zobj as $val) {echo "{ x: new Date('" . $val['month'] . "'),y: " . $val['requests'] . "},";}?>];
+var datadepl = [
+    <?php if (DBTYPE == "oracle") {
                 $sql = "SELECT TO_CHAR(months.month,'YYYY-MM') as month, COALESCE(count(id),0) as deployments
                  FROM
                  (select trunc(sysdate) as month from dual
@@ -211,8 +234,8 @@ include "public/modules/js.php"; ?>
             $q = $pdo->prepare($sql);
             $q->execute();
             $zobj = $q->fetchAll();
-            foreach ($zobj as $val) {echo "{ x: new Date('" . $val['month'] . "'),y: " . $val['deployments'] . "},";}?> ];
-    var datanewreq=[   <?php if (DBTYPE == "oracle") {
+            foreach ($zobj as $val) {echo "{ x: new Date('" . $val['month'] . "'),y: " . $val['deployments'] . "},";}?>];
+var datanewreq = [<?php if (DBTYPE == "oracle") {
                 $sql = "SELECT TO_CHAR(months.month,'YYYY-MM') as month, COALESCE(count(id),0) as requests
                  FROM
                  (select trunc(sysdate) as month from dual
@@ -255,85 +278,101 @@ include "public/modules/js.php"; ?>
             $q = $pdo->prepare($sql);
             $q->execute();
             $zobj = $q->fetchAll();
-            foreach ($zobj as $val) {echo "{ x: new Date('" . $val['month'] . "'),y: " . $val['requests'] . "},";}?> ];
-    var color = Chart.helpers.color;
-    var config = {
-			type: 'line',
-			data: {
-				datasets: [{
-					label: 'Efforts',
-					backgroundColor: color(coleff).alpha(0.2).rgbString(),
-					borderColor: coleff,
-					fill: true,
-					data: dataeff,
-				},{
-					label: 'Deployments',
-					backgroundColor: color(coldepl).alpha(0.2).rgbString(),
-					borderColor: coldepl,
-					fill: true,
-					data: datadepl,
-				},{
-					label: 'New requests',
-					backgroundColor: color(colnewreq).alpha(0.2).rgbString(),
-					borderColor: colnewreq,
-					fill: true,
-					data: datanewreq,
-				},{
-					label: 'Approved requests',
-					backgroundColor: color(colapp).alpha(0.2).rgbString(),
-					borderColor: colapp,
-					fill: true,
-					data: dataappr,
-				}]
-			},
-			options: {
-				responsive: true,
-				title: {  display: false, /*	text: 'changes per day'*/	},
-				scales: {
-					xAxes: [{
-            type: 'time',
-            time: { unit: 'month' },
-						display: true,
-						scaleLabel: { display: false,labelString: 'Date'	},
-						ticks: { major: {		fontColor: '#FF0000'	}}
-					}],
-					yAxes: [{
-						display: true,
-						scaleLabel: {	display: true,	labelString: 'number'}
-					}]
-				}
-			}
-		};
-    window.onload = function() {
-			var ctx = document.getElementById('bar-chart-eff').getContext('2d');
-			window.myLine = new Chart(ctx, config);
-    };
-    <?php if (!empty($temp["bsteps"]) && count($temp["bsteps"])>0) {?>
-  new Chart(document.getElementById("req-pie-chart"), {
-    type: "pie",
+            foreach ($zobj as $val) {echo "{ x: new Date('" . $val['month'] . "'),y: " . $val['requests'] . "},";}?>];
+var color = Chart.helpers.color;
+var config = {
+    type: 'line',
     data: {
-      labels: [<?php foreach ($temp["bsteps"] as $keyin => $valin) {echo "'" . $valin["name"] . "',";}?>],
-      datasets: [
-        {
-          label: "",
-          backgroundColor: [ <?php foreach ($temp["bsteps"] as $keyin => $valin) {echo "'" . $valin["color"] . "',";}?> ],
-          borderColor: "#ababab",
-          data: [<?php foreach ($temp["bsteps"] as $keyin => $valin) {echo "'" . $valin["wfnum"] . "',";}?>],
-        },
-      ],
+        datasets: [{
+            label: 'Efforts',
+            backgroundColor: color(coleff).alpha(0.2).rgbString(),
+            borderColor: coleff,
+            fill: true,
+            data: dataeff,
+        }, {
+            label: 'Deployments',
+            backgroundColor: color(coldepl).alpha(0.2).rgbString(),
+            borderColor: coldepl,
+            fill: true,
+            data: datadepl,
+        }, {
+            label: 'New requests',
+            backgroundColor: color(colnewreq).alpha(0.2).rgbString(),
+            borderColor: colnewreq,
+            fill: true,
+            data: datanewreq,
+        }, {
+            label: 'Approved requests',
+            backgroundColor: color(colapp).alpha(0.2).rgbString(),
+            borderColor: colapp,
+            fill: true,
+            data: dataappr,
+        }]
     },
     options: {
-      legend: {
-        labels: {
-          fontColor: Chart.helpers.color,
+        responsive: true,
+        title: {
+            display: false,
+            /*	text: 'changes per day'*/
         },
-      },
-      title: {
-        display: true,
-        fontColor: Chart.helpers.color,
-        text: "Current requests by business step",
-      },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    unit: 'month'
+                },
+                display: true,
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Date'
+                },
+                ticks: {
+                    major: {
+                        fontColor: '#FF0000'
+                    }
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'number'
+                }
+            }]
+        }
     }
-  });
+};
+window.onload = function() {
+    var ctx = document.getElementById('bar-chart-eff').getContext('2d');
+    window.myLine = new Chart(ctx, config);
+};
+<?php if (!empty($temp["bsteps"]) && count($temp["bsteps"])>0) {?>
+new Chart(document.getElementById("req-pie-chart"), {
+    type: "pie",
+    data: {
+        labels: [<?php foreach ($temp["bsteps"] as $keyin => $valin) {echo "'" . $valin["name"] . "',";}?>],
+        datasets: [{
+            label: "",
+            backgroundColor: [
+                <?php foreach ($temp["bsteps"] as $keyin => $valin) {echo "'" . $valin["color"] . "',";}?>
+            ],
+            borderColor: "#ababab",
+            data: [
+                <?php foreach ($temp["bsteps"] as $keyin => $valin) {echo "'" . $valin["wfnum"] . "',";}?>],
+        }, ],
+    },
+    options: {
+        legend: {
+            labels: {
+                fontColor: Chart.helpers.color,
+            },
+        },
+        title: {
+            display: true,
+            fontColor: Chart.helpers.color,
+            text: "Current requests by business step",
+        },
+    }
+});
 <?php } ?>
-   </script>
+</script>

@@ -39,7 +39,7 @@ class Class_reports
    echo '<body class="fix-header card-no-border no-sidebar" style="background: #fff;"><div id="main-wrapper">';
     ?>
         <?php if(file_exists(__DIR__."/types/".$thisarray['p1'].".php")){ include "types/".$thisarray['p1'].".php";}   else { textClass::PageNotFound(); }?>
-<?php include "public/modules/license.php";
+<?php 
     echo '</div>';
     include "public/modules/js.php"; ?>
     

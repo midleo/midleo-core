@@ -35,7 +35,7 @@
             <div class="col-md-8">
             <div class="card">
   <div class="card-body p-0">
-            <table id="data-table" class="table table-hover stylish-table" aria-busy="false">
+            <table id="data-table" class="table table-hover stylish-table mb-0" aria-busy="false">
                 <thead>
                   <tr>
                   <th class="text-start">File</th>

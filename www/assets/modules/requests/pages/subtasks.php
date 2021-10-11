@@ -203,7 +203,7 @@ foreach($wfdatagroups as $key=>$val){ ?>
          if($q->fetchColumn()>0){  ?>
               
   <div class="table-responsive">
-       <table class="table table-hover stylish-table">
+       <table class="table table-hover stylish-table mb-0">
         <thead><tr><th>Status</th><th>Task Name</th><th>From</th><th>To</th><th>Deadline</th></tr></thead>
        <tbody>
          <?php

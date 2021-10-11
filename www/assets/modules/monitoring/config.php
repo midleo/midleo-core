@@ -75,21 +75,24 @@ class Class_monitoring{
   include "public/modules/breadcrumb.php"; ?>
         <?php 
         if($thisarray["p2"]=="new"){ ?>
-        <div id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-        <form name="monform" action="" method="post">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card ngctrl">
-                        <div class="card-header">
-                            <h4>Define new monitoring</h4>
-                        </div>
-                        <div class="card-body">
-                            
+        <div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-10">
+        <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+        <div class="col-lg-9">
+            <form name="monform" action="" method="post">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card ngctrl">
+                            <div class="card-body">
+
                                 <?php if(!empty($_SESSION["userdata"]["apparr"])){
     $sql="select appcode,appinfo from config_app_codes where appcode in (" . str_repeat('?,', count($_SESSION["userdata"]["apparr"]) - 1) . '?' . ") ";
     $stmt = $pdo->prepare($sql);
     if($stmt->execute($_SESSION["userdata"]["apparr"])){  ?>
-                                 <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="form-control-label text-lg-left col-md-4">Monitor Name</label>
                                     <div class="col-md-8"><input required name="monname" id="monname" type="text"
                                             class="form-control" value="">
@@ -138,7 +141,7 @@ class Class_monitoring{
                                     <label class="form-control-label text-lg-left col-md-4">Monitoring provider</label>
                                     <?php if(is_array($monjobprovider)){?>
                                     <div class="col-md-8">
-                                    <select required name="monprovider" ng-model="mon.monprov" class="form-control">
+                                        <select required name="monprovider" ng-model="mon.monprov" class="form-control">
                                             <option value="">Please select</option>
                                             <?php 
     foreach($monjobprovider as $key=>$val) { ?>
@@ -164,7 +167,7 @@ class Class_monitoring{
                                     </div>
                                     <?php } ?>
                                 </div>
-                                
+
                                 <div class="form-group row">
                                     <label class="form-control-label text-lg-left col-md-4">Monitoring Software</label>
                                     <?php if(is_array($monjobsrv)){?>
@@ -211,38 +214,47 @@ class Class_monitoring{
                                     <?php } ?>
                                 </div>
                                 <div class="form-group row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-8">
-<button type="submit" name="savemon" class="btn btn-info"><svg class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                        </svg>&nbsp;Save</button>
-    </div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8">
+                                        <button type="submit" name="savemon" class="btn btn-info"><svg
+                                                class="midico midico-outline">
+                                                <use href="/assets/images/icon/midleoicons.svg#i-save"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
+                                            </svg>&nbsp;Save</button>
+                                    </div>
                                 </div>
                                 <?php }} else { echo "You are not assignd to any Applications";} ?>
 
 
-                            
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6" ng-show="mon.monaltype">
-                    <div class="card ngctrl">
-                        <div class="card-body">
+                    <div class="col-md-6" ng-show="mon.monaltype">
+                        <div class="card ngctrl">
+                            <div class="card-body">
 
-                        <div class="form-group row" ng-show="mon.monaltype=='email'">
+                                <div class="form-group row" ng-show="mon.monaltype=='email'">
                                     <label class="form-control-label text-lg-left col-md-4">Email for the alert</label>
                                     <div class="col-md-8">
-                                    <input name="monaemail" type="text" id="tags" data-role="tagsinput" class="form-control" value="">
+                                        <input name="monaemail" type="text" id="tags" data-role="tagsinput"
+                                            class="form-control" value="">
                                     </div>
                                 </div>
 
 
-    </div>
-    </div>
-    </div>
-            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
+            </div>
+    <div class="col-md-3">
+        <?php include "public/modules/breadcrumbin.php"; ?>
+    </div>
+    </div>
+
+
         </div>
         <?php } else {
         if(!empty($thisarray['p1'])){ 
@@ -257,22 +269,15 @@ class Class_monitoring{
         textClass::PageNotFound();
      }
         } else { ?>
-        
+<div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
+    </div>
+    <div class="col-lg-10">
 
-        <div id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-            <div class="row p-0">
-                <div class="col-md-3 position-relative">
-                    <input type="text" ng-model="search" class="form-control topsearch" placeholder="Find a service">
-                    <span class="searchicon"><svg class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                        </svg>
-                </div>
-            </div><br>
-            <div class="card ngctrl">
-                <div class="card-body p-0">
-
-                    <div class="table-responsive">
+        <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+           <div class="col-lg-9">
+            <div class="card ngctrl p-0">
                         <table class="table table-vmiddle table-hover stylish-table mb-0">
                             <thead>
                                 <tr>
@@ -321,6 +326,16 @@ class Class_monitoring{
                     </div>
 
                 </div>
+
+
+                <div class="col-md-3">
+    <div>
+      <input type="text" ng-model="search" class="form-control topsearch" placeholder="Filter">
+      <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
+  </div>
+        <?php include "public/modules/breadcrumbin.php"; ?>
+    </div>
+    </div>
             </div>
         </div>
     </div>
@@ -341,17 +356,19 @@ echo "</div>";
         echo '<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
         <script src="/assets/js/datatables/dataTables.bootstrap5.min.js"></script>
         <script src="/assets/js/datatables/dataTables.fixedColumns.min.js"></script>'; ?>
-       <script type="text/javascript">
-        let dtable=$('#data-table').DataTable({
-           "oLanguage": {
-             "sSearch": ""
-            },
-            dom: 'Bfrtip',
-            "order": [[ 6, "desc" ]]
-         });
-        $('.dtfilter').keyup(function(){
-          dtable.search($(this).val()).draw() ;
-        });
+    <script type="text/javascript">
+    let dtable = $('#data-table').DataTable({
+        "oLanguage": {
+            "sSearch": ""
+        },
+        dom: 'Bfrtip',
+        "order": [
+            [6, "desc"]
+        ]
+    });
+    $('.dtfilter').keyup(function() {
+        dtable.search($(this).val()).draw();
+    });
     </script>
     <?php }
     include "public/modules/template_end.php";

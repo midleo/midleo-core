@@ -366,7 +366,7 @@ array_push($brarr, array(
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="card p-0">
-                                        <table class="table  table-vmiddle table-hover stylish-table">
+                                        <table class="table  table-vmiddle table-hover stylish-table mb-0">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">Name</th>

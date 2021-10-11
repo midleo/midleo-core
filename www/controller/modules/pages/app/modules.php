@@ -1,4 +1,11 @@
 <?php
+array_push($brarr,array(
+  "title"=>"Install new module",
+  "link"=>"#modal-module",
+  "modal"=>true,
+  "midicon"=>"add",
+  "active"=>true,
+));
  if(isset($_POST['instmodule'])){
     $img = $_FILES['dfile'];
     $moddir="assets/modules/";
@@ -24,20 +31,9 @@
     }  
  }
  ?>
-  <div class="row">
-          <div class="col-md-3 position-relative">
-              <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Find a module">
-              <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-          </div>
-          <div class="col-md-9 text-end" >
-          <a data-bs-toggle="modal" class="waves-effect waves-light btn btn-info" href="#modal-module"><svg data-bs-toggle="tooltip" data-bs-placement="top" title="Install new module" class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy" /></svg>&nbsp;Install</a>
-
-          </div>
-  </div><br>
-<div class="card" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-        <div class="card-body p-0"> 
+<div class="card p-0">
     <form action="" method="post" enctype="multipart/form-data" name="frmUpload">
-     <table id="data-table" class="table table-hover stylish-table" aria-busy="false" style="margin-top:0px!important;">
+     <table id="data-table" class="table table-hover stylish-table mb-0" aria-busy="false" style="margin-top:0px!important;">
         <thead>
           <tr>
             <th data-column-id="id" data-identifier="true" data-align="center" data-header-align="center" data-width="150px">Module</th>
@@ -81,7 +77,6 @@
           </div>
       </div>
     </div>
-  </div>
       
     </form>
   </div> </div> 

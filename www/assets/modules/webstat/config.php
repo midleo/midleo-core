@@ -39,7 +39,6 @@ class Class_webstat
             "active"=>($thisarray['p1']=="ibmmq")?"active":"",
           )
       );
-        include "public/modules/breadcrumb.php";
         if(!empty($thisarray['p1'])){
     
         if (file_exists(__DIR__ . "/views/" . $thisarray['p1'] . ".php")) { include "views/" . $thisarray['p1'] . ".php"; }

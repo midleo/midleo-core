@@ -15,7 +15,7 @@
       </div>
     </div><br><br>
     <div class="row"><div class="col-md-12">
-      <table class="table table-striped table-vmiddle table-hover stylish-table">
+      <table class="table table-striped table-vmiddle table-hover stylish-table mb-0">
         <thead>
           <tr>
             <th class="text-center">Name</th>

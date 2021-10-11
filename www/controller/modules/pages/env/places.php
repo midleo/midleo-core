@@ -153,7 +153,7 @@ $sql="select serverid,serverdns,servertype from env_servers where pluid=?";
 $q = $pdo->prepare($sql);
 $q->execute(array(htmlspecialchars($_GET["uid"]))); 
 if($zobj = $q->fetchAll()){ ?>
-<table id="data-table" class="table table-hover stylish-table" aria-busy="false">
+<table id="data-table" class="table table-hover stylish-table mb-0" aria-busy="false">
         <thead>
           <tr>
             <th >Server</th>

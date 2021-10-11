@@ -1,9 +1,10 @@
+<?php if($breadcrumb["special"] || $brarr){ ?>
 <br>
 <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
 <br>
 <div class="list-group">
-    <?php if($breadcrumb){  if($brarr){ foreach($brarr as $key=>$val){ ?>
-    <a href="<?php echo $val["link"];?>" <?php if($val["tab"]){?>data-bs-toggle="tab" role="tab"<?php } ?> <?php if($val["id"]){?>id="<?php echo $val["id"];?>"<?php } ?> <?php if($val["nglink"]){?>ng-click="<?php echo $val["nglink"];?>"<?php } ?> <?php if($val["ngshow"]){?>ng-show="<?php echo $val["ngshow"];?>"<?php } ?>
+    <?php  if($brarr){ foreach($brarr as $key=>$val){ ?>
+    <a href="<?php echo $val["link"];?>" <?php if($val["tab"]){?>data-bs-toggle="tab" role="tab"<?php } ?> <?php if($val["id"]){?>id="<?php echo $val["id"];?>"<?php } ?> <?php if($val["nglink"]){?>ng-click="<?php echo $val["nglink"];?>"<?php } ?> <?php if($val["onclick"]){?>onclick="<?php echo $val["onclick"];?>"<?php } ?> <?php if($val["ngshow"]){?>ng-show="<?php echo $val["ngshow"];?>"<?php } ?>
     <?php if($val["modal"]){?>data-bs-toggle="modal"<?php } ?>
         title="<?php echo $val["title"];?>"
         class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action <?php echo $val["main"]?"border-arrow":"";?>"><?php if($val["midicon"]){?><svg
@@ -28,5 +29,6 @@
             src="<?php echo $breadcrumb["img"];?>" width="22px"></a><?php } ?>&nbsp;<?php echo $breadcrumb["textr2"];?>
         </a><?php } ?>
         <?php echo $breadcrumb["special"]?$breadcrumb["special"]:"";?>
-   <?php } ?>
+   
 </div>
+<?php } ?>

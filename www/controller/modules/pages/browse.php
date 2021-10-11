@@ -24,13 +24,12 @@ class Class_browse{
     <?php } ?>
     <?php } 
     echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
+    $brarr=array();
     if($thisarray['p1']=="req"){ $breadcrumb["text"]="Request info"; } 
           elseif($thisarray['p1']=="appserver"){ 
-            $breadcrumb["text"]="Application server info"; 
-            $showr=true;
-            $breadcrumb["textr2"]="Back to application servers";
-            $breadcrumb["linkr2"]="/env/appservers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""); 
-            $breadcrumb["midicon"]="app-srv";
+            $brarr["text"]="Application server info"; 
+            $brarr["link"]="/env/appservers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""); 
+            $brarr["midicon"]="app-srv";
           } 
           elseif($thisarray['p1']=="server"){ 
             $breadcrumb["text"]="Server info"; 
@@ -43,18 +42,38 @@ class Class_browse{
             $breadcrumb["text"]="Diagram info"; 
           } 
           elseif($thisarray['p1']=="serverlist"){ 
-            $breadcrumb["text"]="Server list"; 
-            $showr=true;
-            $breadcrumb["textr2"]="Back to home";
-            $breadcrumb["linkr2"]="//{$_SERVER['HTTP_HOST']}//p=welcome"; 
-            $breadcrumb["midicon"]="dashboard";
+            $breadcrumb["text"]="Server information"; 
+            array_push($brarr,array(
+              "title"=>"Back to home",
+              "link"=>"//".$_SERVER['HTTP_HOST']."//p=welcome",
+              "midicon"=>"dashboard",
+              "active"=>true,
+            ));
           } 
           else { $breadcrumb["text"]="User info"; } 
     include "public/modules/headcontent.php";
     ?>
     <div class="page-wrapper"><div class="container-fluid">
-       <?php if(file_exists(__DIR__."/browse/".$thisarray['p1'].".php")){ include "browse/".$thisarray['p1'].".php";}   else { textClass::PageNotFound(); }?>
+    <div class="row pt-3">
+    <div class="col-lg-2">
+        <?php include "public/modules/sidebar.php"; ?>
     </div>
+    <div class="col-lg-8">
+       <?php if(file_exists(__DIR__."/browse/".$thisarray['p1'].".php")){ include "browse/".$thisarray['p1'].".php";}   else { textClass::PageNotFound(); }?>
+       </div>
+    <div class="col-md-2">
+    <div style="display:block;">
+            <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Filter">
+            <span class="searchicon"><svg class="midico midico-outline">
+                    <use href="/assets/images/icon/midleoicons.svg#i-search"
+                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
+                </svg>
+        </div>
+        <?php include "public/modules/breadcrumbin.php"; ?>
+    </div>
+    </div>
+    
+      </div>
 </div>
 <?php
     include "public/modules/footer.php";

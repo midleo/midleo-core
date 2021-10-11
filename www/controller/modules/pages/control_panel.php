@@ -713,7 +713,7 @@ class Class_cpinfo
             <div class="col-lg-8">
                 <div class="row">
                     <div class="card p-0">
-                        <table id="data-table-ki" class="table table-hover stylish-table" aria-busy="false"
+                        <table id="data-table-ki" class="table table-hover stylish-table mb-0" aria-busy="false"
                             style="margin-top:0px !important;">
                             <thead>
                                 <tr>
