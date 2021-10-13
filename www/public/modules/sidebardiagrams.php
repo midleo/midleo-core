@@ -4,7 +4,7 @@
 <nav class="sidebar-nav ">
     <ul id="sidebarnav">
         <?php
-$sqlin = "SELECT catname, category FROM knowledge_categories" . (!empty($sactcat) ? " where" . $sactcat : "");
+$sqlin = "SELECT catname, category FROM knowledge_categories" . (!empty($sactcat) ? " where" . $sactcat : ""); 
 $qin = $pdo->prepare($sqlin);
 $qin->execute();
 $zobjin = $qin->fetchAll();

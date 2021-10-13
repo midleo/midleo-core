@@ -163,9 +163,9 @@ if ($forumcase=="posts") {
     }
   include "public/modules/headcontentinfo.php";   
   echo '<div class="page-wrapper">'; ?>
-        <div class="container-fluid">
+<div class="container-fluid">
 
-            <?php     echo '<div class="row pt-3">
+    <?php     echo '<div class="row pt-3">
             <div class="col-lg-2" style="overflow-x:auto;">';
             include "public/modules/sidebarinfo.php";
             echo '</div>
@@ -175,32 +175,32 @@ if ($forumcase=="posts") {
   $q = $pdo->prepare($sql);
   $q->execute(array($keyws));
   if($zobj = $q->fetch(PDO::FETCH_ASSOC)){ ?>
-            <div class="card" style="box-shadow:none;">
-                <div class="card-body">
-                    <h4 class="card-title"><?php echo $zobj['cat_name'];?></h4>
-                    <h6 class="card-subtitle" style="margin-bottom: 0px;">Posted
-                        <?php echo textClass::ago($zobj['catdate']);?></h6>
-                    <br>
-                    <p><?php 
+    <div class="card" style="box-shadow:none;">
+        <div class="card-body">
+            <h4 class="card-title"><?php echo $zobj['cat_name'];?></h4>
+            <h6 class="card-subtitle" style="margin-bottom: 0px;">Posted
+                <?php echo textClass::ago($zobj['catdate']);?></h6>
+            <br>
+            <p><?php 
         if (strpos($zobj['cattext'], 'diagram') !== false) {
           echo Class_info::replaceDiagramsWithImage($zobj['cattext']);
         } else {
            echo $zobj['cattext'];
         }
         ?></p>
-                </div>
-                <ul class="wall-attrs clearfix list-inline list-unstyled" style="margin-left: 10px;">
-                    <li class="wa-stats"><span><i class="mdi mdi-eye"></i> <?php echo $zobj['views'];?>
-                            views</span><span style="padding:0;"><a href=""
-                                style="color:red;display:block;width:100%;height:100%;padding: 7px 12px;"><i
-                                    class="mdi mdi-heart"></i> <?php echo $zobj['catlikes'];?> likes</a></span><span><i
-                                class="mdi mdi-open-in-new"></i> <?php echo $zobj['category'];?></span></li>
-                </ul>
-            </div>
+        </div>
+        <ul class="wall-attrs clearfix list-inline list-unstyled" style="margin-left: 10px;">
+            <li class="wa-stats"><span><i class="mdi mdi-eye"></i> <?php echo $zobj['views'];?>
+                    views</span><span style="padding:0;"><a href=""
+                        style="color:red;display:block;width:100%;height:100%;padding: 7px 12px;"><i
+                            class="mdi mdi-heart"></i> <?php echo $zobj['catlikes'];?> likes</a></span><span><i
+                        class="mdi mdi-open-in-new"></i> <?php echo $zobj['category'];?></span></li>
+        </ul>
+    </div>
 
-            <?php if(!empty($zobj['tags'])){?><br>
-            <div class="blogTags">
-                <?php
+    <?php if(!empty($zobj['tags'])){?><br>
+    <div class="blogTags">
+        <?php
   $clientkeyws=$zobj['tags'];
   $kt=explode(",",$clientkeyws);
   foreach($kt as $key=>$val){ if($val<>" " and strlen($val) < 70 and strlen($val) > 0){
@@ -208,7 +208,7 @@ if ($forumcase=="posts") {
     $val=rtrim($val, ' ');
     echo '<a class="btn btn-light btn-sm waves-effect" style="margin-right:5px;margin-top:5px;" href="/info/tags/'.$val.'"><i class="mdi mdi-pound"></i>&nbsp;'.$val.'</a>';
   }}  ?></div><?php } ?>
-            <?php
+    <?php
 $sql="update knowledge_info set views=views+1 where id=?"; 
 $q = $pdo->prepare($sql);
 $q->execute(array($zobj['id']));
@@ -252,61 +252,60 @@ $q->execute(array($zobj['id']));
   if($zobj = $q->fetchAll()){
     foreach($zobj as $val) {
       ?>
-            <div class="card waves-effect" style="display:block;box-shadow:none;"
-                onclick="location.href='/info/posts/<?php echo $val['cat_latname'];?>'">
-                <div class="card-body">
-                    <h4 class="card-title"><?php echo $val['cat_name'];?></h4>
-                    <h6 class="card-subtitle" style="margin-bottom: 0px;">Posted
-                        <?php echo textClass::ago($val['catdate']);?></h6>
-                    <br>
-                    <p><?php echo strip_tags(textClass::word_limiter($val['cattext'],120,400));?></p>
-                </div>
+    <div class="card waves-effect" style="display:block;box-shadow:none;"
+        onclick="location.href='/info/posts/<?php echo $val['cat_latname'];?>'">
+        <div class="card-body">
+            <h4 class="card-title"><?php echo $val['cat_name'];?></h4>
+            <h6 class="card-subtitle" style="margin-bottom: 0px;">Posted
+                <?php echo textClass::ago($val['catdate']);?></h6>
+            <br>
+            <p><?php echo strip_tags(textClass::word_limiter($val['cattext'],120,400));?></p>
+        </div>
 
 
-                <ul class="wall-attrs clearfix list-inline list-unstyled blogstat" style="margin-left: 10px;">
-                    <li class="wa-stats">
-                        <span><i class="mdi mdi-eye"></i> <?php echo $val['views'];?> views</span>
-                        <span style="color:red;"><i class="mdi mdi-heart"></i> <?php echo $val['catlikes'];?>
-                            likes</span>
-                        <span><i class="mdi mdi-open-in-new"></i> <?php echo $val['category'];?></span>
-                    </li>
-                </ul>
+        <ul class="wall-attrs clearfix list-inline list-unstyled blogstat" style="margin-left: 10px;">
+            <li class="wa-stats">
+                <span><i class="mdi mdi-eye"></i> <?php echo $val['views'];?> views</span>
+                <span style="color:red;"><i class="mdi mdi-heart"></i> <?php echo $val['catlikes'];?>
+                    likes</span>
+                <span><i class="mdi mdi-open-in-new"></i> <?php echo $val['category'];?></span>
+            </li>
+        </ul>
+    </div>
+    <?php }} else { ?> <div class="card" style="box-shadow:none;">
+        <div class="card-body card-padding">
+            <div class="text-center">
+                <p class="lead">There are no posts in this category</p>
+                <p class="lead"><a href="/cpinfo/new">Create one</a></p>
             </div>
-            <?php }} else { ?> <div class="card" style="box-shadow:none;">
-                <div class="card-body card-padding">
-                    <div class="text-center">
-                        <p class="lead">There are no posts in this category</p>
-                        <p class="lead"><a href="/cpinfo/new">Create one</a></p>
-                    </div>
-                </div>
-            </div><?php } ?>
-            <?php if($blognum>0){?>
-            <nav style="padding-top:10px">
-                <ul class="pagination">
-                    <?php if($page > 1)
+        </div>
+    </div><?php } ?>
+    <?php if($blognum>0){?>
+    <nav style="padding-top:10px">
+        <ul class="pagination">
+            <?php if($page > 1)
 { ?>
-                    <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $prev;?>">Previous</a></li>
-                    <?php }
+            <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $prev;?>">Previous</a></li>
+            <?php }
 for($i = 1; $i <= $total_pages; $i++)
     {
       if(($page) == $i)
       { ?>
-                    <li class="page-item active"><a class="page-link"
-                            href="/info/pn/<?php echo $i;?>"><?php echo $i;?></a></li>
-                    <?php  }
+            <li class="page-item active"><a class="page-link" href="/info/pn/<?php echo $i;?>"><?php echo $i;?></a></li>
+            <?php  }
       else
       { ?>
-                    <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $i;?>"><?php echo $i;?></a>
-                    </li>
-                    <?php }
+            <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $i;?>"><?php echo $i;?></a>
+            </li>
+            <?php }
     }
 if($page < $total_pages)
 { ?>
-                    <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $next;?>">Next</a></li>
-                    <?php } ?>
-                </ul>
-            </nav>
-            <?php } 
+            <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $next;?>">Next</a></li>
+            <?php } ?>
+        </ul>
+    </nav>
+    <?php } 
       }    
 
 
@@ -406,100 +405,100 @@ class Class_mregister{
 
   }
   include "public/modules/css.php";    ?>
-            </head>
+    </head>
 
-            <body style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
-                <section id="wrapper">
-                    <div class="login-register">
-                        <div class="row justify-content-center">
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form class="form-material form-horizontal" id="loginform"
-                                            action="" method="post">
+    <body
+        style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+        <section id="wrapper">
+            <div class="login-register">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="form-material form-horizontal" id="loginform" action="" method="post">
 
-                                            <div style="position: absolute;right: 10px;top: 10px;">
-                                                <span class="text-muted">v. <?php echo $appver;?></span>
-                                            </div>
-                                            <div class="text-center">
-                                                <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-sq-dark.svg"
-                                                    alt="Midleo CORE"
-                                                    title="Midleo CORE" class="light-logo"
-                                                    style="width:100px;" />
-                                                <h3 class="p-2 rounded-title mb-3"></h3>
-                                            </div>
-                                            <?php $sql="select ldapserver,ldapinfo from ldap_config";
+                                    <div style="position: absolute;right: 10px;top: 10px;">
+                                        <span class="text-muted">v. <?php echo $appver;?></span>
+                                    </div>
+                                    <div class="text-center">
+                                        <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-sq-dark.svg"
+                                            alt="Midleo CORE" title="Midleo CORE" class="light-logo"
+                                            style="width:100px;" />
+                                        <h3 class="p-2 rounded-title mb-3"></h3>
+                                    </div>
+                                    <?php $sql="select ldapserver,ldapinfo from ldap_config";
                         $q = $pdo->prepare($sql);              
                        $q->execute();      
                        if($zobj = $q->fetchAll()){?>
-                                            <div class="form-group mb-3">
-                                                <select name="authtype" id="authtype" class="form-control">
-                                                    <option value="">Authentication provider</option>
-                                                    <?php foreach($zobj as $val) { ?><option
-                                                        value="<?php echo $val['ldapserver'];?>">
-                                                        <?php echo $val['ldapinfo'];?></option><?php } ?>
-                                                    <option value="">Default</option>
-                                                </select>
-                                                
-                                            </div>
-                                            <?php } ?>
-                                            <div class="form-group mb-1">
-                                                <input name="usr_name" id="usr_name" class="form-control" type="text"
-                                                    required="" placeholder="Your name">
-                                            </div>
-                                            <div class="form-group mb-1">
-                                                <input name="usr_email" id="username" class="form-control" type="text"
-                                                    required="" placeholder="Email address">
-                                            </div>
-                                            <div class="form-group mb-1">
-                                                <input type="password" id="pwdnew" name="pwdnew" class="form-control " placeholder="Password">
-                                            </div>
-                                            <div class="form-group mb-1">
-                                                <input class="form-control" type="password" id="pwdnew2" name="pwdnew2"
-                                                    equalto="#pwdnew" placeholder="Confirm password">
-                                            </div>
-                                            <div class="form-group mb-1">
-                                                <div class="col-xs-12">
-                                                    <div style="display: block;" id="pass-strength-result"><i
-                                                            class='mdi mdi-lock-open-outline'></i>&nbsp;Password
-                                                        Strenght</div>
-                                                </div>
-                                            </div>
-                                           
-                                            <div class="form-group row">
-                                                <div class="col-md-6 text-end"><img src="/pubapi/captcha" /></div>
-                                                <div class="col-md-6">
-                                                    <input name="captcha" id="captcha" class="form-control" type="text"
-                                                        required="" placeholder="write the number">
-                                                                                                    </div>
-                                            </div>
-                                            <div class="form-group text-center mt-3">
-                                                <div class="col-xs-12">
-                                                    <button name="doRegister"
-                                                        class="btn m-btn-theme text-uppercase waves-effect waves-light"
-                                                        type="submit"><svg class="midico midico-outline">
-                                                            <use href="/assets/images/icon/midleoicons.svg#i-logout"
-                                                                xlink:href="/assets/images/icon/midleoicons.svg#i-logout" />
-                                                        </svg>&nbsp;Register</button>
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-0">
-                                                <div class="col-sm-12 text-center">
-                                                    You have an account? <a href="/mlogin"
-                                                        class="text-info ml-1"><b>Sign In</b></a>
-                                                </div>
-                                            </div>
-                                        </form>
+                                    <div class="form-group mb-3">
+                                        <select name="authtype" id="authtype" class="form-control">
+                                            <option value="">Authentication provider</option>
+                                            <?php foreach($zobj as $val) { ?><option
+                                                value="<?php echo $val['ldapserver'];?>">
+                                                <?php echo $val['ldapinfo'];?></option><?php } ?>
+                                            <option value="">Default</option>
+                                        </select>
+
                                     </div>
-                                </div>
+                                    <?php } ?>
+                                    <div class="form-group mb-1">
+                                        <input name="usr_name" id="usr_name" class="form-control" type="text"
+                                            required="" placeholder="Your name">
+                                    </div>
+                                    <div class="form-group mb-1">
+                                        <input name="usr_email" id="username" class="form-control" type="text"
+                                            required="" placeholder="Email address">
+                                    </div>
+                                    <div class="form-group mb-1">
+                                        <input type="password" id="pwdnew" name="pwdnew" class="form-control "
+                                            placeholder="Password">
+                                    </div>
+                                    <div class="form-group mb-1">
+                                        <input class="form-control" type="password" id="pwdnew2" name="pwdnew2"
+                                            equalto="#pwdnew" placeholder="Confirm password">
+                                    </div>
+                                    <div class="form-group mb-1">
+                                        <div class="col-xs-12">
+                                            <div style="display: block;" id="pass-strength-result"><i
+                                                    class='mdi mdi-lock-open-outline'></i>&nbsp;Password
+                                                Strenght</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6 text-end"><img src="/pubapi/captcha" /></div>
+                                        <div class="col-md-6">
+                                            <input name="captcha" id="captcha" class="form-control" type="text"
+                                                required="" placeholder="write the number">
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center mt-3">
+                                        <div class="col-xs-12">
+                                            <button name="doRegister"
+                                                class="btn m-btn-theme text-uppercase waves-effect waves-light"
+                                                type="submit"><svg class="midico midico-outline">
+                                                    <use href="/assets/images/icon/midleoicons.svg#i-logout"
+                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-logout" />
+                                                </svg>&nbsp;Register</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <div class="col-sm-12 text-center">
+                                            You have an account? <a href="/mlogin" class="text-info ml-1"><b>Sign
+                                                    In</b></a>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
+            </div>
+        </section>
 
 
-                <!-- Older IE warning message -->
-                <!--[if lt IE 9]>
+        <!-- Older IE warning message -->
+        <!--[if lt IE 9]>
   <div class="ie-warning">
   <h1 class="c-red">Warning!!</h1>
   <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -515,86 +514,86 @@ class Class_mregister{
   <![endif]--><?php
 include "public/modules/footer.php";
     include "public/modules/js.php"; ?>
-                <script type='text/javascript'>
-                (function(a) {
-                    function b() {
-                        var e = a("#pwdnew").val(),
-                            d = a("#username").val(),
-                            c = a("#pwdnew2").val(),
-                            f;
-                        a("#pass-strength-result").removeClass("short bad good strong");
-                        if (!e) {
-                            a("#pass-strength-result").html(pwsL10n.empty);
-                            return
-                        }
-                        f = passwordStrength(e, d, c);
-                        switch (f) {
-                            case 2:
-                                a("#pass-strength-result").addClass("bad").html(pwsL10n.bad);
-                                break;
-                            case 3:
-                                a("#pass-strength-result").addClass("good").html(pwsL10n.good);
-                                break;
-                            case 4:
-                                a("#pass-strength-result").addClass("strong").html(pwsL10n.strong);
-                                break;
-                            case 5:
-                                a("#pass-strength-result").addClass("short").html(pwsL10n.mismatch);
-                                break;
-                            default:
-                                a("#pass-strength-result").addClass("short").html(pwsL10n["short"])
-                        }
+        <script type='text/javascript'>
+        (function(a) {
+            function b() {
+                var e = a("#pwdnew").val(),
+                    d = a("#username").val(),
+                    c = a("#pwdnew2").val(),
+                    f;
+                a("#pass-strength-result").removeClass("short bad good strong");
+                if (!e) {
+                    a("#pass-strength-result").html(pwsL10n.empty);
+                    return
+                }
+                f = passwordStrength(e, d, c);
+                switch (f) {
+                    case 2:
+                        a("#pass-strength-result").addClass("bad").html(pwsL10n.bad);
+                        break;
+                    case 3:
+                        a("#pass-strength-result").addClass("good").html(pwsL10n.good);
+                        break;
+                    case 4:
+                        a("#pass-strength-result").addClass("strong").html(pwsL10n.strong);
+                        break;
+                    case 5:
+                        a("#pass-strength-result").addClass("short").html(pwsL10n.mismatch);
+                        break;
+                    default:
+                        a("#pass-strength-result").addClass("short").html(pwsL10n["short"])
+                }
+            }
+            a(document).ready(function() {
+                a("#pwdnew").val("").keyup(b);
+                a("#pwdnew2").val("").keyup(b);
+                a("#pass-strength-result").show();
+                a(".color-palette").click(function() {
+                    a(this).siblings('input[name="admin_color"]').prop("checked", true)
+                });
+                a("#first_name, #last_name, #nickname").blur(function() {
+                    var c = a("#display_name"),
+                        e = c.find("option:selected").attr("id"),
+                        f = [],
+                        d = {
+                            display_nickname: a("#nickname").val(),
+                            display_username: a("#username").val(),
+                            display_firstname: a("#first_name").val(),
+                            display_lastname: a("#last_name").val()
+                        };
+                    if (d.display_firstname && d.display_lastname) {
+                        d.display_firstlast = d.display_firstname + " " + d
+                            .display_lastname;
+                        d.display_lastfirst = d.display_lastname + " " + d.display_firstname
                     }
-                    a(document).ready(function() {
-                        a("#pwdnew").val("").keyup(b);
-                        a("#pwdnew2").val("").keyup(b);
-                        a("#pass-strength-result").show();
-                        a(".color-palette").click(function() {
-                            a(this).siblings('input[name="admin_color"]').prop("checked", true)
-                        });
-                        a("#first_name, #last_name, #nickname").blur(function() {
-                            var c = a("#display_name"),
-                                e = c.find("option:selected").attr("id"),
-                                f = [],
-                                d = {
-                                    display_nickname: a("#nickname").val(),
-                                    display_username: a("#username").val(),
-                                    display_firstname: a("#first_name").val(),
-                                    display_lastname: a("#last_name").val()
-                                };
-                            if (d.display_firstname && d.display_lastname) {
-                                d.display_firstlast = d.display_firstname + " " + d
-                                .display_lastname;
-                                d.display_lastfirst = d.display_lastname + " " + d.display_firstname
-                            }
-                            a("option", c).remove();
-                            a.each(d, function(i, g) {
-                                var h = g.replace(/<\/?[a-z][^>]*>/gi, "");
-                                if (d[i].length && a.inArray(h, f) == -1) {
-                                    f.push(h);
-                                    a("<option />", {
-                                        id: i,
-                                        text: h,
-                                        selected: (i == e)
-                                    }).appendTo(c)
-                                }
-                            })
-                        })
+                    a("option", c).remove();
+                    a.each(d, function(i, g) {
+                        var h = g.replace(/<\/?[a-z][^>]*>/gi, "");
+                        if (d[i].length && a.inArray(h, f) == -1) {
+                            f.push(h);
+                            a("<option />", {
+                                id: i,
+                                text: h,
+                                selected: (i == e)
+                            }).appendTo(c)
+                        }
                     })
-                })(jQuery);
-                var pwsL10n = {
-                    empty: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Password Strenght",
-                    short: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Too Short",
-                    bad: "<i class='mdi mdi-lock-open'></i>&nbsp;Bad",
-                    good: "<i class='mdi mdi-lock'></i>&nbsp;Good",
-                    strong: "<i class='mdi mdi-shield-lock-outline'></i>&nbsp;Strong",
-                    mismatch: "<i class='mdi mdi-lock-question'></i>&nbsp;Mismatch"
-                };
-                try {
-                    convertEntities(pwsL10n);
-                } catch (e) {};
-                </script>
-                <script src="/assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
+                })
+            })
+        })(jQuery);
+        var pwsL10n = {
+            empty: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Password Strenght",
+            short: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Too Short",
+            bad: "<i class='mdi mdi-lock-open'></i>&nbsp;Bad",
+            good: "<i class='mdi mdi-lock'></i>&nbsp;Good",
+            strong: "<i class='mdi mdi-shield-lock-outline'></i>&nbsp;Strong",
+            mismatch: "<i class='mdi mdi-lock-question'></i>&nbsp;Mismatch"
+        };
+        try {
+            convertEntities(pwsL10n);
+        } catch (e) {};
+        </script>
+        <script src="/assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
     include "public/modules/template_end.php";
     echo '</body></html>';
 
@@ -739,128 +738,123 @@ class Class_mlogin{
     } 
   }
 include "public/modules/css.php";    ?>
-                </head>
+        </head>
 
-                <body style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
-                    <section id="wrapper">
-                        <div class="login-register">
-                            <div class="row justify-content-center">
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form class="form-horizontal" id="loginform" action=""
-                                                method="post">
-                                                <div style="position: absolute;right: 10px;top: 10px;">
-                                                    <span class="text-muted">v.
-                                                        <?php echo !empty($appver)?$appver:"initial";?></span>
-                                                </div>
-                                                <div class="text-center">
-                                                    <img data-bs-toggle="tooltip"
-                                                        src="/assets/images/midleo-logo-sq-dark.svg"
-                                                        alt="Midleo CORE"
-                                                        title="Midleo CORE" class="light-logo"
-                                                        style="width:120px;" />
-                                                    <h3 class="p-2 rounded-title mb-3"></h3>
-                                                </div>
-                                                <?php $sql="select ldapserver,ldapinfo from ldap_config";
+        <body
+            style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+            <section id="wrapper">
+                <div class="login-register">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form class="form-horizontal" id="loginform" action="" method="post">
+                                        <div style="position: absolute;right: 10px;top: 10px;">
+                                            <span class="text-muted">v.
+                                                <?php echo !empty($appver)?$appver:"initial";?></span>
+                                        </div>
+                                        <div class="text-center">
+                                            <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-sq-dark.svg"
+                                                alt="Midleo CORE" title="Midleo CORE" class="light-logo"
+                                                style="width:120px;" />
+                                            <h3 class="p-2 rounded-title mb-3"></h3>
+                                        </div>
+                                        <?php $sql="select ldapserver,ldapinfo from ldap_config";
                         $q = $pdo->prepare($sql);              
                        $q->execute();      
                        if($zobj = $q->fetchAll()){?>
-                                                <div class="form-group mb-2">
-                                                <label for="authtype">Authentication provider</label>
-                                                    <select name="authtype" id="authtype" class="form-control">
-                                                        <?php foreach($zobj as $val) { ?><option
-                                                            value="<?php echo $val['ldapserver'];?>">
-                                                            <?php echo $val['ldapinfo'];?></option><?php } ?>
-                                                        <option value="">Default</option>
-                                                    </select>
-                                                </div>
-                                                <?php } ?>
-                                                <div class="form-group mb-2">
-                                                    <input name="usr_email" class="form-control" type="text" required=""
-                                                        id="usr_email" placeholder="Username / Email address">
-                                                  
-                                                </div>
-                                                <div class="form-group mb-2">
-                                                    <input name="pwd" class="form-control" type="password" id="pwd"
-                                                        required="" placeholder="Password">
-                                                    
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="d-flex no-block align-items-center">
-                                                        <div class="ml-auto">
-                                                            <a href="javascript:void(0)" id="to-recover"
-                                                                class="text-muted"><i
-                                                                    class="mdi mdi-lock-alert me-1"></i> Forgot pwd?</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group text-center mt-3">
-                                                    <button name="doLogin"
-                                                        class="btn m-btn-theme text-uppercase waves-effect btn-block waves-light"
-                                                        type="submit"><svg class="midico midico-outline">
-                                                            <use href="/assets/images/icon/midleoicons.svg#i-login"
-                                                                xlink:href="/assets/images/icon/midleoicons.svg#i-login" />
-                                                        </svg>&nbsp;Log In</button>
-                                                </div>
-                                                <?php if($website["registration"] && $website["registration"]==1){?>
-                                                <div class="form-group mb-0">
-                                                    <div class="col-sm-12 text-center">
-                                                        Don't have an account? <a href="/mregister"
-                                                            class="text-info ml-1"><b>Sign Up</b></a>
-                                                    </div>
-                                                </div>
-                                                <?php } ?>
-                                            </form>
-                                            <form class="form-horizontal " id="recoverform" action=""
-                                                method="post">
-                                                <div style="position: absolute;right: 10px;top: 10px;">
-                                                    <span class="text-muted">v.
-                                                        <?php echo !empty($appver)?$appver:"initial";?></span>
-                                                </div>
-                                                <div class="text-center">
-                                                    <img data-bs-toggle="tooltip"
-                                                        src="/assets/images/midleo-logo-sq-dark.svg"
-                                                        alt="Midleo CORE"
-                                                        title="Midleo CORE" class="light-logo"
-                                                        style="width:120px;" />
-                                                    <h3 class="p-2 rounded-title mb-3"></h3>
-                                                </div>
-                                                <div class="form-group ">
-                                                    <div class="col-xs-12">
-                                                        <p class="text-muted" style="line-height:initial;">Enter your Email and instructions will be
-                                                            sent to you! </p>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group mb-2">
-                                                <label for="email_reset">Email</label>
-
-                                                    <input class="form-control" name="usr_email" id="email_reset"
-                                                        type="text" required="">
-                                                </div><br>
-                                                <div class="form-group text-center mt-3">
-                                                    <div class="col-xs-12">
-                                                        <button
-                                                            class="btn m-btn-theme text-uppercase waves-effect btn-block waves-light"
-                                                            name="doForgot" type="submit">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group mb-0">
-                                                    <div class="col-sm-12 text-center">
-                                                        <a href="/mlogin" class="text-info ml-1"><b>Log In</b></a>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                        <div class="form-group mb-2">
+                                            <label for="authtype">Authentication provider</label>
+                                            <select name="authtype" id="authtype" class="form-control">
+                                                <?php foreach($zobj as $val) { ?><option
+                                                    value="<?php echo $val['ldapserver'];?>">
+                                                    <?php echo $val['ldapinfo'];?></option><?php } ?>
+                                                <option value="">Default</option>
+                                            </select>
                                         </div>
-                                    </div>
+                                        <?php } ?>
+                                        <div class="form-group mb-2">
+                                            <input name="usr_email" class="form-control" type="text" required=""
+                                                id="usr_email" placeholder="Username / Email address">
+
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <input name="pwd" class="form-control" type="password" id="pwd" required=""
+                                                placeholder="Password">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="d-flex no-block align-items-center">
+                                                <div class="ml-auto">
+                                                    <a href="javascript:void(0)" id="to-recover" class="text-muted"><i
+                                                            class="mdi mdi-lock-alert me-1"></i> Forgot pwd?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center mt-3">
+                                            <button name="doLogin"
+                                                class="btn m-btn-theme text-uppercase waves-effect btn-block waves-light"
+                                                type="submit"><svg class="midico midico-outline">
+                                                    <use href="/assets/images/icon/midleoicons.svg#i-login"
+                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-login" />
+                                                </svg>&nbsp;Log In</button>
+                                        </div>
+                                        <?php if($website["registration"] && $website["registration"]==1){?>
+                                        <div class="form-group mb-0">
+                                            <div class="col-sm-12 text-center">
+                                                Don't have an account? <a href="/mregister"
+                                                    class="text-info ml-1"><b>Sign Up</b></a>
+                                            </div>
+                                        </div>
+                                        <?php } ?>
+                                    </form>
+                                    <form class="form-horizontal " id="recoverform" action="" method="post">
+                                        <div style="position: absolute;right: 10px;top: 10px;">
+                                            <span class="text-muted">v.
+                                                <?php echo !empty($appver)?$appver:"initial";?></span>
+                                        </div>
+                                        <div class="text-center">
+                                            <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-sq-dark.svg"
+                                                alt="Midleo CORE" title="Midleo CORE" class="light-logo"
+                                                style="width:120px;" />
+                                            <h3 class="p-2 rounded-title mb-3"></h3>
+                                        </div>
+                                        <div class="form-group ">
+                                            <div class="col-xs-12">
+                                                <p class="text-muted" style="line-height:initial;">Enter your Email and
+                                                    instructions will be
+                                                    sent to you! </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="email_reset">Email</label>
+
+                                            <input class="form-control" name="usr_email" id="email_reset" type="text"
+                                                required="">
+                                        </div><br>
+                                        <div class="form-group text-center mt-3">
+                                            <div class="col-xs-12">
+                                                <button
+                                                    class="btn m-btn-theme text-uppercase waves-effect btn-block waves-light"
+                                                    name="doForgot" type="submit">Reset</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <div class="col-sm-12 text-center">
+                                                <a href="/mlogin" class="text-info ml-1"><b>Log In</b></a>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </div>
+            </section>
 
 
-                    <!-- Older IE warning message -->
-                    <!--[if lt IE 9]>
+            <!-- Older IE warning message -->
+            <!--[if lt IE 9]>
   <div class="ie-warning">
   <h1 class="c-red">Warning!!</h1>
   <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -938,138 +932,122 @@ if(isset($_POST['changepass'])){
    $breadcrumb["text"]="Profile settings";
     include "public/modules/headcontent.php";
      echo '<div class="page-wrapper"><div class="container-fluid">';
-    include "public/modules/breadcrumb.php"; ?>
+     ?>
 
-
-                    <div class="modal" id="chgpic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" style="width:380px;">
-                            <div class="modal-content">
-                                <form enctype="multipart/form-data" method="post" action="">
-                                    <div class="modal-header">Upload avatar</div>
-                                    <div class="modal-body form-horizontal form-material">
-                                        <div class="image-editor text-center">
-                                            <button type="button" id="fileupload" onClick="getFile('tufile')"
-                                                class="btn btn-light btn-sm">upload</button>
-                                            <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file"
-                                                    class="cropit-image-input" name="tufile" id="tufile"
-                                                    onChange="sub(this,'fileupload')"
-                                                    accept=".bmp, .gif, .jpeg, .jpg, .png, .tif, .tiff, image/jpeg"
-                                                    size="1" /></div>
-                                            <div class="cropit-preview profileprev" style="margin: 10px auto;">
-                                            </div>
-                                            <div class="image-size-label">Resize image</div>
-                                            <input type="range" class="cropit-image-zoom-input" id="input-slider">
-                                            <input type="hidden" name="ufile" class="ufile" />
-                                            <div class="row">
-                                                <div class="col-md-3"></div>
-                                                <div class="col-md-6">
-                                                    <button type="button"
-                                                        class="btn btn-light btn-sm prevbutton">View</button>
-                                                </div>
-                                                <div class="col-md-3"></div>
-                                            </div>
+            <div class="modal" id="chgpic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" style="width:380px;">
+                    <div class="modal-content">
+                        <form enctype="multipart/form-data" method="post" action="">
+                            <div class="modal-body form-horizontal form-material">
+                                <div class="image-editor text-center">
+                                    <button type="button" id="fileupload" onClick="getFile('tufile')"
+                                        class="btn btn-light btn-sm">upload</button>
+                                    <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file"
+                                            class="cropit-image-input" name="tufile" id="tufile"
+                                            onChange="sub(this,'fileupload')"
+                                            accept=".bmp, .gif, .jpeg, .jpg, .png, .tif, .tiff, image/jpeg" size="1" />
+                                    </div>
+                                    <div class="cropit-preview profileprev" style="margin: 10px auto;">
+                                    </div>
+                                    <div class="image-size-label">Resize image</div>
+                                    <input type="range" class="cropit-image-zoom-input" id="input-slider">
+                                    <input type="hidden" name="ufile" class="ufile" />
+                                    <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-6">
+                                            <button type="button" class="btn btn-light btn-sm prevbutton">View</button>
                                         </div>
+                                        <div class="col-md-3"></div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <input type="hidden" name="avatarid" value="<?php echo $uavatar;?>">
-                                        <button type="submit" class="btn btn-info btn-sm uploaddata"
-                                            name="addfile">Save</button>&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-danger btn-sm"
-                                            data-bs-dismiss="modal">Cancel</button>
-                                    </div>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="row"> 
-                        <div class="col-lg-4 col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Avatar</h4>
                                 </div>
-                                <div class="card-body">
-                                    <div class="mt-4 text-center">
-                                        <img class="img img-fluid rounded-circle"
-                                            src="<?php echo !empty($uavatar)?$uavatar:"/assets/images/avatar.svg";?>"
-                                            alt="" width="150">
-                                        <h4 class="card-title mt-2"><?php echo $usname;?></h4>
-                                        <h6 class="card-subtitle"><?php echo $usemail;?></h6>
-                                        <div class="row text-center justify-content-md-center">
-                                            <?php if(!empty($uavatar)){?> <form enctype="multipart/form-data"
-                                                method="post" action=""><input type="hidden" name="avatarid"
-                                                    value="<?php echo $uavatar;?>"><?php } ?>
-                                                <div class="btn-group">
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#chgpic"
-                                                        class="btn btn-info waves-effect waves-dark btn-sm">
-                                                        <i class="mdi mdi-camera"></i> <span
-                                                            class="hidden-xs">Upload</span>
-                                                    </button>
-                                                    <?php if(!empty($uavatar)){?><button type="submit"
-                                                        class="btn btn-danger btn-sm waves-effect waves-dark"
-                                                        name="delavatar"><svg class="midico midico-outline">
-                                                            <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                                                xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                                        </svg>&nbsp;Delete</button><?php } ?>
-                                                </div>
-                                                <?php if(!empty($uavatar)){?>
-                                            </form><?php } ?>
-                                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="avatarid" value="<?php echo $uavatar;?>">
+                                <button type="submit" class="btn btn-info btn-sm uploaddata"
+                                    name="addfile">Save</button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row pt-3">
+                <div class="col-lg-2">
+                    <?php include "public/modules/sidebar.php"; ?>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="card p-2">
+                                <div class="mt-4 text-center">
+                                    <img class="img img-fluid rounded-circle"
+                                        src="<?php echo !empty($uavatar)?$uavatar:"/assets/images/avatar.svg";?>" alt=""
+                                        width="150">
+                                    <h4 class="card-title mt-2"><?php echo $usname;?></h4>
+                                    <h6 class="card-subtitle"><?php echo $usemail;?></h6>
+                                    <div class="row text-center justify-content-md-center">
+                                        <?php if(!empty($uavatar)){?> <form enctype="multipart/form-data" method="post"
+                                            action=""><input type="hidden" name="avatarid"
+                                                value="<?php echo $uavatar;?>"><?php } ?>
+                                            <div class="btn-group">
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#chgpic"
+                                                    class="btn btn-light waves-effect waves-dark btn-sm">
+                                                    <i class="mdi mdi-camera"></i> <span class="hidden-xs">Upload</span>
+                                                </button>
+                                                <?php if(!empty($uavatar)){?><button type="submit"
+                                                    class="btn btn-light btn-sm waves-effect waves-dark"
+                                                    name="delavatar"><svg class="midico midico-outline">
+                                                        <use href="/assets/images/icon/midleoicons.svg#i-x"
+                                                            xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                                                    </svg>&nbsp;Delete</button><?php } ?>
+                                            </div>
+                                            <?php if(!empty($uavatar)){?>
+                                        </form><?php } ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Profile info</h4>
-                                </div>
+                            <div class="card p-3">
                                 <ul class="nav nav-tabs profile-tab" role="tablist">
                                     <li class="nav-item"> <a class="nav-link active waves-effect waves-dark"
                                             data-bs-toggle="tab" href="#profile" role="tab">Profile</a> </li>
-                                    <li class="nav-item"> <a class="nav-link waves-effect waves-dark" data-bs-toggle="tab"
-                                            href="#security" role="tab">Security</a> </li>
+                                    <li class="nav-item"> <a class="nav-link waves-effect waves-dark"
+                                            data-bs-toggle="tab" href="#security" role="tab">Security</a> </li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="profile" role="tabpanel">
-                                        <div class="card-body">
                                             <form class="form-material " method="post" action="">
                                                 <div class="form-group mt-3">
-                                                <label>Name</label>
-                                                    <input type="text" name="usname" value="<?php echo $usname;?>"
-                                                        class="form-control">
+                                                    <input type="text" placeholder="Your name" name="usname"
+                                                        value="<?php echo $usname;?>" class="form-control">
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                <label>Email</label>
-                                                    <input type="text" class="form-control" name="usemail"
-                                                        value="<?php echo $usemail;?>">
+                                                    <input type="text" placeholder="Your email" class="form-control"
+                                                        name="usemail" value="<?php echo $usemail;?>">
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                <label>Phone</label>
-                                                    <input type="text" name="usphone" value="<?php echo $userphone;?>"
-                                                        class="form-control">
+                                                    <input type="text" placeholder="contact number" name="usphone"
+                                                        value="<?php echo $userphone;?>" class="form-control">
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                <label>Title</label>
-                                                    <input type="text" name="ustitle" value="<?php echo $usertitle;?>"
-                                                        class="form-control">
-                                                    
+                                                    <input type="text" placeholder="your job title" name="ustitle"
+                                                        value="<?php echo $usertitle;?>" class="form-control">
+
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                <label>User Groups</label>
-                                                    <input type="text"
+                                                    <input type="text" placeholder="User Gorups"
                                                         value="<?php if($ugroups){ foreach($ugroups as $key=>$val){ echo $val.", "; }} echo $accrights[$_SESSION["user_level"]]; ?>"
                                                         class="form-control" disabled>
-                                                    
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                <label>Access groups</label>
-                                                    <textarea class="form-control"
+                                                    <textarea class="form-control" placeholder="Access groups"
                                                         disabled><?php if($acclist){?><?php foreach($acclist as $key=>$val){ echo $gracclist[$key].", "; } } else { echo "Not access yet"; } ?></textarea>
-                                                    
-                                                </div>
 
+                                                </div>
                                                 <div class="form-group mt-3">
                                                     <input type='hidden' value='0' name='user_online_show'>
                                                     <input type="checkbox" value="1" name="user_online_show" id="onlsh"
@@ -1085,40 +1063,35 @@ if(isset($_POST['changepass'])){
                                                         <?php } ?> />
                                                     <label class="chbl" for="actsh">Show My activity</label>
                                                 </div>
-                                                <div class="form-group ">
+                                                <div>
                                                     <br><br>
                                                     <button type="submit" name="edinf"
-                                                        class="btn btn-info waves-effect waves-dark"><svg
+                                                        class="btn btn-light waves-effect waves-dark"><svg
                                                             class="midico midico-outline">
                                                             <use href="/assets/images/icon/midleoicons.svg#i-save"
                                                                 xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
                                                         </svg>&nbsp;Save</button>
                                                 </div>
-
                                             </form>
-                                        </div>
                                     </div>
                                     <div class="tab-pane" id="security" role="tabpanel">
-                                        <div class="card-body">
-                                            <form class="form-material " method="post" action="">
+                                            <form class="form-material" method="post" action="">
 
                                                 <div class="form-group mt-3">
-                                                <label>Old password</label>
-                                                    <input id="pwd" type="password" name="pwd" class="form-control"
-                                                        required>
-                                                   
+                                                    <input id="pwd" placeholder="Old password" type="password"
+                                                        name="pwd" class="form-control" required>
+
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                <label>New password</label>
-                                                    <input type="password" id="pwdnew" name="pwdnew"
-                                                        class="form-control" required>
-                                                   
+                                                    <input placeholder="New password" type="password" id="pwdnew"
+                                                        name="pwdnew" class="form-control" required>
+
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                <label>repeat new password</label>
-                                                    <input type="password" id="pwdnew2" name="pwdnew2" equalto="#pwdnew"
+                                                    <input placeholder="repeat new password" type="password"
+                                                        id="pwdnew2" name="pwdnew2" equalto="#pwdnew"
                                                         class="form-control" required>
-                                                    
+
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <input type="hidden" id="username"
@@ -1127,9 +1100,9 @@ if(isset($_POST['changepass'])){
                                                             class='mdi mdi-lock-open-outline'></i>&nbsp;Password
                                                         Strenght</div>
                                                 </div>
-                                                <div class="form-group mt-3">
+                                                <div><br><br>
                                                     <button type="submit" name="changepass"
-                                                        class="btn btn-info waves-effect waves-dark"><svg
+                                                        class="btn btn-light waves-effect waves-dark"><svg
                                                             class="midico midico-outline">
                                                             <use href="/assets/images/icon/midleoicons.svg#i-save"
                                                                 xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
@@ -1137,7 +1110,6 @@ if(isset($_POST['changepass'])){
                                                 </div>
 
                                             </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1145,94 +1117,100 @@ if(isset($_POST['changepass'])){
                     </div>
 
 
+                    <div class="col-md-2">
+                        <?php include "public/modules/breadcrumbin.php"; ?>
+                    </div>
+                </div>
+            </div>
 
 
-        </div>
-        </div>
 
-        <?php include "public/modules/footer.php";
+</div>
+</div>
+
+<?php include "public/modules/footer.php";
     echo "</div></div>";
     include "public/modules/js.php";  ?>
-        <script src="/assets/js/jquery/jquery.cropit.js" type="text/javascript"></script>
-        <script type='text/javascript'>
-        (function(a) {
-            function b() {
-                var e = a("#pwdnew").val(),
-                    d = a("#username").val(),
-                    c = a("#pwdnew2").val(),
-                    f;
-                a("#pass-strength-result").removeClass("short bad good strong");
-                if (!e) {
-                    a("#pass-strength-result").html(pwsL10n.empty);
-                    return
-                }
-                f = passwordStrength(e, d, c);
-                switch (f) {
-                    case 2:
-                        a("#pass-strength-result").addClass("bad").html(pwsL10n.bad);
-                        break;
-                    case 3:
-                        a("#pass-strength-result").addClass("good").html(pwsL10n.good);
-                        break;
-                    case 4:
-                        a("#pass-strength-result").addClass("strong").html(pwsL10n.strong);
-                        break;
-                    case 5:
-                        a("#pass-strength-result").addClass("short").html(pwsL10n.mismatch);
-                        break;
-                    default:
-                        a("#pass-strength-result").addClass("short").html(pwsL10n["short"])
-                }
+<script src="/assets/js/jquery/jquery.cropit.js" type="text/javascript"></script>
+<script type='text/javascript'>
+(function(a) {
+    function b() {
+        var e = a("#pwdnew").val(),
+            d = a("#username").val(),
+            c = a("#pwdnew2").val(),
+            f;
+        a("#pass-strength-result").removeClass("short bad good strong");
+        if (!e) {
+            a("#pass-strength-result").html(pwsL10n.empty);
+            return
+        }
+        f = passwordStrength(e, d, c);
+        switch (f) {
+            case 2:
+                a("#pass-strength-result").addClass("bad").html(pwsL10n.bad);
+                break;
+            case 3:
+                a("#pass-strength-result").addClass("good").html(pwsL10n.good);
+                break;
+            case 4:
+                a("#pass-strength-result").addClass("strong").html(pwsL10n.strong);
+                break;
+            case 5:
+                a("#pass-strength-result").addClass("short").html(pwsL10n.mismatch);
+                break;
+            default:
+                a("#pass-strength-result").addClass("short").html(pwsL10n["short"])
+        }
+    }
+    a(document).ready(function() {
+        a("#pwdnew").val("").keyup(b);
+        a("#pwdnew2").val("").keyup(b);
+        a("#pass-strength-result").show();
+        a(".color-palette").click(function() {
+            a(this).siblings('input[name="admin_color"]').prop("checked", true)
+        });
+        a("#first_name, #last_name, #nickname").blur(function() {
+            var c = a("#display_name"),
+                e = c.find("option:selected").attr("id"),
+                f = [],
+                d = {
+                    display_nickname: a("#nickname").val(),
+                    display_username: a("#username").val(),
+                    display_firstname: a("#first_name").val(),
+                    display_lastname: a("#last_name").val()
+                };
+            if (d.display_firstname && d.display_lastname) {
+                d.display_firstlast = d.display_firstname + " " + d.display_lastname;
+                d.display_lastfirst = d.display_lastname + " " + d.display_firstname
             }
-            a(document).ready(function() {
-                a("#pwdnew").val("").keyup(b);
-                a("#pwdnew2").val("").keyup(b);
-                a("#pass-strength-result").show();
-                a(".color-palette").click(function() {
-                    a(this).siblings('input[name="admin_color"]').prop("checked", true)
-                });
-                a("#first_name, #last_name, #nickname").blur(function() {
-                    var c = a("#display_name"),
-                        e = c.find("option:selected").attr("id"),
-                        f = [],
-                        d = {
-                            display_nickname: a("#nickname").val(),
-                            display_username: a("#username").val(),
-                            display_firstname: a("#first_name").val(),
-                            display_lastname: a("#last_name").val()
-                        };
-                    if (d.display_firstname && d.display_lastname) {
-                        d.display_firstlast = d.display_firstname + " " + d.display_lastname;
-                        d.display_lastfirst = d.display_lastname + " " + d.display_firstname
-                    }
-                    a("option", c).remove();
-                    a.each(d, function(i, g) {
-                        var h = g.replace(/<\/?[a-z][^>]*>/gi, "");
-                        if (d[i].length && a.inArray(h, f) == -1) {
-                            f.push(h);
-                            a("<option />", {
-                                id: i,
-                                text: h,
-                                selected: (i == e)
-                            }).appendTo(c)
-                        }
-                    })
-                })
+            a("option", c).remove();
+            a.each(d, function(i, g) {
+                var h = g.replace(/<\/?[a-z][^>]*>/gi, "");
+                if (d[i].length && a.inArray(h, f) == -1) {
+                    f.push(h);
+                    a("<option />", {
+                        id: i,
+                        text: h,
+                        selected: (i == e)
+                    }).appendTo(c)
+                }
             })
-        })(jQuery);
-        var pwsL10n = {
-            empty: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Password Strenght",
-            short: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Too Short",
-            bad: "<i class='mdi mdi-lock-open'></i>&nbsp;Bad",
-            good: "<i class='mdi mdi-lock'></i>&nbsp;Good",
-            strong: "<i class='mdi mdi-shield-lock-outline'></i>&nbsp;Strong",
-            mismatch: "<i class='mdi mdi-lock-question'></i>&nbsp;Mismatch"
-        };
-        try {
-            convertEntities(pwsL10n);
-        } catch (e) {};
-        </script>
-        <script src="/assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
+        })
+    })
+})(jQuery);
+var pwsL10n = {
+    empty: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Password Strenght",
+    short: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Too Short",
+    bad: "<i class='mdi mdi-lock-open'></i>&nbsp;Bad",
+    good: "<i class='mdi mdi-lock'></i>&nbsp;Good",
+    strong: "<i class='mdi mdi-shield-lock-outline'></i>&nbsp;Strong",
+    mismatch: "<i class='mdi mdi-lock-question'></i>&nbsp;Mismatch"
+};
+try {
+    convertEntities(pwsL10n);
+} catch (e) {};
+</script>
+<script src="/assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
     include "public/modules/template_end.php";
     echo '</body></html>';
   }
@@ -1256,8 +1234,10 @@ class Class_searchall{
     include "public/modules/headcontent.php";
   echo '<div class="page-wrapper"><div class="container-fluid">';
   
-    include "public/modules/breadcrumb.php";
-    echo '<div class="row"><div class="col-12">'; 
+    
+  echo '<div class="row pt-3"><div class="col-lg-2">'; 
+    include "public/modules/sidebar.php";
+    echo '</div><div class="col-lg-8">'; 
     if(isset($_REQUEST["sa"])){ 
       $data=array();
       if(!empty($_REQUEST["fd"])){
@@ -1310,22 +1290,26 @@ class Class_searchall{
       }
     } else { $data=array(); }
     ?>
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Search Result For "<?php echo htmlspecialchars($_REQUEST['fd']);?>"</h4>
-                <h6 class="card-subtitle"></h6>
-                <ul class="search-listing">
-                    <?php if(is_array($data) && !empty($data)){ foreach($data as $key=>$val) {?>
-                    <li>
-                        <h3><a href="<?php echo $key;?>"><?php echo $val;?></a></h3>
-                    </li>
-                    <?php } } else { ?>
-                    <li>No data found</li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </div>
-        <?php echo '</div></div>';
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Search Result For "<?php echo htmlspecialchars($_REQUEST['fd']);?>"</h4>
+        <h6 class="card-subtitle"></h6>
+        <ul class="search-listing">
+            <?php if(is_array($data) && !empty($data)){ foreach($data as $key=>$val) {?>
+            <li>
+                <h3><a href="<?php echo $key;?>"><?php echo $val;?></a></h3>
+            </li>
+            <?php } } else { ?>
+            <li>No data found</li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>
+</div>
+<?php include "public/modules/breadcrumbin.php"; ?>
+    </div>
+    </div>
+<?php echo '</div></div>';
     include "public/modules/footer.php";
 	echo '</div></div>';
     include "public/modules/js.php"; 
@@ -1348,92 +1332,92 @@ class Class_welcome{
    echo '<body class="fix-header card-no-border no-sidebar"><div id="main-wrapper">';
    include "public/modules/headcontentmain.php";   
    echo '<div class="page-wrapper">'; ?>
-        <div class="container-fluid">
+<div class="container-fluid">
 
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <br>
             <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card maincard">
-                                <div class="row">
-                                    <div class="col-md-3 text-end">
-                                        <img src="/assets/images/icon/documentation.svg"
-                                            style="padding-top: 20px;width:80px;display: block;float: right;">
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Documentation</h4>
-                                            <p class="card-text">Get help using and administering MidlEO</p><br>
-                                            <a href="/info/" class="btn btn-light">Docs</a>
-                                        </div>
-                                    </div>
+                <div class="col-md-6">
+                    <div class="card maincard">
+                        <div class="row">
+                            <div class="col-md-3 text-end">
+                                <img src="/assets/images/icon/documentation.svg"
+                                    style="padding-top: 20px;width:80px;display: block;float: right;">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <h4 class="card-title">Documentation</h4>
+                                    <p class="card-text">Get help using and administering MidlEO</p><br>
+                                    <a href="/info/" class="btn btn-light">Docs</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card maincard">
-                                <div class="row">
-                                    <div class="col-md-3 text-end">
-                                        <img src="/assets/images/icon/support.svg"
-                                            style="padding-top: 20px;width:80px;display: block;float: right;">
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Contact support</h4>
-                                            <p class="card-text">Open a service request or browse the middleware
-                                                environment</p>
-                                            <a href="/requests" class="btn btn-light">Open request</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card maincard">
-                                <div class="row">
-                                    <div class="col-md-3 text-end">
-                                        <img src="/assets/images/icon/status.svg"
-                                            style="padding-top: 20px;width:80px;display: block;float: right;">
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Middleware status</h4>
-                                            <p class="card-text">Check the health of your servers and applications</p>
-                                            <br>
-                                            <a href="/browse/serverlist" class="btn btn-light">Browse</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card maincard">
-                                <div class="row">
-                                    <div class="col-md-3 text-end">
-                                        <img src="/assets/images/icon/idea.svg"
-                                            style="padding-top: 20px;width:80px;display: block;float: right;">
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Suggestions and bug reports</h4>
-                                            <p class="card-text">Find existing feature suggestions and bug reports</p>
-                                            <br>
-                                            <a href="/info/category/bugs" class="btn btn-light">Browse</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
-                <div class="col-md-1"></div>
-            </div>
+                <div class="col-md-6">
+                    <div class="card maincard">
+                        <div class="row">
+                            <div class="col-md-3 text-end">
+                                <img src="/assets/images/icon/support.svg"
+                                    style="padding-top: 20px;width:80px;display: block;float: right;">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <h4 class="card-title">Contact support</h4>
+                                    <p class="card-text">Open a service request or browse the middleware
+                                        environment</p>
+                                    <a href="/requests" class="btn btn-light">Open request</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card maincard">
+                        <div class="row">
+                            <div class="col-md-3 text-end">
+                                <img src="/assets/images/icon/status.svg"
+                                    style="padding-top: 20px;width:80px;display: block;float: right;">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <h4 class="card-title">Middleware status</h4>
+                                    <p class="card-text">Check the health of your servers and applications</p>
+                                    <br>
+                                    <a href="/browse/serverlist" class="btn btn-light">Browse</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card maincard">
+                        <div class="row">
+                            <div class="col-md-3 text-end">
+                                <img src="/assets/images/icon/idea.svg"
+                                    style="padding-top: 20px;width:80px;display: block;float: right;">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <h4 class="card-title">Suggestions and bug reports</h4>
+                                    <p class="card-text">Find existing feature suggestions and bug reports</p>
+                                    <br>
+                                    <a href="/info/category/bugs" class="btn btn-light">Browse</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <?php include "public/modules/license.php";
+
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+    <?php include "public/modules/license.php";
     echo '</div></div>';
     include "public/modules/footer.php";
     include "public/modules/js.php";

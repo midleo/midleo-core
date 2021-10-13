@@ -21,10 +21,12 @@ class Class_drawapi{
     $pdo = pdodb::connect();
     $data = json_decode(file_get_contents("php://input"));
     if(!empty($data->xml)){
+      $nowtime = new DateTime();
+      $now=$nowtime->format('Y-m-d H:i').":00";
         $xml=simplexml_load_string(stripslashes($data->xml));
-        $sql="update config_diagrams set xmldata=?, imgdata=?  where desid=?";
+        $sql="update config_diagrams set xmldata=?, desdate=?, imgdata=?  where desid=?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(urldecode(gzinflate(base64_decode($xml->diagram))), $data->data, $data->desid));
+        $stmt->execute(array(urldecode(gzinflate(base64_decode($xml->diagram))),$now, $data->data, $data->desid));
         echo "done";
     } else {
         echo "empty data";

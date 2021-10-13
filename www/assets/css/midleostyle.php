@@ -87,8 +87,7 @@ h5, .h5 {font-size: 1rem;}
 *{outline:none}
 body{background:#fff;margin:0;overflow-x:hidden;font-family: "Ubuntu", sans-serif;font-size: 0.875rem;font-weight: 300;line-height: 1.5;color: #67757c;text-align: left;}
 html{position:relative;min-height:100%;}
-a{color:#'.$thiscolor.';text-decoration:none;}
-a:hover,a:focus{text-decoration:none}
+a,a:hover,a:focus{color:#'.$thiscolor.';text-decoration:none;}
 a.link{color:#455a64}
 a.link:hover,a.link:focus{color:#'.$thiscolor.'}
 html body .mdi:before,html body .mdi-set{line-height:initial}

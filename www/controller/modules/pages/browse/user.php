@@ -5,7 +5,7 @@ array_push($brarr,array(
     "icon"=>"mdi-arrow-left",
     "active"=>true,
   ));
- $sql="select t.email,t.fullname,t.ldapserver, t.avatar, t.user_online_show from users t where t.mainuser=?"; 
+ $sql="select t.email,t.fullname,t.ldapserver, t.avatar, t.user_online, t.user_online_show, t.user_activity_show from users t where t.mainuser=?"; 
  $q = $pdo->prepare($sql);
  $q->execute(array($thisarray['p2']));
  $tmp=array();
@@ -15,6 +15,9 @@ array_push($brarr,array(
         "avatar"=>$row['avatar'],
         "ldap"=>$row['ldapserver'],
         "email"=>$row['email'],
+        "user_online_show"=>$row['user_online_show'],
+        "user_online"=>$row['user_online'],
+        "user_activity_show"=>$row['user_activity_show'],
         "type"=>"user"
      );
  } 
@@ -22,14 +25,16 @@ if(!empty($tmp["user"]) && is_array($tmp["user"])){ ?>
 
 <div class="row">
     <div class="col-lg-4 col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>Profile</h4>
-            </div>
-            <div class="card-body">
+        <div class="card p-2">
                 <div class="mt-4 text-center">
-                    <img src="<?php echo !empty($tmp["user"]["avatar"])?$tmp["user"]["avatar"]:"/assets/images/avatar.svg";?>"
-                        class="rounded-circle" width="150" />
+                    <div class="position-relative">
+                        <img src="<?php echo !empty($tmp["user"]["avatar"])?$tmp["user"]["avatar"]:"/assets/images/avatar.svg";?>"
+                            class="rounded-circle" width="150" />
+                        <span
+                            class="position-absolute top-0 translate-middle p-2 bg-<?php echo $tmp["user"]["user_online_show"]==1?($tmp["user"]["user_online"]==1?"success":"danger"):"secondary";?> border border-light rounded-circle">
+                            <span class="visually-hidden">Status</span>
+                        </span>
+                    </div>
                     <h4 class="card-title mt-2"><?php echo $tmp["user"]["fullname"];?></h4>
                     <h6 class="card-subtitle"></h6>
                 </div>
@@ -52,16 +57,13 @@ if(!empty($tmp["user"]) && is_array($tmp["user"])){ ?>
                     }
                   }
                   ?>
-
-
             </div>
-
-        </div>
     </div>
 
     <div class="col-lg-8 col-md-12">
 
-        <?php $sql="select * from tracking where whoid=? order by id desc limit 20";
+        <?php if($tmp["user"]["user_activity_show"]==1){
+             $sql="select * from tracking where whoid=? order by id desc limit 20";
 $q = $pdo->prepare($sql);  
 $q->execute(array($thisarray['p2'])); 
 if($zobj = $q->fetchAll()){
@@ -83,7 +85,8 @@ foreach($zobj as $val) {
                         <p>
                             <?php echo !empty($val["appid"])?'<a href="/env/apps/test'.$val["appid"].'" target="_blank"><i class="mdi mdi-application-brackets-outline"></i>&nbsp;'.$val["appid"]."</a><br>":"";?>
                             <?php echo !empty($val["projid"])?'<i class="mdi mdi-projector-screen-outline"></i>&nbsp;'.$val["projid"]."<br>":"";?>
-                            <i class="mdi mdi-information-outline"></i>&nbsp;<?php echo $val["what"];?></p>
+                            <i class="mdi mdi-information-outline"></i>&nbsp;<?php echo $val["what"];?>
+                        </p>
                     </div>
 
                 </div>
@@ -93,7 +96,13 @@ foreach($zobj as $val) {
 
         <?php } } else { echo "No activity yet."; } ?>
 
-
+        <?php } else { ?>
+        <div class="card  p-2 mb-3">
+            <div class="d-flex align-items-start">
+                User activity disabled
+            </div>
+        </div>
+        <?php } ?>
     </div>
 </div>
 

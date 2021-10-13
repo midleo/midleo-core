@@ -22,7 +22,7 @@ class Class_diagrams
         }
         $sactive=" author='".$_SESSION["user"]."'";
         $sactive.=" or public='1'".$tmp["likesearch"];
-        $sactcat=" public='1'".$tmp["likesearch"];
+        $sactcat=" cattype='1'".$tmp["likesearch"];
         $sql="select count(id) from config_diagrams".(!empty($sactive)?" where".$sactive:"");
         $q = $pdo->prepare($sql);
         $q->execute();

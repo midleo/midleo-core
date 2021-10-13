@@ -78,6 +78,42 @@ class Class_docapi
         }
         exit;
     }
+    public static function importPDF(){
+        require_once 'controller/vendor/autoload.php';
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdf    = $parser->parseFile('public/temp/test.pdf');
+        $text = $pdf->getText();
+        echo $text;
+        $details  = $pdf->getDetails();
+     
+        foreach ($details as $property => $value) {
+        if (is_array($value)) {
+            $value = implode(', ', $value);
+        }
+        echo $property . ' => ' . $value . "\n";
+       }
+      /*  $mpdf = new \Mpdf\Mpdf([
+          'format' => 'A4',
+          'margin_left' => 5,
+          'margin_right' => 5,
+          'margin_top' => 5,
+          'margin_bottom' => 10,
+          'margin_header' => 5,
+          'margin_footer' => 5,
+        ]);
+        $mpdf->SetProtection(array('print'));  
+            $mpdf->SetAuthor("MidlEO");
+            $mpdf->showWatermarkText = false;
+            $mpdf->SetDisplayMode('fullpage');  
+            $mpdf->SetTitle("Midleo core");
+            $html="test";
+            $pagecount = $mpdf->SetSourceFile('public/temp/test.pdf');
+            $tplId = $mpdf->importPage($pagecount);
+            $mpdf->useTemplate($tplId);
+            $mpdf->WriteHTML($html);
+            $mpdf->Output();
+    */
+       }
     public static function importDocs()
     {
         $data = json_decode(file_get_contents("php://input"));
