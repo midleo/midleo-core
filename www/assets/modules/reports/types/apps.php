@@ -34,7 +34,7 @@ $qin->execute(array($zobj["owner"]));
 if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
 <div class="contact-widget position-relative">
 <a href="/browse/user/<?php echo $zobj["owner"];?>" target="_blank" class="py-3 px-2 text-decoration-none">
- <div class="user-img position-relative d-inline-block mr-2"> 
+ <div class="user-img position-relative d-inline-block me-2"> 
  <img src="<?php echo !empty($zobjin["avatar"])?$zobjin["avatar"] : '/assets/images/avatar.svg' ;?>"
  width="40" alt="<?php echo $zobjin["fullname"];?>" data-bs-toggle="tooltip"
  data-bs-placement="top" title="<?php echo $zobjin["fullname"];?>" class="rounded-circle">
@@ -55,7 +55,7 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
 <?php
    foreach(json_decode($zobj["appusers"],true) as $key=>$val){?>
 <a href="/browse/user/<?php echo $key;?>" target="_blank" class="py-3 px-2  d-block text-decoration-none">
- <div class="user-img position-relative d-inline-block mr-2"> 
+ <div class="user-img position-relative d-inline-block me-2"> 
  <img src="<?php echo !empty($val["uavatar"])?'/assets/images/users/'.$val["uavatar"] : '/assets/images/avatar.svg' ;?>"
 width="40" alt="<?php echo $val["uname"];?>" data-bs-toggle="tooltip"
 data-bs-placement="top" title="<?php echo $val["uname"];?>" class="rounded-circle">

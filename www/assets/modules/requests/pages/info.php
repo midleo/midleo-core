@@ -455,7 +455,7 @@ $breadcrumb["link2"]=($thisarray["p1"]=="type"?"":"/reqinfo/".$thisarray["p1"]);
                }
                if(count($tmp["requsers"])>0){
                 foreach($tmp["requsers"] as $valin){
-                  echo '<li class="d-inline-block border-0 mr-1"><img src="'.(!empty($valin["avatar"])?$valin["avatar"]:"/assets/images/avatar.svg").'"
+                  echo '<li class="d-inline-block border-0 me-1"><img src="'.(!empty($valin["avatar"])?$valin["avatar"]:"/assets/images/avatar.svg").'"
                   width="40" alt="user" data-bs-toggle="tooltip" data-bs-placement="top" title=""
                   data-original-title="'.$valin["fullname"].'" class="rounded-circle"></li>';
                 }
@@ -517,7 +517,7 @@ if($zobjin["effdays"]){
 ?>
 <div class="card card-body">
                             <div class="row">
-                                <div class="col pr-0 align-self-center">
+                                <div class="col pe-0 align-self-center">
                                     <h2 class="font-weight-light mb-0">Efforts</h2>
                                     <h6 class="text-muted"><?php echo $temparr["timeperiod"];?> of <?php echo $tempvar;?>
                                             <?php echo $website["effort_unit"];?></h6>

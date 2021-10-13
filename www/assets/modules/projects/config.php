@@ -292,7 +292,7 @@ echo '<div class="page-wrapper"><div class="container-fluid">';
                 <div class="row task-dates">
                     <div class="col-md-4">
                         <div class="mt-4">
-                            <h5 class="font-size-14"><i class="mdi mdi-calendar mr-1 text-primary"></i> Start Date</h5>
+                            <h5 class="font-size-14"><i class="mdi mdi-calendar me-1 text-primary"></i> Start Date</h5>
                             <p class="mb-0">
                                 <?php echo $zobj["projstartdate"]?$zobj["projstartdate"]:"Not yet started";?></p>
                         </div>
@@ -300,14 +300,14 @@ echo '<div class="page-wrapper"><div class="container-fluid">';
 
                     <div class="col-md-4">
                         <div class="mt-4">
-                            <h5 class="font-size-14"><i class="mdi mdi-calendar mr-1 text-primary"></i> Due Date
+                            <h5 class="font-size-14"><i class="mdi mdi-calendar me-1 text-primary"></i> Due Date
                             </h5>
                             <p class="mb-0"><?php echo $zobj["projduedate"];?></p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="mt-4">
-                            <h5 class="font-size-14"><i class="mdi mdi-currency-eur mr-1 text-primary"></i> Budget</h5>
+                            <h5 class="font-size-14"><i class="mdi mdi-currency-eur me-1 text-primary"></i> Budget</h5>
                             <p class="mb-0"><input type="hidden" id="projbudget"
                                     value="<?php echo $zobj["totalcost"];?>"><?php echo $zobj["totalcost"];?>
                                 <?php echo $website["currency_unit"];?></p>
@@ -333,7 +333,7 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
                 <div class="contact-widget position-relative">
                     <a href="/browse/user/<?php echo $zobj["owner"];?>" target="_blank"
                         class="py-3 px-2 border-bottom d-block text-decoration-none">
-                        <div class="user-img position-relative d-inline-block mr-2">
+                        <div class="user-img position-relative d-inline-block me-2">
                             <img src="<?php echo !empty($zobjin["avatar"])?$zobjin["avatar"] : '/assets/images/avatar.svg' ;?>"
                                 width="40" alt="<?php echo $zobjin["fullname"];?>" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="<?php echo $zobjin["fullname"];?>" class="rounded-circle">
@@ -394,7 +394,7 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
    foreach(json_decode($zobj["projusers"],true) as $key=>$val){?>
                     <a href="/browse/user/<?php echo $key;?>" target="_blank"
                         class="py-3 px-2 border-bottom d-block text-decoration-none">
-                        <div class="user-img position-relative d-inline-block mr-2">
+                        <div class="user-img position-relative d-inline-block me-2">
                             <img src="<?php echo !empty($val["uavatar"])?'/assets/images/users/'.$val["uavatar"] : '/assets/images/avatar.svg' ;?>"
                                 width="40" alt="<?php echo $val["uname"];?>" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="<?php echo $val["uname"];?>" class="rounded-circle">

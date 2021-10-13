@@ -791,7 +791,7 @@ include "public/modules/css.php";    ?>
                                                         <div class="ml-auto">
                                                             <a href="javascript:void(0)" id="to-recover"
                                                                 class="text-muted"><i
-                                                                    class="mdi mdi-lock-alert mr-1"></i> Forgot pwd?</a>
+                                                                    class="mdi mdi-lock-alert me-1"></i> Forgot pwd?</a>
                                                         </div>
                                                     </div>
                                                 </div>

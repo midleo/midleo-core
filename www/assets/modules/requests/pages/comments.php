@@ -48,7 +48,7 @@ $stmt = $pdo->prepare($sql);
                                             $valin = $stmt->fetch(PDO::FETCH_ASSOC); 
                                          ?>
                                     <div class="sl-item mt-2 mb-3">
-                                        <div class="sl-left user-img float-start mr-3 position-relative"
+                                        <div class="sl-left user-img float-start me-3 position-relative"
                                             data-bs-toggle="tooltip"
                                             title="<?php echo $valin["user_online_show"]==0?"Unknown":($valin["user_online"]==1?"Online":"Offline");?>">
                                             <?php if(!empty($valin["avatar"])){?><img src="<?php echo $valin["avatar"];?>"

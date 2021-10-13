@@ -760,12 +760,12 @@ if(!empty($thisarray["p1"])){
                                                 xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
                                         </svg></div>
                                     <div class="row">
-                                        <div class="col-md-12 text-start cardpj pl-4">
+                                        <div class="col-md-12 text-start cardpj ps-4">
                                             <p class="card-text">
                                                 {{ d.templinfo | limitTo:4*textlimit }}{{d.templinfo.length > 4*textlimit ? '...' : ''}}
                                             </p>
                                             <ul class="assignedto list-style-none pb-2">
-                                                <li class="d-inline-block border-0 mr-1"
+                                                <li class="d-inline-block border-0 me-1"
                                                     ng-repeat="(key,val) in d.serviceid" ng-if="$index < 5">
                                                     <span class="badge"
                                                         ng-class="(key==catselected) ? 'badge-info' : 'badge-light'">{{val}}</span>
@@ -832,7 +832,7 @@ if(!empty($thisarray["p1"])){
                                             <div class="contact-widget position-relative">
                                                 <a href="/browse/user/{{pjinfo.owner.user}}" target="_blank"
                                                     class="py-3 px-2 d-block text-decoration-none">
-                                                    <div class="user-img position-relative d-inline-block mr-2">
+                                                    <div class="user-img position-relative d-inline-block me-2">
                                                         <img src="{{pjinfo.owner.avatar}}" width="40"
                                                             alt="{{pjinfo.owner.fullname}}" data-bs-toggle="tooltip"
                                                             data-bs-placement="top" title="{{pjinfo.owner.fullname}}"

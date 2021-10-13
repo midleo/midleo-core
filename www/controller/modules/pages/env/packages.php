@@ -158,7 +158,7 @@
                             <td class="text-center">{{ d.packuid }}</td>
                             <td class="text-center">{{ d.released }}</td>
                             <td class="text-center">{{ d.user }}</td>
-                            <td class="text-center"><span class="badge badge-secondary mr-1 mt-1"
+                            <td class="text-center"><span class="badge badge-secondary me-1 mt-1"
                                     ng-repeat="(key,val) in d.deployedin">{{val}}</span></td>
                             <td class="text-center"><span
                                     class="badge badge-{{ d.gitpreparedspan }}">{{ d.gitprepared }}</span>

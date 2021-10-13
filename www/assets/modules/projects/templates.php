@@ -153,7 +153,7 @@ class Class_pjtemplates
                     <div class="contact-widget position-relative">
                         <a href="/browse/user/<?php echo $_SESSION["user"];?>" target="_blank"
                             class="py-3 px-2 border-bottom d-block text-decoration-none">
-                            <div class="user-img position-relative d-inline-block mr-2">
+                            <div class="user-img position-relative d-inline-block me-2">
                                 <img src="<?php echo !empty($uavatar)?$uavatar : '/assets/images/avatar.svg' ;?>"
                                     width="40" alt="<?php echo $usname;?>" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="<?php echo $usname;?>" class="rounded-circle">
@@ -255,13 +255,13 @@ class Class_pjtemplates
                                 style="margin-bottom:46px;">
 
                                 <div class="row">
-                                    <div class="col-md-12 text-start cardpj pl-4">
+                                    <div class="col-md-12 text-start cardpj ps-4">
                                         <h4 class="font-normal">{{ d.templname }}</h4>
                                         <p class="card-text">
                                             {{ d.templinfo | limitTo:4*textlimit }}{{d.templinfo.length > 4*textlimit ? '...' : ''}}
                                         </p>
                                         <ul class="assignedto list-style-none pb-2">
-                                            <li class="d-inline-block border-0 mr-1"
+                                            <li class="d-inline-block border-0 me-1"
                                                 ng-repeat="(key,val) in d.serviceid" ng-if="$index < 5">
                                                 <span class="badge badge-info">{{val}}</span>
                                             </li>

@@ -205,7 +205,7 @@ $qin->execute(array($zobj["owner"]));
 if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
 <div class="contact-widget position-relative">
 <a href="/browse/user/<?php echo $zobj["owner"];?>" target="_blank" class="py-3 px-2 border-bottom d-block text-decoration-none">
- <div class="user-img position-relative d-inline-block mr-2"> 
+ <div class="user-img position-relative d-inline-block me-2"> 
  <img src="<?php echo !empty($zobjin["avatar"])?$zobjin["avatar"] : '/assets/images/avatar.svg' ;?>"
  width="40" alt="<?php echo $zobjin["fullname"];?>" data-bs-toggle="tooltip"
  data-bs-placement="top" title="<?php echo $zobjin["fullname"];?>" class="rounded-circle">
@@ -258,7 +258,7 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
    foreach(json_decode($zobj["appusers"],true) as $key=>$val){?>
 
 <a href="/browse/user/<?php echo $key;?>" target="_blank" class="py-3 px-2 border-bottom d-block text-decoration-none">
- <div class="user-img position-relative d-inline-block mr-2"> 
+ <div class="user-img position-relative d-inline-block me-2"> 
  <img src="<?php echo !empty($val["uavatar"])?'/assets/images/users/'.$val["uavatar"] : '/assets/images/avatar.svg' ;?>"
 width="40" alt="<?php echo $val["uname"];?>" data-bs-toggle="tooltip"
 data-bs-placement="top" title="<?php echo $val["uname"];?>" class="rounded-circle">
@@ -315,7 +315,7 @@ data-bs-placement="top" title="<?php echo $val["uname"];?>" class="rounded-circl
         <td class="text-center"><a ng-click="addrecent('/env/apps',d.appcode,d.appname)" style="cursor:pointer;">{{ d.appcode }}</a></td>
         <td class="text-center">{{ d.appname }}</td>
         <td class="text-center">{{ d.owner }}</td>
-        <td class="text-center"><span ng-if="d.tags" class="badge badge-secondary mr-1 mt-1" ng-repeat="(key,val) in d.tags"><a class="text-white" href="/searchall/?sa=y&st=tag&fd={{ val }}">{{val}}</a></span></td>
+        <td class="text-center"><span ng-if="d.tags" class="badge badge-secondary me-1 mt-1" ng-repeat="(key,val) in d.tags"><a class="text-white" href="/searchall/?sa=y&st=tag&fd={{ val }}">{{val}}</a></span></td>
         <td>
         <div class="text-start d-grid gap-2 d-md-block">
           <a href="/env/apps/?app={{d.appcode}}" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg></a>
