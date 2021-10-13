@@ -55,13 +55,7 @@ if (!empty($thisarray['p2'])){
                                         role="tab">Tracking</a> </li>
                             </ul>
 </div>
-<?php if($thisarray['p3']!="obj"){?>
-<div class="row">
-          <div class="col-md-3 position-relative">
-              <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Filter">
-              <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-          </div>
-  </div><br><?php } ?>
+<br>
 <div class="card">
 
                           <?php if($thisarray['p3']==""){?>

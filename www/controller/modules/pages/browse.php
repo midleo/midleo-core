@@ -27,16 +27,22 @@ class Class_browse{
     $brarr=array();
     if($thisarray['p1']=="req"){ $breadcrumb["text"]="Request info"; } 
           elseif($thisarray['p1']=="appserver"){ 
-            $brarr["text"]="Application server info"; 
-            $brarr["link"]="/env/appservers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""); 
-            $brarr["midicon"]="app-srv";
+            $breadcrumb["text"]="Application server information"; 
+            array_push($brarr,array(
+              "title"=>"Back to app servers",
+              "link"=>"/env/appservers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""),
+              "midicon"=>"app-srv",
+              "active"=>true,
+            ));
           } 
           elseif($thisarray['p1']=="server"){ 
-            $breadcrumb["text"]="Server info"; 
-            $showr=true;
-            $breadcrumb["textr2"]="Back to servers";
-            $breadcrumb["linkr2"]="/env/servers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""); 
-            $breadcrumb["midicon"]="server";
+            $breadcrumb["text"]="Server information"; 
+            array_push($brarr,array(
+              "title"=>"Back to servers",
+              "link"=>"/env/servers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""),
+              "midicon"=>"server",
+              "active"=>true,
+            ));
           } 
           elseif($thisarray['p1']=="draw"){ 
             $breadcrumb["text"]="Diagram info"; 
