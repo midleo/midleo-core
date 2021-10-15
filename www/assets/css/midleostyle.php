@@ -330,7 +330,7 @@ html body #visitor .c3-chart-arcs-title{font-size:18px;fill:#d5d6d8}
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){width:100%}
 .input-form .btn{padding:7px 12px}
 input[type="radio"]{border-radius:'.$borderradius.';}
-.form-control{border-radius:6px;height: auto;float:none;font-size:inherit;}
+.form-control{border-radius:6px;height: auto;float:none;}
 .form-control.focus,.form-control:focus{box-shadow:none;float:none}
 .form-control-line .form-group{overflow:hidden}
 .form-control-line .form-control{border:0;border-radius:0;padding-left:0;border-bottom:1px solid #d9d9d9}
@@ -727,11 +727,9 @@ from{width:0}
 .input-group-addon [type="radio"]:not(:checked),.input-group-addon [type="radio"]:checked,.input-group-addon [type="checkbox"]:not(:checked),.input-group-addon [type="checkbox"]:checked{position:initial;opacity:1}
 .custom-select{background:url(../images/custom-select.png) right .75rem center no-repeat;-webkit-appearance:none}
 textarea{resize:none}
-.form-control{min-height:38px;display:initial;border-color:#CAD0DB;}
+
 .form-control-sm{min-height:20px}
 .form-control:disabled,.form-control[readonly]{opacity:.7}
-.custom-control-input:focus ~ .custom-control-indicator{box-shadow:none}
-.custom-control-input:checked ~ .custom-control-indicator{background-color:#21c1d6}
 form label{font-weight:400}
 .form-group{margin-bottom:10px}
 .form-horizontal label:not(.chbl){margin-bottom:0;line-height: 37px;}
@@ -1592,7 +1590,7 @@ background-position:
   calc(100% - 20px) calc(1em + 2px),
   calc(100% - 15px) calc(1em + 2px),
   calc(100% - 2.5em) 0.5em;
-background-size: 5px 5px,  5px 5px,  1px 1.5em;
+background-size: 5px 5px,  5px 5px, 0;
 background-repeat: no-repeat;
 }
 select.form-control:focus {
@@ -1607,7 +1605,7 @@ select.form-control:focus {
   background-size:
     5px 5px,
     5px 5px,
-    1px 1.5em;
+    0;
   background-repeat: no-repeat;
   border-color: green;
   outline: 0;
@@ -1791,7 +1789,6 @@ body[data-color="dark"] .border-arrow{background-color:#1c1e23}
 body[data-color="dark"] .border-arrow:after{border-left-color: #1c1e23;}
 .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle{background-color: #0380FE;border-color: #0380FE;}
 .anim-tada{animation: tada 1.5s ease infinite;}
-.tox-tinymce{border-radius:6px!important;}
 .table td, .table th{border-top:1px solid transparent;}
 table.dataTable td, table.dataTable th{border-bottom:1px solid transparent;}
 .contact-widget a:hover{ background: #f2f4f8; }

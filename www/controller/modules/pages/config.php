@@ -145,7 +145,7 @@ if ($forumcase=="posts") {
       "active"=>($page=="draw")?"active":"",
     ));
   }
-    if (sessionClass::checkAcc($acclist, "odfiles")) {
+    if (sessionClass::checkAcc($acclist, "odfiles") && !empty($website['odappid'])) {
       array_push($brarr,array(
           "title"=>"View/Map OneDrive files",
         "link"=>"/onedrive",
@@ -153,7 +153,7 @@ if ($forumcase=="posts") {
         "active"=>($page=="onedrive")?"active":"",
       ));
     }
-    if (sessionClass::checkAcc($acclist, "dbfiles")) {
+    if (sessionClass::checkAcc($acclist, "dbfiles") && !empty($website['dbclid'])) {
       array_push($brarr,array(
           "title"=>"View/Map Dropbox files",
         "link"=>"/dropbox",
@@ -308,10 +308,9 @@ if($page < $total_pages)
     <?php } 
       }    
 
-
    echo '</div><div class="col-lg-3">'; 
    include "public/modules/blogsidebar.php";
-   echo '<div class="stickyside h2menu"><div class="list-group h2-menu" id="top-menu"></div>   </div></div></div></div></div></div></div>';
+   echo '</div></div></div></div></div></div>';
    include "public/modules/footer.php";
    include "public/modules/js.php";
    include "public/modules/template_end.php";

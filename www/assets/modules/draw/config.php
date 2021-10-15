@@ -273,7 +273,7 @@ array_push($brarr, array(
             "midicon" => "deploy",
             "active" => ($page == "docimport") ? "active" : "",
         ));
-        if (sessionClass::checkAcc($acclist, "odfiles")) {
+        if (sessionClass::checkAcc($acclist, "odfiles") && !empty($website['odappid'])) {
             array_push($brarr, array(
                 "title" => "View/Map OneDrive files",
                 "link" => "/onedrive",
@@ -281,7 +281,7 @@ array_push($brarr, array(
                 "active" => ($page == "onedrive") ? "active" : "",
             ));
         }
-        if (sessionClass::checkAcc($acclist, "dbfiles")) {
+        if (sessionClass::checkAcc($acclist, "dbfiles") && !empty($website['dbclid'])) {
             array_push($brarr, array(
                 "title" => "View/Map Dropbox files",
                 "link" => "/dropbox",
@@ -291,16 +291,17 @@ array_push($brarr, array(
         }
         ?>
         <?php if (!empty($thisarray['p1'])) {
-            $sql = "SELECT tags, desuser, desname, reqid, imgdata FROM config_diagrams where binary desid=?";
+            $sql = "SELECT tags, desuser, desname, reqid, imgdata, accgroups FROM config_diagrams where binary desid=?";
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p1']));
-            if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {?>
+            if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
+                ?>
         <div class="row pt-3">
             <div class="col-lg-2">
                 <?php  include "public/modules/sidebar.php";?></div>
             <div class="col-lg-10">
                 <div class="row">
-                    <?php if ($_SESSION["user"] == $zobj["desuser"]) {?>
+                    <?php if ($_SESSION["user"] == $zobj["desuser"] || sessionClass::checkAcc($_SESSION["userdata"]["ugroups"], str_replace(array('"',"]","["),"",$zobj["accgroups"]))) { ?>
 
                     <div class="col-md-9 drawcard">
                         <?php } else {?>
@@ -313,7 +314,7 @@ array_push($brarr, array(
                             </div>
 
                         </div>
-                        <?php if ($_SESSION["user"] == $zobj["desuser"]) {?>
+                        <?php if ($_SESSION["user"] == $zobj["desuser"] || sessionClass::checkAcc($_SESSION["userdata"]["ugroups"], str_replace(array('"',"]","["),"",$zobj["accgroups"]))) { ?>
                         <div class="col-md-3 formcard">
                             <form method="post" action="">
                                 <div class="form-group">

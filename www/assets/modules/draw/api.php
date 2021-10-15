@@ -36,8 +36,15 @@ class Class_drawapi{
   }
   public static function readDesign(){
     $pdo = pdodb::connect();
-    $data = json_decode(file_get_contents("php://input"));
-    $sql="select id,reqid,desid,desdate,desuser,desname,tags from config_diagrams";
+    //$data = json_decode(file_get_contents("php://input"));
+    $tmp=array();
+    $tmp["likesearch"]=" desuser='".$_SESSION["user"]."'";
+    if(!empty($_SESSION["userdata"]["ugroups"])){
+      foreach($_SESSION["userdata"]["ugroups"] as $keyin=>$valin){
+          $tmp["likesearch"].=" or accgroups like '%".$keyin."%'";
+      }
+    }
+    $sql="select id,reqid,desid,desdate,desuser,imgdata,desname,tags from config_diagrams where (".$tmp["likesearch"].")"; 
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $data=array();

@@ -55,7 +55,6 @@ if (!empty($thisarray['p2'])){
                                         role="tab">Tracking</a> </li>
                             </ul>
 </div>
-<br>
 <div class="card">
 
                           <?php if($thisarray['p3']==""){?>

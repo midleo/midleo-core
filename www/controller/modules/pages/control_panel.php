@@ -507,9 +507,10 @@ class Class_cpinfo
 <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/tinyreset.css">
 <style type="text/css">
-.tox-tinymce {
-    height: 700px !important;
+.bootstrap-tagsinput {
+    border-radius: 0px;
 }
 </style>
 <?php echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
@@ -535,7 +536,7 @@ class Class_cpinfo
                 "active" => ($page == "draw") ? "active" : "",
             ));
         }
-        if (sessionClass::checkAcc($acclist, "odfiles")) {
+        if (sessionClass::checkAcc($acclist, "odfiles") && !empty($website['odappid'])) {
             array_push($brarr, array(
                 "title" => "View/Map OneDrive files",
                 "link" => "/onedrive",
@@ -543,7 +544,7 @@ class Class_cpinfo
                 "active" => ($page == "onedrive") ? "active" : "",
             ));
         }
-        if (sessionClass::checkAcc($acclist, "dbfiles")) {
+        if (sessionClass::checkAcc($acclist, "dbfiles") && !empty($website['dbclid'])) {
             array_push($brarr, array(
                 "title" => "View/Map Dropbox files",
                 "link" => "/dropbox",
@@ -556,7 +557,22 @@ class Class_cpinfo
         include "public/modules/headcontent.php"; ?>
 <div class="page-wrapper">
     <div class="container-fluid">
+        <!--diagrams modal-->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="drlbl" aria-hidden="true">
+            <div class="modal-dialog" style="width: auto;">
+                <div class="modal-content">
+                    <div class="modal-body">
 
+                        <br><br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info" onclick="selectDraw();">Insert</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--diagrams modal-->
         <?php if ($thisarray['p1'] == "new") {?>
         <form class="form-horizontal form-material" action="" method="post" enctype="multipart/form-data"
             name="frmUpload" onSubmit="return validateForm();">
@@ -566,38 +582,53 @@ class Class_cpinfo
                     <?php  include "public/modules/sidebar.php";?></div>
                 <div class="col-lg-8">
 
+                    <input type="text" placeholder="Title" name="posttitle" id="posttitle"
+                        value="<?php echo $_POST["posttitle"]; ?>" class="form-control br-0 form-control-lg"
+                        required><span class="form-control-feedback"></span>
+
                     <textarea name="postcontent" rows="10"
                         class="textarea"><?php echo $_POST["postcontent"]; ?></textarea>
-
+                    <input placeholder="Tags" type="text" name="tags" id="tags" value="<?php echo $_POST["tags"]; ?>"
+                        class="form-control br-0 validatefield" data-role="tagsinput" required><span
+                        class="form-control-feedback"></span>
                 </div>
                 <div class="col-md-2">
+                    <br>
+                    <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
+                    <br>
+                    <div class="list-group">
+                    <a href="/cpinfo"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-history"></i>&nbsp;Back</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlcat"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-border-all"></i>&nbsp;Category</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlacc"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-shield-lock-outline"></i>&nbsp;Permissions</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modal-category-form"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-plus"></i>&nbsp;New Category</a>
+                        <a href="javascript:void(0)" onclick="document.getElementById('addpost').click();"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-content-save-outline"></i>&nbsp;Save</a>
+                    </div>
+                    <button type="submit" id="addpost" name="addpost" style="display:none;"></button>
 
-                    <div class="form-group">
-                        <input type="text" placeholder="Title" name="posttitle" id="posttitle"
-                            value="<?php echo $_POST["posttitle"]; ?>" class="form-control" required><span
-                            class="form-control-feedback"></span>
-                    </div>
-                    <div class="form-group">
-                        <input placeholder="Tags" type="text" name="tags" id="tags"
-                            value="<?php echo $_POST["tags"]; ?>" class="form-control validatefield"
-                            data-role="tagsinput" required><span class="form-control-feedback"></span>
-                    </div>
-                    <div class="form-group">
-                        <select name="public" class="form-control">
-                            <option value="1" onclick="document.getElementById('accgroups').style.display = 'none';">
-                                Visible to Public</option>
-                            <option value="0" onclick="document.getElementById('accgroups').style.display = 'flex';">
-                                Private</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="accgroups" style="display:none;">
-                        <input name="users" id="autogroups" type="text" class="form-control"
-                            placeholder="Access groups">
-                        <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-9"><select name="category" style="width:100%;" class="form-control"
-                                data-live-search="true">
+                </div>
+            </div>
+
+
+
+
+            <!--cat modal-->
+            <div class="modal" id="modlcat" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+
+                            <select name="category" style="width:100%;" class="form-control" data-live-search="true">
                                 <?php $sql = "SELECT * FROM knowledge_categories";
             $q = $pdo->prepare($sql);
             $q->execute();
@@ -609,25 +640,42 @@ class Class_cpinfo
                                 <?php }?>
                             </select>
                         </div>
-                        <div class="col-md-3 text-start">
-                            <button type="button" data-bs-toggle="modal" class="waves-effect btn btn-light btn-sm"
-                                href="#modal-category-form"><svg class='midico midico-outline'>
-                                    <use href='/assets/images/icon/midleoicons.svg#i-add'
-                                        xlink:href='/assets/images/icon/midleoicons.svg#i-add' />
-                                </svg></button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Done</button>
                         </div>
-                    </div><br>
-                    <div class="form-group text-start">
-                        <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Post this content"
-                            name="addpost" class="btn btn-light"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                            </svg></button>
                     </div>
-
-
                 </div>
             </div>
+            <!--cat modal-->
+            <!--acc modal-->
+            <div class="modal" id="modlacc" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <select name="public" class="form-control">
+                                    <option value="1"
+                                        onclick="document.getElementById('accgroups').style.display = 'none';">
+                                        Visible to Public</option>
+                                    <option value="0"
+                                        onclick="document.getElementById('accgroups').style.display = 'flex';">
+                                        Private</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="accgroups" style="display:none;">
+                                <input name="users" id="autogroups" type="text" class="form-control"
+                                    placeholder="Access groups">
+                                <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--acc modal-->
         </form>
         <?php } else if ($thisarray['p1'] == "edit") {
             $sql = "SELECT id,cat_latname,cat_name,category,cattext,tags FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and" . $sactive : "");
@@ -641,72 +689,110 @@ class Class_cpinfo
                     <?php  include "public/modules/sidebar.php";?></div>
                 <div class="col-lg-8">
 
+                    <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name']; ?>"
+                        class="form-control br-0 form-control-lg" required><span class="form-control-feedback"></span>
                     <textarea name="postcontent" rows="10" class="textarea"><?php echo $zobj['cattext']; ?></textarea>
+                    <input placeholder="Tags" type="text" name="tags" id="tags" value="<?php echo $zobj['tags']; ?>"
+                        class="form-control br-0 validatefield" data-role="tagsinput"><span
+                        class="form-control-feedback"></span>
+
                 </div>
                 <div class="col-md-2">
+                    <br>
+                    <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
+                    <br>
+                    <div class="list-group">
+                        <a href="/cpinfo"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-history"></i>&nbsp;Back</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlcat"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-border-all"></i>&nbsp;Category</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlacc"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-shield-lock-outline"></i>&nbsp;Permissions</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modal-category-form"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-plus"></i>&nbsp;New Category</a>
+                        <a href="javascript:void(0)" onclick="document.getElementById('updpost').click();"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-content-save-outline"></i>&nbsp;Save</a>
+                        <a href="javascript:void(0)" onclick="document.getElementById('delpost').click();"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-close"></i>&nbsp;Delete</a>
 
-                    <div class="form-group">
-                        <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name']; ?>"
-                            class="form-control" required><span class="form-control-feedback"></span>
                     </div>
-                    <div class="form-group">
-                        <input type="text" placeholder="Tags" name="tags" value="<?php echo $zobj['tags']; ?>"
-                            class="form-control" data-role="tagsinput"><span class="form-control-feedback"></span>
-                    </div>
-                    <div class="form-group">
-                        <select name="public" class="form-control">
-                            <option value="1" onclick="document.getElementById('accgroups').style.display = 'none';">
-                                Visible to Public</option>
-                            <option value="0" onclick="document.getElementById('accgroups').style.display = 'flex';">
-                                Private</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="accgroups" style="display:none;">
-                        <input name="users" id="autogroups" type="text" class="form-control"
-                            placeholder="Access groups">
-                        <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-9"><select name="category" class="form-control">
+                    <button type="submit" id="updpost" name="updpost" style="display:none;"></button>
+                    <button type="submit" id="delpost" name="delpost" style="display:none;"></button>
+
+                </div>
+
+            </div>
+            <input type="hidden" name="catid" value="<?php echo $zobj['id']; ?>">
+
+
+
+            <!--cat modal-->
+            <div class="modal" id="modlcat" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+
+                            <select name="category" style="width:100%;" class="form-control" data-live-search="true">
                                 <option value="<?php echo $zobj['category']; ?>"><?php echo $zobj['category']; ?>
                                 </option>
-                                <?php $sqlin = "SELECT * FROM knowledge_categories";
-                $qin = $pdo->prepare($sqlin);
-                $qin->execute();
-                $zobjin = $qin->fetchAll();
-                foreach ($zobjin as $val) {?><option value="<?php echo $val['category']; ?>">
-                                    <?php echo $val['catname']; ?></option><?php }?>
+                                <?php $sql = "SELECT * FROM knowledge_categories";
+            $q = $pdo->prepare($sql);
+            $q->execute();
+            if ($zobj = $q->fetchAll()) {
+                foreach ($zobj as $val) {?>
+                                <option value="<?php echo $val['category']; ?>"><?php echo $val['catname']; ?></option>
+                                <?php }} else {?>
+                                <option value="demo">Please add category</option>
+                                <?php }?>
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <button type="button" data-bs-toggle="modal" class="waves-effect btn btn-light btn-sm"
-                                href="#modal-category-form"><svg class='midico midico-outline'>
-                                    <use href='/assets/images/icon/midleoicons.svg#i-add'
-                                        xlink:href='/assets/images/icon/midleoicons.svg#i-add' />
-                                </svg></button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Done</button>
                         </div>
-                    </div><br>
-                    <div class="text-start d-grid gap-2 d-md-block">
-                        <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Update"
-                            name="updpost" class="btn btn-light"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                            </svg></button>
-                        <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Back"
-                            onclick="location.href='/cpinfo'" class="btn btn-light"><i
-                                class="mdi mdi-history"></i></button>
-                        <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                            name="delpost" class="btn btn-danger"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                            </svg></button>
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="catid" value="<?php echo $zobj['id']; ?>">
+            <!--cat modal-->
+            <!--acc modal-->
+            <div class="modal" id="modlacc" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <select name="public" class="form-control">
+                                    <option value="1"
+                                        onclick="document.getElementById('accgroups').style.display = 'none';">
+                                        Visible to Public</option>
+                                    <option value="0"
+                                        onclick="document.getElementById('accgroups').style.display = 'flex';">
+                                        Private</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="accgroups" style="display:none;">
+                                <input name="users" id="autogroups" type="text" class="form-control"
+                                    placeholder="Access groups">
+                                <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--acc modal-->
         </form>
         <?php
-} else {textClass::PageNotFound();}} else {?>
+} else {textClass::PageNotFound();}} else { ?>
         <div class="row pt-3">
             <div class="col-lg-2">
                 <?php  include "public/modules/sidebar.php";?></div>

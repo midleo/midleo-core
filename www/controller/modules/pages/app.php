@@ -108,7 +108,8 @@ class Class_appconfig
 <link rel="stylesheet" type="text/css" href="/assets/css/nestablemenu.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-datetimepicker.css">
 <?php }
-        echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
+        echo '<link rel="stylesheet" type="text/css" href="/assets/css/tinyreset.css">
+        </head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Midleo configuration";
         include "public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
