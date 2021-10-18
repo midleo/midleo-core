@@ -469,6 +469,7 @@ CREATE TABLE IF NOT EXISTS `knowledge_info` (
   `accgroups` varchar(255) DEFAULT NULL,
   `author` varchar(100) DEFAULT NULL,
   `tags` varchar(250) NOT NULL,
+  `gitprepared` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

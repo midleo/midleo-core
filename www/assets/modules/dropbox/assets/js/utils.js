@@ -105,7 +105,7 @@ function showPageSection(elementClass) {
   $("." + elementClass).show();
 }
 function showItems(thisdir) {
-  $('#data-table').DataTable().clear().draw();
+  $('#data-table').DataTable({responsive: true, "autoWidth": false, destroy: true}).clear().draw();
   updateBreadcrumb(thisdir);
   dbx.filesListFolder({
           path: thisdir

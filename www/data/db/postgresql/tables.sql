@@ -416,7 +416,8 @@ CREATE TABLE IF NOT EXISTS knowledge_info (
   public NUMERIC(1) NOT NULL DEFAULT '1',
   accgroups varchar(255) DEFAULT NULL,
   author varchar(100) DEFAULT NULL,
-  tags varchar(150) NOT NULL
+  tags varchar(150) NOT NULL,
+  gitprepared int NOT NULL DEFAULT '0'
 )  ;
 
 CREATE TABLE IF NOT EXISTS ldap_config (

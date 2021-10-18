@@ -434,6 +434,7 @@ CREATE TABLE knowledge_info (
   accgroups varchar2(255) DEFAULT NULL,
   author varchar2(100) DEFAULT NULL,
   tags varchar2(150) NOT NULL,
+  gitprepared number(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (id)
 )    ;
 BEGIN EXECUTE IMMEDIATE 'drop sequence knowledge_info_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;

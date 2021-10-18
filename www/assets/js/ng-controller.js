@@ -1724,7 +1724,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
     $http({
       method: 'POST',
       data: { 'pkg': packuid },
-      url: '/api/gitlist/commits'
+      url: '/vcapi/gitlist/commits'
     }).then(function successCallback(response) {
       $(".gl" + thisid).html('<i class="mdi mdi-git"></i>');
       $(".gl" + thisid).prop("disabled", false);

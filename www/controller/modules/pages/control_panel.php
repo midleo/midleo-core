@@ -492,20 +492,54 @@ class Class_cpinfo
                 $sql = "INSERT INTO knowledge_info (cat_latname,category,cat_name,public,tags,author, cattext,accgroups) VALUES (?,?,?,?,?,?,?,?)";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($latname, htmlspecialchars($_POST["category"]), $posttitle, htmlspecialchars($_POST['public']), htmlspecialchars($_POST["tags"]), $_SESSION["user"], $_POST["postcontent"], (!empty($_POST["respgrsel"]) ? $_POST["respgrsel"] : "")));
+                
+                $shagit="";
+
+                $return=vc::gitAdd("text",$_POST["postcontent"],"articles/posts/".$latname.".txt",false,$shagit,true);
+                
+                
+                
+                
                 header("Location: /cpinfo/edit/" . $latname);
                 $msg[] = 'You posted successfully the info.';
             }
         }
         if (isset($_POST['updpost'])) {
-            $sql = "update knowledge_info set tags=?, category=?, cat_name=?, cattext=? , public=?, accgroups=? where cat_latname=?";
+            $sql = "update knowledge_info set tags=?, gitprepared='1', category=?, cat_name=?, cattext=? , public=?, accgroups=? where cat_latname=?";
             $q = $pdo->prepare($sql);
             $q->execute(array(htmlspecialchars($_POST["tags"]), htmlspecialchars($_POST["category"]), htmlspecialchars($_POST["posttitle"]), $_POST["postcontent"], htmlspecialchars($_POST['public']), (!empty($_POST["respgrsel"]) ? $_POST["respgrsel"] : ""), $thisarray['p2']));
             textClass::replaceMentions($_POST["postcontent"], $_SERVER["HTTP_HOST"] . "/info/posts/" . $thisarray['p2']);
+            if($website['gittype']){
+                $shagit="";
+                if($website['gittype']=="github" && $_POST["gitprepared"]==1){
+                    $resp=vc::gitTreelist("articles/posts/".$thisarray['p2'].".txt");
+                    $shagit=json_decode($resp,true)["sha"];
+                }
+                $return=vc::gitAdd("text",$_POST["postcontent"],"articles/posts/".$thisarray['p2'].".txt",($_POST["gitprepared"]==1?true:false),$shagit,true);
+                if(empty($return["err"])){
+                    $tmp["gitupload"]="articles/posts/".$thisarray['p2'].".txt";
+                  } else {
+                    $msg[]=$return["err"];
+                    $tmp["gitupload"]=false;
+                }
+                if($tmp["gitupload"]){
+                    $resp=vc::GetCommitID($tmp["gitupload"]); 
+                    $lastcommit=json_decode($resp,true)[0]["id"];
+                    if($lastcommit){
+                      $sql="insert into env_gituploads (gittype,commitid,packuid,fileplace,steptype,stepuser) values (?,?,?,?,?,?)";
+                      $q = $pdo->prepare($sql);
+                      $q->execute(array($website['gittype'],$lastcommit,"knowledge_info:".$_POST['catid'],"articles/posts/".$thisarray['p2'].".txt","prepare",$_SESSION["user"]));
+                    }
+                }
+            }
+            gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid"=>"system"), "Updated post:<a href='/info/posts/".$thisarray['p2']."'>".$_POST["posttitle"]."</a>");
             $msg[] = 'The post was updated.';
         }
         include "public/modules/css.php";?>
+<?php if($thisarray['p1']!="new"){?>
 <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
+<?php } ?>
 <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/tinyreset.css">
 <style type="text/css">
@@ -597,7 +631,7 @@ class Class_cpinfo
                     <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
                     <br>
                     <div class="list-group">
-                    <a href="/cpinfo"
+                        <a href="/cpinfo"
                             class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
                                 class="mdi mdi-history"></i>&nbsp;Back</a>
                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlcat"
@@ -678,7 +712,7 @@ class Class_cpinfo
             <!--acc modal-->
         </form>
         <?php } else if ($thisarray['p1'] == "edit") {
-            $sql = "SELECT id,cat_latname,cat_name,category,cattext,tags FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and" . $sactive : "");
+            $sql = "SELECT id,cat_latname,cat_name,category,cattext,tags,gitprepared FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and" . $sactive : "");
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p2']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -711,6 +745,10 @@ class Class_cpinfo
                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlacc"
                             class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
                                 class="mdi mdi-shield-lock-outline"></i>&nbsp;Permissions</a>
+                        <a href="javascript:void(0)"
+                            onclick="getGITHistory('knowledge_info:<?php echo $zobj['id']; ?>');"
+                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                class="mdi mdi-git"></i>&nbsp;Change History</a>
                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modal-category-form"
                             class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
                                 class="mdi mdi-plus"></i>&nbsp;New Category</a>
@@ -724,6 +762,7 @@ class Class_cpinfo
                                 class="mdi mdi-close"></i>&nbsp;Delete</a>
 
                     </div>
+                    <input type="hidden" name="gitprepared" value="<?php echo $zobj['gitprepared']; ?>">
                     <button type="submit" id="updpost" name="updpost" style="display:none;"></button>
                     <button type="submit" id="delpost" name="delpost" style="display:none;"></button>
 
@@ -733,7 +772,40 @@ class Class_cpinfo
             <input type="hidden" name="catid" value="<?php echo $zobj['id']; ?>">
 
 
+            <!--history modal-->
+            <div class="modal" id="modal-hist" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog" style="width:auto;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div style="display:block;">
+                                <input type="text" ng-model="search" class="form-control topsearch dtfilter"
+                                    placeholder="Filter">
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body pt-0">
+                            <div class="table-responsive">
+                                <table id="data-table-hist" class="table table-hover stylish-table mb-0"
+                                    aria-busy="false" style="margin-top:0px !important;" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th data-column-id="id" data-identifier="true" data-visible="false"
+                                                data-type="numeric">ID</th>
+                                            <th data-column-id="commitid">Commit ID</th>
+                                            <th data-column-id="filepl">File place</th>
+                                            <th data-column-id="author">Author</th>
+                                            <th data-column-id="commitdate">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--history modal-->
             <!--cat modal-->
             <div class="modal" id="modlcat" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
@@ -890,11 +962,12 @@ include "public/modules/footer.php";
         echo "</div></div>";
         include "public/modules/js.php";
         echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';?>
+<?php if($thisarray['p1']!="new"){?>
 <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
 <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
+    <?php if($thisarray['p1']!="edit"){ ?>
     let table = $('#data-table-ki').DataTable({
         "oLanguage": {
             "sSearch": "",
@@ -931,8 +1004,11 @@ $(document).ready(function() {
         });
     });
 
+
+    <?php } ?>
 });
 </script>
+<?php } ?>
 <?php include "public/modules/template_end.php";
         echo '</body></html>';
     }

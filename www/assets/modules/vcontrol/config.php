@@ -1,14 +1,15 @@
 <?php
 $modulelist["vcontrol"]["name"]="GIT Version control";
+include_once "api.php";
 class vc{
-   public static function gitAdd(?string $file_encoding,$file_git,$file_place,$file_exist=false,$file_sha=""){
+   public static function gitAdd(?string $file_encoding,$file_git,$file_place,$file_exist=false,$file_sha="",$textcont=false){
      global $website;
      if(in_array($website['gittype'],array("github","gitlab","bitbucket"))){
       if($website['gittype']=="gitlab"){
         $data_git = array(
         'branch'=>"master",
-        'commit_message'=>'system upload from MidlEOApp',
-        'content'=> ($file_encoding=="base64"?base64_encode(file_get_contents($file_git)):file_get_contents($file_git)),
+        'commit_message'=>'system upload for MidlEOApp from.'.$_SESSION["user"],
+        'content'=> $textcont?$file_git:($file_encoding=="base64"?base64_encode(file_get_contents($file_git)):file_get_contents($file_git)),
         'author_name'=>$_SESSION["user"],
         );
         if($file_encoding=="base64"){
@@ -18,7 +19,7 @@ class vc{
       }
       if($website['gittype']=="github"){
         $data_git = array(
-            'message'=>'system upload from MidlEOApp',
+            'message'=>'system upload for midleo.CORE from.'.$_SESSION["user"],
             'content'=> base64_encode(file_get_contents($file_git)),
             'committer'=> array(
               'name'=>$_SESSION["user"],
@@ -33,7 +34,7 @@ class vc{
       if($website['gittype']=="bitbucket"){
         $data_git = array(
             'branch'=>"master",
-            'message'=>'system upload from MidlEOApp',
+            'message'=>'system upload for midleo.CORE from.'.$_SESSION["user"],
             $file_place => file_get_contents($file_git),  
             'author' => $_SESSION["user"]." @MIDLEO <system@midleo.app>",    
           ); 
@@ -78,7 +79,7 @@ class vc{
        curl_setopt($ch, CURLAUTH_BASIC, 1);
        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
           'Content-Type:application/x-www-form-urlencoded',
-          'User-Agent: MIDLEO APP agent',
+          'User-Agent: midleo.CORE Agent',
           )
         );  
       }
@@ -86,7 +87,7 @@ class vc{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
          'Accept: application/vnd.github.v3+json',
          'Content-Type:application/json',
-         'User-Agent: MIDLEO APP agent',
+         'User-Agent: midleo.CORE Agent',
          'Authorization: token '.$website['githtoken']
          )
        );
@@ -107,14 +108,14 @@ class vc{
       if($website['gittype']=="gitlab"){
         $data_git = array(
         'branch'=>"master",
-        'commit_message'=>'system delete from MidlEOApp',
+        'commit_message'=>'system delete for midleo.CORE from'.$_SESSION["user"],
         'author_name'=>$_SESSION["user"],
         );
         $data_string_git = json_encode($data_git); 
       }
       if($website['gittype']=="github"){
         $data_git = array(
-            'message'=>'system delete from MidlEOApp',
+            'message'=>'system delete for midleo.CORE from'.$_SESSION["user"],
             'sha'=> $file_sha,
          ); 
          $data_string_git = json_encode($data_git); 
@@ -122,9 +123,9 @@ class vc{
       if($website['gittype']=="bitbucket"){
         $data_git = array(
             'branch'=>"master",
-            'message'=>'system delete from MidlEOApp',
+            'message'=>'system delete for midleo.CORE from'.$_SESSION["user"],
             'files' => $file_place,  
-            'author' => $_SESSION["user"]." @MIDLEO <system@midleo.app>",    
+            'author' => $_SESSION["user"]." @MIDLEO <system@midleo.core>",    
           ); 
         $data_string_git = http_build_query($data_git);
       }
@@ -163,7 +164,7 @@ class vc{
         curl_setopt($ch, CURLAUTH_BASIC, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
            'Content-Type:application/x-www-form-urlencoded',
-           'User-Agent: MIDLEO APP agent',
+           'User-Agent: midleo.CORE Agent',
            )
          );  
        }
@@ -171,7 +172,7 @@ class vc{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
          'Accept: application/vnd.github.v3+json',
          'Content-Type:application/json',
-         'User-Agent: MIDLEO APP agent',
+         'User-Agent: midleo.CORE Agent',
          'Authorization: token '.$website['githtoken']
          )
        );
@@ -254,7 +255,7 @@ class vc{
         curl_setopt($ch, CURLAUTH_BASIC, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
            'Content-Type:application/x-www-form-urlencoded',
-           'User-Agent: MIDLEO APP agent',
+           'User-Agent: midleo.CORE Agent',
            )
          );  
        }
@@ -262,7 +263,7 @@ class vc{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
          'Accept: application/vnd.github.v3+json',
          'Content-Type:application/json',
-         'User-Agent: MIDLEO APP agent',
+         'User-Agent: midleo.CORE Agent',
          'Authorization: token '.$website['githtoken']
          )
        );
@@ -309,7 +310,7 @@ class vc{
        if($website['gittype']=="github"){
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
          'Accept: application/vnd.github.v3.raw',
-         'User-Agent: MIDLEO APP agent',
+         'User-Agent: midleo.CORE Agent',
          'Authorization: token '.$website['githtoken']
          )
        );
@@ -319,7 +320,7 @@ class vc{
         curl_setopt($ch, CURLAUTH_BASIC, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
            'Content-Type:application/x-www-form-urlencoded',
-           'User-Agent: MIDLEO APP agent',
+           'User-Agent: midleo.CORE Agent',
            )
          );  
        }

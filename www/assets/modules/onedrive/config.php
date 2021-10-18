@@ -284,7 +284,7 @@ class Class_onedrive
                         if (data) {
                             $('#od-items').empty();
                             //   $('#od-json').empty();
-                            $('#data-table-doc').DataTable().clear().draw();
+                            $('#data-table-doc').DataTable({responsive: true, "autoWidth": false, destroy: true}).clear().draw();
                             //  $("<code>").html(JSON.stringify(data)).appendTo("#od-json");
                             var decodedPath = decodeURIComponent(path);
                             updateBreadcrumb(decodedPath);

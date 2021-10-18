@@ -122,6 +122,11 @@ if ($forumcase=="posts") {
     } else { $blogcatname="wrong category!"; }
   } else { $blogcatname="Category is empty!"; }}
   include "public/modules/css.php";   
+  if ($forumcase=="posts") {?>
+    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
+    <?php
+  }
   echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
   $breadcrumb["text"]="Knowledge base"; 
      $brarr=array();
@@ -198,6 +203,40 @@ if ($forumcase=="posts") {
         </ul>
     </div>
 
+    <!--history modal-->
+    <div class="modal" id="modal-hist" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog" style="width:auto;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div style="display:block;">
+                                <input type="text" ng-model="search" class="form-control topsearch dtfilter"
+                                    placeholder="Filter">
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body pt-0">
+                            <div class="table-responsive">
+                                <table id="data-table-hist" class="table table-hover stylish-table mb-0"
+                                    aria-busy="false" style="margin-top:0px !important;" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th data-column-id="id" data-identifier="true" data-visible="false"
+                                                data-type="numeric">ID</th>
+                                            <th data-column-id="commitid">Commit ID</th>
+                                            <th data-column-id="filepl">File place</th>
+                                            <th data-column-id="author">Author</th>
+                                            <th data-column-id="commitdate">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--history modal-->
     <?php if(!empty($zobj['tags'])){?><br>
     <div class="blogTags">
         <?php
@@ -313,6 +352,10 @@ if($page < $total_pages)
    echo '</div></div></div></div></div></div>';
    include "public/modules/footer.php";
    include "public/modules/js.php";
+   if ($forumcase=="posts") {?>
+    <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+ <?php  }
    include "public/modules/template_end.php";
    if(!empty($text)){unset($text);}
     echo '</body></html>';

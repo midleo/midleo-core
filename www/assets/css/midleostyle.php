@@ -1575,7 +1575,7 @@ background-color: #fff;
 .btngrev span{margin-bottom:5px;}
 /*.card-title{text-transform:uppercase;}*/
 .modal-header{border-bottom: none;}
-.modal-content{background-color: #F5F5F5;border:none;box-shadow: 0px 10px 20px #0000000F;border-radius: 12px;}
+.modal-content{background-color: #F5F5F5;border:none;box-shadow: 0px 10px 20px #0000000F;border-radius: 6px;}
 .modal-footer{border-top:none;padding: .5em;}
 select.form-control {
   moz-appearance: none;

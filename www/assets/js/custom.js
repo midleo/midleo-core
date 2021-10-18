@@ -2,17 +2,18 @@ var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]'
 var currentTheme = localStorage.getItem('theme');
 let logoimg = $(".ml");
 let logoimgicon = $(".mli");
+var notice = "";
 if (currentTheme) {
   $('body').attr('data-color', currentTheme);
   if (currentTheme === 'dark') {
- //   logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
- //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
+    //   logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
+    //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
     if (toggleSwitch) {
       toggleSwitch.checked = true;
     }
   } else {
-  //  logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
- //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
+    //  logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
+    //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
   }
 } else {
   $('body').attr('data-color', "light");
@@ -128,16 +129,16 @@ function switchTheme(e) {
     $("body").data("color", "dark");
     $('body').attr('data-color', "dark");
     localStorage.setItem('theme', 'dark');
-  //  logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
-  //  logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
+    //  logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
+    //  logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
     $(".slidersw").html('<svg class="itemicon midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-day" xlink:href="/assets/images/icon/midleoicons.svg#i-day"/></svg> ');
   }
   else {
     $("body").data("color", "light");
     $('body').attr('data-color', "light");
     localStorage.setItem('theme', 'light');
- //   logoimg.attr("src", "/assets/images/midleo-logo-dark.svg");
- //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-dark.svg");
+    //   logoimg.attr("src", "/assets/images/midleo-logo-dark.svg");
+    //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-dark.svg");
     $(".slidersw").html('<svg class="itemicon midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-night" xlink:href="/assets/images/icon/midleoicons.svg#i-night"/></svg> ');
   }
 }
@@ -276,14 +277,14 @@ $(document).ready(function () {
   }
 });
 function notify(message, type) {
-  $.notify({ message: message }, {
+  notice = $.notify({ message: message }, {
     type: type,
     allow_dismiss: true,
     label: 'Cancel',
     className: 'btn-sm btn-light',
     newest_on_top: true,
     placement: { from: 'top', align: 'right' },
-    delay: 3000,
+    delay: 300,
     animate: { enter: 'animated fadeIn', exit: 'animated fadeOut' }
   });
 };
@@ -515,10 +516,10 @@ function updateOutput() {
       liobj["id"] = $(this).attr('id');
       liobj["name"] = $(".nml" + $(this).attr('id')).text();
       liobj["nameshort"] = $(this).attr('data-nameshort');
-      if($(this).attr('data-color')){
+      if ($(this).attr('data-color')) {
         liobj["color"] = $(this).attr('data-color');
       }
-      if($(this).attr('data-icon')){
+      if ($(this).attr('data-icon')) {
         liobj["icon"] = $(this).attr('data-icon');
       }
       ulserial.push(liobj);
@@ -564,7 +565,7 @@ function showthisnm(thisid, thisname, color) {
 }
 function showthisnmicon(thisid, thisname, icon) {
   $("#nmname").val(thisname);
-  $("#radioic_"+icon).prop("checked", true);
+  $("#radioic_" + icon).prop("checked", true);
   $("#nmid").val(thisid);
   $('#nmModal').modal('show');
 }
@@ -589,4 +590,37 @@ function savethisnmicon() {
   $(".ni" + $("#nmid").val() + " a.nml" + $("#nmid").val()).html($("#nmname").val());
   $('#nmModal').modal('hide');
   updateOutput();
+}
+function getGITHistory(thistype) {
+  notify("<i class='mdi mdi-loading iconspin'></i>&nbsp;Please wait", "info");
+  $.ajax({
+    type: "POST",
+    url: "/vcapi/history",
+    data: { hsearch: thistype },
+    dataType: 'json',
+    cache: false,
+    success: function (data) {
+      if (data) {
+        if (data.error) {
+          nalert(data.errorlog, "danger");
+        } else {
+          let table = $('#data-table-hist').DataTable({ responsive: true, "autoWidth": false, destroy: true }).clear().draw();
+          $.each(data, function (index, element) {
+            let itemdata = "<tr><td>" + element.id + "</td><td><a href='#' onclick=\"copyToClipboard('" + element.commitid + "');\">" + element.commitid.substring(0, 8) + "</a></td><td>" + element.fileplace + "</td><td><a href='/browse/user/" + element.stepuser + "' target='_blank'>" + element.stepuser + "</td><td>" + moment(element.steptime).format("YYYY-MM-DD H:mm") + "</td></tr>";
+            $('#data-table-hist').DataTable().row.add($(itemdata)[0]).draw(false);
+          });
+          notice.close();
+          $('.dtfilter').keyup(function () { table.search($(this).val()).draw(); });
+          $('#data-table-hist').css('display', 'table');
+          $('#modal-hist').modal('show');
+        }
+      } else {
+        notify("No changes yet", "warning");
+      }
+    }
+  });
+}
+function copyToClipboard(thistext) {
+  navigator.clipboard.writeText(thistext);
+  notify("Copied to clipboard", "success");
 }

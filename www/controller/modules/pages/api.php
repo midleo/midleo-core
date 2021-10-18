@@ -46,7 +46,6 @@ class Class_api{
       case 'readplaces':  Class_api::readPlaces($thisarray["p2"]);  break;
       case 'readimp':  Class_api::readImported();  break;
       case 'readdepl':  Class_api::readDeployments();  break;
-      case 'gitlist': Class_api::readGitInfo(); break;
       case 'getallusrgr':  Class_api::readAllusrGr($thisarray["p2"]);  break;
       case 'mqsc':  Class_api::createMqsc($thisarray["p2"],$thisarray["p3"]);  break;
       case 'auth':  Class_api::createAuth($thisarray["p2"],$thisarray["p3"]);  break;
@@ -1266,30 +1265,6 @@ fteCreateMonitor.cmd/sh -ix '.$name.'.xml
       $data['deplobjects']=$val['deplobjects'];
       $data['deplby']=$val['deplby'];
       $data['packuid']=$val['packuid'];
-      $newdata[]=$data;
-    }
-    pdodb::disconnect();
-    echo json_encode($newdata,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE); exit;
-  }
-  public static function readGitInfo(){
-    $data = json_decode(file_get_contents("php://input"));
-    if(!$data->pkg){
-      echo json_encode(array(),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE); exit;
-    }
-    $pdo = pdodb::connect();
-    $sql="select * from env_gituploads where packuid=?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array($data->pkg));
-    $zobj = $stmt->fetchAll();
-    foreach($zobj as $val) {
-      $data=array();
-      $data['gittype']=$val['gittype'];
-      $data['commitid']=$val['commitid'];
-      $data['packuid']=$val['packuid'];
-      $data['fileplace']=$val['fileplace'];
-      $data['steptime']=$val['steptime'];
-      $data['steptype']=$val['steptype'];
-      $data['stepuser']=$val['stepuser'];
       $newdata[]=$data;
     }
     pdodb::disconnect();

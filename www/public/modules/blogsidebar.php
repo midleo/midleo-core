@@ -8,7 +8,12 @@
     <?php if($forumcase=="posts"){?><a data-bs-toggle="tooltip" href="/cpinfo/edit/<?php echo $keyws;?>"
         data-bs-placement="top" title="Edit this Article"
         class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-            class="mdi mdi-pencil-outline"></i>&nbsp;Edit</a><?php } ?>
+            class="mdi mdi-pencil-outline"></i>&nbsp;Edit</a>
+    <a href="javascript:void(0)" onclick="getGITHistory('knowledge_info:<?php echo $zobj['id']; ?>');"
+        class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+            class="mdi mdi-git"></i>&nbsp;Change History</a>
+
+    <?php } ?>
     <?php if($breadcrumb){  if($brarr){ foreach($brarr as $key=>$val){ ?>
     <a href="<?php echo $val["link"];?>" data-bs-toggle="tooltip" data-bs-placement="top"
         title="<?php echo $val["title"];?>"
