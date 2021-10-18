@@ -418,14 +418,7 @@ array_push($brarr, array(
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    <div style="display:block;">
-                                        <input type="text" ng-model="search" class="form-control  topsearch"
-                                            placeholder="find a diagram">
-                                        <span class="searchicon"><svg class="midico midico-outline">
-                                                <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                                            </svg><span>
-                                    </div>
+                                <?php include "public/modules/filterbar.php"; ?>
                                     <?php include "public/modules/breadcrumbin.php";?>
                                 </div>
                             </div>

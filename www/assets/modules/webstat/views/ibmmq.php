@@ -65,14 +65,7 @@ else if(!empty($_GET["qmid"])){
                                 </ul>
                             </div>
                             <div class="col-md-3">
-                                <div class="p-1 position-relative">
-                                    <input type="text" ng-model="search" class="form-control  dtfilter"
-                                        placeholder="Find an object">
-                                    <span class="searchicon"><svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                                        </svg>
-                                </div>
+                            <?php include "public/modules/filterbar.php"; ?>
                             </div>
                         </div>
                         <div class="tab-content">
@@ -199,13 +192,7 @@ else if(!empty($_GET["qmid"])){
             </div>
 
             <div class="col-md-2">
-                <div>
-                    <input type="text" ng-model="search" class="form-control topsearch" placeholder="Filter">
-                    <span class="searchicon"><svg class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                        </svg>
-                </div>
+                <?php include "public/modules/filterbar.php"; ?>
                 <?php include "public/modules/breadcrumbin.php"; ?>
             </div>
         </div>

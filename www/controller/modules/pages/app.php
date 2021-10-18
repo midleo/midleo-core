@@ -191,16 +191,9 @@ class Class_appconfig
             </div>
             <div class="col-md-3">
                 <?php if(!in_array($thisarray['p1'], array("external","mail","main"))){?>
-                <div>
-                    <input type="text" ng-model="search" class="form-control topsearch dtfilter" placeholder="Filter">
-                    <span class="searchicon"><svg class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                        </svg>
-                </div>
-                
-                <?php }
- ?><?php include "public/modules/breadcrumbin.php"; ?>
+                    <?php include "public/modules/filterbar.php"; ?>
+                <?php } ?>
+                <?php include "public/modules/breadcrumbin.php"; ?>
             </div>
         </div>
     </div>

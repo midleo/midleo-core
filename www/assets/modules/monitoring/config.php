@@ -72,7 +72,7 @@ class Class_monitoring{
       "active"=>($thisarray["p2"]=="new")?"active":"",
     ));
   }
-  include "public/modules/breadcrumb.php"; ?>
+  ?>
         <?php 
         if($thisarray["p2"]=="new"){ ?>
         <div class="row pt-3">
@@ -253,8 +253,6 @@ class Class_monitoring{
         <?php include "public/modules/breadcrumbin.php"; ?>
     </div>
     </div>
-
-
         </div>
         <?php } else {
         if(!empty($thisarray['p1'])){ 
@@ -329,10 +327,7 @@ class Class_monitoring{
 
 
                 <div class="col-md-3">
-    <div>
-      <input type="text" ng-model="search" class="form-control topsearch" placeholder="Filter">
-      <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg>
-  </div>
+                <?php include "public/modules/filterbar.php"; ?>
         <?php include "public/modules/breadcrumbin.php"; ?>
     </div>
     </div>

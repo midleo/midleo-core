@@ -32,7 +32,7 @@ if (!empty($bsteps) && !empty($ugrarr) && !empty($widarr)) {
     <div class="row">
         <div class="col-md-4 position-relative">
             <input type="text" id="applauto" class="form-control topsearch" required
-                placeholder="Find an application" />
+                placeholder="Filter" />
             <span class="searchicon"><svg class="midico midico-outline">
                     <use href="/assets/images/icon/midleoicons.svg#i-search"
                         xlink:href="/assets/images/icon/midleoicons.svg#i-search" />

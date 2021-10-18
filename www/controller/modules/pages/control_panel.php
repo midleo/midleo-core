@@ -903,14 +903,7 @@ class Class_cpinfo
                 </div>
             </div>
             <div class="col-md-2">
-                <div style="display:block;">
-                    <input type="text" ng-model="search" class="form-control topsearch dtfilter"
-                        placeholder="Find an article">
-                    <span class="searchicon"><svg class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                        </svg>
-                </div>
+                <?php include "public/modules/filterbar.php"; ?>
                 <?php include "public/modules/breadcrumbin.php";?>
             </div>
         </div>

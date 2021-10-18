@@ -1,6 +1,6 @@
 <?php if($breadcrumb){ ?>
 <div class="row">
-  <div class="col-md-10 align-self-center" style="min-height:50px;">
+  <div class="col-lg-12 align-self-center" style="min-height:50px;">
   <?php if($brenvarr){?>
     <ul class="nav nav-tabs customtab">
    <?php foreach($brenvarr as $key=>$val){ ?>
@@ -24,6 +24,5 @@
         </div>
     </div>
    <?php } ?>
-   
 </div>
 <?php } ?>
