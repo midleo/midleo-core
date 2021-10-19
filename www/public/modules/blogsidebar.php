@@ -2,10 +2,16 @@
 <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
 <br>
 <div class="list-group">
+<form method='post' action='/docapi/export'>
     <a href="/cpinfo/new" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article"
         class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
             class="mdi mdi-plus"></i>&nbsp;New Page</a>
-    <?php if($forumcase=="posts"){?><a data-bs-toggle="tooltip" href="/cpinfo/edit/<?php echo $keyws;?>"
+    <?php if($forumcase=="posts"){?>
+      <a data-bs-toggle="tooltip" href="javascript:void(0)" onclick="document.getElementById('pdfexport').click();"
+        data-bs-placement="top" title="Export in PDF"
+        class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+            class="mdi mdi-file-pdf-box"></i>&nbsp;Export in PDF</a>
+      <a data-bs-toggle="tooltip" href="/cpinfo/edit/<?php echo $keyws;?>"
         data-bs-placement="top" title="Edit this Article"
         class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
             class="mdi mdi-pencil-outline"></i>&nbsp;Edit</a>
@@ -26,6 +32,11 @@
             class="mdi <?php echo $val["icon"];?>"></i><?php } ?><?php if($val["img"]){ ?><img
             src="<?php echo $val["img"];?>" width="22px"></a><?php } ?>&nbsp;<?php echo $val["title"];?></a>
     <?php }}} ?>
+    <input type="submit" id="pdfexport" name="pdfexport" style="display:none;">
+    <input type='hidden' name='thisid' value='<?php echo $keyws;?>'>
+    <input type='hidden' name='thisuid' value='<?php echo $zobj['id']?$zobj['id']:"";?>'>
+    <input type='hidden' name='thistype' value='kbase'>
+            </form>
 </div>
 <?php  $clientkeyws="";
 if(DBTYPE=='postgresql'){

@@ -124,4 +124,27 @@ class documentClass{
     list($encrypted_data, $iv) = explode('::', base64_decode($garble), 2);
     return openssl_decrypt($encrypted_data, 'aes-256-cbc', $key, 0, $iv);
   }
+  public static function getDiagramDataById($diagramId) {
+    $pdo = pdodb::connect(); 
+    $sqlin="SELECT imgdata FROM config_diagrams where desid=?";
+    $qin = $pdo->prepare($sqlin);
+    $qin->execute(array($diagramId));
+    if ($results = $qin->fetch(PDO::FETCH_ASSOC)) {
+       $imageData = $results['imgdata'];
+       if (!empty($imageData)) {
+           return $imageData;
+       }
+    }
+    return null;
+    pdodb::disconnect();
+  }
+  public static  function replaceDiagramsWithImage($text) {
+   return preg_replace_callback("#\[diagram=([a-z0-9]+)\]#i", function ($matches) {
+     $imageData = documentClass::getDiagramDataById($matches[1]);
+     if ($imageData === null) {
+        return null;
+     }
+     return "<img style='max-width:100%;' src='{$imageData}'>";
+   }, $text);
+ }
 }

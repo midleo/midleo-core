@@ -64,7 +64,7 @@ class Class_onedrive
             array_push($brarr,array(
             "title"=>"View/Edit diagrams",
             "link"=>"/draw",
-            "midicon"=>"diagram",
+            "icon"=>"mdi-chart-scatter-plot-hexbin",
             "active"=>($page=="draw")?"active":"",
              ));
              }
@@ -72,7 +72,7 @@ class Class_onedrive
                 array_push($brarr,array(
                     "title"=>"View/Map Dropbox files",
                   "link"=>"/dropbox",
-                  "midicon"=>"dropbox",
+                  "icon"=>"mdi-dropbox",
                   "active"=>($page=="dropbox")?"active":"",
                 ));
               }

@@ -1,5 +1,5 @@
 <?php
-$modulelist["docimport"]["name"] = "Import Documents";
+$modulelist["docimport"]["name"] = "Import/Export Documents";
 include_once "api.php";
 class Class_docimport
 {

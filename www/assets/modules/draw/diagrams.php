@@ -87,7 +87,7 @@ class Class_diagrams
       array_push($brarr,array(
           "title"=>"View/Map Dropbox files",
         "link"=>"/dropbox",
-        "midicon"=>"dropbox",
+        "icon"=>"mdi-dropbox",
         "active"=>($page=="dropbox")?"active":"",
       ));
     }

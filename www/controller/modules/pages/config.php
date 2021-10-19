@@ -50,29 +50,6 @@ class Class_reqlogout{
   }
 }
 class Class_info{
-   public static function getDiagramDataById($diagramId) {
-     $pdo = pdodb::connect(); 
-     $sqlin="SELECT imgdata FROM config_diagrams where desid=?";
-     $qin = $pdo->prepare($sqlin);
-     $qin->execute(array($diagramId));
-     if ($results = $qin->fetch(PDO::FETCH_ASSOC)) {
-        $imageData = $results['imgdata'];
-        if (!empty($imageData)) {
-            return $imageData;
-        }
-     }
-     return null;
-     pdodb::disconnect();
-   }
-   public static  function replaceDiagramsWithImage($text) {
-    return preg_replace_callback("#\[diagram=([a-z0-9]+)\]#i", function ($matches) {
-      $imageData = Class_info::getDiagramDataById($matches[1]);
-      if ($imageData === null) {
-         return null;
-      }
-      return "<img style='max-width:100%;' src='{$imageData}'>";
-    }, $text);
-  }
   public static function getPage($thisarray){
    global $installedapp;
    global $website;
@@ -133,28 +110,28 @@ if ($forumcase=="posts") {
       array_push($brarr,array(
         "title"=>"Knowledge Base",
         "link"=>"/info",
-        "midicon"=>"kn-b",
+        "icon"=>"mdi-lightbulb-on-outline",
         "active"=>($page=="cpinfo")?"active":"",
       ));
       array_push($brarr, array(
         "title" => "Import documents",
         "link" => "/docimport",
-        "midicon" => "deploy",
+        "icon" => "mdi-import",
         "active" => ($page == "docimport") ? "active" : "",
     ));
    if (sessionClass::checkAcc($acclist, "designer")) {
     array_push($brarr,array(
       "title"=>"Diagrams",
       "link"=>"/diagrams",
-      "midicon"=>"diagram",
+      "icon"=>"mdi-chart-scatter-plot-hexbin",
       "active"=>($page=="draw")?"active":"",
     ));
   }
     if (sessionClass::checkAcc($acclist, "odfiles") && !empty($website['odappid'])) {
       array_push($brarr,array(
-          "title"=>"View/Map OneDrive files",
+        "title"=>"View/Map OneDrive files",
         "link"=>"/onedrive",
-        "midicon"=>"onedrive",
+        "icon"=>"mdi-microsoft-onedrive",
         "active"=>($page=="onedrive")?"active":"",
       ));
     }
@@ -162,7 +139,7 @@ if ($forumcase=="posts") {
       array_push($brarr,array(
           "title"=>"View/Map Dropbox files",
         "link"=>"/dropbox",
-        "midicon"=>"dropbox",
+        "icon"=>"mdi-dropbox",
         "active"=>($page=="dropbox")?"active":"",
       ));
     }
@@ -174,7 +151,7 @@ if ($forumcase=="posts") {
             <div class="col-lg-2" style="overflow-x:auto;">';
             include "public/modules/sidebarinfo.php";
             echo '</div>
-            <div class="col-lg-7">';
+            <div class="col-lg-8">';
       if ($forumcase=="posts") { 
   $sql="SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where cat_latname=?".(!empty($sactive)?" and (".$sactive.")":""); 
   $q = $pdo->prepare($sql);
@@ -188,7 +165,7 @@ if ($forumcase=="posts") {
             <br>
             <p><?php 
         if (strpos($zobj['cattext'], 'diagram') !== false) {
-          echo Class_info::replaceDiagramsWithImage($zobj['cattext']);
+          echo documentClass::replaceDiagramsWithImage($zobj['cattext']);
         } else {
            echo $zobj['cattext'];
         }
@@ -347,7 +324,7 @@ if($page < $total_pages)
     <?php } 
       }    
 
-   echo '</div><div class="col-lg-3">'; 
+   echo '</div><div class="col-lg-2">'; 
    include "public/modules/blogsidebar.php";
    echo '</div></div></div></div></div></div>';
    include "public/modules/footer.php";
