@@ -200,8 +200,7 @@ if (empty($_SESSION["userdata"]["pjarr"])) {$_SESSION["userdata"]["pjarr"] = arr
                                     <th class="text-start" style="vertical-align:top;">
                                         <h4>Recently used apps</h4>
                                     </th>
-                                    <th colspan="2" class="text-end" style="vertical-align:top;"><a href="/env/apps">All
-                                            Applications</a></th>
+                                    <th colspan="2" class="text-end" style="vertical-align:top;"><a href="/env/apps">All Applications</a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -215,7 +214,7 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
         if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
             foreach (json_decode($zobj["recentdata"], true) as $key => $val) {
                 ?>
-                                <tr>
+                                <tr style="cursor:pointer;" onclick="location.href='/env/apps/<?php echo $val["id"]; ?>'">
                                     <td class="text-start"><?php echo $val["name"]; ?></td>
                                     <td></td>
                                     <td style="width:50px" class="text-end"><a target="_parent"

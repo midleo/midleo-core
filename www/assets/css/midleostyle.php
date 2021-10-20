@@ -1,5 +1,5 @@
 <?php 
-$thiscolor="00AFFF";
+$thiscolor=!empty($_GET["c"])?htmlspecialchars($_GET["c"]):"00AFFF";
 $borderradius="3px;";
 header('Cache-Control: public');
 header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 86400) . ' GMT');
@@ -122,15 +122,6 @@ html body .bg-light-inverse{background-color:#f6f6f6}
 .round{line-height:48px;width:45px;height:45px}
 .round img{border-radius:100%}
 .round-lg{line-height:65px;width:60px;height:60px;font-size:30px}
-.pagination{padding-left:2rem;;}
-.pagination > li:first-child > a,.pagination > li:first-child > span{border-bottom-left-radius:4px;border-top-left-radius:4px}
-.pagination > li:last-child > a,.pagination > li:last-child > span{border-bottom-right-radius:4px;border-top-right-radius:4px}
-.pagination > li > a,.pagination > li > span{color:#212529}
-.pagination > li > a:hover,.pagination > li > span:hover,.pagination > li > a:focus,.pagination > li > span:focus{background-color:#f2f4f8}
-.pagination-split li{margin-left:5px;display:inline-block;float:left}
-.pagination-split li:first-child{margin-left:0}
-.pagination-split li a{-moz-border-radius:'.$borderradius.';-webkit-border-radius:'.$borderradius.';border-radius:4px}
-.pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover,.pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus{background-color:#'.$thiscolor.';border-color:#'.$thiscolor.'}
 .pager li > a,.pager li > span{-moz-border-radius:'.$borderradius.';-webkit-border-radius:'.$borderradius.';border-radius:'.$borderradius.';color:#212529}
 .cell{display:table-cell;vertical-align:middle}
 .table thead th,.table th{font-weight:bold;}
@@ -1192,47 +1183,6 @@ path.link { fill: none;stroke: #ccc; stroke-width: 2px;}
   .modal-lg{width:900px}
 }
 /*.btn-outline-info{border-color:transparent!important;}*/
-ul.pagination > li:first-child > a, 
-ul.pagination > li:first-child > span {
-    margin-left: 0;
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px;
-}
-
-ul.pagination > li > a {
-    position: relative;
-    float: left;
-    padding: 6px 12px;
-    line-height: 1.42857143;
-    text-decoration: none;
-    border: 0px solid transparent;
-    border-radius:'.$borderradius.';
-}
-ul.pagination > li:last-child > a, 
-ul.pagination > li:last-child > span {
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-}
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus {
-    z-index: 2;
-    color: #fff;
-    background-color: #'.$thiscolor.';
-    cursor: default;
-}
-
-.pagination > li > a:hover, 
-.pagination > li > span:hover, 
-.pagination > li > a:focus, 
-.pagination > li > span:focus {
-    color: #fff;
-    background-color: #'.$thiscolor.';
-    cursor:pointer;
-}
 /*calendar*/
 .invoice{padding:30px!important;-webkit-print-color-adjust:exact!important}
 .invoice .card-header{background:#eee!important;padding:20px;margin:-10px -30px 25px}

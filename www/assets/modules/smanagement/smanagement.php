@@ -220,27 +220,24 @@ if(!empty($thisarray["p1"])){
     </div>
     <div class="col-lg-8">
         <div class="card p-2" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+
+
             <input id="wid" name="wid" value="<?php echo $thisarray["p1"];?>" type="text" style="display:none;">
 
                 <div class="row">
                     <div class="col-md-5">
-                        <div class="form-group row">
-                            <label class="form-control-label text-lg-right col-md-4">Name</label>
-                            <div class="col-md-8"><input type="text" id="wname" value="<?php echo $zobj["wname"];?>"
-                                    class="form-control" placeholder="eg. Workflow for team X" required>
-                            </div>
+                        <div class="form-group">
+                            <input type="text" id="wname" value="<?php echo $zobj["wname"];?>"
+                                    class="form-control" placeholder="Name, eg. Workflow for team X" required>
                         </div>
-                        <div class="form-group row">
-                            <label class="form-control-label text-lg-right col-md-4">Information</label>
-                            <div class="col-md-8"><input type="text" id="winfo" value="<?php echo $zobj["winfo"];?>"
-                                    class="form-control" placeholder="eg. Workflow for team X" required>
-                            </div>
+                        <div class="form-group">
+                            <input type="text" id="winfo" value="<?php echo $zobj["winfo"];?>"
+                                    class="form-control" placeholder="Information, eg. Workflow for team X" required>
                         </div>
-                        <div class="form-group row">
-                            <label class="form-control-label text-lg-right col-md-4">Input form</label>
-                            <div class="col-md-8">
+                        <div class="form-group">
                                 <select id="formid" class="form-control">
-                                    <option value="">Not necessary</option>
+                                <option value="">Input form</option>
+                                <option value="">Not necessary</option>
                                     <?php 
     foreach($typereq as $keyin=>$valin) { ?>
                                     <option value="<?php echo $keyin;?>"
@@ -249,26 +246,22 @@ if(!empty($thisarray["p1"])){
                                     <?php  }
   ?>
                                 </select>
-                            </div>
                         </div>
                         <div class="form-group row">
-                            <label class="form-control-label text-lg-right col-md-4">Efforts</label>
-                            <div class="col-md-4"><input type="number" min="0" oninput="validity.valid||(value='');"
-                                    id="wfcost" value="<?php echo $zobj["wfcost"];?>" class="form-control">
+                            <div class="col-md-8"><input type="number" min="0" oninput="validity.valid||(value='');"
+                                    id="wfcost" value="<?php echo $zobj["wfcost"];?>" class="form-control" placeholder="Efforts">
                             </div>
                             <div class="form-control-label text-lg-left col-md-4"><?php echo $website['effort_unit'];?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="form-control-label text-lg-right col-md-4">Costs</label>
-                            <div class="col-md-4"><input type="number" min="0" oninput="validity.valid||(value='');"
-                                    id="wfcurcost" value="<?php echo $zobj["wfcurcost"];?>" class="form-control">
+                            <div class="col-md-8"><input type="number" min="0" oninput="validity.valid||(value='');"
+                                    id="wfcurcost" value="<?php echo $zobj["wfcurcost"];?>" class="form-control" placeholder="Costs">
                             </div>
                             <div class="form-control-label text-lg-left col-md-4">
                                 <?php echo $website['currency_unit'];?>
                             </div>
                         </div>
-                        <br><br>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
@@ -286,14 +279,7 @@ if(!empty($thisarray["p1"])){
                                 <label for="haveconf" class="ts-helper">Add confirmation (optional)</label>
                             </div>
                         </div>
-                        <div class="btn-group-vertical">
-                            <button type="button" class="btn btn-light text-start"
-                                ng-click="readrespusr('<?php echo $thisarray["p1"];?>','<?php echo $_SESSION['user'];?>')"><svg
-                                    class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-groups"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-groups" />
-                                </svg>&nbsp;Responsible Groups</button>
-                        </div>
+                        
                     </div>
                     <div class="col-md-4">
 
@@ -318,38 +304,24 @@ if(!empty($thisarray["p1"])){
                                     </svg></a>
                             </div>
                         </div>
+                        <div class="btn-group-vertical">
+                            <button type="button" class="btn btn-light text-start"
+                                ng-click="readrespusr('<?php echo $thisarray["p1"];?>','<?php echo $_SESSION['user'];?>')"><svg
+                                    class="midico midico-outline">
+                                    <use href="/assets/images/icon/midleoicons.svg#i-groups"
+                                        xlink:href="/assets/images/icon/midleoicons.svg#i-groups" />
+                                </svg>&nbsp;Responsible Groups</button>
+                        </div>
                     </div>
-
-
-
                 </div>
-                <div class="row">
-                    <div class="col-md-10 jtk-canvas canvas-wide flowchart jtk-surface  jtk-surface-nopan" id="canvas">
-                    </div>
-                    <div class="col-md-2 jtk-canvas flowchart">
+<hr>
 
-                        <input id="currentST" style="display:none;" value="<?php echo $thisarray["p1"];?>">
-                        <br />
-                        <ul class="flowchartmenu">
-                            <li class="window start jsplumb-connected" id="startEv"><strong>
-                                    <p>start</p>
-                                </strong></li>
-                            <li class="window step jsplumb-connected-step" id="stepEv"><strong>
-                                    <p>step</p>
-                                </strong></li>
-                            <li class="window diamond jsplumb-connected-step" id="descEv"><strong>
-                                    <p class="desc-text">decision</p>
-                                </strong></li>
-                            <li class="window end jsplumb-connected-end" id="endEv"><strong>
-                                    <p>end</p>
-                                </strong></li>
-                        </ul>
-                        <div class="modal" id="nmModal" tabindex="-1" role="dialog" aria-labelledby="nmmodallbl">
+                    <div class="jtk-canvas canvas-wide flowchart jtk-surface  jtk-surface-nopan" id="canvas">
+                    </div>
+                    
+                    <div class="modal" id="nmModal" tabindex="-1" role="dialog" aria-labelledby="nmmodallbl">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4>Change step</h4>
-                                    </div>
                                     <div class="modal-body form-material">
                                         <div class="form-group row">
                                             <label class="form-control-label text-lg-right col-md-3"
@@ -509,14 +481,23 @@ if(!empty($thisarray["p1"])){
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-
             </div>
         </div>
     </div>
     <div class="col-md-2">
         <?php include "public/modules/breadcrumbin.php"; ?>
+        <br><br>
+<h4><i class="mdi mdi-gate-nand"></i>&nbsp;Logical Blocks</h4>
+<br>
+        <div class="jtk-canvas flowchart">
+                        <input id="currentST" style="display:none;" value="<?php echo $thisarray["p1"];?>">
+                        <div class="flowchartmenu list-group">
+                            <a class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action window jsplumb-connected" id="startEv"><i class="mdi mdi-play-circle-outline"></i>&nbsp;Start block</a>
+                            <a class="window  jsplumb-connected-step waves-effect waves-light list-group-item list-group-item-light list-group-item-action" id="stepEv"><i class="mdi mdi-step-forward"></i>&nbsp;Step block</a>
+                            <a class="window  jsplumb-connected-step waves-effect waves-light list-group-item list-group-item-light list-group-item-action" id="descEv"><i class="mdi mdi-arrow-decision"></i>&nbsp;Decision block</a>
+                            <a class="window  jsplumb-connected-end waves-effect waves-light list-group-item list-group-item-light list-group-item-action" id="endEv"><i class="mdi mdi-stop-circle-outline"></i>&nbsp;End block</a>
+                    </div> 
+      </div>
     </div>
 </div>
 <?php } else { textClass::PageNotFound();  } } else { 

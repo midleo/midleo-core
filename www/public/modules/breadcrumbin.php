@@ -29,6 +29,5 @@
             src="<?php echo $breadcrumb["img"];?>" width="22px"></a><?php } ?>&nbsp;<?php echo $breadcrumb["textr2"];?>
         </a><?php } ?>
         <?php echo $breadcrumb["special"]?$breadcrumb["special"]:"";?>
-   
-</div>
 <?php } ?>
+</div>

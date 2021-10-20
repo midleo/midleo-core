@@ -17,7 +17,7 @@
 <link href="/assets/css/google_ubuntu_fonts.css" rel="stylesheet" />
 <link href="/assets/css/animate.css" rel="stylesheet" type="text/css" />
 <link href="/assets/css/spinners.css" rel="stylesheet" type="text/css" />
-<link href="/assets/css/midleostyle.php?&v=<?php echo filemtime('./assets/css/midleostyle.php');?>" rel="stylesheet" type="text/css" />
+<link href="/assets/css/midleostyle.php?&c=<?php echo $website["color"];?>&v=<?php echo filemtime('./assets/css/midleostyle.php');?>" rel="stylesheet" type="text/css" />
 <?php  if(!empty($_SESSION['requser']) || $page=="requests" || $page=="reqsearch" || $page=="reqinfo" || $page=="reqtasks" || $page=="calendar" || $page=="env" || $page=="projects" || $page=="smanagement" ||  $page=="business"){ ?>
 <link href="/assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 <?php } ?>

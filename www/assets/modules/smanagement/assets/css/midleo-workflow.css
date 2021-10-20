@@ -7,7 +7,7 @@
 .jtk-surface-panning{cursor:-moz-grabbing;cursor:-webkit-grabbing;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .jtk-surface-canvas{overflow:visible!important}
 .jtk-surface-droppable-node{touch-action:none}
-.jtk-surface-nopan{overflow:scroll!important;cursor:default}
+.jtk-surface-nopan{overflow:auto auto!important;cursor:default;}
 .jtk-surface-tile{border:none;outline:none;margin:0;-webkit-transition:opacity .3s ease .15s;-moz-transition:opacity .3s ease .15s;-o-transition:opacity .3s ease .15s;-ms-transition:opacity .3s ease .15s;transition:opacity .3s ease .15s}
 .jtk-lasso{border:2px solid #3177b8;background-color:#f5f5f5;opacity:.5;display:none;z-index:20000;position:absolute}
 .jtk-lasso-select-defeat *{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
@@ -96,7 +96,7 @@ path{cursor:pointer}
 .end{border-radius:40px;text-align:center}
 .step{border-radius:.5em;width:80px;height:80px}
 .flowchartmenu li{margin-top:10px}
-.flowchart .window{border:2px solid #346789;-moz-border-radius:6px;border-radius:6px;opacity:.8;width:auto;height:40px;min-width:100px;display:flex;justify-content:center;align-items:center;cursor:pointer;text-align:center;z-index:20!important;background-color:#F5F5F5;color:#000;font-family:helvetica,sans-serif;padding:.5em;}
+.flowchart .window:not(.list-group-item){-moz-border-radius:6px;border-radius:6px;opacity:.8;width:auto;height:40px;min-width:100px;display:flex;justify-content:center;align-items:center;cursor:pointer;text-align:center;z-index:20!important;background-color:#F5F5F5;color:#000;padding:.5em;}
 .flowchart .window:hover{background-color:#D0D7E3;}
 .flowchart .active{border:1px dotted #0CC44F}
 .flowchart .hover{border:1px dotted #E81625}
@@ -106,13 +106,13 @@ path{cursor:pointer}
 .flowchart .jsplumb-endpoint{z-index:30;cursor:pointer}
 .aLabel{background-color:#fff;padding:.4em;font:12px sans-serif;color:#444;/*z-index:21;*/border-radius: 4px;border:1px solid gray;opacity:.8;cursor:pointer}
 .aLabel.jsplumb-hover{background-color:#5C96BC;color:#fff;border:1px solid #fff}
-.window.jsplumb-connected{border:2px solid #0CC44F; }
-.window.jsplumb-connected:hover{border:2px solid #1BF16A;  }
-.window.jsplumb-connected-step{border:2px solid #00AFFF; }
-.window.jsplumb-connected-step:hover{border:2px solid #00D3FF;  }
-.window.jsplumb-connected-end{border:2px solid #E81625; }
-.window.jsplumb-connected-end:hover{border:2px solid #FF3953; }
-.window.jsplumb-connected-step i, .window.jsplumb-connected i, .window.jsplumb-connected-end i {color:#000;}
+.window:not(.list-group-item).jsplumb-connected{border:2px solid #0CC44F; }
+.window:not(.list-group-item).jsplumb-connected:hover{border:2px solid #1BF16A;  }
+.window:not(.list-group-item).jsplumb-connected-step{border:2px solid #00AFFF; }
+.window:not(.list-group-item).jsplumb-connected-step:hover{border:2px solid #00D3FF;  }
+.window:not(.list-group-item).jsplumb-connected-end{border:2px solid #E81625; }
+.window:not(.list-group-item).jsplumb-connected-end:hover{border:2px solid #FF3953; }
+.window:not(.list-group-item).jsplumb-connected-step i, .window.jsplumb-connected i, .window.jsplumb-connected-end i {color:#000;}
 .jsplumb-drag{outline:4px solid #ffc0cb!important}
 path,.jsplumb-endpoint{cursor:pointer}
 .jsplumb-overlay{background-color:transparent}

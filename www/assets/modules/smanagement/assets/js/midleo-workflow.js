@@ -180,8 +180,8 @@ jsPlumb.ready(function () {
         if (x < 0) { x = 0; }
         if (y < 0) { y = 0; }
         if (clicked) {
-            properties[0].top = y - containerOffset.top;
-            properties[0].left = x - containerOffset.left;
+            properties[0].top = y - containerOffset.top - 300 ;
+            properties[0].left = x - containerOffset.left - 50;
         }
     });
 
