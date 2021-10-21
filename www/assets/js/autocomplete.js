@@ -390,6 +390,7 @@ $(document).ready(function () {
       mentions: {
         delimiter: ['@', '#'],
         source: function (query, process, delimiter) {
+          if(query.length>0){
           if (delimiter === '@') {
             $.ajax({
               url: "/pubapi/getallusrgr/all",
@@ -412,16 +413,23 @@ $(document).ready(function () {
               }
             });
           }
+        } else {
+          notify("please write some character","warning")
+        }
         },
         render: function (item) {
-          return '<li><a href="javascript:;"><span>' + item.name + '</span></a></li>';
+          if (item.nameid) {
+            return '<li><a href="javascript:;"><img src="'+item.avatar+'" class="img-fluid rounded">&nbsp;' + item.name + ' ('+item.nameid+')</a></li>';
+          } else {
+            return '<li><a href="javascript:;"><span>' + item.name + '</span></a></li>';
+          }
         },
         insert: function (item) {
           if (item.nameid) {
-            return '<a target="_blank" href="/browse/user/'+item.nameid+'" class="badge bg-light text-dark" id="midmention=' + item.type + '@' + item.nameid + '">@' + item.name + '</a>';
+            return '<a target="_blank" href="/browse/user/'+item.nameid+'" class="badge bg-light text-dark" id="midmention=' + item.type + '@' + item.nameid + '">' + item.name + '</a>';
           }
           if (item.what) {
-            return '<a href="' + location.protocol + "//" + location.host + '/searchall/?sa=y&st=tag&fd=' + item.name + '" target="_blank" class="badge bg-light text-dark">#' + item.name + '</a>';
+            return '<a href="' + location.protocol + "//" + location.host + '/searchall/?sa=y&st=tag&fd=' + item.name + '" target="_blank" class="badge bg-light text-dark">' + item.name + '</a>';
           }
         },
         renderDropdown: function () {

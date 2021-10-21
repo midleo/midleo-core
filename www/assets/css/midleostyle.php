@@ -1784,6 +1784,7 @@ display:none;}
 .navbar-light .navbar-toggler{border-color: transparent;}
 .sidebarinfo{margin-top: 49px!important;}
 .ml-0{margin-left:0px;}
+.rte-autocomplete li a img{width:24px;}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);
