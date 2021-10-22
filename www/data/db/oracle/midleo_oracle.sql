@@ -741,6 +741,7 @@ CREATE TABLE config_diagrams (
   accgroups varchar2(255) DEFAULT NULL,
   author varchar2(100) DEFAULT NULL,
   category varchar2(100) DEFAULT NULL,
+  gitprepared number(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (id),
   CONSTRAINT desid UNIQUE  (desid)
 );

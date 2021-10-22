@@ -139,10 +139,30 @@ class Class_draw
         if (!sessionClass::checkAcc($acclist, "designer")) {header("Location:/?");}
         if (isset($_POST["savedesdata"])) {
             $hash = textClass::getRandomStr();
-            $sql = "insert into config_diagrams(tags,reqid,appcode,srvlist,appsrvlist,desid,desuser,desname,imgdata,xmldata) values(?,?,?,?,?,?,?,?,?,?)";
+            $sql = "insert into config_diagrams(tags,reqid,appcode,srvlist,appsrvlist,desid,desuser,desname,imgdata,xmldata) values(?,?,?,?,?,?,?,?,?,?) RETURNING id";
             $q = $pdo->prepare($sql);
             if ($q->execute(array(htmlspecialchars($_POST["tags"]), htmlspecialchars($_POST["reqname"]), htmlspecialchars($_POST["appname"]), htmlspecialchars($_POST["serverlist"]), htmlspecialchars($_POST["appserverlist"]), $hash, $_SESSION['user'], htmlspecialchars($_POST["destitle"]), "", ""))) {
-                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($_POST["appname"]), "reqid" => htmlspecialchars($_POST["reqname"]), "srvid" => htmlspecialchars($_POST["serverlist"]), "appsrvid" => htmlspecialchars($_POST["appserverlist"])), "Created new diagram <a href='/draw/" . $hash . "'>" . htmlspecialchars($_POST["destitle"]) . "</a>");
+                $tmp['catid'] = $q->fetch(PDO::FETCH_ASSOC)["id"];
+                if ($website['gittype']) {
+                    $shagit = "";
+                    $return = vc::gitAdd("text", "initial diagram", "articles/draw/" . $hash . ".txt", false, $shagit, true);
+                    if (empty($return["err"])) {
+                        $tmp["gitupload"] = "articles/draw/" . $hash . ".txt";
+                    } else {
+                        $msg[] = $return["err"];
+                        $tmp["gitupload"] = false;
+                    }
+                    if ($tmp["gitupload"]) {
+                        $resp = vc::GetCommitID($tmp["gitupload"]);
+                        $lastcommit = json_decode($resp, true)[0]["id"];
+                        if ($lastcommit) {
+                            $sql = "insert into env_gituploads (gittype,commitid,packuid,fileplace,steptype,stepuser) values (?,?,?,?,?,?)";
+                            $q = $pdo->prepare($sql);
+                            $q->execute(array($website['gittype'], $lastcommit, "config_diagrams:" . $tmp['catid'], "articles/draw/" . $hash . ".txt", "prepare", $_SESSION["user"]));
+                        }
+                    }
+                }
+                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($_POST["appname"]), "reqid" => htmlspecialchars($_POST["reqname"]), "srvid" => htmlspecialchars($_POST["serverlist"]), "appsrvid" => htmlspecialchars($_POST["appserverlist"])), "Created new diagram:<a href='/draw/" . $hash . "'>" . htmlspecialchars($_POST["destitle"]) . "</a>");
                 if (!empty(htmlspecialchars($_POST["tags"]))) {
                     gTable::dbsearch($hash, $_SERVER["HTTP_REFERER"], htmlspecialchars($_POST["tags"]));
                 }
@@ -229,6 +249,8 @@ function save(url, msg) {
             }
         };
         msg.desid = '<?php echo $thisarray['p1']; ?>';
+        msg.gitprepared = $("#gitprepared").val();
+        msg.id = $("#thisid").val();
         req.open("POST", url, true);
         req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         req.send(JSON.stringify(msg));
@@ -246,6 +268,8 @@ iframe {
     height: 800px;
 }
 </style>
+<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
 <?php }
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Graph editor";
@@ -254,13 +278,13 @@ iframe {
     <div class="container-fluid">
         <?php
 $brarr = array();
-array_push($brarr, array(
-    "title" => "Create new diagram",
-    "link" => "#mnewdes",
-    "midicon" => "add",
-    "modal" => true, 
-    "active" => false,
-));
+        array_push($brarr, array(
+            "title" => "Create new diagram",
+            "link" => "#mnewdes",
+            "midicon" => "add",
+            "modal" => true,
+            "active" => false,
+        ));
         array_push($brarr, array(
             "title" => "Create/edit articles",
             "link" => "/cpinfo",
@@ -291,246 +315,299 @@ array_push($brarr, array(
         }
         ?>
         <?php if (!empty($thisarray['p1'])) {
-            $sql = "SELECT tags, desuser, desname, reqid, imgdata, accgroups FROM config_diagrams where binary desid=?";
+            $sql = "SELECT tags, id, gitprepared, desuser, desname, reqid, imgdata, accgroups FROM config_diagrams where binary desid=?";
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p1']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
                 ?>
         <div class="row pt-3">
             <div class="col-lg-2">
-                <?php  include "public/modules/sidebar.php";?></div>
+                <?php include "public/modules/sidebar.php";?></div>
             <div class="col-lg-10">
-                <div class="row">
-                    <?php if ($_SESSION["user"] == $zobj["desuser"] || sessionClass::checkAcc($_SESSION["userdata"]["ugroups"], str_replace(array('"',"]","["),"",$zobj["accgroups"]))) { ?>
+                <form method="post" action="">
+                    <div class="row">
+                        <div class="col-md-9 drawcard">
 
-                    <div class="col-md-9 drawcard">
-                        <?php } else {?>
-                        <div class="col-md-12 drawcard">
-                            <?php }?>
-                            <div class="card">
-                                <div class="card-body" id="drawid">
-                                    <img id="image" style="max-width:100%;" src="<?php echo $zobj["imgdata"]; ?>" />
-                                </div>
-                            </div>
-
-                        </div>
-                        <?php if ($_SESSION["user"] == $zobj["desuser"] || sessionClass::checkAcc($_SESSION["userdata"]["ugroups"], str_replace(array('"',"]","["),"",$zobj["accgroups"]))) { ?>
-                        <div class="col-md-3 formcard">
-                            <form method="post" action="">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Diagram Name" name="desname"
-                                        value="<?php echo $zobj["desname"]; ?>" class="form-control"
-                                        placeholder="diagram name">
-                                </div>
-                                <div class="form-group">
-                                    <input name="tags" placeholder="Tags" id="tags" data-role="tagsinput" type="text"
-                                        value="<?php echo $zobj["tags"]; ?>" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Tracking ID" id="reqauto" class="form-control"
-                                        value="<?php echo $zobj["reqid"]; ?>" />
-                                    <input type="text" id="reqname" name="reqname" value="<?php echo $zobj["reqid"]; ?>"
-                                        style="display:none;" />
-                                </div>
-                                <br>
-                                <div class="text-start d-grid gap-2 d-md-block">
-                                    <button type="button" class="btn btn-light" data-bs-toggle="tooltip"
-                                        title="Embed in article"
-                                        onclick="cpclip('[diagram=<?php echo $thisarray["p1"]; ?>]');"><svg
-                                            class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-documents"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-documents" />
-                                        </svg></button>
-                                    <button type="button" class="btn btn-light" data-bs-toggle="tooltip" title="Edit"
-                                        onclick="editDiagram('image');"><svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-edit"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-edit" />
-                                        </svg></button>
-                                    <button type="submit" name="savefd" class="btn btn-light" data-bs-toggle="tooltip"
-                                        title="Save"><svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                                        </svg></button>
+                            <div class="card p-0">
+                                <?php if ($_SESSION["user"] == $zobj["desuser"] || sessionClass::checkAcc($_SESSION["userdata"]["ugroups"], str_replace(array('"', "]", "["), "", $zobj["accgroups"]))) {?>
+                                <div class="card-header p-0 border-bottom formcard"><input type="text"
+                                        placeholder="Diagram Name" name="desname"
+                                        value="<?php echo $zobj["desname"]; ?>"
+                                        class="form-control br-0 form-control-lg  brtr-3 brtl-3 border-0"
+                                        placeholder="Diagram name">
                                 </div>
                                 <?php }?>
-                            </form>
+                                <div class="card-body" id="drawid">
+                                    <img id="image" class="img-fluid" src="<?php echo $zobj["imgdata"]; ?>" />
+                                </div>
+
+                                <?php if ($_SESSION["user"] == $zobj["desuser"] || sessionClass::checkAcc($_SESSION["userdata"]["ugroups"], str_replace(array('"', "]", "["), "", $zobj["accgroups"]))) {?>
+                                <div class="card-footer formcard"> <input name="tags" placeholder="Tags" id="tags"
+                                        data-role="tagsinput" type="text" value="<?php echo $zobj["tags"]; ?>"
+                                        class="form-control br-0">
+                                </div>
+                                <?php }?>
+                            </div>
+
                         </div>
-                    </div>
-                    <?php } else {
-                textClass::PageNotFound();
-            }
-        } else {?>
-                    <div class="row pt-3">
-                        <div class="col-lg-2">
-                            <?php  include "public/modules/sidebar.php";?></div>
-                        <div class="col-lg-10" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <div class="card p-0">
-                                        <table class="table  table-vmiddle table-hover stylish-table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">Name</th>
-                                                    <th class="text-center">Created date</th>
-                                                    <th class="text-center">Created by</th>
-                                                    <th class="text-center">Tags</th>
-                                                    <th class="text-center" style="width:60px;">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody ng-init="getAllDes('grapheditor')">
-                                                <tr ng-hide="contentLoaded">
-                                                    <td colspan="5" style="text-align:center;font-size:1.1em;"><i
-                                                            class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
-                                                </tr>
-                                                <tr id="contloaded" class="hide"
-                                                    dir-paginate="d in names | filter:search | orderBy:'-released' | itemsPerPage:10"
-                                                    pagination-id="prodx" ng-hide="d.deslatname==''">
-                                                    <td class="text-center"><a
-                                                            href="/draw/{{ d.desid}}">{{ d.desname}}</a></td>
-                                                    <td class="text-center">{{ d.desdate }}</td>
-                                                    <td class="text-center">{{ d.desuser }}</td>
-                                                    <td class="text-center"><a ng-repeat="tag in d.tags.split(',')"
-                                                            class="badge badge-secondary waves-effect"
-                                                            style="margin-right:5px;margin-top:5px;"
-                                                            href="/searchall/?sa=y&st=tag&fd={{ tag }}">{{ tag }}</a>
-                                                    </td>
-                                                    <td>
-                                                        <?php if ($_SESSION['user_level'] >= "5") {?>
-                                                        <button type="button"
-                                                            ng-click="deldes(d.id,d.desid,'<?php echo $_SESSION["user"]; ?>')"
-                                                            class="btn btn-light btn-sm bg waves-effect"><svg
-                                                                class="midico midico-outline">
-                                                                <use href="/assets/images/icon/midleoicons.svg#i-trash"
-                                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
-                                                            </svg></button>
-                                                        <?php } else {?>
-                                                        <button type="button"
-                                                            class="btn btn-light btn-sm bg waves-effect"><i
-                                                                class="mdi mdi-close"></i></button>
-                                                        <?php }?>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <dir-pagination-controls pagination-id="prodx" boundary-links="true"
-                                            on-page-change="pageChangeHandler(newPageNumber)"
-                                            template-url="/assets/templ/pagination.tpl.html"></dir-pagination-controls>
+                        <div class="col-md-3 formcard">
+                            <?php if ($_SESSION["user"] == $zobj["desuser"] || sessionClass::checkAcc($_SESSION["userdata"]["ugroups"], str_replace(array('"', "]", "["), "", $zobj["accgroups"]))) {?>
+                            <div class="form-group">
+                                <input type="text" placeholder="Tracking ID" id="reqauto" class="form-control"
+                                    value="<?php echo $zobj["reqid"]; ?>" />
+                                <input type="text" id="reqname" name="reqname" value="<?php echo $zobj["reqid"]; ?>"
+                                    style="display:none;" />
+                            </div>
+                            <br>
+                            <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
+                            <br>
+                            <div class="list-group">
+                                <a href="/draw"
+                                    class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                        class="mdi mdi-history"></i>&nbsp;Back to Diagrams</a>
+                                <a type="button"
+                                    class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"
+                                    data-bs-toggle="tooltip" title="Embed in article"
+                                    onclick="cpclip('[diagram=<?php echo $thisarray["p1"]; ?>]');"><i
+                                        class="mdi mdi-content-copy"></i>&nbsp; Copy to clipboard</a>
+                                <a type="button"
+                                    class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"
+                                    data-bs-toggle="tooltip" title="Edit" onclick="editDiagram('image');"><i
+                                        class="mdi mdi-square-edit-outline"></i>&nbsp;Edit this diagram</a>
+                                <a href="javascript:void(0)"
+                                    onclick="getGITHistory('config_diagrams:<?php echo $zobj["id"]; ?>');"
+                                    class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
+                                        class="mdi mdi-git"></i>&nbsp;Change History</a>
+                                <a href="javascript:void(0)" onclick="document.getElementById('savefd').click();"
+                                    class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"
+                                    data-bs-toggle="tooltip" title="Save"><i
+                                        class="mdi mdi-content-save-outline"></i>&nbsp;Save changes</a>
+
+                            </div>
+                            <input type="submit" name="savefd" id="savefd" style="display:none;">
+                            <!--history modal-->
+                            <div class="modal" id="modal-hist" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog" style="width:auto;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div style="display:block;">
+                                                <input type="text" ng-model="search"
+                                                    class="form-control topsearch dtfilter" placeholder="Filter">
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body pt-0">
+                                            <div class="table-responsive">
+                                                <table id="data-table-hist" class="table table-hover stylish-table mb-0"
+                                                    aria-busy="false" style="margin-top:0px !important;"
+                                                    style="width:100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-column-id="id" data-identifier="true"
+                                                                data-visible="false" data-type="numeric">ID</th>
+                                                            <th data-column-id="commitid">Commit ID</th>
+                                                            <th data-column-id="filepl">File place</th>
+                                                            <th data-column-id="author">Author</th>
+                                                            <th data-column-id="commitdate">Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
-                                <?php include "public/modules/filterbar.php"; ?>
-                                    <?php include "public/modules/breadcrumbin.php";?>
-                                </div>
                             </div>
+                            <!--history modal-->
+                            <?php }?>
+                            <input type="hidden" id="gitprepared" value="<?php echo $zobj["gitprepared"]; ?>">
+                            <input type="hidden" id="thisid" value="<?php echo $zobj["id"]; ?>">
                         </div>
-                        <div class="modal" id="mnewdes" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form name="form" action="" method="post">
-                                        <div class="modal-header text-center">
-                                            <h4>Create new diagram</h4>
-                                        </div>
-                                        <div class="modal-body"><br>
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3"
-                                                    for="diagram_title">Name</label>
-                                                <div class="col-md-9"><input type="text" id="diagram_title"
-                                                        name="destitle" class="form-control" required /> </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3">Tags</label>
-                                                <div class="col-md-9"><input name="tags" id="tags" data-role="tagsinput"
-                                                        type="text" class="form-control"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3">Request
-                                                    Number</label>
-                                                <div class="col-md-9"> <input type="text" id="reqauto"
-                                                        class="form-control" required />
-                                                    <input type="text" id="reqname" name="reqname"
-                                                        style="display:none;" />
-                                                </div>
-                                            </div>
-                                            <input type="hidden" name="destype" value="grapheditor">
-                                            <div class="form-group row">
-                                                <label
-                                                    class="form-control-label text-lg-right col-md-3">Application</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="applauto" class="form-control" required
-                                                        placeholder="write the application name or code" />
-                                                    <input type="text" id="appname" name="appname"
-                                                        style="display:none;" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3">Server</label>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control autocomplsrv"
-                                                        placeholder="write the server name" />
-                                                    <input type="text" name="server" id="server"
-                                                        style="display:none;" />
-                                                    <input type="text" name="serverid" id="serverid"
-                                                        style="display:none;" />
-                                                    <input type="text" name="serverip" id="serverip"
-                                                        style="display:none;" />
-                                                    <input type="text" name="serverlist" id="serverlist"
-                                                        style="display:none;" />
-                                                    <input type="text" name="serverlistnames" id="serverlistnames"
-                                                        style="display:none;" />
-                                                    <div id="srvlistnames"></div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <button type="button" class="btn btn-light btn-sm"
-                                                        onclick="mkSrvlist()"><i
-                                                            class="mdi mdi-plus mdi-24px"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3">Application
-                                                    Server</label>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control autocomplappsrv"
-                                                        placeholder="write the applicaiton server name" />
-                                                    <input type="text" name="appserver" id="appserver"
-                                                        style="display:none;" />
-                                                    <input type="text" name="appserverid" id="appserverid"
-                                                        style="display:none;" />
-                                                    <input type="text" name="appserverlist" id="appserverlist"
-                                                        style="display:none;" />
-                                                    <input type="text" name="appserverlistnames" id="appserverlistnames"
-                                                        style="display:none;" />
-                                                    <div id="appsrvlistnames"></div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <button type="button" class="btn btn-light btn-sm"
-                                                        onclick="mkAppSrvlist()"><i
-                                                            class="mdi mdi-plus mdi-24px"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary btn-sm"
-                                                data-bs-dismiss="modal"><svg class="midico midico-outline">
-                                                    <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                                </svg>&nbsp;Close</button>
-                                            <button class="btn btn-info btn-sm" type="submit" name="savedesdata"><i
-                                                    class="mdi mdi-content-save"></i>&nbsp;Create</button>&nbsp;
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <?php }?>
                     </div>
+                </form>
+                <?php } else { ?>
+                <div class="row pt-3">
+                    <div class="col-lg-2">
+                        <?php include "public/modules/sidebar.php";?></div>
+                    <div class="col-lg-8"><?php textClass::PageNotFound(); ?>
+                    </div>
+                    <div class="col-lg-2"></div>
                 </div>
-                <?php include "public/modules/footer.php";
+                <?php }
+        } else {?>
+                <div class="row pt-3">
+                    <div class="col-lg-2">
+                        <?php include "public/modules/sidebar.php";?></div>
+                    <div class="col-lg-10" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="card p-0">
+                                    <table class="table  table-vmiddle table-hover stylish-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Name</th>
+                                                <th class="text-center">Created date</th>
+                                                <th class="text-center">Created by</th>
+                                                <th class="text-center">Tags</th>
+                                                <th class="text-center" style="width:60px;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-init="getAllDes('grapheditor')">
+                                            <tr ng-hide="contentLoaded">
+                                                <td colspan="5" style="text-align:center;font-size:1.1em;"><i
+                                                        class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                                            </tr>
+                                            <tr id="contloaded" class="hide"
+                                                dir-paginate="d in names | filter:search | orderBy:'-released' | itemsPerPage:10"
+                                                pagination-id="prodx" ng-hide="d.deslatname==''">
+                                                <td class="text-center"><a href="/draw/{{ d.desid}}">{{ d.desname}}</a>
+                                                </td>
+                                                <td class="text-center">{{ d.desdate }}</td>
+                                                <td class="text-center">{{ d.desuser }}</td>
+                                                <td class="text-center"><a ng-repeat="tag in d.tags.split(',')"
+                                                        class="badge badge-secondary waves-effect"
+                                                        style="margin-right:5px;margin-top:5px;"
+                                                        href="/searchall/?sa=y&st=tag&fd={{ tag }}">{{ tag }}</a>
+                                                </td>
+                                                <td>
+                                                    <?php if ($_SESSION['user_level'] >= "5") {?>
+                                                    <button type="button"
+                                                        ng-click="deldes(d.id,d.desid,'<?php echo $_SESSION["user"]; ?>')"
+                                                        class="btn btn-light btn-sm bg waves-effect"><svg
+                                                            class="midico midico-outline">
+                                                            <use href="/assets/images/icon/midleoicons.svg#i-trash"
+                                                                xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
+                                                        </svg></button>
+                                                    <?php } else {?>
+                                                    <button type="button"
+                                                        class="btn btn-light btn-sm bg waves-effect"><i
+                                                            class="mdi mdi-close"></i></button>
+                                                    <?php }?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <dir-pagination-controls pagination-id="prodx" boundary-links="true"
+                                        on-page-change="pageChangeHandler(newPageNumber)"
+                                        template-url="/assets/templ/pagination.tpl.html"></dir-pagination-controls>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <?php include "public/modules/filterbar.php";?>
+                                <?php include "public/modules/breadcrumbin.php";?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal" id="mnewdes" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form name="form" action="" method="post">
+                                    <div class="modal-header text-center">
+                                        <h4>Create new diagram</h4>
+                                    </div>
+                                    <div class="modal-body"><br>
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3"
+                                                for="diagram_title">Name</label>
+                                            <div class="col-md-9"><input type="text" id="diagram_title" name="destitle"
+                                                    class="form-control" required /> </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3">Tags</label>
+                                            <div class="col-md-9"><input name="tags" id="tags" data-role="tagsinput"
+                                                    type="text" class="form-control"></div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3">Request
+                                                Number</label>
+                                            <div class="col-md-9"> <input type="text" id="reqauto" class="form-control"
+                                                    required />
+                                                <input type="text" id="reqname" name="reqname" style="display:none;" />
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="destype" value="grapheditor">
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3">Application</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="applauto" class="form-control" required
+                                                    placeholder="write the application name or code" />
+                                                <input type="text" id="appname" name="appname" style="display:none;" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3">Server</label>
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control autocomplsrv"
+                                                    placeholder="write the server name" />
+                                                <input type="text" name="server" id="server" style="display:none;" />
+                                                <input type="text" name="serverid" id="serverid"
+                                                    style="display:none;" />
+                                                <input type="text" name="serverip" id="serverip"
+                                                    style="display:none;" />
+                                                <input type="text" name="serverlist" id="serverlist"
+                                                    style="display:none;" />
+                                                <input type="text" name="serverlistnames" id="serverlistnames"
+                                                    style="display:none;" />
+                                                <div id="srvlistnames"></div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-light btn-sm"
+                                                    onclick="mkSrvlist()"><i class="mdi mdi-plus mdi-24px"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="form-control-label text-lg-right col-md-3">Application
+                                                Server</label>
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control autocomplappsrv"
+                                                    placeholder="write the applicaiton server name" />
+                                                <input type="text" name="appserver" id="appserver"
+                                                    style="display:none;" />
+                                                <input type="text" name="appserverid" id="appserverid"
+                                                    style="display:none;" />
+                                                <input type="text" name="appserverlist" id="appserverlist"
+                                                    style="display:none;" />
+                                                <input type="text" name="appserverlistnames" id="appserverlistnames"
+                                                    style="display:none;" />
+                                                <div id="appsrvlistnames"></div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-light btn-sm"
+                                                    onclick="mkAppSrvlist()"><i
+                                                        class="mdi mdi-plus mdi-24px"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            data-bs-dismiss="modal"><svg class="midico midico-outline">
+                                                <use href="/assets/images/icon/midleoicons.svg#i-x"
+                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
+                                            </svg>&nbsp;Close</button>
+                                        <button class="btn btn-info btn-sm" type="submit" name="savedesdata"><i
+                                                class="mdi mdi-content-save"></i>&nbsp;Create</button>&nbsp;
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <?php }?>
+                </div>
+            </div>
+            <?php include "public/modules/footer.php";
         echo "</div></div>";
         include "public/modules/js.php";
         echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';
         if (empty($thisarray['p1'])) {
             echo '<script  type="text/javascript" src="/assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/js/ng-controller.js"></script>';
         }
+        if (!empty($thisarray['p1'])) {
+        ?>
+            <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
+            <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+            <?php }
         include "public/modules/template_end.php";
         echo '</body></html>';
     }

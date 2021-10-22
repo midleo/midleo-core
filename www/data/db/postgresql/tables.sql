@@ -557,6 +557,7 @@ CREATE TABLE IF NOT EXISTS config_diagrams (
   accgroups varchar(255) DEFAULT NULL,
   author varchar(100) DEFAULT NULL,
   category varchar(100) DEFAULT NULL,
+  gitprepared int NOT NULL DEFAULT '0',
    UNIQUE(desid)
 ) ;
 

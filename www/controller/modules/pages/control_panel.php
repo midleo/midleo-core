@@ -36,7 +36,7 @@ class Class_cp
             "title" => "Import documents",
             "link" => "#mnewimp",
             "midicon" => "add",
-            "modal" => true, 
+            "modal" => true,
             "active" => false,
         ));
         array_push($brarr, array(
@@ -45,34 +45,32 @@ class Class_cp
             "midicon" => "kn-b",
             "active" => ($page == "cpinfo") ? "active" : "",
         ));
-        array_push($brarr,array(
-            "title"=>"LDAP configuration",
-            "link"=>"/".$page."/ldap",
-            "midicon"=>"ldap",
-            "active"=>($thisarray['p1'] == "ldap")?"active":"",
-        ),array(
-            "title"=>"External connections",
-            "link"=>"/".$page."/external",
-            "midicon"=>"ext-config",
-            "active"=>($thisarray['p1'] == "external")?"active":"",
-        ),array(
-            "title"=>"Core Configuration",
-            "link"=>"/".$page."/main",
-            "midicon"=>"core-config",
-            "active"=>($thisarray['p1'] == "main")?"active":"",
-          ));
-
-
+        array_push($brarr, array(
+            "title" => "LDAP configuration",
+            "link" => "/" . $page . "/ldap",
+            "midicon" => "ldap",
+            "active" => ($thisarray['p1'] == "ldap") ? "active" : "",
+        ), array(
+            "title" => "External connections",
+            "link" => "/" . $page . "/external",
+            "midicon" => "ext-config",
+            "active" => ($thisarray['p1'] == "external") ? "active" : "",
+        ), array(
+            "title" => "Core Configuration",
+            "link" => "/" . $page . "/main",
+            "midicon" => "core-config",
+            "active" => ($thisarray['p1'] == "main") ? "active" : "",
+        ));
 
         $page = "dashboard";
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         include "public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
-        
+
         ?>
 <div class="row pt-3">
     <div class="col-lg-2">
-        <?php  include "public/modules/sidebar.php";?></div>
+        <?php include "public/modules/sidebar.php";?></div>
     <div class="col-lg-8">
         <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
             <div class="col-md-6">
@@ -200,7 +198,8 @@ if (empty($_SESSION["userdata"]["pjarr"])) {$_SESSION["userdata"]["pjarr"] = arr
                                     <th class="text-start" style="vertical-align:top;">
                                         <h4>Recently used apps</h4>
                                     </th>
-                                    <th colspan="2" class="text-end" style="vertical-align:top;"><a href="/env/apps">All Applications</a></th>
+                                    <th colspan="2" class="text-end" style="vertical-align:top;"><a href="/env/apps">All
+                                            Applications</a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -214,7 +213,8 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
         if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
             foreach (json_decode($zobj["recentdata"], true) as $key => $val) {
                 ?>
-                                <tr style="cursor:pointer;" onclick="location.href='/env/apps/<?php echo $val["id"]; ?>'">
+                                <tr style="cursor:pointer;"
+                                    onclick="location.href='/env/apps/<?php echo $val["id"]; ?>'">
                                     <td class="text-start"><?php echo $val["name"]; ?></td>
                                     <td></td>
                                     <td style="width:50px" class="text-end"><a target="_parent"
@@ -234,7 +234,7 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
         </div>
     </div>
     <div class="col-lg-2">
-        <?php  include "public/modules/breadcrumbin.php"; ?>
+        <?php include "public/modules/breadcrumbin.php";?>
     </div>
 </div>
 <?php
@@ -475,6 +475,18 @@ class Class_cpinfo
             $sql = "delete from knowledge_info where id=?";
             $q = $pdo->prepare($sql);
             $q->execute(array(htmlspecialchars($_POST["catid"])));
+            if ($website['gittype']) {
+                $sql = "select id,commitid,fileplace from env_gituploads where packuid=? order by id desc LIMIT 1";
+                $q = $pdo->prepare($sql);
+                $q->execute(array("knowledge_info:" . htmlspecialchars($_POST["catid"])));
+                if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
+                    $return = vc::gitDelete($zobj["fileplace"], $zobj["commitid"]);
+                    $sql = "update env_gituploads set steptype='delete' where id=?";
+                    $q = $pdo->prepare($sql);
+                    $q->execute(array($zobj["id"]));
+                }
+            }
+            gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Deleted post:" . $_POST["postname"]);
             header("Location: /cpinfo");
             $msg[] = 'The post was deleted.';
         }
@@ -488,17 +500,30 @@ class Class_cpinfo
             if ($q->fetchColumn() > 0) {
                 $err[] = "Post with such name already exist. Please specify a different one.";
             } else {
-                $sql = "INSERT INTO knowledge_info (cat_latname,category,cat_name,public,tags,author, cattext,accgroups) VALUES (?,?,?,?,?,?,?,?)";
+                $sql = "INSERT INTO knowledge_info (cat_latname,category,cat_name,public,tags,author, cattext,accgroups) VALUES (?,?,?,?,?,?,?,?) RETURNING id";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($latname, htmlspecialchars($_POST["category"]), $posttitle, htmlspecialchars($_POST['public']), htmlspecialchars($_POST["tags"]), $_SESSION["user"], $_POST["postcontent"], (!empty($_POST["respgrsel"]) ? $_POST["respgrsel"] : "")));
-                
-                $shagit="";
-
-                $return=vc::gitAdd("text",$_POST["postcontent"],"articles/posts/".$latname.".txt",false,$shagit,true);
-                
-                
-                
-                
+                $tmp['catid'] = $q->fetch(PDO::FETCH_ASSOC)["id"];
+                if ($website['gittype']) {
+                    $shagit = "";
+                    $return = vc::gitAdd("text", $_POST["postcontent"], "articles/posts/" . $latname . ".txt", false, $shagit, true);
+                    if (empty($return["err"])) {
+                        $tmp["gitupload"] = "articles/posts/" . $latname . ".txt";
+                    } else {
+                        $msg[] = $return["err"];
+                        $tmp["gitupload"] = false;
+                    }
+                    if ($tmp["gitupload"]) {
+                        $resp = vc::GetCommitID($tmp["gitupload"]);
+                        $lastcommit = json_decode($resp, true)[0]["id"];
+                        if ($lastcommit) {
+                            $sql = "insert into env_gituploads (gittype,commitid,packuid,fileplace,steptype,stepuser) values (?,?,?,?,?,?)";
+                            $q = $pdo->prepare($sql);
+                            $q->execute(array($website['gittype'], $lastcommit, "knowledge_info:" . $tmp['catid'], "articles/posts/" . $latname . ".txt", "prepare", $_SESSION["user"]));
+                        }
+                    }
+                }
+                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Created post:<a href='/info/posts/" . $latname . "'>" . $_POST["posttitle"] . "</a>");
                 header("Location: /cpinfo/edit/" . $latname);
                 $msg[] = 'You posted successfully the info.';
             }
@@ -508,37 +533,37 @@ class Class_cpinfo
             $q = $pdo->prepare($sql);
             $q->execute(array(htmlspecialchars($_POST["tags"]), htmlspecialchars($_POST["category"]), htmlspecialchars($_POST["posttitle"]), $_POST["postcontent"], htmlspecialchars($_POST['public']), (!empty($_POST["respgrsel"]) ? $_POST["respgrsel"] : ""), $thisarray['p2']));
             textClass::replaceMentions($_POST["postcontent"], $_SERVER["HTTP_HOST"] . "/info/posts/" . $thisarray['p2']);
-            if($website['gittype']){
-                $shagit="";
-                if($website['gittype']=="github" && $_POST["gitprepared"]==1){
-                    $resp=vc::gitTreelist("articles/posts/".$thisarray['p2'].".txt");
-                    $shagit=json_decode($resp,true)["sha"];
+            if ($website['gittype']) {
+                $shagit = "";
+                if ($website['gittype'] == "github" && $_POST["gitprepared"] == 1) {
+                    $resp = vc::gitTreelist("articles/posts/" . $thisarray['p2'] . ".txt");
+                    $shagit = json_decode($resp, true)["sha"];
                 }
-                $return=vc::gitAdd("text",$_POST["postcontent"],"articles/posts/".$thisarray['p2'].".txt",($_POST["gitprepared"]==1?true:false),$shagit,true);
-                if(empty($return["err"])){
-                    $tmp["gitupload"]="articles/posts/".$thisarray['p2'].".txt";
-                  } else {
-                    $msg[]=$return["err"];
-                    $tmp["gitupload"]=false;
+                $return = vc::gitAdd("text", $_POST["postcontent"], "articles/posts/" . $thisarray['p2'] . ".txt", ($_POST["gitprepared"] == 1 ? true : false), $shagit, true);
+                if (empty($return["err"])) {
+                    $tmp["gitupload"] = "articles/posts/" . $thisarray['p2'] . ".txt";
+                } else {
+                    $msg[] = $return["err"];
+                    $tmp["gitupload"] = false;
                 }
-                if($tmp["gitupload"]){
-                    $resp=vc::GetCommitID($tmp["gitupload"]); 
-                    $lastcommit=json_decode($resp,true)[0]["id"];
-                    if($lastcommit){
-                      $sql="insert into env_gituploads (gittype,commitid,packuid,fileplace,steptype,stepuser) values (?,?,?,?,?,?)";
-                      $q = $pdo->prepare($sql);
-                      $q->execute(array($website['gittype'],$lastcommit,"knowledge_info:".$_POST['catid'],"articles/posts/".$thisarray['p2'].".txt","prepare",$_SESSION["user"]));
+                if ($tmp["gitupload"]) {
+                    $resp = vc::GetCommitID($tmp["gitupload"]);
+                    $lastcommit = json_decode($resp, true)[0]["id"];
+                    if ($lastcommit) {
+                        $sql = "insert into env_gituploads (gittype,commitid,packuid,fileplace,steptype,stepuser) values (?,?,?,?,?,?)";
+                        $q = $pdo->prepare($sql);
+                        $q->execute(array($website['gittype'], $lastcommit, "knowledge_info:" . $_POST['catid'], "articles/posts/" . $thisarray['p2'] . ".txt", "prepare", $_SESSION["user"]));
                     }
                 }
             }
-            gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid"=>"system"), "Updated post:<a href='/info/posts/".$thisarray['p2']."'>".$_POST["posttitle"]."</a>");
+            gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Updated post:<a href='/info/posts/" . $thisarray['p2'] . "'>" . $_POST["posttitle"] . "</a>");
             $msg[] = 'The post was updated.';
         }
         include "public/modules/css.php";?>
-<?php if($thisarray['p1']!="new"){?>
+<?php if ($thisarray['p1'] != "new") {?>
 <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
-<?php } ?>
+<?php }?>
 <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/tinyreset.css">
 <style type="text/css">
@@ -612,18 +637,22 @@ class Class_cpinfo
 
             <div class="row pt-3">
                 <div class="col-lg-2">
-                    <?php  include "public/modules/sidebar.php";?></div>
+                    <?php include "public/modules/sidebar.php";?></div>
                 <div class="col-lg-8">
+                    <div class="card p-0">
+                        <input type="text" placeholder="Title" name="posttitle" id="posttitle"
+                            value="<?php echo $_POST["posttitle"]; ?>"
+                            class="form-control br-0 form-control-lg  brtr-3 brtl-3 border-0" required><span
+                            class="form-control-feedback"></span>
 
-                    <input type="text" placeholder="Title" name="posttitle" id="posttitle"
-                        value="<?php echo $_POST["posttitle"]; ?>" class="form-control br-0 form-control-lg"
-                        required><span class="form-control-feedback"></span>
-
-                    <textarea name="postcontent" rows="10"
-                        class="textarea"><?php echo $_POST["postcontent"]; ?></textarea>
-                    <input placeholder="Tags" type="text" name="tags" id="tags" value="<?php echo $_POST["tags"]; ?>"
-                        class="form-control br-0 validatefield" data-role="tagsinput" required><span
-                        class="form-control-feedback"></span>
+                        <textarea name="postcontent" rows="10"
+                            class="textarea"><?php echo $_POST["postcontent"]; ?></textarea>
+                        <div class="card-footer">
+                            <input placeholder="Tags" type="text" name="tags" id="tags"
+                                value="<?php echo $_POST["tags"]; ?>" class="form-control br-0 validatefield"
+                                data-role="tagsinput" required><span class="form-control-feedback"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-2">
                     <br>
@@ -632,7 +661,7 @@ class Class_cpinfo
                     <div class="list-group">
                         <a href="/cpinfo"
                             class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-history"></i>&nbsp;Back</a>
+                                class="mdi mdi-history"></i>&nbsp;Back to Knowledge base</a>
                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlcat"
                             class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
                                 class="mdi mdi-border-all"></i>&nbsp;Category</a>
@@ -719,16 +748,20 @@ class Class_cpinfo
                 ?><form action="" class="form-horizontal form-material" method="post">
             <div class="row pt-3">
                 <div class="col-lg-2">
-                    <?php  include "public/modules/sidebar.php";?></div>
+                    <?php include "public/modules/sidebar.php";?></div>
                 <div class="col-lg-8">
-
-                    <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name']; ?>"
-                        class="form-control br-0 form-control-lg" required><span class="form-control-feedback"></span>
-                    <textarea name="postcontent" rows="10" class="textarea"><?php echo $zobj['cattext']; ?></textarea>
-                    <input placeholder="Tags" type="text" name="tags" id="tags" value="<?php echo $zobj['tags']; ?>"
-                        class="form-control br-0 validatefield" data-role="tagsinput"><span
-                        class="form-control-feedback"></span>
-
+                    <div class="card p-0">
+                        <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name']; ?>"
+                            class="form-control br-0 form-control-lg brtr-3 brtl-3 border-0" required><span
+                            class="form-control-feedback"></span>
+                        <textarea name="postcontent" rows="10"
+                            class="textarea"><?php echo $zobj['cattext']; ?></textarea>
+                        <div class="card-footer"><input placeholder="Tags" type="text" name="tags" id="tags"
+                                value="<?php echo $zobj['tags']; ?>"
+                                class="form-control br-0 validatefield brbr-3 brbl-3" data-role="tagsinput"><span
+                                class="form-control-feedback"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-2">
                     <br>
@@ -769,6 +802,7 @@ class Class_cpinfo
 
             </div>
             <input type="hidden" name="catid" value="<?php echo $zobj['id']; ?>">
+            <input type="hidden" name="postname" value="<?php echo $zobj['cat_latname']; ?>">
 
 
             <!--history modal-->
@@ -815,10 +849,10 @@ class Class_cpinfo
                                 <option value="<?php echo $zobj['category']; ?>"><?php echo $zobj['category']; ?>
                                 </option>
                                 <?php $sql = "SELECT * FROM knowledge_categories";
-            $q = $pdo->prepare($sql);
-            $q->execute();
-            if ($zobj = $q->fetchAll()) {
-                foreach ($zobj as $val) {?>
+                $q = $pdo->prepare($sql);
+                $q->execute();
+                if ($zobj = $q->fetchAll()) {
+                    foreach ($zobj as $val) {?>
                                 <option value="<?php echo $val['category']; ?>"><?php echo $val['catname']; ?></option>
                                 <?php }} else {?>
                                 <option value="demo">Please add category</option>
@@ -863,10 +897,10 @@ class Class_cpinfo
             <!--acc modal-->
         </form>
         <?php
-} else {textClass::PageNotFound();}} else { ?>
+} else {textClass::PageNotFound();}} else {?>
         <div class="row pt-3">
             <div class="col-lg-2">
-                <?php  include "public/modules/sidebar.php";?></div>
+                <?php include "public/modules/sidebar.php";?></div>
             <div class="col-lg-8">
                 <div class="row">
                     <div class="card p-0">
@@ -902,7 +936,7 @@ class Class_cpinfo
                 </div>
             </div>
             <div class="col-md-2">
-                <?php include "public/modules/filterbar.php"; ?>
+                <?php include "public/modules/filterbar.php";?>
                 <?php include "public/modules/breadcrumbin.php";?>
             </div>
         </div>
@@ -954,12 +988,12 @@ include "public/modules/footer.php";
         echo "</div></div>";
         include "public/modules/js.php";
         echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';?>
-<?php if($thisarray['p1']!="new"){?>
+<?php if ($thisarray['p1'] != "new") {?>
 <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
 <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    <?php if($thisarray['p1']!="edit"){ ?>
+    <?php if ($thisarray['p1'] != "edit") {?>
     let table = $('#data-table-ki').DataTable({
         "oLanguage": {
             "sSearch": "",
@@ -984,23 +1018,23 @@ $(document).ready(function() {
     });
     $('.command-delete').on('click', function() {
         var data = table.row($(this).parents('tr')).data();
-        var dataString = 'thisid=' + data[0] + '&thisusr=<?php echo $_SESSION["user"]; ?>';
+        var dataString = 'thisid=' + data[0] + '&thisname=' + data[1] + '&thisusr=<?php echo $_SESSION["user"]; ?>';
         $.ajax({
             type: "POST",
             url: "/api/delkni",
             data: dataString,
             success: function(html) {
                 $("#kb" + data[0]).hide();
-                notify('Article deleted!', 'error');
+                notify('Article deleted!', 'danger');
             }
         });
     });
 
 
-    <?php } ?>
+    <?php }?>
 });
 </script>
-<?php } ?>
+<?php }?>
 <?php include "public/modules/template_end.php";
         echo '</body></html>';
     }

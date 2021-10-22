@@ -620,6 +620,7 @@ CREATE TABLE IF NOT EXISTS `config_diagrams` (
   `accgroups` varchar(255) DEFAULT NULL,
   `author` varchar(100) DEFAULT NULL,
   `category` varchar(100) DEFAULT NULL,
+  `gitprepared` int(1) NOT NULL DEFAULT '0',
    PRIMARY KEY (`id`),
    UNIQUE KEY `desid` (`desid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

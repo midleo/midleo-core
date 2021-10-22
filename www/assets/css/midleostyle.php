@@ -1785,6 +1785,11 @@ display:none;}
 .sidebarinfo{margin-top: 49px!important;}
 .ml-0{margin-left:0px;}
 .rte-autocomplete li a img{width:24px;}
+.brtr-3{border-top-right-radius:3px;}
+.brtl-3{border-top-left-radius:3px;}
+.brbr-3{border-bottom-right-radius:3px;}
+.brbl-3{border-bottom-left-radius:3px;}
+.tox-tinymce{border:0px solid transparent!important;border-top:1px solid #ccc!important;}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);

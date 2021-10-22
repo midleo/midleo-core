@@ -8,7 +8,7 @@ class vc{
       if($website['gittype']=="gitlab"){
         $data_git = array(
         'branch'=>"master",
-        'commit_message'=>'system upload for MidlEOApp from.'.$_SESSION["user"],
+        'commit_message'=>'system upload for midleo.CORE from:'.$_SESSION["user"],
         'content'=> $textcont?$file_git:($file_encoding=="base64"?base64_encode(file_get_contents($file_git)):file_get_contents($file_git)),
         'author_name'=>$_SESSION["user"],
         );
@@ -19,7 +19,7 @@ class vc{
       }
       if($website['gittype']=="github"){
         $data_git = array(
-            'message'=>'system upload for midleo.CORE from.'.$_SESSION["user"],
+            'message'=>'system upload for midleo.CORE from:'.$_SESSION["user"],
             'content'=> base64_encode(file_get_contents($file_git)),
             'committer'=> array(
               'name'=>$_SESSION["user"],
@@ -34,7 +34,7 @@ class vc{
       if($website['gittype']=="bitbucket"){
         $data_git = array(
             'branch'=>"master",
-            'message'=>'system upload for midleo.CORE from.'.$_SESSION["user"],
+            'message'=>'system upload for midleo.CORE from:'.$_SESSION["user"],
             $file_place => file_get_contents($file_git),  
             'author' => $_SESSION["user"]." @MIDLEO <system@midleo.app>",    
           ); 
@@ -108,14 +108,14 @@ class vc{
       if($website['gittype']=="gitlab"){
         $data_git = array(
         'branch'=>"master",
-        'commit_message'=>'system delete for midleo.CORE from'.$_SESSION["user"],
+        'commit_message'=>'system delete for midleo.CORE from:'.$_SESSION["user"],
         'author_name'=>$_SESSION["user"],
         );
         $data_string_git = json_encode($data_git); 
       }
       if($website['gittype']=="github"){
         $data_git = array(
-            'message'=>'system delete for midleo.CORE from'.$_SESSION["user"],
+            'message'=>'system delete for midleo.CORE from:'.$_SESSION["user"],
             'sha'=> $file_sha,
          ); 
          $data_string_git = json_encode($data_git); 
@@ -123,7 +123,7 @@ class vc{
       if($website['gittype']=="bitbucket"){
         $data_git = array(
             'branch'=>"master",
-            'message'=>'system delete for midleo.CORE from'.$_SESSION["user"],
+            'message'=>'system delete for midleo.CORE from:'.$_SESSION["user"],
             'files' => $file_place,  
             'author' => $_SESSION["user"]." @MIDLEO <system@midleo.core>",    
           ); 
