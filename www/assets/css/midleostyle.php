@@ -609,11 +609,6 @@ from{width:0}
 .stats-row{margin-bottom:20px}
 .stats-row .stat-item{display:inline-block;padding-right:15px}
 .stats-row .stat-item + .stat-item{padding-left:15px;border-left:1px solid rgba(120,130,140,0.13)}
-.city-weather-days{margin:0}
-.city-weather-days li{text-align:center;padding:15px 0}
-.city-weather-days li span{display:block;padding:10px 0 0;color:#d5d6d8}
-.city-weather-days li i{display:block;font-size:20px;color:#'.$thiscolor.'}
-.city-weather-days li h3{font-weight:300;margin-top:5px}
 .comment-widgets .comment-row{border-left:3px solid #fff}
 .comment-widgets .comment-row:hover,.comment-widgets .comment-row.active{border-color:#'.$thiscolor.'}
 .comment-text:hover .comment-footer .action-icons,.comment-text.active .comment-footer .action-icons{visibility:visible}

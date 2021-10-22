@@ -23,7 +23,6 @@ if (!empty($website['gitreposurl'])) {define("gitreposurl", $website['gitreposur
 if (!empty($website['gitreposuser'])) {define("gitreposuser", $website['gitreposuser']);}
 if (!empty($website['gitrepospass'])) {define("gitrepospass", $website['gitrepospass']);}
 if (!empty($website['gitbinpath'])) {define("gitbinpath", $website['gitbinpath']);}
-if (!empty($appver)) {define("appver", $appver);}
 if (!empty($website['proxy_host'])) {define("proxy_host", $website['proxy_host']);}
 if (!empty($website['proxy_port'])) {define("proxy_port", $website['proxy_port']);}
 if (!empty($website['smtp_host'])) {

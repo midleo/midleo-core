@@ -26,35 +26,6 @@ class notiffClass{
       ."<body>".$body."</body></html>";
     return $htmlbody;
   }
-  public static function checkUpdate($proxy="",$proxy_auth=""){
-    $url="https://midleo.com/api/checkupdate";
-    $ch = curl_init();
-    if(!empty($proxy)){
-    curl_setopt_array($ch, array(
-    CURLOPT_PROXY=>$proxy,
-    CURLOPT_PROXYUSERPWD=>$proxy_auth,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_URL =>$url,
-    CURLOPT_POST =>1,
-    CURLOPT_CONNECTTIMEOUT => 300,
-    CURLOPT_TIMEOUT=>300,
-    CURLOPT_HTTPPROXYTUNNEL=>true,
-    CURLOPT_SSL_VERIFYPEER=> false
-    ));
-    } else {
-    curl_setopt_array($ch, array(
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_URL =>$url,
-    CURLOPT_POST =>1,
-    CURLOPT_CONNECTTIMEOUT => 3,
-    CURLOPT_TIMEOUT=>3,
-    CURLOPT_SSL_VERIFYPEER=> false
-    ));
-    }
-   $result= curl_exec ($ch);
-   curl_close ($ch);
-   return $result; 
-  }
 }
 function send_mailfinal($from,$to,$subject,$header="welcome",$footer="regards",$body=array("info"=>"demo"),$template="full",$fileatt=array("name"=>"link"),$priority=null){
 	if($template=="full"){

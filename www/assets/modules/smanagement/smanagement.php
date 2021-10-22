@@ -13,7 +13,6 @@ class Class_smanagement
         global $modulelist;
         global $maindir;
         global $projcodes;
-        global $appver;
         $year=date("Y");
         if ($installedapp != "yes") {header("Location: /install");}
         sessionClass::page_protect(base64_encode("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));

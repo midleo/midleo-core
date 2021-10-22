@@ -7,7 +7,6 @@ class Class_cp
         global $website;
         global $maindir;
         global $modulelist;
-        global $appver;
         global $projcodes;
         global $lastupdate;
         if ($installedapp != "yes") {header("Location: /install");}
@@ -16,18 +15,6 @@ class Class_cp
         $msg = array();
         $pdo = pdodb::connect();
         include "public/modules/css.php";
-        if (empty($_SESSION['appnewver']) && $website['check_new_ver'] == 1) {
-            if (!empty($website['proxy_host'])) {
-                $checkupdv = json_decode(notiffClass::checkUpdate($website['proxy_host'] . ":" . $website['proxy_port'], $_SESSION['user'] . ":" . documentClass::decryptIt($_SESSION['usrpwd'])), true);
-            } else {
-                $checkupdv = json_decode(notiffClass::checkUpdate(), true);
-            }
-            if (bccomp($checkupdv['version'], $appver, 2) == 1) {$_SESSION['lastupdate'] = $lastupdate;
-                $_SESSION['appnewver'] = $checkupdv['version'];
-                $_SESSION['appnewvernum'] = $checkupdv['version'];} else { $_SESSION['appnewver'] = "no";
-                $_SESSION['appnewvernum'] = "0";}
-            $err[] = $checkupdv['errorlog'];
-        }
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
         $breadcrumb["text"] = "Dashboard";
         $breadcrumb["midicon"] = "dashboard";

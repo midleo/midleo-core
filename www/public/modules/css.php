@@ -27,8 +27,3 @@
 <script src="assets/js/html5shiv.js"></script>
 <script src="assets/js/respond.min.js"></script>
 <![endif]-->
-<?php if(!empty($_SESSION['appnewver']) && $_SESSION['appnewver']!="no" && $thisarray["last"]!="update"){ 
-$alert["/appconfig/update"]["head"]="New Update available"; 
-$alert["/appconfig/update"]["line1"]="New v.".$_SESSION['appnewver']; 
-$alert["/appconfig/update"]["line2"]="last update:".$_SESSION['lastupdate']; 
-}?>

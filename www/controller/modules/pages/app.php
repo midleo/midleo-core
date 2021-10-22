@@ -14,7 +14,6 @@ class Class_appconfig
         global $modulelist;
         global $accrights;
         global $maindir;
-        global $appver;
         if ($installedapp != "yes") {header("Location: /install");}
         if (empty($thisarray['p1'])) {header("Location: /appconfig/groups");}
         sessionClass::page_protect(base64_encode("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));

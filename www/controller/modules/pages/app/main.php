@@ -10,6 +10,8 @@
 <form method="post" action="" class="form-material">
     <div class="row">
         <div class="col-md-6">
+        <div class="card">
+        <div class="card-body">
             <div class="form-group">
                 <input type="text" name="conf#env_name"
                     value="<?php echo isset($_POST['conf#env_name'])?$_POST['conf#env_name']:$website['env_name'];?>"
@@ -57,8 +59,7 @@ echo "<option value='".$val['timezone_id']."'>".$val['timezone_id']."</option>";
             </div>
             <button type="submit" name="saveadm" id="saveadm" style="display:none;" >save</button>
 
-        </div>
-        <div class="col-md-6">
+<br>
             <div class="form-group">
                 <input type='hidden' value='0' name='conf#registration'>
                 <input type="checkbox" value="1" name="conf#registration" id="registration"
@@ -66,17 +67,7 @@ echo "<option value='".$val['timezone_id']."'>".$val['timezone_id']."</option>";
                     <?php if($website['registration']==1){?>checked="checked" <?php } ?> />
                 <label for="registration">Enable user registration</label>
             </div>
-            <div class="form-group">
-                <input type='hidden' value='0' name='conf#check_new_ver'>
-                <input type="checkbox" value="1" name="conf#check_new_ver" id="check_new_ver"
-                    class="material-inputs filled-in chk-col-blue"
-                    <?php if($website['check_new_ver']==1){?>checked="checked" <?php } ?> />
-                <label for="check_new_ver">Check for new version</label>
             </div>
-            <div class="form-group" style="margin-bottom:0px;">
-                <label for="latestv">Latest version
-                    <?php echo $appver; ?>
-                </label>
             </div>
         </div>
     </div>
