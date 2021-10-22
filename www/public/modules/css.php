@@ -18,7 +18,7 @@
 <link href="/assets/css/animate.css" rel="stylesheet" type="text/css" />
 <link href="/assets/css/spinners.css" rel="stylesheet" type="text/css" />
 <link href="/assets/css/midleostyle.php?&c=<?php echo $website["color"];?>&v=<?php echo filemtime('./assets/css/midleostyle.php');?>" rel="stylesheet" type="text/css" />
-<?php  if(!empty($_SESSION['requser']) || $page=="requests" || $page=="reqsearch" || $page=="reqinfo" || $page=="reqtasks" || $page=="calendar" || $page=="env" || $page=="projects" || $page=="smanagement" ||  $page=="business"){ ?>
+<?php  if($page=="requests" || $page=="reqsearch" || $page=="reqinfo" || $page=="reqtasks" || $page=="calendar" || $page=="env" || $page=="projects" || $page=="smanagement" ||  $page=="business"){ ?>
 <link href="/assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 <?php } ?>
 <script src="/assets/js/angular.min.js"></script>

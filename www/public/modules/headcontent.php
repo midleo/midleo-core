@@ -63,13 +63,12 @@
                           
                         </a>
                         <ul class="dropdown-menu usrdrdown" aria-labelledby="usrdrdown">
-                            
-                            <li><a href="/profile/" class="dropdown-item waves-effect waves-dark"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-users" xlink:href="/assets/images/icon/midleoicons.svg#i-users"/></svg>&nbsp;Profile<span class="text-end"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></span></a></li>
+                            <li><a href="/profile/" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-account-outline"></i>&nbsp;Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a href="/info/" class="dropdown-item waves-effect waves-dark"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-kn-b" xlink:href="/assets/images/icon/midleoicons.svg#i-kn-b"/></svg>&nbsp;Knowledge base<span class="text-end"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></span></a></li>
+                            <li><a href="/info/" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-post-outline"></i>&nbsp;Knowledge base</a></li>
                             <?php if (sessionClass::checkAcc($acclist, "requests")) { ?><li><a
-                                    href="/requests" class="dropdown-item waves-effect waves-dark"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-requests" xlink:href="/assets/images/icon/midleoicons.svg#i-requests"/></svg>&nbsp;Requests<span class="text-end"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></span></a></li><?php } ?>
-                            <?php if(!empty($_SESSION["user"])){?> <li><a href="/logout" class="dropdown-item waves-effect waves-dark"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg>&nbsp;&nbsp;Logout<span class="text-end"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg></span></a></li> <?php } ?>
+                                    href="/requests" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-swap-vertical-bold"></i>&nbsp;Requests</a></li><?php } ?>
+                            <li><a href="/logout" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-exit-to-app"></i>&nbsp;Logout</a></li>
                         </ul>
                 </li>
                 <?php } else { ?>

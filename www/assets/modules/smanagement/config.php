@@ -8,7 +8,7 @@ class Class_reqworkflow{
     session_start();
     $err = array();
     $msg = array();
-    if(!empty($thisarray["p1"]) && (!empty($_SESSION['user']) || !empty($_SESSION['requser']))) {
+    if(!empty($thisarray["p1"]) && !empty($_SESSION['user'])) {
     switch($thisarray["p1"]) {
       case 'read': Class_reqworkflow::readWfl();  break;
       case 'save': Class_reqworkflow::saveWfl();  break;

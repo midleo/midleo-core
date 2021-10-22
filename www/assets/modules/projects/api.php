@@ -7,7 +7,7 @@ class Class_projectapi{
     session_start();
     $err = array();
     $msg = array();
-    if(!empty($thisarray["p1"]) && (!empty($_SESSION['user']) || !empty($_SESSION['requser']))) {
+    if(!empty($thisarray["p1"]) && !empty($_SESSION['user'])) {
     switch($thisarray["p1"]) {
       case 'groups': Class_projectapi::getGroups($thisarray["p2"]);  break;
       case 'projects': Class_projectapi::Projects($thisarray["p2"]);  break;

@@ -34,7 +34,7 @@ class requestFunctions{
     if(!empty($updinfo)){
       $sql="insert into requests_comments (reqid,commuser,commfullname,commtext) values(?,?,?,?)";
       $q = $pdo->prepare($sql);
-      $q->execute(array($reqid,(!empty($_SESSION['user'])?$_SESSION['user']:$_SESSION['requser']),$usrfullname,$updinfo));
+      $q->execute(array($reqid,$_SESSION['user'],$usrfullname,$updinfo));
       textClass::replaceMentions($updinfo,$_SERVER["HTTP_HOST"]."/reqinfo/".$reqid);
       $msg="Comment added";
     } else {
@@ -191,7 +191,7 @@ class requestFunctions{
     $sql="update requests set assigned='',modified = '".$now."' where sname=?";
     $q = $pdo->prepare($sql);
     $q->execute(array($reqid));
-    gTable::track($_SESSION["userdata"]["usname"], $_SESSION['requser'], array("appid"=>"system","reqid"=>htmlspecialchars($_POST["reqid"])), "Request have been sent back to the team");
+    gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid"=>"system","reqid"=>htmlspecialchars($_POST["reqid"])), "Request have been sent back to the team");
     $msg[]="Request sent back"; 
     return array("err"=>$err,"msg"=>$msg);
     pdodb::disconnect();
@@ -231,7 +231,7 @@ class requestFunctions{
         (!empty($files)?$files:""),
         htmlspecialchars($_POST['deadline']),
         htmlspecialchars($_POST['deadlinedeployed']),
-        $_SESSION['requser'],
+        $_SESSION['user'],
         array_keys($wfdata["nodes"])[0],
         !empty($wfdata["nodes"][array_keys($wfdata["nodes"])[0]][0]["elusrtype"])?$wfdata["nodes"][array_keys($wfdata["nodes"])[0]][0]["elusrtype"]:"",
         !empty($wfdata["nodes"][array_keys($wfdata["nodes"])[0]][0]["elusr"])?$wfdata["nodes"][array_keys($wfdata["nodes"])[0]][0]["elusr"]:"",
@@ -262,7 +262,7 @@ class requestFunctions{
             $q->execute(array($hash,$_POST['reqtype'],json_encode($datatype,true)));
          }
       }
-      gTable::track($_SESSION["userdata"]["usname"], $_SESSION['requser'], array("reqid"=>$hash,"appid"=>"system"), "Opened new request <a href='/browse/req/".$hash."'>".htmlspecialchars($_POST['reqname'])."</a>");
+      gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("reqid"=>$hash,"appid"=>"system"), "Opened new request <a href='/browse/req/".$hash."'>".htmlspecialchars($_POST['reqname'])."</a>");
       send_mailfinal(
         $website['system_mail'],
         $wfdatagroups[$wfdata["nodes"][array_keys($wfdata["nodes"])[0]][0]["elusr"]]["uemail"],
@@ -345,7 +345,7 @@ class requestFunctions{
        $q = $pdo->prepare($sql);
        $q->execute(array(htmlspecialchars($_POST['effappr']),htmlspecialchars($_POST['reqid'])));
       }
-      gTable::track($_SESSION["userdata"]["usname"], $_SESSION['requser'], array("reqid"=>htmlspecialchars($_POST['reqid']),"appid"=>"system"), "Updated request <a href='/browse/req/".htmlspecialchars($_POST['reqid'])."'>".htmlspecialchars($_POST['reqname'])."</a>");
+      gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("reqid"=>htmlspecialchars($_POST['reqid']),"appid"=>"system"), "Updated request <a href='/browse/req/".htmlspecialchars($_POST['reqid'])."'>".htmlspecialchars($_POST['reqname'])."</a>");
     /*
       send_mailfinal(
        $website['system_mail'],

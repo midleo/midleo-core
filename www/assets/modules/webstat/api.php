@@ -8,7 +8,7 @@ class Class_webstatapi
         session_start();
         $err = array();
         $msg = array();
-        if (!empty($thisarray["p1"]) && (!empty($_SESSION['requser']) || !empty($_SESSION['user']))) {
+        if (!empty($thisarray["p1"]) && !empty($_SESSION['user'])) {
             switch ($thisarray["p1"]) {
                 case 'readqm':Class_webstatapi::readIBMmq();  break;
                 default:echo json_encode(array('error' => true, 'type' => "error", 'errorlog' => "please use the API correctly."));exit;

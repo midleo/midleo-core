@@ -58,7 +58,6 @@ if($q->execute(array($zobj['reqapp']))){
       <div class="col-md-4">
         <div class="d-grid btnbox" role="group" >
   <?php if(!empty($_SESSION['user'])){?><a href="/reqinfo/<?php echo $thisarray['p2'];?>" target="_parent" class="btn btn-primary waves-effect"><i class="mdi mdi-sitemap"></i>&nbsp;Open the request</a><?php } ?>
- <?php if(!empty($_SESSION['requser'])){?><a href="/reqinfocl/<?php echo $thisarray['p2'];?>" target="_parent" class="btn btn-primary waves-effect"><i class="mdi mdi-sitemap"></i>&nbsp;Open the request</a><?php } ?>
         </div>
         <br>
         

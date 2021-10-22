@@ -69,32 +69,3 @@ class Class_templatecp{
     include "public/modules/template_end.php";
   }
 }
-class Class_templatecpreq{
-  public static function getPage($thisarray){
-    global $installedapp;
-    global $website;
-    global $maindir;
-    global $page;
-    global $typeq;
-    global $typereq;
-    global $modulelist;
-    sessionClassreq::page_protectreq(base64_encode("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
-    $pdo = pdodb::connect();
-    $data=sessionClassreq::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val;  } 
-    include "public/modules/css.php";
-    echo '</head><body class="card-no-border"><div id="main-wrapper">';
-    include "public/modules/headcontentreq.php";
-    echo '<div class="page-wrapper"><div class="container-fluid">';
-    include "public/modules/breadcrumbreq.php";
-    echo '<div class="row"><div class="col-12">';
-	
-    
-    
-    echo '</div></div>';
-    include "public/modules/footer.php";
-	echo '</div></div>';
-    include "public/modules/js.php"; 
-	echo '</body></html>';
-    include "public/modules/template_end.php";
-  }
-}

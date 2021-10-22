@@ -8,7 +8,7 @@ class Class_reqapi
         session_start();
         $err = array();
         $msg = array();
-        if (!empty($thisarray["p1"]) && (!empty($_SESSION['requser']) || !empty($_SESSION['user']))) {
+        if (!empty($thisarray["p1"]) && !empty($_SESSION['user'])) {
             switch ($thisarray["p1"]) {
                 case 'readreq':Class_reqapi::readRequest($thisarray["p2"]);  break;
                 case 'readureq':Class_reqapi::readURequest($thisarray["p2"]); break;

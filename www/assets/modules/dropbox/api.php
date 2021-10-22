@@ -9,7 +9,7 @@ class Class_dropboxapi
         session_start();
         $err = array();
         $msg = array();
-        if (!empty($thisarray["p1"]) && (!empty($_SESSION['requser']) || !empty($_SESSION['user']))) {
+        if (!empty($thisarray["p1"]) && !empty($_SESSION['user'])) {
             switch ($thisarray["p1"]) {
                 case 'updtag':Class_dropboxapi::updateTag($thisarray["p2"]);
                     break;

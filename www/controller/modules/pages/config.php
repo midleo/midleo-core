@@ -20,8 +20,6 @@ class Class_main
             Class_welcome::getPage();
         } elseif (isset($_SESSION['user_id']) && isset($_SESSION['user'])) {
             header("Location: /cp/?");
-        } elseif (isset($_SESSION['requser_id']) && isset($_SESSION['requser'])) {
-            header("Location: /console/?");
         }
         // else {  header("Location: /info/?");  }
         else {Class_welcome::getPage();}
@@ -125,7 +123,7 @@ class Class_info
         array_push($brarr, array(
             "title" => "Knowledge Base",
             "link" => "/info",
-            "icon" => "mdi-lightbulb-on-outline",
+            "icon" => "mdi-post-outline",
             "active" => ($page == "cpinfo") ? "active" : "",
         ));
         array_push($brarr, array(
@@ -495,10 +493,7 @@ class Class_mregister
                                         <div class="col-xs-12">
                                             <button name="doRegister"
                                                 class="btn m-btn-theme text-uppercase waves-effect waves-light"
-                                                type="submit"><svg class="midico midico-outline">
-                                                    <use href="/assets/images/icon/midleoicons.svg#i-logout"
-                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-logout" />
-                                                </svg>&nbsp;Register</button>
+                                                type="submit"><i class="mdi mdi-login"></i>&nbsp;Register</button>
                                         </div>
                                     </div>
                                     <div class="form-group mb-0">
@@ -808,10 +803,7 @@ class Class_mlogin
                                         <div class="form-group text-center mt-3">
                                             <button name="doLogin"
                                                 class="btn m-btn-theme text-uppercase waves-effect btn-block waves-light"
-                                                type="submit"><svg class="midico midico-outline">
-                                                    <use href="/assets/images/icon/midleoicons.svg#i-login"
-                                                        xlink:href="/assets/images/icon/midleoicons.svg#i-login" />
-                                                </svg>&nbsp;Log In</button>
+                                                type="submit"><i class="mdi mdi-login"></i>&nbsp;Log In</button>
                                         </div>
                                         <?php if ($website["registration"] && $website["registration"] == 1) {?>
                                         <div class="form-group mb-0">

@@ -66,11 +66,6 @@
                     <a data-bs-toggle="tooltip" title="Control Panel" class="nav-link text-muted waves-effect waves-dark"
                         href="/cp/?"><span class="itemicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-dashboard" xlink:href="/assets/images/icon/midleoicons.svg#i-dashboard" /></svg></span></a>
                 </li>
-                <?php } elseif (!empty($_SESSION["requser"])) {?>
-                <li class="nav-item">
-                    <a data-bs-toggle="tooltip" title="Control Panel" class="nav-link text-muted waves-effect waves-dark"
-                        href="/console/?"><span class="itemicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-dashboard" xlink:href="/assets/images/icon/midleoicons.svg#i-dashboard" /></svg></span></a>
-                </li>
                 <?php } else {?>
                 <li class="nav-item">
                     <a data-bs-toggle="tooltip" title="Login Console" class="nav-link text-muted waves-effect waves-dark"

@@ -7,7 +7,7 @@ class Class_pubapi{
     session_start();
     $err = array();
     $msg = array();
-    if(!empty($thisarray["p1"]) /*&& (!empty($_SESSION['user']) || !empty($_SESSION['requser']))*/) {
+    if(!empty($thisarray["p1"])) {
     switch($thisarray["p1"]) { 
       case 'getallusrgr':  Class_pubapi::readAllusrGr($thisarray["p2"]);  break;
       case 'getallgr':  Class_pubapi::readAllGr($thisarray["p2"]);  break;
