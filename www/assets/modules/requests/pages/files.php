@@ -108,7 +108,7 @@
                <div class="form-group">
                  <div class="col-md-12">
                     <label class="control-label">Tags</label>
-                    <input type="text" name="tags" id="tags" value="" class="form-control" data-role="tagsinput"><span class="form-control-feedback"></span>
+                    <input type="text" name="tags" id="tags" value="" class="form-control" data-role="tagsinput">
                   </div>
                  </div>
             </div>

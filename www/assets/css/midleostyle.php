@@ -701,13 +701,13 @@ from{width:0}
 .form-control-line .form-control.form-control-danger:focus{border-bottom:1px solid #fc4b6c}
 .form-control-label{line-height:36px;}
 .form-control-danger,.form-control-success,.form-control-warning{padding-right:2.25rem;background-repeat:no-repeat;background-position:center right .5625rem;-webkit-background-size:1.125rem 1.125rem;background-size:1.125rem 1.125rem}
-.has-success .col-form-label,.has-success .custom-control,.has-success .form-check-label,.has-success .form-control-feedback,.has-success .form-control-label{color:#21c1d6}
+.has-success .col-form-label,.has-success .custom-control,.has-success .form-check-label,.has-success .form-control-label{color:#21c1d6}
 /*.has-success .form-control-success{background-image:url(../images/icon/success.svg);background-repeat: no-repeat;background-position-x: right;}*/
 .has-success .form-control{border:1px solid #0CC44F;}
-.has-warning .col-form-label,.has-warning .custom-control,.has-warning .form-check-label,.has-warning .form-control-feedback,.has-warning .form-control-label{color:#ffb22b}
+.has-warning .col-form-label,.has-warning .custom-control,.has-warning .form-check-label,.has-warning .form-control-label{color:#ffb22b}
 /*.has-warning .form-control-warning{background-image:url(../images/icon/warning.svg);background-repeat: no-repeat;background-position-x: right;}*/
 .has-warning .form-control{border-color:#ffb22b}
-.has-danger .col-form-label,.has-danger .custom-control,.has-danger .form-check-label,.has-danger .form-control-feedback,.has-danger .form-control-label{color:#fc4b6c}
+.has-danger .col-form-label,.has-danger .custom-control,.has-danger .form-check-label,.has-danger .form-control-label{color:#fc4b6c}
 /*.has-danger .form-control-danger{background-image:url(../images/icon/danger.svg);background-repeat: no-repeat;background-position-x: right;}*/
 .has-danger .form-control{border:1px solid #E81625;box-shadow:none;}
 .input-group-addon [type="radio"]:not(:checked),.input-group-addon [type="radio"]:checked,.input-group-addon [type="checkbox"]:not(:checked),.input-group-addon [type="checkbox"]:checked{position:initial;opacity:1}

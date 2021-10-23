@@ -96,6 +96,18 @@ $(document).ready(function () {
   }
   if ($('#autogroups')[0]) {
     let grset = new Set();
+    if ($('#tagsacc')[0]) { $('#tagsacc').tagsinput({ itemValue: 'id', itemText: 'text' }); }
+    if ($('#savedgr')[0]) { 
+      let savedgr=$('#savedgr').val();
+      if(savedgr){
+        savedgr=savedgr.split(',');
+        savedgr.forEach(function(value){
+          grset.add(value);
+          if ($('#tagsacc')[0]) { $('#tagsacc').tagsinput('add', { id: value, text: value }); }
+        });
+        $("#respgrsel").val(JSON.stringify(Array.from(grset)));
+      }
+    }
     $('#autogroups').autocomplete({
       source: function (request, response) {
         $.ajax({
@@ -117,6 +129,7 @@ $(document).ready(function () {
       select: function (event, ui) {
         grset.add(ui.item.nameid);
         $("#respgrsel").val(JSON.stringify(Array.from(grset)));
+        if ($('#tagsacc')[0]) { $('#tagsacc').tagsinput('add', { id: ui.item.nameid, text: ui.item.label }); }
         notify("Group added successfully", "success");
         $(this).val(''); return false;
       }

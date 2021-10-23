@@ -624,3 +624,13 @@ function copyToClipboard(thistext) {
   navigator.clipboard.writeText(thistext);
   notify("Copied to clipboard", "success");
 }
+function SetToString(set, delim){
+  let str = '';
+  let i = 0;
+  let size = set.size;
+  set.forEach(function(elem){
+    str += elem
+    if(i++ < size - 1) str += delim
+  });
+  return str
+}

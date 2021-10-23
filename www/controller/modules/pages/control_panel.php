@@ -619,8 +619,8 @@ class Class_cpinfo
         </div>
         <!--diagrams modal-->
         <?php if ($thisarray['p1'] == "new") {?>
-        <form class="form-horizontal form-material" action="" method="post" enctype="multipart/form-data"
-            name="frmUpload" onSubmit="return validateForm();">
+        <form class="form-material" action="" method="post" enctype="multipart/form-data" name="frmUpload"
+            onSubmit="return validateForm();">
 
             <div class="row pt-3">
                 <div class="col-lg-2">
@@ -629,15 +629,14 @@ class Class_cpinfo
                     <div class="card p-0">
                         <input type="text" placeholder="Title" name="posttitle" id="posttitle"
                             value="<?php echo $_POST["posttitle"]; ?>"
-                            class="form-control br-0 form-control-lg  brtr-3 brtl-3 border-0" required><span
-                            class="form-control-feedback"></span>
+                            class="form-control br-0 form-control-lg  brtr-3 brtl-3 border-0" required>
 
                         <textarea name="postcontent" rows="10"
                             class="textarea"><?php echo $_POST["postcontent"]; ?></textarea>
                         <div class="card-footer">
                             <input placeholder="Tags" type="text" name="tags" id="tags"
                                 value="<?php echo $_POST["tags"]; ?>" class="form-control br-0 validatefield"
-                                data-role="tagsinput" required><span class="form-control-feedback"></span>
+                                data-role="tagsinput" required>
                         </div>
                     </div>
                 </div>
@@ -672,7 +671,7 @@ class Class_cpinfo
 
 
             <!--cat modal-->
-            <div class="modal" id="modlcat" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="modlcat" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -697,25 +696,33 @@ class Class_cpinfo
             </div>
             <!--cat modal-->
             <!--acc modal-->
-            <div class="modal" id="modlacc" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="modlacc" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body">
-
                             <div class="form-group">
-                                <select name="public" class="form-control">
-                                    <option value="1"
-                                        onclick="document.getElementById('accgroups').style.display = 'none';">
-                                        Visible to Public</option>
-                                    <option value="0"
-                                        onclick="document.getElementById('accgroups').style.display = 'flex';">
-                                        Private</option>
-                                </select>
+                                <div class="btn-group" role="group" aria-label="acc radios">
+                                    <input type="radio" class="btn-check" name="public" id="public1" value="1"
+                                        onclick="document.getElementById('accgroups').style.display = 'none';"
+                                        autocomplete="off" checked>
+                                    <label class="btn btn-outline-info btn-sm" for="public1">Public</label>
+                                    <input type="radio" class="btn-check" name="public" id="public0" value="0"
+                                        onclick="document.getElementById('accgroups').style.display = 'flex';"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-info btn-sm" for="public0">Private</label>
+                                </div>
                             </div>
-                            <div class="form-group" id="accgroups" style="display:none;">
-                                <input name="users" id="autogroups" type="text" class="form-control"
-                                    placeholder="Access groups">
-                                <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+                            <div id="accgroups" class="row" style="display:none;">
+                                <div class="form-group col-lg-6">
+                                    <input name="users" id="autogroups" type="text" class="form-control"
+                                        placeholder="Access groups">
+
+                                    <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <input placeholder="Groups with access" type="text" id="tagsacc" disabled
+                                        class="form-control br-0 brbr-3 brbl-3" data-role="tagsinput">
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -727,26 +734,24 @@ class Class_cpinfo
             <!--acc modal-->
         </form>
         <?php } else if ($thisarray['p1'] == "edit") {
-            $sql = "SELECT id,cat_latname,cat_name,category,cattext,tags,gitprepared FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and" . $sactive : "");
+            $sql = "SELECT id,cat_latname,cat_name,category,cattext,public,accgroups,tags,gitprepared FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and" . $sactive : "");
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p2']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
 
-                ?><form action="" class="form-horizontal form-material" method="post">
+                ?><form action="" class="form-material" method="post">
             <div class="row pt-3">
                 <div class="col-lg-2">
                     <?php include "public/modules/sidebar.php";?></div>
                 <div class="col-lg-8">
                     <div class="card p-0">
                         <input type="text" placeholder="Title" name="posttitle" value="<?php echo $zobj['cat_name']; ?>"
-                            class="form-control br-0 form-control-lg brtr-3 brtl-3 border-0" required><span
-                            class="form-control-feedback"></span>
+                            class="form-control br-0 form-control-lg brtr-3 brtl-3 border-0" required>
                         <textarea name="postcontent" rows="10"
                             class="textarea"><?php echo $zobj['cattext']; ?></textarea>
                         <div class="card-footer"><input placeholder="Tags" type="text" name="tags" id="tags"
                                 value="<?php echo $zobj['tags']; ?>"
-                                class="form-control br-0 validatefield brbr-3 brbl-3" data-role="tagsinput"><span
-                                class="form-control-feedback"></span>
+                                class="form-control br-0 validatefield brbr-3 brbl-3" data-role="tagsinput">
                         </div>
                     </div>
                 </div>
@@ -793,7 +798,7 @@ class Class_cpinfo
 
 
             <!--history modal-->
-            <div class="modal" id="modal-hist" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="modal-hist" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog" style="width:auto;">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -827,7 +832,7 @@ class Class_cpinfo
             </div>
             <!--history modal-->
             <!--cat modal-->
-            <div class="modal" id="modlcat" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="modlcat" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -838,8 +843,8 @@ class Class_cpinfo
                                 <?php $sql = "SELECT * FROM knowledge_categories";
                 $q = $pdo->prepare($sql);
                 $q->execute();
-                if ($zobj = $q->fetchAll()) {
-                    foreach ($zobj as $val) {?>
+                if ($zobjin = $q->fetchAll()) {
+                    foreach ($zobjin as $val) {?>
                                 <option value="<?php echo $val['category']; ?>"><?php echo $val['catname']; ?></option>
                                 <?php }} else {?>
                                 <option value="demo">Please add category</option>
@@ -854,25 +859,35 @@ class Class_cpinfo
             </div>
             <!--cat modal-->
             <!--acc modal-->
-            <div class="modal" id="modlacc" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="modlacc" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body">
-
                             <div class="form-group">
-                                <select name="public" class="form-control">
-                                    <option value="1"
-                                        onclick="document.getElementById('accgroups').style.display = 'none';">
-                                        Visible to Public</option>
-                                    <option value="0"
-                                        onclick="document.getElementById('accgroups').style.display = 'flex';">
-                                        Private</option>
-                                </select>
+                                <div class="btn-group" role="group" aria-label="acc radios">
+                                    <input type="radio" class="btn-check" name="public" id="public1" value="1"
+                                        onclick="document.getElementById('accgroups').style.display = 'none';"
+                                        autocomplete="off" <?php echo $zobj['public']=="1"?"checked":""; ?>>
+                                    <label class="btn btn-outline-info btn-sm" for="public1">Public</label>
+                                    <input type="radio" class="btn-check" name="public" id="public0" value="0"
+                                        onclick="document.getElementById('accgroups').style.display = 'flex';"
+                                        autocomplete="off" <?php echo $zobj['public']=="0"?"checked":""; ?>>
+                                    <label class="btn btn-outline-info btn-sm" for="public0">Private</label>
+                                </div>
+
                             </div>
-                            <div class="form-group" id="accgroups" style="display:none;">
-                                <input name="users" id="autogroups" type="text" class="form-control"
-                                    placeholder="Access groups">
-                                <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+                            <div id="accgroups" class="row" style="display:<?php echo $zobj['public']=="1"?"none":"flex"; ?>;">
+                                <div class="form-group col-lg-6">
+                                    <input name="users" id="autogroups" type="text" class="form-control"
+                                        placeholder="search for groups">
+                                    <input style="display:none;" type="text" id="savedgr" value="<?php echo !empty($zobj['accgroups'])?implode(', ' , json_decode($zobj['accgroups'])):""; ?>">
+                                    <input type="text" id="respgrsel" name="respgrsel" style="display:none;">
+
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <input placeholder="Groups with access" type="text" id="tagsacc" disabled
+                                        class="form-control br-0 brbr-3 brbl-3" data-role="tagsinput">
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -930,7 +945,7 @@ class Class_cpinfo
         <br>
         <?php }?>
         <!--modal start -->
-        <div class="modal" id="modal-category-form" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="modal-category-form" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
 
                 <div class="modal-content">
@@ -1005,7 +1020,8 @@ $(document).ready(function() {
     });
     $('.command-delete').on('click', function() {
         var data = table.row($(this).parents('tr')).data();
-        var dataString = 'thisid=' + data[0] + '&thisname=' + data[1] + '&thisusr=<?php echo $_SESSION["user"]; ?>';
+        var dataString = 'thisid=' + data[0] + '&thisname=' + data[1] +
+            '&thisusr=<?php echo $_SESSION["user"]; ?>';
         $.ajax({
             type: "POST",
             url: "/api/delkni",
