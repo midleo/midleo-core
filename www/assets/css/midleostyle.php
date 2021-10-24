@@ -1785,6 +1785,7 @@ display:none;}
 .brbr-3{border-bottom-right-radius:3px;}
 .brbl-3{border-bottom-left-radius:3px;}
 .tox-tinymce{border:0px solid transparent!important;border-top:1px solid #ccc!important;}
+.list-group-item-light{font-size:.9rem;}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);
