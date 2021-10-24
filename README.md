@@ -11,25 +11,25 @@ With Midleo Core, you can import Word , PDF, Visio documents and save them as te
 Some screenshots from the Midleo app:
 
 ### Project management
-![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/service-management.png)
+![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/service-management.png?raw=true)
 
 ### Application list
-![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/applications.png)
+![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/applications.png?raw=true)
 
 ### Firewall import
-![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/firewall_import.png)
+![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/firewall_import.png?raw=true)
 
 ### Create package for IBM MQ deployment
-![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/ibm-mq-package.png)
+![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/ibm-mq-package.png?raw=true)
 
 ### Server information page
-![The Midleo web app](https://gitlab.com/midleo/midleo-core/-/raw/master/gitlab.assets/server-info.png)
+![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/server-info.png?raw=true)
 
 ## How to install
 
 ```bash
 cd /folder-you-want-to-install
-git clone https://gitlab.com/midleo/midleo-core.git
+git clone https://github.com/midleo/midleo-core.git
 cd midleo.core/www/controller
 composer install
 ```

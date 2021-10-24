@@ -56,7 +56,7 @@ $(document).ready(function () {
       var searchIDs = $('#diagramslist input:checkbox:checked').map(function(){
         return $(this).val();
       }).toArray();
-      console.log(searchIDs);
+      //console.log(searchIDs);
       $.each(searchIDs, function (index, element) {
         tinymce.activeEditor.execCommand('mceInsertContent', false, '<p>[diagram=' + element + ']</p>');
       });
@@ -451,7 +451,7 @@ $(document).ready(function () {
       },
       toolbar1: 'insertfile undo redo  | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print | forecolor backcolor | hr drawio',
       setup: function (editor) {
-        tinymce.ScriptLoader.load('/assets/js/bootstrap.min.js');
+//        tinymce.ScriptLoader.load('/assets/js/bootstrap.min.js');
         editor.ui.registry.addButton('drawio', {
           type: 'splitbutton',
           tooltip: 'Import diagrams',
