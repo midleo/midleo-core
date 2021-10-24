@@ -1,17 +1,16 @@
-# Midleo Core
+# midleo.CORE
 
 Source code for Midleo Core application
 
 ## What is Midleo Core?
-Midleo Core is software made by IT for IT. It can help people working in administration and development section to better organize their resources - servers, firewal rules, application servers, documents, visio diagrams. It can help for better organize your daily tasks and collaborate more with the colleagues.
-With Midleo Core, you can import Word , PDF, Visio documents and save them as text in database. You can batch import multiple documents from shared drive - recursive import.
+Midleo Core is software for document collaboration, knowledge base, PDF, Word import/export, middleware automation.
 
 ## Take a look
 
 Some screenshots from the Midleo app:
 
-### Project management
-![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/service-management.png?raw=true)
+### Knowledge base
+![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/knowledge-base.png?raw=true)
 
 ### Application list
 ![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/applications.png?raw=true)
@@ -67,4 +66,4 @@ Midleo CORE is using:
 
 ## License
 
-The Midleo CORE is licensed under the GPL v3 license. See the [license file](https://gitlab.com/midleo/midleo-core/-/blob/master/LICENSE) for more information.
+The Midleo CORE is licensed under the GPL v3 license.
