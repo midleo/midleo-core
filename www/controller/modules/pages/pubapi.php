@@ -26,8 +26,6 @@ class Class_pubapi{
       case 'getgitcfg': Class_pubapi::readGITCfg();  break;
       case 'captcha': Class_pubapi::captcha(); break;
       case 'updatesrv': Class_pubapi::updateSrv(); break;
-      case 'readnav': Class_pubapi::readNav(); break;
-      case 'favnav': Class_pubapi::FavNav(); break;
       default: echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"please use the API correctly."));exit;
                     }
   } else { echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"please use the API correctly."));exit;  }
@@ -314,108 +312,6 @@ class Class_pubapi{
       echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"GIT is not configured."));
     }
     exit;
-  }
-  public static function readNav(){
-    global $website;
-    global $navlist;
-    $newdata=array();
-    $json = file_get_contents('php://input');
-    $data = json_decode($json); 
-    if(!empty($data) && $data->type=="fav"){
-      if(!empty($_SESSION["user"]) || !empty($_SESSION["requser"])){
-        $pdo = pdodb::connect();
-        $sql="select navfav from ".(!empty($_SESSION["requser"])?"req":"")."users where mainuser=?";
-        $q = $pdo->prepare($sql);
-        $q->execute(array(!empty($_SESSION["user"])?$_SESSION["user"]:$_SESSION["requser"]));
-        if($zobj = $q->fetch(PDO::FETCH_ASSOC)){
-          $tmp=json_decode($zobj["navfav"],true);
-          $tmptype=!empty($_SESSION["user"])?"user":"requser";
-          if(!empty($tmp) && is_array($tmp)){
-            foreach($tmp as $keyin=>$valin){
-              $data = array();
-              $data['navname'] = $navlist[$tmptype][$keyin]["name"];
-              $data['navid'] = $keyin;
-              $data['navlink'] = $navlist[$tmptype][$keyin]["navlink"];
-              $data['navcond'] = $navlist[$tmptype][$keyin]["navcond"];
-              $data['navicon'] = $navlist[$tmptype][$keyin]["navicon"];
-              $newdata[] = $data;
-            }
-            ksort($newdata);
-            echo json_encode($newdata, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-          }
-        }
-        pdodb::disconnect();
-        clearSESS::template_end();
-      }
-      exit;
-    }
-    if(!empty($_SESSION["user"])){
-      $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
-      foreach($navlist["user"] as $keyin=>$valin){
-        if(!$valin["navacc"]){
-          $data = array();
-          $data['navname'] = $valin["name"];
-          $data['navid'] = $keyin;
-          $data['navlink'] = $valin["navlink"];
-          $data['navcond'] = $valin["navcond"];
-          $data['navicon'] = $valin["navicon"];
-          $newdata[] = $data;
-        } else {
-          if (sessionClass::checkAcc($acclist, $valin["navacc"])) {
-            $data = array();
-            $data['navname'] = $valin["name"];
-            $data['navid'] = $keyin;
-            $data['navlink'] = ($valin["navcond"]=="env"?($valin["navlink"]."/apps/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")):$valin["navlink"]);
-            $data['navcond'] = $valin["navcond"];
-            $data['navicon'] = $valin["navicon"];
-            $newdata[] = $data;
-          }
-        }
-      }
-    } else {
-      $data = array();
-      $data['navname'] = $navlist["none"][0]["name"];
-      $data['navid'] = 0;
-      $data['navlink'] = $navlist["none"][0]["navlink"];
-      $data['navcond'] = $navlist["none"][0]["navcond"];
-      $data['navicon'] = $navlist["none"][0]["navicon"];
-      $newdata[] = $data;
-    }
-    echo json_encode($newdata, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    exit;
-  }
-  public static function FavNav(){
-    if(!empty($_SESSION["user"]) || !empty($_SESSION["requser"])){
-      $json = file_get_contents('php://input');
-      $data = json_decode($json); 
-      if(!empty($data)){
-        $pdo = pdodb::connect();
-        $sql="select navfav from ".(!empty($_SESSION["requser"])?"req":"")."users where mainuser=?";
-        $q = $pdo->prepare($sql);
-        $q->execute(array(!empty($_SESSION["user"])?$_SESSION["user"]:$_SESSION["requser"]));
-        if($zobj = $q->fetch(PDO::FETCH_ASSOC)){
-          $tmp=json_decode($zobj["navfav"],true);
-          if($data->type=="rm"){
-            if($tmp[$data->navid]){
-             unset($tmp[$data->navid]);
-            }
-          } else {
-            $tmp[$data->navid]="1";
-          }
-          $sql="update ".(!empty($_SESSION["requser"])?"req":"")."users set navfav=? where mainuser=?";
-          $q = $pdo->prepare($sql);
-          $q->execute(array(json_encode($tmp,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),!empty($_SESSION["user"])?$_SESSION["user"]:$_SESSION["requser"]));
-        }
-        echo json_encode(array('success'=>true),true);
-        pdodb::disconnect();
-        clearSESS::template_end();
-        exit;
-      } else {
-        echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"please use the API correctly."));exit;
-      }
-    } else {
-      echo json_encode(array('error'=>true,'type'=>"error",'errorlog'=>"please use the API correctly."));exit;
-    }
   }
   public static function readAllpack($d1=null){
     $pdo = pdodb::connect();

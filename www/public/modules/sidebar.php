@@ -1,17 +1,28 @@
 <br>
 <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Navigation</h4>
 <br>
-<nav class="sidebar-nav " ng-app="ngSysApp" ng-controller="ngsysCtrl">
- <div class="navtop hide-menu">
- <a  href="" ng-click="getAllnav('<?php echo $page."/".(($thisarray["last"]!=$page && $thisarray["last"]!="?")?$thisarray["last"]:"");?>','reset','fav')"><span class="favstar"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-star-empty" xlink:href="/assets/images/icon/midleoicons.svg#i-star-empty" /></svg></span>&nbsp;<span>Favorites</span></a>
- <span class="close"><a href="" ng-click="getAllnav('<?php echo $page."/".(($thisarray["last"]!=$page && $thisarray["last"]!="?")?$thisarray["last"]:"");?>','reset','')" ><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></a></span>
- </div>
-  <ul id="sidebarnav" ng-show="sysLoaded" ng-init="getAllnav('<?php echo $page."/".(($thisarray["last"]!=$page && $thisarray["last"]!="?")?$thisarray["last"]:"");?>','','')">
-  <li  ng-repeat="d in names" id="nav{{d.navid}}" class="row" ng-class="{ 'active': d.navcond == '<?php echo $page;?>' }">
-    <a ng-class="{ 'active': d.navcond == '<?php echo $page;?>' }"  class="waves-effect waves-dark col-md-10" href="{{d.navlink}}"><svg class="midico midico-outline me-2 mt-0" ng-class="{ 'active': d.navcond == '<?php echo $page;?>' }"><use href="{{d.navicon}}" xlink:href="{{d.navicon}}"/></svg><span class="hide-menu">{{d.navname}} </span></a>
-    <div ng-show="navtype=='allnav'" class="favnav col-md-2" ng-click="navfav(d.navid,'add')" data-bs-toggle="tooltip" title="Add to favorites"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-star-full" xlink:href="/assets/images/icon/midleoicons.svg#i-star-full" /></svg></div>
-    <div ng-show="navtype=='favnav'" class="favnav col-md-2" ng-click="navfav(d.navid,'rm')" data-bs-toggle="tooltip" title="Remove from favorites"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-star-empty" xlink:href="/assets/images/icon/midleoicons.svg#i-star-empty" /></svg></div>
-   </li>
-  </ul>
-   <div id="sidebarnavload" ng-hide="sysLoaded" class="text-center" style="margin-top:50px;"><i class="mdi mdi-loading mdi-24px iconspin"></i></div>
-  </nav>
+<nav class="sidebar-nav ">
+    <ul id="sidebarnav">
+    <li class="row">
+            <a class="waves-effect waves-dark col-md-12 <?php echo $page=="dashboard"?"active":"";?>" href="/cp/?"><i class="mdi mdi-view-dashboard-outline"></i>&nbsp;Dashboard</a>
+        </li>
+        <li class="row">
+            <a class="waves-effect waves-dark col-md-12 <?php echo $page=="cpinfo"?"active":"";?>" href="/cpinfo"><i class="mdi mdi-file-document-edit-outline"></i>&nbsp;Documentation</a>
+        </li>
+        <li class="row">
+            <a class="waves-effect waves-dark col-md-12 <?php echo $page=="env"?"active":"";?>" href="/env/apps"><i class="mdi mdi-server-network"></i>&nbsp;Environment</a>
+        </li>
+        <li class="row">
+            <a class="waves-effect waves-dark col-md-12 <?php echo $page=="automation"?"active":"";?>" href="/automation"><i class="mdi mdi-refresh-auto"></i>&nbsp;Automation</a>
+        </li>
+        <li class="row">
+            <a class="waves-effect waves-dark col-md-12 <?php echo $page=="webstat"?"active":"";?>" href="/webstat/charts"><i class="mdi mdi-chart-multiple"></i>&nbsp;Statistics</a>
+        </li>
+        <li class="row">
+            <a class="waves-effect waves-dark col-md-12 <?php echo $page=="monitoring"?"active":"";?>" href="/monitoring"><i class="mdi mdi-monitor-eye"></i>&nbsp;Monitoring</a>
+        </li>
+        <li class="row">
+            <a class="waves-effect waves-dark col-md-12 <?php echo $page=="appconfig"?"active":"";?>" href="/appconfig"><i class="mdi mdi-cogs"></i>&nbsp;Midleo Configuration</a>
+        </li>
+    </ul>
+</nav>

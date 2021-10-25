@@ -7,7 +7,6 @@ class Class_cp
         global $website;
         global $maindir;
         global $modulelist;
-        global $projcodes;
         global $lastupdate;
         if ($installedapp != "yes") {header("Location: /install");}
         sessionClass::page_protect(base64_encode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
@@ -59,7 +58,7 @@ class Class_cp
     <div class="col-lg-2">
         <?php include "public/modules/sidebar.php";?></div>
     <div class="col-lg-8">
-        <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+        <div class="row">
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-12">
@@ -75,57 +74,7 @@ class Class_cp
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body p-0">
-                        <table class="table table-vmiddle table-hover stylish-table mb-0">
-                            <thead>
-                                <tr>
-                                    <th colspan="2" class="text-start" style="vertical-align:top;">
-                                        <h4>Latest projects</h4>
-                                    </th>
-                                    <th colspan="2" class="text-end" style="vertical-align:top;"><a href="/projects">All
-                                            Projects</a></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="display:none;">
-                                    <td colspan="4"></td>
-                                </tr>
-                                <?php
-if (empty($_SESSION["userdata"]["pjarr"])) {$_SESSION["userdata"]["pjarr"] = array();
-            $argpjarr = 0;} else { $argpjarr = 1;}
-
-        $sql = "select projcode,projname,projstatus,projduedate from config_projrequest where " . (!empty($_SESSION["userdata"]["pjarr"]) ? "( owner='" . $_SESSION["user"] . "' or serviceid in (" . str_repeat('?,', count($_SESSION["userdata"]["pjarr"]) - $argpjarr) . '?' . "))" : " requser=?");
-        $q = $pdo->prepare($sql);
-        if (!empty($_SESSION["userdata"]["pjarr"])) {
-            $q->execute($_SESSION["userdata"]["pjarr"]);
-        } else {
-            $q->execute(array($_SESSION["user"]));
-        }
-
-        if ($zobj = $q->fetchAll()) {
-            foreach ($zobj as $val) {?>
-                                <tr>
-                                    <td><?php echo $val["projname"]; ?></td>
-                                    <td style="width:100px;" class="text-center"><span
-                                            class="badge badge-<?php echo $projcodes[$val['projstatus']]["badge"]; ?>"><?php echo $projcodes[$val['projstatus']]["name"]; ?></span>
-                                    </td>
-                                    <td style="width:100px;" class="text-start">
-                                        <?php echo date("d/m/Y", strtotime($val["projduedate"])); ?></td>
-                                    <td style="width:50px;"><a
-                                            href="/projects/?pjid=<?php echo $val["projcode"]; ?>"><svg
-                                                class="midico midico-outline">
-                                                <use href="/assets/images/icon/midleoicons.svg#i-right"
-                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-right" />
-                                            </svg></a></td>
-                                </tr>
-                                <?php }
-        }
-        ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                
             </div>
             <div class="col-md-6">
                 <div class="card">
@@ -228,7 +177,6 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
 include "public/modules/footer.php";
         include "public/modules/js.php";?>
 <script src="/assets/js/dirPagination.js"></script>
-<script type="text/javascript" src="/assets/modules/requests/assets/js/ng-controller.js"></script>
 <script src="/assets/js/chart.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 var thiscolor = "#000";

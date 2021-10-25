@@ -22,7 +22,6 @@
 <link href="/assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 <?php } ?>
 <script src="/assets/js/angular.min.js"></script>
-<script type="text/javascript" src="/assets/js/sys-controller.js"></script>
 <!--[if lt IE 9]>
 <script src="assets/js/html5shiv.js"></script>
 <script src="assets/js/respond.min.js"></script>

@@ -9,7 +9,6 @@ class Class_reports
         global $page;
         global $bsteps;
         global $modulelist;
-        global $typereq;
         global $maindir;
         global $env;
         if (!empty($env)) {  $menudataenv = json_decode($env, true); } else {  $menudataenv = array(); }

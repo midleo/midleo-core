@@ -77,7 +77,7 @@ $(function () {
   $(".search-box a, .search-box .app-search .srh-btn").on('click', function () {
     $(".app-search").toggle(200);
   });
-  $(function () {
+  /*$(function () {
     var url = window.location;
     var element = $('ul#sidebarnav a').filter(function () {
       return this.href == url;
@@ -91,7 +91,7 @@ $(function () {
       }
     }
 
-  });
+  });*/
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl)

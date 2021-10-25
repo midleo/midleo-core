@@ -278,7 +278,7 @@ class Class_env
         <?php include "public/modules/sidebar.php"; ?>
     </div>
     <div class="col-lg-10">
-        <div class="row ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+        <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
             <div class="col-md-9">
                 <?php include "public/modules/breadcrumb.php"; ?>
                 <div class="card">
