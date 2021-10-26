@@ -111,7 +111,7 @@ class Class_info
                 $blogcat = $zobj['category'];
             } else { $blogcatname = "wrong category!";}
         } else { $blogcatname = "Category is empty!";}}
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         if ($forumcase == "posts") {?>
     <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
@@ -156,13 +156,13 @@ class Class_info
                 "active" => ($page == "dropbox") ? "active" : "",
             ));
         }
-        include "public/modules/headcontentinfo.php";
+        include $website['corebase']."public/modules/headcontentinfo.php";
         echo '<div class="page-wrapper">';?>
 <div class="container-fluid">
 
     <?php echo '<div class="row pt-3">
             <div class="col-lg-2" style="overflow-x:auto;">';
-        include "public/modules/sidebarinfo.php";
+        include $website['corebase']."public/modules/sidebarinfo.php";
         echo '</div>
             <div class="col-lg-8">';
         if ($forumcase == "posts") {
@@ -332,15 +332,15 @@ $sql = "update knowledge_info set views=views+1 where id=?";
         }
 
         echo '</div><div class="col-lg-2">';
-        include "public/modules/blogsidebar.php";
+        include $website['corebase']."public/modules/blogsidebar.php";
         echo '</div></div></div></div></div></div>';
-        include "public/modules/footer.php";
-        include "public/modules/js.php";
+        include $website['corebase']."public/modules/footer.php";
+        include $website['corebase']."public/modules/js.php";
         if ($forumcase == "posts") {?>
     <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
  <?php }
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/template_end.php";
         if (!empty($text)) {unset($text);}
         echo '</body></html>';
         //end function
@@ -425,7 +425,7 @@ class Class_mregister
             }
 
         }
-        include "public/modules/css.php";?>
+        include $website['corebase']."public/modules/css.php";?>
     </head>
 
     <body
@@ -526,8 +526,8 @@ class Class_mregister
 </ul>
 </div><p>Sorry for the inconvenience!</p></div>
   <![endif]--><?php
-include "public/modules/footer.php";
-        include "public/modules/js.php";?>
+include $website['corebase']."public/modules/footer.php";
+        include $website['corebase']."public/modules/js.php";?>
         <script type='text/javascript'>
         (function(a) {
             function b() {
@@ -608,7 +608,7 @@ include "public/modules/footer.php";
         } catch (e) {};
         </script>
         <script src="/assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
-include "public/modules/template_end.php";
+include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
 
     }
@@ -750,7 +750,7 @@ class Class_mlogin
                 }
             }
         }
-        include "public/modules/css.php";?>
+        include $website['corebase']."public/modules/css.php";?>
         </head>
 
         <body
@@ -870,10 +870,10 @@ class Class_mlogin
 </ul>
 </div><p>Sorry for the inconvenience!</p></div>
   <![endif]--><?php
-include "public/modules/footer.php";
-        include "public/modules/js.php";
+include $website['corebase']."public/modules/footer.php";
+        include $website['corebase']."public/modules/js.php";
         echo '<script type="text/javascript">localStorage.clear();</script>';
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
 
     }
@@ -929,10 +929,10 @@ class Class_profile
             } else {
                 $err[] = 'Old password is wrong';}
         }
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         echo '</head><body class="card-no-border"> <div id="main-wrapper">';
         $breadcrumb["text"] = "Profile settings";
-        include "public/modules/headcontent.php";
+        include $website['corebase']."public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
         ?>
 
@@ -978,7 +978,7 @@ class Class_profile
 
             <div class="row pt-3">
                 <div class="col-lg-2">
-                    <?php include "public/modules/sidebar.php";?>
+                    <?php include $website['corebase']."public/modules/sidebar.php";?>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">
@@ -1120,7 +1120,7 @@ class Class_profile
 
 
                     <div class="col-md-2">
-                        <?php include "public/modules/breadcrumbin.php";?>
+                        <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
                     </div>
                 </div>
             </div>
@@ -1130,9 +1130,9 @@ class Class_profile
 </div>
 </div>
 
-<?php include "public/modules/footer.php";
+<?php include $website['corebase']."public/modules/footer.php";
         echo "</div></div>";
-        include "public/modules/js.php";?>
+        include $website['corebase']."public/modules/js.php";?>
 <script src="/assets/js/jquery/jquery.cropit.js" type="text/javascript"></script>
 <script type='text/javascript'>
 (function(a) {
@@ -1213,7 +1213,7 @@ try {
 } catch (e) {};
 </script>
 <script src="/assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
-include "public/modules/template_end.php";
+include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
 }
@@ -1232,14 +1232,14 @@ class Class_searchall
         $msg = array();
         $pdo = pdodb::connect();
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         echo '</head><body class="card-no-border"> <div id="main-wrapper">';
         $breadcrumb["text"] = "Search results";
-        include "public/modules/headcontent.php";
+        include $website['corebase']."public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
 
         echo '<div class="row pt-3"><div class="col-lg-2">';
-        include "public/modules/sidebar.php";
+        include $website['corebase']."public/modules/sidebar.php";
         echo '</div><div class="col-lg-8">';
         if (isset($_REQUEST["sa"])) {
             $data = array();
@@ -1309,15 +1309,15 @@ class Class_searchall
     </div>
 </div>
 </div>
-<?php include "public/modules/breadcrumbin.php";?>
+<?php include $website['corebase']."public/modules/breadcrumbin.php";?>
     </div>
     </div>
 <?php echo '</div></div>';
-        include "public/modules/footer.php";
+        include $website['corebase']."public/modules/footer.php";
         echo '</div></div>';
-        include "public/modules/js.php";
+        include $website['corebase']."public/modules/js.php";
         echo '</body></html>';
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/template_end.php";
     }
 }
 class Class_welcome
@@ -1332,10 +1332,10 @@ class Class_welcome
         if ($installedapp != "yes") {header("Location: /install");}
         session_start();
         $pdo = pdodb::connect();
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         echo '<style type="text/css">.card-header + .card-body{padding-top:15px;}</style></head>';
         echo '<body class="fix-header card-no-border no-sidebar"><div id="main-wrapper">';
-        include "public/modules/headcontentmain.php";
+        include $website['corebase']."public/modules/headcontentmain.php";
         echo '<div class="page-wrapper">'; ?>
 <div class="container-fluid">
 
@@ -1422,11 +1422,11 @@ class Class_welcome
         <div class="col-md-1"></div>
     </div>
 
-    <?php include "public/modules/license.php";
+    <?php 
         echo '</div></div>';
-        include "public/modules/footer.php";
-        include "public/modules/js.php";
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/footer.php";
+        include $website['corebase']."public/modules/js.php";
+        include $website['corebase']."public/modules/template_end.php";
         if (!empty($text)) {unset($text);}
         echo '</body></html>';
 

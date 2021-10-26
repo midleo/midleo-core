@@ -8,6 +8,7 @@ $modulelist = array();
 if (!empty($website) && !is_array($website)) {$website = json_decode($website, true);}
 if (!empty($website['varheader'])) {define("varheader", $website['varheader']);}
 if (!empty($website['varfooter'])) {define("varfooter", $website['varfooter']);}
+$website['corebase']=$corebaseurl?$corebaseurl:"";
 $maindir = dirname(dirname(__FILE__));
 foreach (glob(dirname(__FILE__) . "/modules/*/config.php") as $filename) {if (file_exists($filename)) {include $filename;}}
 foreach (glob(dirname(dirname(__FILE__)) . "/assets/modules/*/config.php") as $filename) {if (file_exists($filename)) {include $filename;}}

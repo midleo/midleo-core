@@ -1,24 +1,24 @@
-<script src="/assets/js/jquery/jquery.min.js" type="text/javascript"></script>
-<?php if(isset($_SESSION["user"]) || isset($_SESSION["requser"])){?>
-<script src="/assets/js/jquery/jquery-ui.min.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/jquery/jquery.min.js" type="text/javascript"></script>
+<?php if(isset($_SESSION["user"])){?>
+<script src="/<?php echo $website['corebase'];?>assets/js/jquery/jquery-ui.min.js" type="text/javascript"></script>
 <?php } ?>
-<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/bootstrap.min.js" type="text/javascript"></script>
 <!--[if IE 9 ]>
-<script src="/assets/js/jquery/jquery.placeholder.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/jquery/jquery.placeholder.min.js"></script>
 <![endif]-->
-<script src="/assets/js/bootstrap-growl.min.js" type="text/javascript"></script>
-<script src="/assets/js/waves.min.js" type="text/javascript"></script>
-<script src="/assets/js/sticky-kit.min.js" type="text/javascript"></script>
-<script src="/assets/js/sweet-alert.min.js" type="text/javascript"></script>
-<?php if(isset($_SESSION["user"]) || isset($_SESSION["requser"])){?>
-<script src="/assets/js/moment.min.js"></script>
-<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/bootstrap-growl.min.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/waves.min.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/sticky-kit.min.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/sweet-alert.min.js" type="text/javascript"></script>
+<?php if(isset($_SESSION["user"])){?>
+<script src="/<?php echo $website['corebase'];?>assets/js/moment.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/bootstrap-datetimepicker.min.js"></script>
 <?php 
-$arrtiny=array("/appconfig/mail","reqinfo","reqtasks","reqnew","cpinfo","reqinfocl","reqnewcl","projects","pjtemplates");
-if(in_array($_SERVER['REQUEST_URI'],$arrtiny) || in_array($page,$arrtiny)){ ?><script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script><script type="text/javascript" src="/assets/js/tinymce/mentions.min.js"></script><?php } ?>
+$arrtiny=array("/appconfig/mail","cpinfo");
+if(in_array($_SERVER['REQUEST_URI'],$arrtiny) || in_array($page,$arrtiny)){ ?><script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/tinymce/tinymce.min.js"></script><script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/tinymce/mentions.min.js"></script><?php } ?>
 <?php } ?>
-<script src="/assets/js/custom.js?v=<?php echo filemtime('./assets/js/custom.js');?>" type="text/javascript"></script>
-<script src="/assets/js/autocomplete.js?v=<?php echo filemtime('./assets/js/autocomplete.js');?>" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/custom.js?v=<?php echo filemtime('./assets/js/custom.js');?>" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/autocomplete.js?v=<?php echo filemtime('./assets/js/autocomplete.js');?>" type="text/javascript"></script>
 <script type="text/javascript">
 <?php if(!empty($msg)){ if(is_array($msg)){?> $(document).ready(function(){ <?php foreach ($msg as $e) { if(!empty($e)){?>notify('<?php echo $e;?>', 'success');<?php }} ?> });<?php } else { ?> $(document).ready(function(){ nalert('<?php echo $msg;?>', 'success'); });<?php } } ?>
 <?php if(!empty($err)){ if(is_array($err)){?> $(document).ready(function(){ <?php foreach ($err as $e) { if(!empty($e)){?>notify('<?php echo $e;?>', 'danger');<?php }} ?> });<?php } else {?> $(document).ready(function(){ nalert('<?php echo $err;?>', 'error');});<?php } } ?>
