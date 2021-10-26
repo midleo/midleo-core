@@ -2,7 +2,7 @@
  array_push($brarr,array(
     "title"=>"Define new job",
     "link"=>"#modal-obj-form",
-    "midicon"=>"add",
+    "icon"=>"mdi-plus",
     "modal"=>true,
     "active"=>true,
   ));

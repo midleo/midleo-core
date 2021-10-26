@@ -158,7 +158,7 @@ class Class_env
           array(
             "title"=>"Deploy packages",
             "link"=>"/".$page."/deploy/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "midicon"=>"deploy",
+            "icon"=>"mdi-upload",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "deploy")?"active":"",
           ),
@@ -281,7 +281,8 @@ class Class_env
         <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
             <div class="col-md-9">
                 <?php include "public/modules/breadcrumb.php"; ?>
-                <div class="card">
+                <div class="row">
+                  <div class="col-lg-12">
                     <div class="tab-content">
                         <?php if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {?>
                         <div class="tab-pane <?php echo in_array($thisarray['p1'], $arrayibmmqtab) ? "active" : ""; ?>"
@@ -352,8 +353,9 @@ class Class_env
                             </ul>
                         </div>
                         <?php }?>
-                    </div>
-                </div>
+                        </div>
+                        </div>
+                </div><br>
                 <?php if (file_exists(__DIR__ . "/env/" . $thisarray['p1'] . ".php")) {include "env/" . $thisarray['p1'] . ".php";}?>
                 <?php include "public/modules/respform.php";?>
             </div>

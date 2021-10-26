@@ -39,7 +39,7 @@
           <div class="modal-body container">
             <div class="form-group">
               <div class="col-md-12">
-                <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-primary btn-block"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;upload file</button>
+                <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-primary btn-block"><i class="mdi mdi-plus mdi-18px"></i>&nbsp;upload file</button>
                 <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file" name="dfile[]" id="dfile" onChange="sub(this,'docupload')"/></div>
               </div>
             </div>
@@ -57,7 +57,7 @@
           <div class="modal-footer">
             <button class="btn btn-primary btn-sm uplwait" style="display:none;" type="button"><i class="mdi mdi-loading iconspin"></i>&nbsp;Please wait...</button>
             <button class="waves-effect waves-light btn btn-light btn-sm uplbut" type="button" style="display:none;" ng-click="uploadXMLFile('importibmmq','<?php echo $thisarray['p2'];?>')"><i class="mdi mdi-cloud-upload"></i>&nbsp;Import</button>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
           </div>
         </form>
       </div>

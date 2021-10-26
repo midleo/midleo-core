@@ -14,7 +14,7 @@
         </svg>
         <?php } ?><?php if($val["icon"]){?><i
             class="mdi <?php echo $val["icon"];?>"></i><?php } ?><?php if($val["img"]){ ?><img
-            src="<?php echo $val["img"];?>" width="22px"></a><?php } ?>&nbsp;<?php echo $val["title"];?></a>
+            src="<?php echo $val["img"];?>" width="22px"><?php } ?>&nbsp;<?php echo $val["title"];?></a>
     <?php }}} ?>
     <?php if($showr || $breadcrumb["special"]){?>
        <?php if($showr){?> 

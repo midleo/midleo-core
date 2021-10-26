@@ -115,11 +115,11 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
     if ($(".grudiv" + thisid).hasClass('grudivtg')) {
       $(".grudiv" + thisid).removeClass("grudivtg");
       $(".grudiv" + thisid).slideUp();
-      $("#svg" + thisid).html('<svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>');
+      $("#svg" + thisid).html('<i class="mdi mdi-plus mdi-18px"></i>');
     } else {
       $(".grudiv" + thisid).addClass("grudivtg");
       $(".grudiv" + thisid).slideDown("slow");
-      $("#svg" + thisid).html('<svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-sub" xlink:href="/assets/images/icon/midleoicons.svg#i-sub"/></svg>');
+      $("#svg" + thisid).html('<i class="mdi mdi-minus mdi-18px"></i>');
     }
   }
   $scope.delete = function (what, qid, qmid, projid, user, type) {

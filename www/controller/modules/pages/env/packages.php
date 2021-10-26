@@ -2,7 +2,7 @@
     array_push($brarr,array(
         "title"=>"Create new package",
         "link"=>"/env/packages/".$thisarray['p2']."/?type=new",
-        "midicon"=>"add",
+        "icon"=>"mdi-plus",
         "active"=>false,
       ));
       ?>
@@ -104,10 +104,7 @@
                     </div>
                     <div class="form-group text-end"><br>
                         <button id="btn-create-obj" type="submit" name="createpack"
-                            class="waves-effect waves-light btn btn-light btn-sm"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-add"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-add" />
-                            </svg>&nbsp;Create</button>
+                            class="waves-effect waves-light btn btn-light btn-sm"><i class="mdi mdi-plus mdi-18px"></i>&nbsp;Create</button>
 
                     </div>
                 </div>

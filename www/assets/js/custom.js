@@ -6,15 +6,10 @@ var notice = "";
 if (currentTheme) {
   $('body').attr('data-color', currentTheme);
   if (currentTheme === 'dark') {
-    //   logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
-    //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
     if (toggleSwitch) {
       toggleSwitch.checked = true;
     }
-  } else {
-    //  logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
-    //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
-  }
+  } 
 } else {
   $('body').attr('data-color', "light");
   localStorage.setItem('theme', 'light');
@@ -30,13 +25,13 @@ $(function () {
       $('.navbar-brand .light-logo').hide();
       $(".scroll-sidebar, .slimScrollDiv").css("overflow-x", "visible").parent().css("overflow", "visible");
       $(".sidebartoggler i").addClass("ti-menu");
-      $(".sidebartoggler").html('<svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg>');
+      $(".sidebartoggler").html('<i class="mdi mdi-chevron-triple-right mdi-18px"></i>');
     }
     else {
       $("body").removeClass("mini-sidebar");
       $('.navbar-brand .light-logo-icon').hide();
       $('.navbar-brand .light-logo').show();
-      $(".sidebartoggler").html('<svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-left" xlink:href="/assets/images/icon/midleoicons.svg#i-left"/></svg>');
+      $(".sidebartoggler").html('<i class="mdi mdi-chevron-triple-left mdi-18px"></i>');
       //$(".sidebartoggler i").removeClass("ti-menu");
     }
 
@@ -56,7 +51,7 @@ $(function () {
       $("body").removeClass("mini-sidebar");
       $('.navbar-brand .light-logo-icon').hide();
       $('.navbar-brand .light-logo').show();
-      $(".sidebartoggler").html('<svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-left" xlink:href="/assets/images/icon/midleoicons.svg#i-left"/></svg>');
+      $(".sidebartoggler").html('<i class="mdi mdi-chevron-triple-left mdi-18px"></i>');
 
     }
     else {
@@ -65,7 +60,7 @@ $(function () {
       $("body").addClass("mini-sidebar");
       $('.navbar-brand .light-logo-icon').show();
       $('.navbar-brand .light-logo').hide();
-      $(".sidebartoggler").html('<svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-right" xlink:href="/assets/images/icon/midleoicons.svg#i-right"/></svg>');
+      $(".sidebartoggler").html('<i class="mdi mdi-chevron-triple-right mdi-18px"></i>');
     }
   });
   $(".fix-header .topbar").stick_in_parent({});
@@ -129,17 +124,13 @@ function switchTheme(e) {
     $("body").data("color", "dark");
     $('body').attr('data-color', "dark");
     localStorage.setItem('theme', 'dark');
-    //  logoimg.attr("src", "/assets/images/midleo-logo-white.svg");
-    //  logoimgicon.attr("src", "/assets/images/midleo-icon-logo-white.svg");
-    $(".slidersw").html('<svg class="itemicon midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-day" xlink:href="/assets/images/icon/midleoicons.svg#i-day"/></svg> ');
+    $(".slidersw").html('<i class="mdi mdi-weather-sunny mdi-24px"></i>');
   }
   else {
     $("body").data("color", "light");
     $('body').attr('data-color', "light");
     localStorage.setItem('theme', 'light');
-    //   logoimg.attr("src", "/assets/images/midleo-logo-dark.svg");
-    //   logoimgicon.attr("src", "/assets/images/midleo-icon-logo-dark.svg");
-    $(".slidersw").html('<svg class="itemicon midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-night" xlink:href="/assets/images/icon/midleoicons.svg#i-night"/></svg> ');
+    $(".slidersw").html('<i class="mdi mdi-weather-night mdi-24px"></i>');
   }
 }
 if (toggleSwitch) {
@@ -537,7 +528,7 @@ function updateOutput() {
 $("#add-nmitem").click(function () {
   var totalCount = Math.floor((Math.random() * 10000000) + 1);
   let randstr = Math.random().toString(36).substring(7);
-  var html = '<li id="' + totalCount + '" class="list-group-item border-bottom ni' + totalCount + '" data-id="' + totalCount + '"  data-name="Change this" data-nameshort="n' + randstr + '" data-color="#000" ><a class="nml' + totalCount + '">Change this</a><div class="float-end"><a class="button-edit' + totalCount + ' text-info" onclick="showthisnm(\'' + totalCount + '\',\'Change this\',\'#000\')" style="cursor:pointer;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit" /></svg></a>&nbsp;<a class="text-danger" onclick="rmthisnm(\'ni' + totalCount + '\')" style="cursor:pointer;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x" /></svg></a></div></li>';
+  var html = '<li id="' + totalCount + '" class="list-group-item border-bottom ni' + totalCount + '" data-id="' + totalCount + '"  data-name="Change this" data-nameshort="n' + randstr + '" data-color="#000" ><a class="nml' + totalCount + '">Change this</a><div class="float-end"><a class="button-edit' + totalCount + ' text-info" onclick="showthisnm(\'' + totalCount + '\',\'Change this\',\'#000\')" style="cursor:pointer;"><i class="mdi mdi-pencil mdi-18px"></i></a>&nbsp;<a class="text-danger" onclick="rmthisnm(\'ni' + totalCount + '\')" style="cursor:pointer;"><i class="mdi mdi-close"></i></a></div></li>';
   if ($("#listserial .list-group-item").length) {
     $("#listserial .list-group-item:last").after(html);
   } else {
@@ -548,7 +539,7 @@ $("#add-nmitem").click(function () {
 $("#add-nmitemicon").click(function () {
   var totalCount = Math.floor((Math.random() * 10000000) + 1);
   let randstr = Math.random().toString(36).substring(7);
-  var html = '<li id="' + totalCount + '" class="list-group-item border-bottom ni' + totalCount + '" data-id="' + totalCount + '"  data-name="Change this" data-nameshort="n' + randstr + '" data-icon="application" ><a class="nml' + totalCount + '">Change this</a><div class="float-end"><a class="button-edit' + totalCount + ' text-info" onclick="showthisnmicon(\'' + totalCount + '\',\'Change this\',\'application\')" style="cursor:pointer;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit" /></svg></a>&nbsp;<a class="text-danger" onclick="rmthisnm(\'ni' + totalCount + '\')" style="cursor:pointer;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x" /></svg></a></div></li>';
+  var html = '<li id="' + totalCount + '" class="list-group-item border-bottom ni' + totalCount + '" data-id="' + totalCount + '"  data-name="Change this" data-nameshort="n' + randstr + '" data-icon="application" ><a class="nml' + totalCount + '">Change this</a><div class="float-end"><a class="button-edit' + totalCount + ' text-info" onclick="showthisnmicon(\'' + totalCount + '\',\'Change this\',\'application\')" style="cursor:pointer;"><i class="mdi mdi-pencil mdi-18px"></i></a>&nbsp;<a class="text-danger" onclick="rmthisnm(\'ni' + totalCount + '\')" style="cursor:pointer;"><i class="mdi mdi-close"></i></a></div></li>';
   if ($("#listserial .list-group-item").length) {
     $("#listserial .list-group-item:last").after(html);
   } else {

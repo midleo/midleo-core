@@ -3,7 +3,7 @@
         "title"=>"Export in excel",
         "link"=>"#",
         "nglink"=>"exportData('".$thisarray['p1']."')",
-        "midicon"=>"up",
+        "icon"=>"mdi-file-excel",
         "active"=>false,
       ));
       array_push($brarr,array(
@@ -11,7 +11,7 @@
         "link"=>"#modal-tibacl-form",
         "nglink"=>"showCreateFormtibacl()",
         "modal"=>true,
-        "midicon"=>"add",
+        "icon"=>"mdi-plus",
         "active"=>false,
       ));
       ?>
@@ -41,8 +41,8 @@
  <td class="text-center"><span ng-repeat="thisperm in tperm" class="badge badge-info" style="margin-right:3px;">{{thisperm}}</span></td>
  <td class="text-center">
  <div class="text-start d-grid gap-2 d-md-block">
-  <button type="button" ng-click="readOnetibacl('<?php echo $thisarray['p2'];?>',d.id)" style="" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
-  <?php if($_SESSION['user_level']>="3"){?><button type="button" ng-click="delltibacl('<?php echo $thisarray['p2'];?>',d.id,d.objname,'<?php echo $_SESSION['user'];?>')" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button><?php } ?>
+  <button type="button" ng-click="readOnetibacl('<?php echo $thisarray['p2'];?>',d.id)" style="" class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-pencil mdi-18px"></i></button>
+  <?php if($_SESSION['user_level']>="3"){?><button type="button" ng-click="delltibacl('<?php echo $thisarray['p2'];?>',d.id,d.objname,'<?php echo $_SESSION['user'];?>')" class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button><?php } ?>
  </div>
  </td>
  </tr>
@@ -105,12 +105,12 @@
  <div class="col-md-9">
 
 
- <input id="checkboxpublish" ng-checked="tibacl.perm.publish" class="chkbang" type="checkbox" value="publish" style="display:none" /><button ng-click="toggle('publish', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.publish ? 'btn-primary' : 'btn-light'" type="button" id="checkboxpublish_proxy" style="margin-bottom:5px;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Publish</button>&nbsp;
- <input id="checkboxsubscribe" ng-checked="tibacl.perm.subscribe" class="chkbang" type="checkbox" value="subscribe" style="display:none" /><button ng-click="toggle('subscribe', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.subscribe ? 'btn-primary' : 'btn-light'" type="button" id="checkboxsubscribe_proxy" style="margin-bottom:5px;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Subscribe</button>&nbsp;
- <input id="checkboxdurable" ng-checked="tibacl.perm.durable" class="chkbang" type="checkbox" value="durable" style="display:none" /><button ng-click="toggle('durable', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.durable ? 'btn-primary' : 'btn-light'" type="button" id="checkboxdurable_proxy" style="margin-bottom:5px;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Durable</button>&nbsp;
- <input id="checkboxsend" ng-checked="tibacl.perm.send" class="chkbang" type="checkbox" value="send" style="display:none" /><button ng-click="toggle('send', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.send ? 'btn-primary' : 'btn-light'" type="button" id="checkboxsend_proxy" style="margin-bottom:5px;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Send</button>&nbsp;
- <input id="checkboxreceive" ng-checked="tibacl.perm.receive" class="chkbang" type="checkbox" value="receive" style="display:none" /><button ng-click="toggle('receive', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.receive ? 'btn-primary' : 'btn-light'" type="button" id="checkboxreceive_proxy" style="margin-bottom:5px;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Receive</button>&nbsp;
- <input id="checkboxbrowse" ng-checked="tibacl.perm.browse" class="chkbang" type="checkbox" value="browse" style="display:none" /><button ng-click="toggle('browse', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.browse ? 'btn-primary' : 'btn-light'" type="button" id="checkboxbrowse_proxy" style="margin-bottom:5px;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Browse</button>&nbsp;
+ <input id="checkboxpublish" ng-checked="tibacl.perm.publish" class="chkbang" type="checkbox" value="publish" style="display:none" /><button ng-click="toggle('publish', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.publish ? 'btn-primary' : 'btn-light'" type="button" id="checkboxpublish_proxy" style="margin-bottom:5px;"><i class="mdi mdi-check"></i>&nbsp;Publish</button>&nbsp;
+ <input id="checkboxsubscribe" ng-checked="tibacl.perm.subscribe" class="chkbang" type="checkbox" value="subscribe" style="display:none" /><button ng-click="toggle('subscribe', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.subscribe ? 'btn-primary' : 'btn-light'" type="button" id="checkboxsubscribe_proxy" style="margin-bottom:5px;"><i class="mdi mdi-check"></i>&nbsp;Subscribe</button>&nbsp;
+ <input id="checkboxdurable" ng-checked="tibacl.perm.durable" class="chkbang" type="checkbox" value="durable" style="display:none" /><button ng-click="toggle('durable', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.durable ? 'btn-primary' : 'btn-light'" type="button" id="checkboxdurable_proxy" style="margin-bottom:5px;"><i class="mdi mdi-check"></i>&nbsp;Durable</button>&nbsp;
+ <input id="checkboxsend" ng-checked="tibacl.perm.send" class="chkbang" type="checkbox" value="send" style="display:none" /><button ng-click="toggle('send', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.send ? 'btn-primary' : 'btn-light'" type="button" id="checkboxsend_proxy" style="margin-bottom:5px;"><i class="mdi mdi-check"></i>&nbsp;Send</button>&nbsp;
+ <input id="checkboxreceive" ng-checked="tibacl.perm.receive" class="chkbang" type="checkbox" value="receive" style="display:none" /><button ng-click="toggle('receive', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.receive ? 'btn-primary' : 'btn-light'" type="button" id="checkboxreceive_proxy" style="margin-bottom:5px;"><i class="mdi mdi-check"></i>&nbsp;Receive</button>&nbsp;
+ <input id="checkboxbrowse" ng-checked="tibacl.perm.browse" class="chkbang" type="checkbox" value="browse" style="display:none" /><button ng-click="toggle('browse', selectedtibaclm)" class="waves-effect chkbb  btn  btn-sm  btn-light" ng-class=" tibacl.perm.browse ? 'btn-primary' : 'btn-light'" type="button" id="checkboxbrowse_proxy" style="margin-bottom:5px;"><i class="mdi mdi-check"></i>&nbsp;Browse</button>&nbsp;
  
  
  
@@ -129,11 +129,11 @@
   </div>
   </div>
   <div class="modal-footer">
-  <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+  <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
  <button type="button" id="btn-conf-tibacl" class="waves-effect waves-light btn btn-info btn-sm" ng-click="tibaclconf('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')" ng-href="{{ url }}"><i class="mdi mdi-download"></i>&nbsp;Create config</button>
   <?php if($_SESSION['user_level']>="3"){?>
-  <button type="button" id="btn-create-tibacl" class="waves-effect waves-light btn btn-info btn-sm" ng-click="createtibacl('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Create</button>
-  <button type="button" id="btn-update-tibacl" class="waves-effect waves-light btn btn-info btn-sm" ng-click="updatetibacl('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Save Changes</button>
+  <button type="button" id="btn-create-tibacl" class="waves-effect waves-light btn btn-info btn-sm" ng-click="createtibacl('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-check"></i>&nbsp;Create</button>
+  <button type="button" id="btn-update-tibacl" class="waves-effect waves-light btn btn-info btn-sm" ng-click="updatetibacl('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
   <?php } ?>
    </div>
  </form>

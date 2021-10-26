@@ -5,7 +5,7 @@ array_push($brarr,array(
     "link"=>"#modal-user-form",
     "modal"=>true,
     "nglink"=>"showCreateUser()",
-    "midicon"=>"add",
+    "icon"=>"mdi-plus",
     "active"=>true,
   ));
 }

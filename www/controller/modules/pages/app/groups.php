@@ -4,7 +4,7 @@ array_push($brarr,array(
     "link"=>"#modal-user-form",
     "modal"=>true,
     "nglink"=>"showCreateGroup()",
-    "midicon"=>"add",
+    "icon"=>"mdi-plus",
     "active"=>true,
   ));
   ?>
@@ -29,10 +29,7 @@ array_push($brarr,array(
                         style="background-color:{{d.uacolor}}">{{d.shortname}}</span>
                 </td>
                 <td class="text-start"><a ng-click="showgrinfo(d.id)" style="cursor:pointer;" id="grtext{{d.id}}"><span
-                            id="svg{{d.id}}"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-add"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-add" />
-                            </svg></span>&nbsp;{{ d.group_name | limitTo:textlimit }}{{d.group_name.length > textlimit ? '...' : ''}}</a>
+                            id="svg{{d.id}}"><i class="mdi mdi-plus mdi-18px"></i></span>&nbsp;{{ d.group_name | limitTo:textlimit }}{{d.group_name.length > textlimit ? '...' : ''}}</a>
                     <div class="grudiv{{d.id}} grudivnt">
                         <ul style="margin: 0 auto;padding: 5px;" class="list-group list-group-flush">
                             <li style="width:300px;padding:5px;" ng-repeat="(ukey, user) in d.users"

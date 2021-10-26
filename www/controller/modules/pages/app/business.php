@@ -3,7 +3,7 @@ array_push($brarr,array(
     "title"=>"Add new step",
     "link"=>"javascript:void(0)",
     "id"=>"add-nmitem",
-    "midicon"=>"add",
+    "icon"=>"mdi-plus",
     "active"=>true,
   ));
   array_push($brarr,array(

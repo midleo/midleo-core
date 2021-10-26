@@ -1014,11 +1014,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after,input[type=checkbox]:n
 .theme-switch-wrapper em{margin-left:10px;color:#fff}
 .theme-switch{display:inline-block;height:34px;position:relative;width:34px;margin-bottom:0}
 .theme-switch input{display:none}
-.slidersw{cursor:pointer;transition:.4s;margin-top: 6px;}
-/*.slidersw:before{top:0px;left:0px;content:"\F0594";height:34px;position:absolute;color:#414651;transition:.4s;width:34px;font-family: "Material Design Icons";line-height: 34px;font-size: 24px;text-align: center;}
-input:checked + .slidersw:before{color:#fff;}
-.slidersw.roundsw{border-radius:34px}
-.slidersw.roundsw:before{border-radius:50%}*/
+.slidersw{cursor:pointer;transition:.4s;margin-top: 5px;}
 .hs-stype{border-radius:2px 0px 0px 2px;background:#f9f9f9;left:0;font-size:14px;color:#'.$thiscolor.';top:0;position:absolute;cursor:pointer;width:150px;height:100%;text-align:center;text-align-last:right; padding-right: 20px;  direction: rtl;-webkit-appearance: none;-moz-appearance: none;text-indent: 1px;text-overflow: "";border: 0px solid transparent;}
 .hs-input{border:0;margin-left: 150px;}
 .wa-stats{float:left;}
@@ -1786,6 +1782,7 @@ display:none;}
 .brbl-3{border-bottom-left-radius:3px;}
 .tox-tinymce{border:0px solid transparent!important;border-top:1px solid #ccc!important;}
 .list-group-item-light{font-size:.9rem;}
+.nav-link{padding:0px;padding-top:5px;}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);

@@ -58,7 +58,7 @@
                     
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
                     <button ng-show="depl.reqname" type="button" class="waves-effect waves-light btn btn-light btn-sm"
                         ng-click="createjob('<?php echo $thisarray['p2'];?>','qm','mqenv_mq_<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p1'];?>','<?php echo $page;?>')"><i
                             class="mdi mdi-play-circle-outline"></i>&nbsp;Create job</button>

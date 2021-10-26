@@ -2,7 +2,7 @@
       array_push($brarr,array(
         "title"=>"Create new place",
         "link"=>"/env/places/".$thisarray['p2']."/?type=new",
-        "midicon"=>"add",
+        "icon"=>"mdi-plus",
         "active"=>false,
       ));
     
@@ -63,7 +63,7 @@ foreach($countries as $keyin=>$valin) { ?><option value="<?php echo $keyin;?>"><
 <div class="form-group row">
 <div class="col-md-3"></div>
 <div class="col-md-9">
-<button type="submit" name="saveplace" class="btn btn-info"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Save</button>
+<button type="submit" name="saveplace" class="btn btn-info"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
 </div>
 </div>
 </form>
@@ -138,7 +138,7 @@ foreach($countries as $keyin=>$valin) { ?><option value="<?php echo $keyin;?>" <
 <div class="form-group row">
 <div class="col-md-3"></div>
 <div class="col-md-9">
-<button type="submit" name="updplace" class="btn btn-info"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Save</button>
+<button type="submit" name="updplace" class="btn btn-info"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
 </div>
 </div>
 </form>
@@ -207,10 +207,10 @@ if($zobj = $q->fetchAll()){ ?>
                         <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
                         <div class="text-start d-grid gap-2 d-md-block">
                         <a  href="/env/places/<?php echo $thisarray['p2'];?>/?type=edit&uid={{d.id}}"
-                                        class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></a>
+                                        class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-pencil mdi-18px"></i></a>
                         <?php if($_SESSION['user_level']>=3){?><button type="button"
                                         ng-click="delplace(d.id,'<?php echo $_SESSION['user'];?>',d.name,'<?php echo $thisarray['p2'];?>')"
-                                        class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button><?php } ?>
+                                        class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-close"></i></button><?php } ?>
                                </div>
                         <?php } ?>
                     </td>

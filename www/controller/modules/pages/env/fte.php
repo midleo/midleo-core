@@ -4,7 +4,7 @@
       "link"=>"#modal-fte-form",
       "nglink"=>"showCreateFormfte()",
       "modal"=>true,
-      "midicon"=>"add",
+      "icon"=>"mdi-plus",
       "active"=>false,
     ));
     array_push($brarr,array(
@@ -12,7 +12,7 @@
       "link"=>"#modal-depl-form",
       "nglink"=>"showDeployForm()",
       "modal"=>true,
-      "midicon"=>"deploy",
+      "icon"=>"mdi-upload",
       "ngshow"=>"selectedid.length",
       "active"=>false,
     ));
@@ -52,8 +52,8 @@
  <td class="text-center">{{ d.destdir | limitTo:textlimit }}{{d.destdir.length > textlimit ? '...' : ''}}</td>
  <td class="text-center">
  <div class="text-start d-grid gap-2 d-md-block">
-  <button type="button" ng-click="readOnefte('<?php echo $thisarray['p2'];?>',d.fteid,'env')" style="" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
-  <?php if($_SESSION['user_level']>="3"){?><button type="button" ng-click="deletefte('<?php echo $thisarray['p2'];?>',d.fteid,'<?php echo $_SESSION['user'];?>','env')" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button><?php } ?>
+  <button type="button" ng-click="readOnefte('<?php echo $thisarray['p2'];?>',d.fteid,'env')" style="" class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-pencil mdi-18px"></i></button>
+  <?php if($_SESSION['user_level']>="3"){?><button type="button" ng-click="deletefte('<?php echo $thisarray['p2'];?>',d.fteid,'<?php echo $_SESSION['user'];?>','env')" class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button><?php } ?>
  </div>
  </td>
  </tr>
@@ -255,11 +255,11 @@
   </div>
   </div>
   <div class="modal-footer">
-  <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+  <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
     <button type="button" id="btn-conf-fte" class="waves-effect waves-light btn btn-info btn-sm" ng-click="fteconf('<?php echo $thisarray['p2'];?>','env')" ng-href="{{ url }}"><i class="mdi mdi-download"></i>&nbsp;Create config</button>
   <?php if($_SESSION['user_level']>="3"){?>
-  <button type="button" id="btn-create-fte" class="waves-effect waves-light btn btn-info btn-sm" ng-click="createfte('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','env')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Create</button>
-  <button type="button" id="btn-update-fte" class="waves-effect waves-light btn btn-info btn-sm" ng-click="updatefte('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','env')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Save Changes</button>
+  <button type="button" id="btn-create-fte" class="waves-effect waves-light btn btn-info btn-sm" ng-click="createfte('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','env')"><i class="mdi mdi-check"></i>&nbsp;Create</button>
+  <button type="button" id="btn-update-fte" class="waves-effect waves-light btn btn-info btn-sm" ng-click="updatefte('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','env')"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
   <?php } ?>
   </div>
  </form>
@@ -305,7 +305,7 @@
   <div class="modal-footer">
   <button ng-show="depl.deplenv" type="button" class="waves-effect waves-light btn btn-light btn-sm" ng-click="createjob('<?php echo $thisarray['p2'];?>','fte','mqenv_mqfte','','')"><i class="mdi mdi-play-circle-outline"></i>&nbsp;Create job</button>
   <button ng-show="depl.deplenv" type="button" ng-click="form.$valid && deployMQftesel('<?php echo $thisarray['p2'];?>');" class="waves-effect waves-light btn btn-primary btn-sm"><svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy"/></svg>&nbsp;Deploy</button>
-  <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+  <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
   </div>
  </form>
  </div>
@@ -321,7 +321,7 @@
         </pre>
       </div>
           <div class="modal-footer" style="border-top:0px solid transparent;">
-            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
           </div>
       </div>
     </div>

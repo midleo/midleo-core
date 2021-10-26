@@ -3,7 +3,7 @@
     "title"=>"Export in excel",
     "link"=>"#",
     "nglink"=>"exportData('".$thisarray['p1']."')",
-    "midicon"=>"up",
+    "icon"=>"mdi-file-excel",
     "active"=>false,
   ));
   array_push($brarr,array(
@@ -11,7 +11,7 @@
     "link"=>"#modal-obj-form",
     "nglink"=>"showCreateForm()",
     "modal"=>true,
-    "midicon"=>"add",
+    "icon"=>"mdi-plus",
     "active"=>false,
   ));
   array_push($brarr,array(
@@ -19,7 +19,7 @@
     "link"=>"#modal-depl-form",
     "nglink"=>"showDeployForm()",
     "modal"=>true,
-    "midicon"=>"deploy",
+    "icon"=>"mdi-upload",
     "ngshow"=>"selectedid.length",
     "active"=>false,
   ));
@@ -60,10 +60,10 @@
         <td class="text-center">{{ d.maxdepth }}</td>
         <td class="text-center">
         <div class="text-start d-grid gap-2 d-md-block">
-          <button type="button" ng-click="readOne('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,d.proj,'<?php echo $page;?>')" style="" class="btn btn-light btn-sm bg waves-effect" title="Read"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
+          <button type="button" ng-click="readOne('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,d.proj,'<?php echo $page;?>')" style="" class="btn btn-light btn-sm bg waves-effect" title="Read"><i class="mdi mdi-pencil mdi-18px"></i></button>
           <?php if($_SESSION['user_level']>="3"){?>
-            <button type="button" ng-click="duplicate('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')" class="btn btn-light btn-sm bg waves-effect" title="Duplicate"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-documents" xlink:href="/assets/images/icon/midleoicons.svg#i-documents"/></svg></button>
-            <button type="button" ng-click="delete('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,d.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>')" class="btn btn-light btn-sm bg waves-effect" title="Delete"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button>
+            <button type="button" ng-click="duplicate('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')" class="btn btn-light btn-sm bg waves-effect" title="Duplicate"><i class="mdi mdi-content-duplicate mdi-18px"></i></button>
+            <button type="button" ng-click="delete('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,d.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>')" class="btn btn-light btn-sm bg waves-effect" title="Delete"><i class="mdi mdi-close"></i></button>
           <?php } ?>
           </div>
         </td>
@@ -312,12 +312,12 @@
           <div class="float-start"><a href="https://www.google.com/search?q=ibm+mq+define+queues" target="_blank" class="waves-effect waves-light btn btn-light btn-sm">Information about Queues</a></div>
           <div class="float-end">
             
-            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
             <button type="button"  id="btn-mqsc-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="mqsc('<?php echo $thisarray['p1'];?>',mq.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>')" ng-href="{{ url }}"><i class="mdi mdi-download"></i>&nbsp;Create mqsc</button>
             <?php if($zobj['lockedby']==$_SESSION['user']){?>
             <?php if($_SESSION['user_level']>="3"){?>
-            <button type="button" id="btn-create-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="form.$valid && create('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Create</button>
-            <button type="button"  id="btn-update-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="update('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Save Changes</button>
+            <button type="button" id="btn-create-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="form.$valid && create('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i class="mdi mdi-check"></i>&nbsp;Create</button>
+            <button type="button"  id="btn-update-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="update('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
             <?php } ?>
             <?php } ?>
             </div>

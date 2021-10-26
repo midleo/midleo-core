@@ -82,9 +82,9 @@ class Class_flows{
                     <td class="text-center">{{ d.changed }}</td>
                     <td class="text-center">
                       <?php if(sessionClass::checkAcc($acclist, "ibmadm")){ ?> 
-                      <button type="button" ng-click="deleteflow('<?php echo $thisarray['p2']=="env"?"":$zobj['projid'];?>','<?php echo $_SESSION['user'];?>','<?php echo $thisarray['1'];?>',d.file,'<?php echo $thisarray['2']=="env"?"env":"requests";?>','<?php echo $zobj['flowname'];?>')" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button>
+                      <button type="button" ng-click="deleteflow('<?php echo $thisarray['p2']=="env"?"":$zobj['projid'];?>','<?php echo $_SESSION['user'];?>','<?php echo $thisarray['1'];?>',d.file,'<?php echo $thisarray['2']=="env"?"env":"requests";?>','<?php echo $zobj['flowname'];?>')" class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button>
                       <?php } else {?>
-                        <button type="button" class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x" /></svg></button>
+                        <button type="button" class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button>
                       <?php } ?>
                     </td>
                   </tr>
@@ -105,7 +105,7 @@ class Class_flows{
             <div class="modal-body form-horizontal">
               <div class="form-group">
                 <div class="col-md-12">
-                  <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;add file/files</button>
+                  <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-light btn-sm"><i class="mdi mdi-plus mdi-18px"></i>&nbsp;add file/files</button>
                   <div style='height: 0px;width: 0px; overflow:hidden;'><input required="required" type="file" name="dfile[]" id="dfile" onChange="sub(this,'docupload')" multiple=""/></div>
                 </div>
               </div>
@@ -116,7 +116,7 @@ class Class_flows{
               </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
           <button type="submit" name="addfile" class="waves-effect waves-light btn btn-info btn-sm"><i class="mdi mdi-upload"></i>&nbsp;Upload</button>
            </div>
           </form>

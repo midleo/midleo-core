@@ -3,7 +3,7 @@ array_push($brarr,array(
   "title"=>"Install new module",
   "link"=>"#modal-module",
   "modal"=>true,
-  "midicon"=>"add",
+  "icon"=>"mdi-plus",
   "active"=>true,
 ));
  if(isset($_POST['instmodule'])){
@@ -72,8 +72,8 @@ array_push($brarr,array(
             </div>
           </div>
           <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
-		  <button class="btn btn-info btn-sm" type="submit" name="instmodule"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Install</button>&nbsp;
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
+		  <button class="btn btn-info btn-sm" type="submit" name="instmodule"><i class="mdi mdi-content-save-outline"></i>&nbsp;Install</button>&nbsp;
           </div>
       </div>
     </div>

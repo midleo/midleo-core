@@ -4,7 +4,7 @@ array_push($brarr,array(
     "title"=>"Add new Ldap server",
     "link"=>"#modaladdldap",
     "modal"=>true,
-    "midicon"=>"add",
+    "icon"=>"mdi-plus",
     "active"=>true,
   ));
   ?>

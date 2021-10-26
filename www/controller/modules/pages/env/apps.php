@@ -276,13 +276,13 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
         "title"=>"Export in excel",
         "link"=>"#",
         "nglink"=>"exportData('".$thisarray['p1']."')",
-        "midicon"=>"up",
+        "icon"=>"mdi-file-excel",
         "active"=>false,
       ));
       array_push($brarr,array(
         "title"=>"Create new application",
         "link"=>"/env/apps/?type=new",
-        "midicon"=>"add",
+        "icon"=>"mdi-plus",
         "active"=>false,
       ));
     

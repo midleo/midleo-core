@@ -68,7 +68,7 @@ class Class_monitoring{
     array_push($brarr,array(
       "title"=>"Define new monitoring",
       "link"=>"/".$page."//new",
-      "midicon"=>"add",
+      "icon"=>"mdi-plus",
       "active"=>($thisarray["p2"]=="new")?"active":"",
     ));
   }

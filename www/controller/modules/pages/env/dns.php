@@ -3,7 +3,7 @@
         "title"=>"Export in excel",
         "link"=>"#",
         "nglink"=>"exportData('".$thisarray['p1']."')",
-        "midicon"=>"up",
+        "icon"=>"mdi-file-excel",
         "active"=>false,
       ));
       array_push($brarr,array(
@@ -11,7 +11,7 @@
         "link"=>"#modal-obj-form",
         "nglink"=>"showCreateFormDns()",
         "modal"=>true,
-        "midicon"=>"add",
+        "icon"=>"mdi-plus",
         "active"=>false,
       ));
     ?>
@@ -49,10 +49,10 @@
                             <td class="text-center">
                                 <div class="text-start d-grid gap-2 d-md-block">
                                     <button type="button" ng-click="readOnedns(d.id)"
-                                        class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
+                                        class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-pencil mdi-18px"></i></button>
                                     <?php if($_SESSION['user_level']>=3){?><button type="button"
                                         ng-click="deletedns(d.id,'<?php echo $_SESSION['user'];?>',d.dnsname,'<?php echo $thisarray['p2'];?>')"
-                                        class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button><?php } ?>
+                                        class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-close"></i></button><?php } ?>
                                 </div>
                             </td>
                         </tr>
@@ -158,15 +158,15 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
                                
                                     <?php if($_SESSION['user_level']>=3){?>
                                     <button type="button" id="btn-create-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="form.$valid && createdns('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Create</button>
+                                        ng-click="form.$valid && createdns('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-check"></i>&nbsp;Create</button>
                                     <button type="button" id="btn-update-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="updatedns('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Save Changes</button>
+                                        ng-click="updatedns('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
                                     <?php } ?>
                                 </div>
                             </form>

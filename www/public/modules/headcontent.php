@@ -17,12 +17,10 @@
             <ol class="breadcrumb hide-xs">
       <li class="breadcrumb-item"><a href="/?" target="_parent">Home</a></li>
       <?php if(!empty($breadcrumb["text2"])){?>
-        <li class="breadcrumb-item"><a href="<?php echo $breadcrumb["link"];?>" target="_parent"><?php if($breadcrumb["midicon"]){?><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-<?php echo $breadcrumb["midicon"];?>" xlink:href="/assets/images/icon/midleoicons.svg#i-<?php echo $breadcrumb["midicon"];?>"/></svg> 
-&nbsp;<?php } ?><?php echo $breadcrumb["text"];?></a></li>
+        <li class="breadcrumb-item"><a href="<?php echo $breadcrumb["link"];?>" target="_parent"><?php echo $breadcrumb["text"];?></a></li>
         <li class="breadcrumb-item active"><?php echo $breadcrumb["text2"];?></li>
         <?php } else { ?>
-          <li class="breadcrumb-item active"><?php if($breadcrumb["midicon"]){?><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-<?php echo $breadcrumb["midicon"];?>" xlink:href="/assets/images/icon/midleoicons.svg#i-<?php echo $breadcrumb["midicon"];?>"/></svg> 
-&nbsp;<?php } ?><?php echo $breadcrumb["text"];?></li>
+          <li class="breadcrumb-item active"><?php echo $breadcrumb["text"];?></li>
         <?php } ?>
      </ol>
             
@@ -30,7 +28,7 @@
             <ul class="navbar-nav mb-lg-0 nlinks">
             <li class="nav-item d-none d-md-block search-box"> <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search"
                         class="nav-link d-none d-md-block text-muted waves-effect waves-dark"
-                        href="javascript:void(0)"><span class="itemicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg></span></a>
+                        href="javascript:void(0)"><span class="itemicon"><i class="mdi mdi-magnify mdi-24px"></i></span></a>
                     <?php if(!empty($_SESSION["user"])){?>
                     <form class="app-search p-relative" method="post" action="/searchall">
                         <input type="text" name="fd" class="hs-input hasselect"
@@ -74,14 +72,14 @@
                 <?php } else { ?>
                     <li class="nav-item">
                     <a data-bs-toggle="tooltip" title="Login Console" class="nav-link text-muted waves-effect waves-dark"
-                        href="/mlogin/?"><span class="itemicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-logout" xlink:href="/assets/images/icon/midleoicons.svg#i-logout"/></svg></a>
+                        href="/mlogin/?"><span class="itemicon"><i class="mdi mdi-login mdi-24px"></i></a>
                 </li>
                 <?php } ?>&nbsp;
                 <div class="theme-switch-wrapper">
                     <label class="theme-switch" for="checkbox">
                         <input type="checkbox" id="checkbox" />
-                        <div class="slidersw" style="margin-top: 7px;">
-                        <svg class="itemicon midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-night" xlink:href="/assets/images/icon/midleoicons.svg#i-night"/></svg> 
+                        <div class="slidersw itemicon" style="">
+                        <i class="mdi mdi-weather-night mdi-24px"></i>
                         </div>
                     </label>
                 </div>

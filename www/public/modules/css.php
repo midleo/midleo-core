@@ -8,7 +8,7 @@
 <meta property="description" content='midleo.CORE - Knowledge Base, automation and tracking of your Middleware Environment'/>
 <meta name="keywords" content="Middleware, Source Control, Request system">
 <meta name="application-name" content="MidlEO">
-<link rel="shortcut icon" href="/favicon.ico">
+<link rel="shortcut icon" href="/<?php echo $website['corebase'];?>favicon.ico">
 <title><?php if($blogtitle){ echo $blogtitle." :: MIDLEO"; } elseif($website["env_name"]){ echo $website["env_name"]." :: MIDLEO"; } else { ?>midleo.CORE - Knowledge Base, automation and tracking of your Middleware Environment<?php } ?></title>
 <link href="/<?php echo $website['corebase'];?>assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
 <link href="/<?php echo $website['corebase'];?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />

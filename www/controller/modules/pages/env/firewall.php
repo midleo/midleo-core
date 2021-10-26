@@ -4,7 +4,7 @@
     "title"=>"Export in excel",
     "link"=>"#",
     "nglink"=>"exportData('".$thisarray['p1']."')",
-    "midicon"=>"up",
+    "icon"=>"mdi-file-excel",
     "active"=>false,
   ));
   array_push($brarr,array(
@@ -19,7 +19,7 @@
     "link"=>"#modal-obj-form",
     "nglink"=>"showCreateFormFw()",
     "modal"=>true,
-    "midicon"=>"add",
+    "icon"=>"mdi-plus",
     "active"=>false,
   ));
   }
@@ -51,8 +51,8 @@
         <td class="text-center">{{ d.destdns }}</td>
         <td class="text-center">
         <div class="text-start d-grid gap-2 d-md-block">
-          <button type="button" ng-click="readOnefw(d.id)" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
-          <?php if($_SESSION['user_level']>=3){?><button type="button" ng-click="deletefw(d.id,'<?php echo $_SESSION['user'];?>',d.srcdns,'<?php echo $thisarray['p2'];?>')" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button><?php } ?>
+          <button type="button" ng-click="readOnefw(d.id)" class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-pencil mdi-18px"></i></button>
+          <?php if($_SESSION['user_level']>=3){?><button type="button" ng-click="deletefw(d.id,'<?php echo $_SESSION['user'];?>',d.srcdns,'<?php echo $thisarray['p2'];?>')" class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-close"></i></button><?php } ?>
          </div>
       </td>
       </tr>
@@ -99,10 +99,10 @@
             </div>
           </div>
           <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
        <?php if($_SESSION['user_level']>=3){?>
-            <button type="button" id="btn-create-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="form.$valid && createfw('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Create</button>
-            <button type="button" id="btn-update-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="updatefw('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Save Changes</button>
+            <button type="button" id="btn-create-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="form.$valid && createfw('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-check"></i>&nbsp;Create</button>
+            <button type="button" id="btn-update-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="updatefw('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
             <?php } ?>
                </div>
         </form>
@@ -121,7 +121,7 @@
           <div class="modal-body container">
             <div class="form-group">
               <div class="col-md-12">
-                <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-primary btn-block"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add"/></svg>&nbsp;upload file</button>
+                <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-primary btn-block"><i class="mdi mdi-plus mdi-18px"></i>&nbsp;upload file</button>
                 <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file" name="dfile[]" id="dfile" onChange="sub(this,'docupload')"/></div>
               </div>
             </div>
@@ -139,7 +139,7 @@
           <div class="modal-footer">
             <button class="btn btn-primary btn-sm uplwait" style="display:none;" type="button"><i class="mdi mdi-loading iconspin"></i>&nbsp;Please wait...</button>
             <button class="waves-effect waves-light btn btn-light btn-sm uplbut" type="button" style="display:none;" ng-click="uploadXMLFile('importfw','<?php echo $thisarray['p2'];?>')"><i class="mdi mdi-cloud-upload"></i>&nbsp;Import</button>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
           </div>
         </form>
       </div>

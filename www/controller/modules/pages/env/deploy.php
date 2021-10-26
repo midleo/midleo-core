@@ -15,7 +15,7 @@ if (sessionClass::checkAcc($acclist, "appadm,appview")) {
         "link"=>"#modal-depl-form",
         "nglink"=>"resetDeplForm()",
         "modal"=>true,
-        "midicon"=>"deploy",
+        "icon"=>"mdi-upload",
         "active"=>false,
       ));
     
@@ -99,7 +99,7 @@ if (sessionClass::checkAcc($acclist, "appadm,appview")) {
                 <div class="modal-content">
                     <form action="" method="post" name="form">
                     <div class="modal-header"><h4 class="modal-title">Select a package</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><i class="mdi mdi-close"></i></button>
                      </div>
                         <div class="modal-body container form-modal">
                             <div class="form-group">
@@ -137,7 +137,7 @@ if (sessionClass::checkAcc($acclist, "appadm,appview")) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-light btn-sm deplbutns" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Cancel</button>
+                        <button type="button" class="btn btn-light btn-sm deplbutns" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Cancel</button>
                             <button type="button" name="dodeployall" ng-show="depl.env"
                                 ng-click="form.$valid && deployPKG('<?php echo $thisarray['p2'];?>');"
                                 class="waves-effect waves-light btn btn-info btn-sm deplbutns"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy"/></svg>&nbsp;Deploy</button>

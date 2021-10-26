@@ -29,7 +29,7 @@ if(!empty($ugroups)){
         <td class="text-center">{{ d.servupdated }}</td>
         <td class="text-center">
         <div class="text-start d-grid gap-2 d-md-block">
-          <button type="button" ng-click="readoneSrv(d.id)" class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit"/></svg></button>
+          <button type="button" ng-click="readoneSrv(d.id)" class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-pencil mdi-18px"></i></button>
          </div>
          </td>
       </tr>
@@ -76,9 +76,9 @@ if(!empty($ugroups)){
             </div>
           </div>
           <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
      <?php if($_SESSION['user_level']>=3){?>
-            <button type="button" id="btn-update-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="updateserv('<?php echo $_SESSION['user'];?>','<?php echo $ugr;?>','<?php echo $thisarray['p2'];?>')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-save" xlink:href="/assets/images/icon/midleoicons.svg#i-save"/></svg>&nbsp;Save Changes</button>
+            <button type="button" id="btn-update-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="updateserv('<?php echo $_SESSION['user'];?>','<?php echo $ugr;?>','<?php echo $thisarray['p2'];?>')"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
             <?php } ?>
                   </div>
         </form>

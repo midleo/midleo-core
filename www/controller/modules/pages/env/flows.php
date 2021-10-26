@@ -4,7 +4,7 @@
     "link"=>"#modal-flow-form",
     "nglink"=>"showCreateFormflow()",
     "modal"=>true,
-    "midicon"=>"add",
+    "icon"=>"mdi-plus",
     "active"=>false,
   ));
   ?>
@@ -33,8 +33,8 @@
                              <a ng-click="gitCommit(d.flowid,'env')" class="dropdown-item waves-effect"><i class="mdi mdi-git"></i>&nbsp;GIT commit</a>
                              <a href="/requests/flow/env/{{ d.flowid }}/log" target="_parent" class="dropdown-item waves-effect"><i class="mdi mdi-history"></i>&nbsp;Log history</a>
                              <?php if(sessionClass::checkAcc($acclist, "ibmadm")){?>
-                              <a ng-show="d.insvn=='1'" ng-click="deleteflowsgit('',d.flowid,'<?php echo $_SESSION['user'];?>','env')" class="dropdown-item waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Delete</a>
-                              <a ng-show="d.insvn=='0'" ng-click="deleteflows('',d.flowid,'<?php echo $_SESSION['user'];?>','env')" class="dropdown-item waves-effect"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Delete</a>
+                              <a ng-show="d.insvn=='1'" ng-click="deleteflowsgit('',d.flowid,'<?php echo $_SESSION['user'];?>','env')" class="dropdown-item waves-effect"><i class="mdi mdi-close"></i>&nbsp;Delete</a>
+                              <a ng-show="d.insvn=='0'" ng-click="deleteflows('',d.flowid,'<?php echo $_SESSION['user'];?>','env')" class="dropdown-item waves-effect"><i class="mdi mdi-close"></i>&nbsp;Delete</a>
                              <?php } ?>
                             </div>
                    </div>
@@ -64,8 +64,8 @@
             </div>
           </div>
           <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-x" xlink:href="/assets/images/icon/midleoicons.svg#i-x"/></svg>&nbsp;Close</button>
-            <button type="button" id="btn-create-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="form.$valid && createflow('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','env')"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-check" xlink:href="/assets/images/icon/midleoicons.svg#i-check"/></svg>&nbsp;Create</a>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
+            <button type="button" id="btn-create-obj" class="waves-effect waves-light btn btn-info btn-sm" ng-click="form.$valid && createflow('<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','env')"><i class="mdi mdi-check"></i>&nbsp;Create</a>
            </div>
         </form>
       </div>
