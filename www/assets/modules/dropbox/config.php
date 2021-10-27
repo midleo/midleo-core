@@ -42,20 +42,20 @@ class Class_dropbox
             array_push($brarr, array(
                 "title" => "Create/edit articles",
                 "link" => "/cpinfo",
-                "midicon" => "kn-b",
+                "icon" => "mdi-file-document-edit-outline",
                 "active" => ($page == "cpinfo") ? "active" : "",
             ));
             array_push($brarr, array(
                 "title" => "Import documents",
                 "link" => "/docimport",
-                "midicon" => "deploy",
+                "icon" => "mdi-upload",
                 "active" => ($page == "docimport") ? "active" : "",
             ));
             if (sessionClass::checkAcc($acclist, "designer")) {
                 array_push($brarr, array(
                     "title" => "View/Edit diagrams",
                     "link" => "/draw",
-                    "midicon" => "diagram",
+                    "icon" => "mdi-drawing",
                     "active" => ($page == "draw") ? "active" : "",
                 ));
             }
@@ -63,7 +63,7 @@ class Class_dropbox
                 array_push($brarr, array(
                     "title" => "View/Map OneDrive files",
                     "link" => "/onedrive",
-                    "midicon" => "onedrive",
+                    "icon" => "mdi-microsoft-onedrive",
                     "active" => ($page == "onedrive") ? "active" : "",
                 ));
             }

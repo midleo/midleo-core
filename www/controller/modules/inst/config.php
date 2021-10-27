@@ -193,7 +193,7 @@ class Class_install{
                                 <div style="position: absolute;right: 10px;top: 10px;">
                                     <span class="text-muted">v. Initial</span> 
                                 </div>
-                        <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-dark.svg" alt="Midleo CORE" title="Midleo CORE" class="light-logo" style="width:80px;" />
+                        <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg" alt="Midleo CORE" title="Midleo CORE" class="light-logo" style="width:80px;" />
         <br>
                         <h3 class="p-2 rounded-title mb-3">Fill admin data</h3>
     
@@ -268,7 +268,7 @@ include "public/modules/template_end.php";
                                 <div style="position: absolute;right: 10px;top: 10px;">
                                     <span class="text-muted">v. Initial</span> 
                                 </div>
-                        <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-dark.svg" alt="Midleo CORE" title="Midleo CORE" class="light-logo" style="width:80px;" />
+                        <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg" alt="Midleo CORE" title="Midleo CORE" class="light-logo" style="width:80px;" />
         <br>
                         <h3 class="p-2 rounded-title mb-3">Select Database type</h3>
 

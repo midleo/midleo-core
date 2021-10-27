@@ -22,7 +22,7 @@ if(!empty($ugroups)){
     <tbody ng-init="getAllsrv('<?php echo $ugr;?>')">
       <tr ng-hide="contentLoaded"><td colspan="6" style="text-align:center;font-size:1.1em;"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td></tr>
       <tr id="contloaded" class="hide" dir-paginate="d in names | filter:search | orderBy:'server':reverse | itemsPerPage:10" pagination-id="prodx">
-      <td class="text-center"><a class="btn btn-light btn-sm" href="/browse/server/{{ d.serverid}}"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-server" xlink:href="/assets/images/icon/midleoicons.svg#i-server"/></svg></a></td>
+      <td class="text-center"><a class="btn btn-light btn-sm" href="/browse/server/{{ d.serverid}}"><i class="mdi mdi-server mdi-24px"></i></a></td>
         <td class="text-center">{{ d.server}}</td>
         <td class="text-center">{{ d.servertype}}</td>
         <td class="text-center">{{ d.serverip}}</td>

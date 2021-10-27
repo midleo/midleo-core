@@ -31,7 +31,7 @@ class Class_error
     {
         global $installedapp;
         global $website;
-        echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"><title>Error 404 Page not found - http://' . $_SERVER['HTTP_HOST'] . '</title><meta name="robots" content="noindex,follow"/><style type="text/css">html,body{height:100%;padding:0;margin:0}body{color:#000;background-repeat:no-repeat;background:#fff;}a,a:hover,a:active{color: rgb(0, 0, 0);font-size: 22px;text-decoration: none;text-transform: uppercase;}</style></head><body><table style="width:100%;height:100%;"><tr><td style="vertical-align:middle;text-align:center;font-size:30px;font-family:Tahoma;">Page not found<br/><br/><img style="width:400px;" src="/assets/images/404-not-found.svg"><br/><br/><a href="http://' . $_SERVER['HTTP_HOST'] . '" title="back to http://' . $_SERVER['HTTP_HOST'] . '">back to main page</a></td></tr></table></body></html>';
+        echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"><title>Error 404 Page not found - http://' . $_SERVER['HTTP_HOST'] . '</title><meta name="robots" content="noindex,follow"/><style type="text/css">html,body{height:100%;padding:0;margin:0}body{color:#000;background-repeat:no-repeat;background:#fff;}a,a:hover,a:active{color: rgb(0, 0, 0);font-size: 22px;text-decoration: none;text-transform: uppercase;}</style></head><body><table style="width:100%;height:100%;"><tr><td style="vertical-align:middle;text-align:center;font-size:30px;font-family:Tahoma;">Page not found<br/><br/><img style="width:400px;" src="/'.$website['corebase'].'assets/images/404-not-found.svg"><br/><br/><a href="http://' . $_SERVER['HTTP_HOST'] . '" title="back to http://' . $_SERVER['HTTP_HOST'] . '">back to main page</a></td></tr></table></body></html>';
     }
 }
 class Class_banned
@@ -40,7 +40,7 @@ class Class_banned
     {
         global $installedapp;
         global $website;
-        echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"><title>Error 403 No access</title><meta name="robots" content="noindex,follow"/><style type="text/css">html,body{height:100%;padding:0;margin:0}body{color:#000;background-repeat:no-repeat;background:#fff;}a,a:hover,a:active{color: rgb(0, 0, 0);font-size: 22px;text-decoration: none;text-transform: uppercase;}</style></head><body><table style="width:100%;height:100%;"><tr><td style="vertical-align:middle;text-align:center;font-size:30px;font-family:Tahoma;">You are banned!<br/><br/><img style="width:400px;" src="/assets/images/404-not-found.svg"><br/><br/><a href="http://' . $_SERVER['HTTP_HOST'] . '" title="back to http://' . $_SERVER['HTTP_HOST'] . '">Please try again later</a></td></tr></table></body></html>';
+        echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"><title>Error 403 No access</title><meta name="robots" content="noindex,follow"/><style type="text/css">html,body{height:100%;padding:0;margin:0}body{color:#000;background-repeat:no-repeat;background:#fff;}a,a:hover,a:active{color: rgb(0, 0, 0);font-size: 22px;text-decoration: none;text-transform: uppercase;}</style></head><body><table style="width:100%;height:100%;"><tr><td style="vertical-align:middle;text-align:center;font-size:30px;font-family:Tahoma;">You are banned!<br/><br/><img style="width:400px;" src="/'.$website['corebase'].'assets/images/404-not-found.svg"><br/><br/><a href="http://' . $_SERVER['HTTP_HOST'] . '" title="back to http://' . $_SERVER['HTTP_HOST'] . '">Please try again later</a></td></tr></table></body></html>';
     }
 }
 class Class_logout
@@ -161,7 +161,7 @@ class Class_info
 <div class="container-fluid">
 
     <?php echo '<div class="row pt-3">
-            <div class="col-lg-2" style="overflow-x:auto;">';
+            <div class="col-lg-2" style="overflow-x:auto;overflow-y:auto;">';
         include $website['corebase']."public/modules/sidebarinfo.php";
         echo '</div>
             <div class="col-lg-8">';
@@ -438,7 +438,7 @@ class Class_mregister
                             <div class="card-body">
                                 <form class="form-material form-horizontal" id="loginform" action="" method="post">
                                     <div class="text-center">
-                                        <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-sq-dark.svg"
+                                        <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-sq-dark.svg"
                                             alt="Midleo CORE" title="Midleo CORE" class="light-logo"
                                             style="width:100px;" />
                                         <h3 class="p-2 rounded-title mb-3"></h3>
@@ -763,7 +763,7 @@ class Class_mlogin
                                 <div class="card-body">
                                     <form class="form-horizontal" id="loginform" action="" method="post">
                                         <div class="text-center">
-                                            <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-sq-dark.svg"
+                                            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-sq-dark.svg"
                                                 alt="Midleo CORE" title="Midleo CORE" class="light-logo"
                                                 style="width:120px;" />
                                             <h3 class="p-2 rounded-title mb-3"></h3>
@@ -816,7 +816,7 @@ class Class_mlogin
                                     </form>
                                     <form class="form-horizontal " id="recoverform" action="" method="post">
                                         <div class="text-center">
-                                            <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-sq-dark.svg"
+                                            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-sq-dark.svg"
                                                 alt="Midleo CORE" title="Midleo CORE" class="light-logo"
                                                 style="width:120px;" />
                                             <h3 class="p-2 rounded-title mb-3"></h3>
@@ -1001,10 +1001,7 @@ class Class_profile
                                                 </button>
                                                 <?php if (!empty($uavatar)) {?><button type="submit"
                                                     class="btn btn-light btn-sm waves-effect waves-dark"
-                                                    name="delavatar"><svg class="midico midico-outline">
-                                                        <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                                            xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                                    </svg>&nbsp;Delete</button><?php }?>
+                                                    name="delavatar"><i class="mdi mdi-close"></i>&nbsp;Delete</button><?php }?>
                                             </div>
                                             <?php if (!empty($uavatar)) {?>
                                         </form><?php }?>
@@ -1068,11 +1065,7 @@ class Class_profile
                                                 <div>
                                                     <br><br>
                                                     <button type="submit" name="edinf"
-                                                        class="btn btn-light waves-effect waves-dark"><svg
-                                                            class="midico midico-outline">
-                                                            <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                                                xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                                                        </svg>&nbsp;Save</button>
+                                                        class="btn btn-light waves-effect waves-dark"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
                                                 </div>
                                             </form>
                                     </div>
@@ -1104,11 +1097,7 @@ class Class_profile
                                                 </div>
                                                 <div><br><br>
                                                     <button type="submit" name="changepass"
-                                                        class="btn btn-light waves-effect waves-dark"><svg
-                                                            class="midico midico-outline">
-                                                            <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                                                xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                                                        </svg>&nbsp;Change</button>
+                                                        class="btn btn-light waves-effect waves-dark"><i class="mdi mdi-content-save-outline"></i>&nbsp;Change</button>
                                                 </div>
 
                                             </form>
@@ -1348,7 +1337,7 @@ class Class_welcome
                     <div class="card maincard">
                         <div class="row">
                             <div class="col-md-3 text-end">
-                                <img src="/assets/images/icon/documentation.svg"
+                                <img src="/<?php echo $website['corebase'];?>assets/images/icon/documentation.svg"
                                     style="padding-top: 20px;width:80px;display: block;float: right;">
                             </div>
                             <div class="col-md-9">
@@ -1365,7 +1354,7 @@ class Class_welcome
                     <div class="card maincard">
                         <div class="row">
                             <div class="col-md-3 text-end">
-                                <img src="/assets/images/icon/support.svg"
+                                <img src="/<?php echo $website['corebase'];?>assets/images/icon/support.svg"
                                     style="padding-top: 20px;width:80px;display: block;float: right;">
                             </div>
                             <div class="col-md-9">
@@ -1383,7 +1372,7 @@ class Class_welcome
                     <div class="card maincard">
                         <div class="row">
                             <div class="col-md-3 text-end">
-                                <img src="/assets/images/icon/status.svg"
+                                <img src="/<?php echo $website['corebase'];?>assets/images/icon/status.svg"
                                     style="padding-top: 20px;width:80px;display: block;float: right;">
                             </div>
                             <div class="col-md-9">
@@ -1401,7 +1390,7 @@ class Class_welcome
                     <div class="card maincard">
                         <div class="row">
                             <div class="col-md-3 text-end">
-                                <img src="/assets/images/icon/idea.svg"
+                                <img src="/<?php echo $website['corebase'];?>assets/images/icon/idea.svg"
                                     style="padding-top: 20px;width:80px;display: block;float: right;">
                             </div>
                             <div class="col-md-9">

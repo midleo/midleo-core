@@ -73,12 +73,12 @@ if($q->execute(array($zobj['reqapp']))){
          </a>
         <?php   }?>
         <?php if($zobj['deployed']!=1){ 
-           if($zobj['assigned']=="canceled"){ echo ' <div class="alert alert-warning" style="color:#000;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-warning" xlink:href="/assets/images/icon/midleoicons.svg#i-warning" /></svg>&nbsp;status: Canceled</div>'; }
-           elseif(!empty($zobj['assigned'])){ echo ' <div class="alert alert-info"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-warning" xlink:href="/assets/images/icon/midleoicons.svg#i-warning" /></svg>&nbsp;status: In progress</div>'; }
-          else { echo ' <div class="alert alert-secondary"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-warning" xlink:href="/assets/images/icon/midleoicons.svg#i-warning" /></svg>&nbsp;status: Not assigned</div>'; }
+           if($zobj['assigned']=="canceled"){ echo ' <div class="alert alert-warning" style="color:#000;"><i class="mdi mdi-alert-outline"></i>&nbsp;status: Canceled</div>'; }
+           elseif(!empty($zobj['assigned'])){ echo ' <div class="alert alert-info"><i class="mdi mdi-alert-outline"></i>&nbsp;status: In progress</div>'; }
+          else { echo ' <div class="alert alert-secondary"><i class="mdi mdi-alert-outline"></i>&nbsp;status: Not assigned</div>'; }
         ?>
         <?php } else { ?>
-        <div class="alert alert-success"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-warning" xlink:href="/assets/images/icon/midleoicons.svg#i-warning" /></svg>&nbsp;status: Completed</div>
+        <div class="alert alert-success"><i class="mdi mdi-alert-outline"></i>&nbsp;status: Completed</div>
         <?php } ?>
       </div>
      </div>

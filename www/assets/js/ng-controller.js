@@ -1710,7 +1710,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       url: '/api/applications/qmlist'
     }).then(function successCallback(response) {
       $scope.pkgid = thispkg;
-      $(".mql" + thisid).html('<svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-show" xlink:href="/assets/images/icon/midleoicons.svg#i-show"/></svg>');
+      $(".mql" + thisid).html('<i class="mdi mdi-eye-outline"></i>');
       $(".mql" + thisid).prop("disabled", false);
       $(".mql" + thisid).removeClass('btn-secondary').addClass('btn-light');
       if (response.data != "null") { $scope.qmlist = response.data; } else { $scope.qmlist = []; }

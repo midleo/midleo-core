@@ -5,10 +5,7 @@
             <div class="card-header">
                 <h4>Create an application
                     <div class="float-end">
-                        <a href="/env/apps" class="btn btn-light btn-sm"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                            </svg>&nbsp;Cancel</a>&nbsp;
+                        <a href="/env/apps" class="btn btn-light btn-sm"><i class="mdi mdi-close"></i>&nbsp;Cancel</a>&nbsp;
 
                     </div>
                 </h4>
@@ -45,11 +42,7 @@
                     <div class="form-group row" id="reqfiles">
                         <label class="form-control-label text-lg-right col-md-3"></label>
                         <div class="col-md-9">
-                            <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-light"><svg
-                                    class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-add"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-add" />
-                                </svg>&nbsp;Upload file/files</button>
+                            <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-light"><i class="mdi mdi-plus"></i>&nbsp;Upload file/files</button>
                             <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file" name="dfile[]"
                                     id="dfile" onChange="sub(this,'docupload')" multiple="" /></div>
                             <br>
@@ -61,10 +54,7 @@
                     <div class="form-group row">
                         <label class="form-control-label text-lg-left col-md-3"></label>
                         <div class="col-md-9">
-                            <button type="submit" name="addapp" class="btn btn-light"><svg class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                                </svg>&nbsp;Save</button>
+                            <button type="submit" name="addapp" class="btn btn-light"><i class="mdi mdi-check"></i>&nbsp;Save</button>
                         </div>
                     </div>
                 </form>
@@ -101,24 +91,14 @@
                     <div class="float-end">
                         <form name="projform" action="" method="post">
                             <?php if($_GET["type"]=="edit"){ ?>
-                            <a href="/env/apps/?app=<?php echo $_GET["app"];?>" class="btn btn-light btn-sm"><svg
-                                    class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                                </svg>&nbsp;Done</a>&nbsp;
+                            <a href="/env/apps/?app=<?php echo $_GET["app"];?>" class="btn btn-light btn-sm"><i class="mdi mdi-check"></i>&nbsp;Done</a>&nbsp;
                             <?php } else { ?>
                             <a href="/env/apps/?app=<?php echo $_GET["app"];?>&type=edit"
-                                class="btn btn-light btn-sm"><svg class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-edit"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-edit" />
-                                </svg>&nbsp;Edit</a>&nbsp;
+                                class="btn btn-light btn-sm"><i class="mdi mdi-pencil-outline"></i>&nbsp;Edit</a>&nbsp;
                             <?php } ?>
                             <button type="button"
                                 ng-click="deleteapp('<?php echo $zobj["id"];?>','<?php echo $_GET["app"];?>','<?php echo $_SESSION["user"];?>','yes')"
-                                class="btn btn-light btn-sm"><svg class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                </svg>&nbsp;Delete</button>
+                                class="btn btn-light btn-sm"><i class="mdi mdi-close"></i>&nbsp;Delete</button>
 
                         </form>
                     </div>
@@ -156,10 +136,7 @@
                     <div class="form-group row">
                         <label class="form-control-label text-lg-left col-md-3"></label>
                         <div class="col-md-9">
-                            <button type="submit" name="updapp" class="btn btn-info"><svg class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                                </svg>&nbsp;Save</button>
+                            <button type="submit" name="updapp" class="btn btn-info"><i class="mdi mdi-check"></i>&nbsp;Save</button>
                         </div>
                     </div>
                 </form>
@@ -170,11 +147,7 @@
             </div>
             <div class="card-footer">
                 <div class="float-end">
-                    <a href="/reports/apps/?app=<?php echo $_GET["app"];?>" class="btn btn-light btn-sm"><svg
-                            class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-app"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-app" />
-                        </svg>&nbsp;Generate report</a>&nbsp;
+                    <a href="/reports/apps/?app=<?php echo $_GET["app"];?>" class="btn btn-light btn-sm"><i class="mdi mdi-chart-bar"></i>&nbsp;Generate report</a>&nbsp;
 
                 </div>
             </div>
@@ -225,21 +198,14 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
                         <input type="text" ng-model="group.user" id="respusersselected" style="display:none;" value="">
                     </div>
                     <div class="col-md-4"> <button type="button" class="waves-effect btn btn-light btn-sm"
-                            ng-click="addappgr('<?php echo $_GET["app"];?>','<?php echo $_SESSION["user"];?>')"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-add"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-add" />
-                            </svg>&nbsp;Add</button> </div>
+                            ng-click="addappgr('<?php echo $_GET["app"];?>','<?php echo $_SESSION["user"];?>')"><i class="mdi mdi-plus"></i>&nbsp;Add</button> </div>
                 </div>
                 <div class="grudivnt grudivtg" style="display:block;">
                     <ul style="margin: 0 auto;padding: 5px;" class="list-group list-group-flush">
                         <li style="padding:5px;" ng-repeat="(ukey, user) in respusers"
                             class="list-group-item usr_{{ukey}}">{{user.uname}}<a class="float-end"
                                 ng-click="delappgr('<?php echo $_GET["app"];?>',ukey,user.type,'<?php echo $_SESSION['user'];?>')"
-                                style="cursor:pointer;"><svg class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-x" title="Delete" />
-                                </svg></a></li>
+                                style="cursor:pointer;"><i class="mdi mdi-close"></i></a></li>
                     </ul>
                 </div>
                 <?php } else { ?>
@@ -317,17 +283,10 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
                                     href="/searchall/?sa=y&st=tag&fd={{ val }}">{{val}}</a></span></td>
                         <td>
                             <div class="text-start d-grid gap-2 d-md-block">
-                                <a href="/env/apps/?app={{d.appcode}}" class="btn waves-effect btn-light btn-sm"><svg
-                                        class="midico midico-outline">
-                                        <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                            xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                                    </svg></a>
+                                <a href="/env/apps/?app={{d.appcode}}" class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-magnify"></i></a>
                                 <button ng-show="d.owner=='<?php echo $_SESSION["user"];?>'" type="button"
                                     ng-click="deleteapp(d.id,d.appcode,'<?php echo $_SESSION["user"];?>')"
-                                    class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline">
-                                        <use href="/assets/images/icon/midleoicons.svg#i-trash"
-                                            xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
-                                    </svg></button>
+                                    class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-close"></i></button>
                             </div>
                         </td>
                     </tr>

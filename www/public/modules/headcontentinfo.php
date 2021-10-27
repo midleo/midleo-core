@@ -2,10 +2,10 @@
     <div class="container">
     <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
             
-            <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-white.svg"
+            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-white.svg"
                 alt="Midleo CORE" title="Midleo CORE"
                 class="light-logo ml" />
-            <img data-bs-toggle="tooltip" src="/assets/images/midleo-icon-logo-white.svg"
+            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-icon-logo-white.svg"
                 alt="Midleo CORE" title="Midleo CORE"
                 class="light-logo-icon mli" />
        
@@ -80,11 +80,8 @@
                 <div class="theme-switch-wrapper">
                     <label class="theme-switch" for="checkbox">
                         <input type="checkbox" id="checkbox" />
-                        <div class="slidersw" style="margin-top: 7px;">
-                            <svg class="itemicon midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-night"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-night" />
-                            </svg>
+                        <div class="slidersw itemicon">
+                        <i class="mdi mdi-weather-night mdi-24px"></i>
                         </div>
                     </label>
                 </div>

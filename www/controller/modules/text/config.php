@@ -59,10 +59,7 @@ class textClass{
    echo '
    <div class="error-box">
    <div class="error-body text-center">
-       <h1 class="error-title"><svg class="midico midico-outline" style="width: 4rem;height: 4rem;margin-top: -20px;">
-       <use href="/assets/images/icon/midleoicons.svg#i-help"
-           xlink:href="/assets/images/icon/midleoicons.svg#i-help" />
-   </svg>&nbsp;404</h1>
+       <h1 class="error-title"><i class="mdi mdi-help-circle-outline mdi-24px"></i>&nbsp;404</h1>
        <h3 class="text-uppercase error-subtitle">OOPS!</h3>
        <p class="text mt-4 mb-4">This is awkward.. You are looking for something that does not actually exist.</p>
        <a href="/?" class="btn btn-light waves-effect waves-light mb-5">Back to home</a> </div>

@@ -58,20 +58,20 @@ class Class_diagrams
       array_push($brarr,array(
         "title"=>"Knowledge Base",
         "link"=>"/info",
-        "midicon"=>"kn-b",
+        "icon"=>"mdi-post-outline",
         "active"=>($page=="cpinfo")?"active":"",
       ));
       array_push($brarr, array(
         "title" => "Import documents",
         "link" => "/docimport",
-        "midicon" => "deploy",
+        "icon" => "mdi-upload",
         "active" => ($page == "docimport") ? "active" : "",
     ));
    if (sessionClass::checkAcc($acclist, "designer")) {
     array_push($brarr,array(
       "title"=>"View/Edit diagrams",
       "link"=>"/draw",
-      "midicon"=>"diagram",
+      "icon"=>"mdi-chart-scatter-plot-hexbin",
       "active"=>($page=="draw")?"active":"",
     ));
   }
@@ -79,7 +79,7 @@ class Class_diagrams
       array_push($brarr,array(
           "title"=>"View/Map OneDrive files",
         "link"=>"/onedrive",
-        "midicon"=>"onedrive",
+        "icon"=>"mdi-microsoft-onedrive",
         "active"=>($page=="onedrive")?"active":"",
       ));
     }

@@ -118,7 +118,7 @@ class Class_appconfig
                 array(
                     "title"=>"View/Edit users",
                     "link"=>"/".$page."/users",
-                    "midicon"=>"users",
+                    "icon"=>"mdi-account-multiple mdi-18px",
                     "active"=>($thisarray['p1'] == "users")?"active":"",
                 )
               );
@@ -126,50 +126,50 @@ class Class_appconfig
                 array_push($brenvarr,array(
                     "title"=>"View/Edit groups",
                     "link"=>"/".$page."/groups",
-                    "midicon"=>"groups",
+                    "icon"=>"mdi-account-group-outline mdi-18px",
                     "active"=>($thisarray['p1'] == "groups")?"active":"",
                   ));
               }
               array_push($brenvarr,array(
                 "title"=>"LDAP entries",
                 "link"=>"/".$page."/ldap",
-                "midicon"=>"ldap",
+                "icon"=>"mdi-file-tree-outline mdi-18px",
                 "active"=>($thisarray['p1'] == "ldap")?"active":"",
               ),
               array(
                 "title"=>"External connections",
                 "link"=>"/".$page."/external",
-                "midicon"=>"ext-config",
+                "icon"=>"mdi-open-in-new mdi-18px",
                 "active"=>($thisarray['p1'] == "external")?"active":"",
               ),
               array(
                 "title"=>"MAIL Configuration",
                 "link"=>"/".$page."/mail",
-                "midicon"=>"email-config",
+                "icon"=>"mdi-email-edit-outline mdi-18px",
                 "active"=>($thisarray['p1'] == "mail")?"active":"",
               ),
               array(
                 "title"=>"Core Configuration",
                 "link"=>"/".$page."/main",
-                "midicon"=>"core-config",
+                "icon"=>"mdi-application-cog-outline mdi-18px",
                 "active"=>($thisarray['p1'] == "main")?"active":"",
               ),
               array(
                 "title"=>"Core Modules",
                 "link"=>"/".$page."/modules",
-                "midicon"=>"modules",
+                "icon"=>"mdi-cards mdi-18px",
                 "active"=>($thisarray['p1'] == "modules")?"active":"",
               ),
               array(
                 "title"=>"Business logic",
                 "link"=>"/".$page."/business",
-                "midicon"=>"b-logic",
+                "icon"=>"mdi-head-cog-outline mdi-18px",
                 "active"=>($thisarray['p1'] == "business")?"active":"",
               ),
               array(
                 "title"=>"Environment configuration",
                 "link"=>"/".$page."/env",
-                "midicon"=>"enviro",
+                "icon"=>"mdi-gate-xnor mdi-18px",
                 "active"=>($thisarray['p1'] == "env")?"active":"",
               )
 
@@ -379,10 +379,10 @@ $(document).ready(function() {
             "data": null,
             "render": function(data, type, row, meta) {
                 return (row[2] == "*" ?
-                    "<button type=\"button\" class=\"btn btn-light btn-sm\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-x' xlink:href='/assets/images/icon/midleoicons.svg#i-x' /></svg></button>" :
+                    "<button type=\"button\" class=\"btn btn-light btn-sm\" disabled><i class='mdi mdi-close'></i></button>" :
                     "<button type=\"button\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Delete module\" class=\"btn btn-light btn-sm command-delete\" data-row-id=\"" +
                     row[0] +
-                    "\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-trash' xlink:href='/assets/images/icon/midleoicons.svg#i-trash' /></svg></button>"
+                    "\"><i class='mdi mdi-close'></i></button>"
                     );
             }
         }]

@@ -27,7 +27,7 @@
     <tbody ng-init="getAllAppserv('<?php echo $thisarray['p2'];?>')">
       <tr ng-hide="contentLoaded"><td colspan="6" style="text-align:center;font-size:1.1em;"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td></tr>
       <tr id="contloaded" class="hide" dir-paginate="d in names | filter:search | orderBy:'server':reverse | itemsPerPage:10" pagination-id="prodx">
-      <td class="text-center"><a class="btn btn-light btn-sm" href="/browse/appserver/{{ d.id}}"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-app-srv" xlink:href="/assets/images/icon/midleoicons.svg#i-app-srv"/></svg></a></td>
+      <td class="text-center"><a class="btn btn-light btn-sm" href="/browse/appserver/{{ d.id}}"><i class="mdi mdi-application-brackets-outline mdi-24px"></i></a></td>
       <td class="text-center">{{ d.server}}</td>
       <td class="text-center">{{ d.appsrvname}}</td>
         <td class="text-center">{{ d.port}}</td>

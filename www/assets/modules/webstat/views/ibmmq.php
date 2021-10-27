@@ -84,11 +84,7 @@ else if(!empty($_GET["qmid"])){
                                     <tbody>
                                         <?php foreach($tmp["qminv"]["QUEUES"] as $key=>$val){ if($val["NAME"]){ ?>
                                         <tr>
-                                            <td><a href="/webstat/ibmmq/?qid=<?php echo $key;?>"><svg
-                                                        class="midico midico-outline">
-                                                        <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                                            xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                                                    </svg></a></td>
+                                            <td><a href="/webstat/ibmmq/?qid=<?php echo $key;?>"><i class="mdi mdi-magnify"></i></a></td>
                                             <td><?php echo $val["NAME"];?></td>
                                             <td><?php echo $val["TYPE"];?></td>
                                             <td><?php echo $val["ALTDATE"];?></td>
@@ -113,11 +109,7 @@ else if(!empty($_GET["qmid"])){
                                     <tbody>
                                         <?php foreach($tmp["qminv"]["CHANNELS"] as $key=>$val){ if($val["NAME"]){ ?>
                                         <tr>
-                                            <td><a href="/webstat/ibmmq/?chlid=<?php echo $key;?>"><svg
-                                                        class="midico midico-outline">
-                                                        <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                                            xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                                                    </svg></a></td>
+                                            <td><a href="/webstat/ibmmq/?chlid=<?php echo $key;?>"><i class="mdi mdi-magnify"></i></a></td>
                                             <td><?php echo $val["NAME"];?></td>
                                             <td><?php echo $val["CHLTYPE"];?></td>
                                             <td><?php echo $val["ALTDATE"];?></td>
@@ -170,11 +162,7 @@ else if(!empty($_GET["qmid"])){
                             <tr id="contloaded" class="hide"
                                 dir-paginate="d in names | filter:search | orderBy:'lrun' | itemsPerPage:10"
                                 pagination-id="prodx">
-                                <td class="text-center"><a href="/webstat/ibmmq/?qmid={{d.qmgr}}"><svg
-                                            class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                                        </svg></a></td>
+                                <td class="text-center"><a href="/webstat/ibmmq/?qmid={{d.qmgr}}"><i class="mdi mdi-magnify"></i></a></td>
                                 <td class="text-center">{{ d.qmgr }}</td>
                                 <td class="text-center">{{ d.proj }}</td>
                                 <td class="text-center">{{ d.srv }}</td>

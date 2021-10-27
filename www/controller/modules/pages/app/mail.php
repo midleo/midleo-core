@@ -3,7 +3,7 @@
     "title"=>"Save the configurtion",
     "link"=>"javascript:void(0)",
     "onclick"=>"document.getElementById('saveadm').click();",
-    "midicon"=>"save",
+    "icon"=>"mdi-content-save-outline",
     "active"=>true,
   ));
 ?>

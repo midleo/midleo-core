@@ -9,7 +9,7 @@ if (!empty($thisarray['p2'])){
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-body">
-                                <div class=" text-center"> <svg class="midico midico-outline" style="height:55px;width:55px;"><use href="/assets/images/icon/midleoicons.svg#i-server" xlink:href="/assets/images/icon/midleoicons.svg#i-server"/></svg>
+                                <div class=" text-center"> <i class="mdi mdi-server"></i>
                                     <h4 class="card-title mt-2"><?php echo $val["serverdns"];?></h4>
                                     <h6 class="card-subtitle"><?php echo $val["info"];?></h6>
                                 </div>

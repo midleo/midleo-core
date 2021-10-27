@@ -60,7 +60,7 @@ class Class_monitoring{
     array(
         "title"=>"Enabled monitoring",
         "link"=>"/".$page,
-        "midicon"=>"a-enabled",
+        "icon"=>"mdi-play-circle-outline",
         "active"=>empty($thisarray["p2"])?"active":"",
     )
   );
@@ -216,11 +216,7 @@ class Class_monitoring{
                                 <div class="form-group row">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-8">
-                                        <button type="submit" name="savemon" class="btn btn-info"><svg
-                                                class="midico midico-outline">
-                                                <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                                            </svg>&nbsp;Save</button>
+                                        <button type="submit" name="savemon" class="btn btn-info"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
                                     </div>
                                 </div>
                                 <?php }} else { echo "You are not assignd to any Applications";} ?>
@@ -279,10 +275,7 @@ class Class_monitoring{
                         <table class="table table-vmiddle table-hover stylish-table mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-center" style="width:80px;"><svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-show"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-show" />
-                                        </svg></th>
+                                    <th class="text-center" style="width:80px;"><i class="mdi mdi-eye-outline"></i></th>
                                     <th class="text-center">Monitor</th>
                                     <th class="text-center">Provider</th>
                                     <th class="text-center">Type</th>
@@ -301,10 +294,7 @@ class Class_monitoring{
                                 <tr id="contloaded" class="hide"
                                     dir-paginate="d in names | filter:search | itemsPerPage:10" pagination-id="prodx">
                                     <td class="text-center" style="padding: .5rem;"><a
-                                            href="/monitoring/{{ d.monid }}"><svg class="midico midico-outline">
-                                                <use href="/assets/images/icon/midleoicons.svg#i-show"
-                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-show" />
-                                            </svg></a></td>
+                                            href="/monitoring/{{ d.monid }}"><i class="mdi mdi-eye-outline"></i></a></td>
                                     <td class="text-center">{{ d.monname }}</td>
                                     <td class="text-center">{{ d.monprovider }}</td>
                                     <td class="text-center">{{ d.montype }}</td>

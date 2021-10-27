@@ -46,16 +46,8 @@ array_push($brarr,array(
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" name="addldap" class="btn btn-light btn-sm"><svg
-                                            class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                                        </svg>&nbsp;Save</button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><svg
-                                            class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                        </svg>&nbsp;Close</button>
+                                    <button type="submit" name="addldap" class="btn btn-light btn-sm"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
                                 </div>
                             </div>
                         </div>

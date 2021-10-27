@@ -32,13 +32,13 @@ $brarr=array(
     array(
         "title"=>"View enabled jobs",
         "link"=>"/".$page."/".$thisarray["p1"]."/enabled",
-        "midicon"=>"a-enabled",
+        "icon"=>"mdi-play-circle-outline",
         "active"=>($thisarray["p2"]=="enabled" || empty($thisarray["p2"]))?"active":"",
     ),
     array(
         "title"=>"View disabled jobs",
         "link"=>"/".$page."/".$thisarray["p1"]."/disabled",
-        "midicon"=>"a-disabled",
+        "icon"=>"mdi-stop-circle-outline",
         "active"=>($thisarray["p2"]=="disabled")?"active":"",
       )
   );
@@ -47,7 +47,7 @@ $brarr=array(
     array_push($brarr,array(
       "title"=>"IBM MQ inventory jobs",
       "link"=>"/".$page."/".$thisarray["p1"]."/ibmmq",
-      "midicon"=>"mq",
+      "icon"=>"mdi-tray-full",
       "active"=>($thisarray["p2"]=="ibmmq")?"active":"",
     ));
   }
@@ -170,10 +170,7 @@ $brarr=array(
                         <table class="table table-vmiddle table-hover stylish-table mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-center" style="width:80px;"><svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-show"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-show" />
-                                        </svg></th>
+                                    <th class="text-center" style="width:80px;"><i class="mdi mdi-eye-outline"></i></th>
                                     <th class="text-center">Job name</th>
                                     <th class="text-center">Object name</th>
                                     <th class="text-center">Application</th>
@@ -193,10 +190,7 @@ $brarr=array(
                                     dir-paginate="d in names | filter:search | orderBy:'lrun' | itemsPerPage:10"
                                     pagination-id="prodx">
                                     <td class="text-center" style="padding: .5rem;"><a
-                                            href="/automation/{{ d.jobid }}"><svg class="midico midico-outline">
-                                                <use href="/assets/images/icon/midleoicons.svg#i-a-enabled"
-                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-a-enabled" />
-                                            </svg></a></td>
+                                            href="/automation/{{ d.jobid }}"><i class="mdi mdi-play-circle-outline"></i></a></td>
                                     <td class="text-center">{{ d.jobname }}</td>
                                     <td class="text-center">{{ d.objname }}</td>
                                     <td class="text-center">{{ d.proj }}</td>

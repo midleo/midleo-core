@@ -16,35 +16,34 @@ class Class_cp
         include "public/modules/css.php";
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
         $breadcrumb["text"] = "Dashboard";
-        $breadcrumb["midicon"] = "dashboard";
         $brarr = array();
         array_push($brarr, array(
             "title" => "Import documents",
             "link" => "#mnewimp",
-            "midicon" => "add",
+            "icon" => "mdi-plus",
             "modal" => true,
             "active" => false,
         ));
         array_push($brarr, array(
             "title" => "Create/edit articles",
             "link" => "/cpinfo",
-            "midicon" => "kn-b",
+            "icon" => "mdi-file-document-edit-outline",
             "active" => ($page == "cpinfo") ? "active" : "",
         ));
         array_push($brarr, array(
             "title" => "LDAP configuration",
             "link" => "/" . $page . "/ldap",
-            "midicon" => "ldap",
+            "icon" => "mdi-file-tree-outline",
             "active" => ($thisarray['p1'] == "ldap") ? "active" : "",
         ), array(
             "title" => "External connections",
             "link" => "/" . $page . "/external",
-            "midicon" => "ext-config",
+            "icon" => "mdi-open-in-new",
             "active" => ($thisarray['p1'] == "external") ? "active" : "",
         ), array(
             "title" => "Core Configuration",
             "link" => "/" . $page . "/main",
-            "midicon" => "core-config",
+            "icon" => "mdi-application-cog-outline",
             "active" => ($thisarray['p1'] == "main") ? "active" : "",
         ));
 
@@ -154,11 +153,7 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
                                     <td class="text-start"><?php echo $val["name"]; ?></td>
                                     <td></td>
                                     <td style="width:50px" class="text-end"><a target="_parent"
-                                            href="/env/apps/<?php echo $val["id"]; ?>"><svg
-                                                class="midico midico-outline">
-                                                <use href="/assets/images/icon/midleoicons.svg#i-right"
-                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-right" />
-                                            </svg></a></td>
+                                            href="/env/apps/<?php echo $val["id"]; ?>"><i class="mdi mdi-chevron-triple-right"></i></a></td>
                                 </tr>
                                 <?php }
         }?>
@@ -512,20 +507,20 @@ class Class_cpinfo
         array_push($brarr, array(
             "title" => "New Page",
             "link" => "/cpinfo/new",
-            "midicon" => "add",
+            "icon" => "mdi-plus",
             "active" => ($page == "cpinfo") ? "active" : "",
         ));
         array_push($brarr, array(
             "title" => "Import documents",
             "link" => "/docimport",
-            "midicon" => "deploy",
+            "icon" => "mdi-upload",
             "active" => ($page == "docimport") ? "active" : "",
         ));
         if (sessionClass::checkAcc($acclist, "designer")) {
             array_push($brarr, array(
                 "title" => "View/Edit diagrams",
                 "link" => "/draw",
-                "midicon" => "diagram",
+                "icon" => "mdi-drawing",
                 "active" => ($page == "draw") ? "active" : "",
             ));
         }
@@ -533,7 +528,7 @@ class Class_cpinfo
             array_push($brarr, array(
                 "title" => "View/Map OneDrive files",
                 "link" => "/onedrive",
-                "midicon" => "onedrive",
+                "icon" => "mdi-microsoft-onedrive",
                 "active" => ($page == "onedrive") ? "active" : "",
             ));
         }
@@ -541,12 +536,11 @@ class Class_cpinfo
             array_push($brarr, array(
                 "title" => "View/Map Dropbox files",
                 "link" => "/dropbox",
-                "midicon" => "dropbox",
+                "icon" => "mdi-dropbox",
                 "active" => ($page == "dropbox") ? "active" : "",
             ));
         }
 
-        // $breadcrumb["midicon"]="kn-b";
         include "public/modules/headcontent.php"; ?>
 <div class="page-wrapper">
     <div class="container-fluid">
@@ -916,11 +910,7 @@ class Class_cpinfo
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" name="addnewcat" class="btn btn-light btn-sm"><svg
-                                    class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                                </svg>&nbsp;Add</button>
+                            <button type="submit" name="addnewcat" class="btn btn-light btn-sm"><i class="mdi mdi-content-save-outline"></i>&nbsp;Add</button>
                         </div>
                     </form>
                 </div>
@@ -957,9 +947,9 @@ $(document).ready(function() {
             "render": function(data, type, row, meta) {
                 return "<div class=\"btn-group\"><button type='button' onclick=\"window.open('/info/posts/" +
                     row[2] +
-                    "')\" class=\"btn btn-sm btn-light\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-search' xlink:href='/assets/images/icon/midleoicons.svg#i-search'/></svg></button><button type='button' onclick=\"location.href='/cpinfo/edit/" +
+                    "')\" class=\"btn btn-sm btn-light\"><i class='mdi mdi-magnify mdi-18px'></i></button><button type='button' onclick=\"location.href='/cpinfo/edit/" +
                     row[2] +
-                    "'\" class=\"btn btn-sm btn-light\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-edit' xlink:href='/assets/images/icon/midleoicons.svg#i-edit'/></svg></button><button type=\"button\" class=\"btn btn-sm btn-light command-delete\"><svg class='midico midico-outline'><use href='/assets/images/icon/midleoicons.svg#i-trash' xlink:href='/assets/images/icon/midleoicons.svg#i-trash'/></svg></button></div>"
+                    "'\" class=\"btn btn-sm btn-light\"><i class='mdi mdi-pencil mdi-18px'></i></button><button type=\"button\" class=\"btn btn-sm btn-light command-delete\"><i class='mdi mdi-close mdi-18px'></i></button></div>"
             }
         }]
     });

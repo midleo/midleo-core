@@ -56,7 +56,7 @@ array_push($brarr,array(
             
               <div class="form-group">
               <div class="col-md-12">
-                <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-light"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-add" xlink:href="/assets/images/icon/midleoicons.svg#i-add" /></svg>&nbsp;upload file</button>
+                <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-light"><i class="mdi mdi-plus"></i>&nbsp;upload file</button>
                 <div style='height: 0px;width: 0px; overflow:hidden;'><input required="required" type="file" name="dfile[]" id="dfile" onChange="sub(this,'docupload')"/></div>
               </div>
             </div>

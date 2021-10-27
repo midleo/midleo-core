@@ -39,7 +39,7 @@ public static function createMenu($data,$reqrows=1){
     foreach ($jsonArray as $subArraykey=>$subArray) { 
       $return.='<li id="'.$subArray['id'].'" class="list-group-item border-bottom ni'.$subArray['id'].'" data-name="'.$subArray['name'].'" data-nameshort="'.$subArray['nameshort'].'" data-color="'.$subArray['color'].'" data-id="'.$subArray['id'].'">';
       $return.='<a class="nml'.$subArray['id'].'">'.$subArray["name"].'</a>';
-      if($reqrows==1){ $return.='<div class="float-end"><a class="button-edit'.$subArray['id'].' text-info" onclick="showthisnm(\''.$subArray['id'].'\',\''.$subArray['name'].'\',\''.$subArray['color'].'\')" style="cursor:pointer;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit" /></svg></a>&nbsp;<a class="text-danger" onclick="rmthisnm(\'ni'.$subArray['id'].'\')" style="cursor:pointer;"><i class="mdi mdi-close"></i></a></div>';}
+      if($reqrows==1){ $return.='<div class="float-end"><a class="button-edit'.$subArray['id'].' text-info" onclick="showthisnm(\''.$subArray['id'].'\',\''.$subArray['name'].'\',\''.$subArray['color'].'\')" style="cursor:pointer;"><i class="mdi mdi-pencil-outline"></i></a>&nbsp;<a class="text-danger" onclick="rmthisnm(\'ni'.$subArray['id'].'\')" style="cursor:pointer;"><i class="mdi mdi-close"></i></a></div>';}
       $return.='';
       if (isset($subArray['children'])) {
         $return.='<ul class="list-group list-group-flush">';
@@ -85,7 +85,7 @@ public static function createMenu($data,$reqrows=1){
     foreach ($jsonArray as $subArraykey=>$subArray) { 
       $return.='<li id="'.$subArray['id'].'" class="list-group-item border-bottom ni'.$subArray['id'].'" data-name="'.$subArray['name'].'" data-nameshort="'.$subArray['nameshort'].'" data-icon="'.$subArray['icon'].'" data-id="'.$subArray['id'].'">';
       $return.='<a class="nml'.$subArray['id'].'">'.$subArray["name"].'</a>';
-      if($reqrows==1){ $return.='<div class="float-end"><a class="button-edit'.$subArray['id'].' text-info" onclick="showthisnmicon(\''.$subArray['id'].'\',\''.$subArray['name'].'\',\''.$subArray['icon'].'\')" style="cursor:pointer;"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-edit" xlink:href="/assets/images/icon/midleoicons.svg#i-edit" /></svg></a>&nbsp;<a class="text-danger" onclick="rmthisnm(\'ni'.$subArray['id'].'\')" style="cursor:pointer;"><i class="mdi mdi-close"></i></a></div>';}
+      if($reqrows==1){ $return.='<div class="float-end"><a class="button-edit'.$subArray['id'].' text-info" onclick="showthisnmicon(\''.$subArray['id'].'\',\''.$subArray['name'].'\',\''.$subArray['icon'].'\')" style="cursor:pointer;"><i class="mdi mdi-pencil-outline"></i></a>&nbsp;<a class="text-danger" onclick="rmthisnm(\'ni'.$subArray['id'].'\')" style="cursor:pointer;"><i class="mdi mdi-close"></i></a></div>';}
       $return.='';
       if (isset($subArray['children'])) {
         $return.='<ul class="list-group list-group-flush">';

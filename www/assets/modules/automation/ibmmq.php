@@ -46,10 +46,7 @@
                                 <td class="text-center">
                                     <button type="button"
                                         ng-click="deletemqinv(d.id,d.proj,d.qmgr,'<?php echo $_SESSION["user"]; ?>')"
-                                        class="btn btn-light btn-sm bg waves-effect"><svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                        </svg></button>
+                                        class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button>
                                 </td>
 
                             </tr>
@@ -125,16 +122,9 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg
-                            class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                        </svg>&nbsp;Close</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
                     <button ng-show="depl.repeat" type="button" class="waves-effect waves-light btn btn-info btn-sm"
-                        ng-click="createmqjob('')"><svg class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                        </svg>&nbsp;Create job</button>
+                        ng-click="createmqjob('')"><i class="mdi mdi-check"></i>&nbsp;Create job</button>
                 </div>
             </form>
         </div>

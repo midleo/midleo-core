@@ -47,16 +47,10 @@ array_push($brarr,array(
                 <td>
                     <div class="text-start d-grid gap-2 d-md-block">
                         <button ng-click="readusr(d.name,'<?php echo $_SESSION['user'];?>')" type="button"
-                            class="btn waves-effect btn-sm btn-light"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-edit"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-edit" />
-                            </svg></button>
+                            class="btn waves-effect btn-sm btn-light"><i class="mdi mdi-pencil"></i></button>
                         <?php if($_SESSION['user_level']>=3){?><button
                             ng-click="delusr(d.name,'<?php echo $_SESSION['user'];?>')" type="button"
-                            class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-trash"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
-                            </svg></button><?php } ?>
+                            class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-close"></i></button><?php } ?>
                     </div>
                 </td>
             </tr>
@@ -129,29 +123,13 @@ array_push($brarr,array(
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                            </svg>&nbsp;Close</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
                         <a id="btn-create-user" ng-hide="user.authtype" class="waves-effect btn btn-info btn-sm"
-                            ng-click="form.$valid && createuser('<?php echo $_SESSION['user'];?>')"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                            </svg>&nbsp;Create</a>
+                            ng-click="form.$valid && createuser('<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-check"></i>&nbsp;Create</a>
                         <a id="btn-create-user-ldap" ng-show="user.authtype" class="waves-effect  btn btn-info btn-sm"
-                            ng-click="form.$valid && createuserldap('<?php echo $_SESSION['user'];?>')"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                            </svg>&nbsp;Add</a>
+                            ng-click="form.$valid && createuserldap('<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-check"></i>&nbsp;Add</a>
                         <a id="btn-update-user" class="waves-effect btn btn-info btn-sm"
-                            ng-click="form.$valid && updateuser('<?php echo $_SESSION['user'];?>')"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                            </svg>&nbsp;Save</a>
+                            ng-click="form.$valid && updateuser('<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save</a>
                     </div>
                 </form>
             </div>

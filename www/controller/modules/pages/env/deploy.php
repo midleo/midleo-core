@@ -140,7 +140,7 @@ if (sessionClass::checkAcc($acclist, "appadm,appview")) {
                         <button type="button" class="btn btn-light btn-sm deplbutns" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Cancel</button>
                             <button type="button" name="dodeployall" ng-show="depl.env"
                                 ng-click="form.$valid && deployPKG('<?php echo $thisarray['p2'];?>');"
-                                class="waves-effect waves-light btn btn-info btn-sm deplbutns"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy"/></svg>&nbsp;Deploy</button>
+                                class="waves-effect waves-light btn btn-info btn-sm deplbutns"><i class="mdi mdi-upload"></i>&nbsp;Deploy</button>
                            
                         </div>
                     </form>

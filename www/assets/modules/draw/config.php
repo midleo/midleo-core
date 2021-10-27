@@ -281,27 +281,27 @@ $brarr = array();
         array_push($brarr, array(
             "title" => "Create new diagram",
             "link" => "#mnewdes",
-            "midicon" => "add",
+            "icon" => "mdi-plus",
             "modal" => true,
             "active" => false,
         ));
         array_push($brarr, array(
             "title" => "Create/edit articles",
             "link" => "/cpinfo",
-            "midicon" => "kn-b",
+            "icon" => "mdi-file-document-edit-outline",
             "active" => ($page == "cpinfo") ? "active" : "",
         ));
         array_push($brarr, array(
             "title" => "Import documents",
             "link" => "/docimport",
-            "midicon" => "deploy",
+            "icon" => "mdi-upload",
             "active" => ($page == "docimport") ? "active" : "",
         ));
         if (sessionClass::checkAcc($acclist, "odfiles") && !empty($website['odappid'])) {
             array_push($brarr, array(
                 "title" => "View/Map OneDrive files",
                 "link" => "/onedrive",
-                "midicon" => "onedrive",
+                "icon" => "mdi-microsoft-onedrive",
                 "active" => ($page == "onedrive") ? "active" : "",
             ));
         }
@@ -309,7 +309,7 @@ $brarr = array();
             array_push($brarr, array(
                 "title" => "View/Map Dropbox files",
                 "link" => "/dropbox",
-                "midicon" => "dropbox",
+                "icon" => "mdi-dropbox",
                 "active" => ($page == "dropbox") ? "active" : "",
             ));
         }
@@ -475,11 +475,8 @@ $brarr = array();
                                                     <?php if ($_SESSION['user_level'] >= "5") {?>
                                                     <button type="button"
                                                         ng-click="deldes(d.id,d.desid,'<?php echo $_SESSION["user"]; ?>')"
-                                                        class="btn btn-light btn-sm bg waves-effect"><svg
-                                                            class="midico midico-outline">
-                                                            <use href="/assets/images/icon/midleoicons.svg#i-trash"
-                                                                xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
-                                                        </svg></button>
+                                                        class="btn btn-light btn-sm bg waves-effect"><i
+                                                            class="mdi mdi-close"></i></button>
                                                     <?php } else {?>
                                                     <button type="button"
                                                         class="btn btn-light btn-sm bg waves-effect"><i
@@ -582,10 +579,7 @@ $brarr = array();
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary btn-sm"
-                                            data-bs-dismiss="modal"><svg class="midico midico-outline">
-                                                <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                            </svg>&nbsp;Close</button>
+                                            data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
                                         <button class="btn btn-info btn-sm" type="submit" name="savedesdata"><i
                                                 class="mdi mdi-content-save"></i>&nbsp;Create</button>&nbsp;
                                     </div>

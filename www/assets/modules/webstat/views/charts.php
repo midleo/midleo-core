@@ -33,17 +33,11 @@ if (!empty($bsteps) && !empty($ugrarr) && !empty($widarr)) {
         <div class="col-md-4 position-relative">
             <input type="text" id="applauto" class="form-control topsearch" required
                 placeholder="Filter" />
-            <span class="searchicon"><svg class="midico midico-outline">
-                    <use href="/assets/images/icon/midleoicons.svg#i-search"
-                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                </svg>
+            <span class="searchicon"><i class="mdi mdi-magnify"></i>
                 <input type="text" id="appname" name="appname" style="display:none;" />
         </div>
         <div class="col-md-4">
-            <button type="submit" name="getforms" class="btn btn-info"><svg class="midico midico-outline">
-                    <use href="/assets/images/icon/midleoicons.svg#i-search"
-                        xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                </svg>&nbsp;Show</button>&nbsp;
+            <button type="submit" name="getforms" class="btn btn-info"><i class="mdi mdi-magnify"></i>&nbsp;Show</button>&nbsp;
             <a href="/webstat/charts/?" class="btn btn-light">Reset</a>
         </div>
     </div>

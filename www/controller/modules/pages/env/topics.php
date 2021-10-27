@@ -19,7 +19,7 @@
     "link"=>"#modal-depl-form",
     "nglink"=>"showDeployForm()",
     "modal"=>true,
-    "midicon"=>"deploy",
+    "icon"=>"mdi-upload",
     "ngshow"=>"selectedid.length",
     "active"=>false,
   ));

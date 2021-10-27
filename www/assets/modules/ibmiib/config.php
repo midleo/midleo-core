@@ -53,10 +53,10 @@ class Class_flows{
     <div class="row">
           <div class="col-md-3 position-relative">
               <input type="text" ng-model="search" class="form-control  topsearch" placeholder="Search file name...">
-              <span class="searchicon"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-search" xlink:href="/assets/images/icon/midleoicons.svg#i-search"/></svg></span>
+              <span class="searchicon"><i class="mdi mdi-magnify"></i></span>
 </div>
           <div class="col-md-9 text-end">
-          <span data-bs-toggle="tooltip" data-bs-placement="top" title="Upload new files"><a  data-bs-toggle="modal"  class="waves-effect waves-light btn btn-info" href="#modal-flow-form"><svg class="midico midico-outline"><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy"/></svg>&nbsp;Upload</a></span>
+          <span data-bs-toggle="tooltip" data-bs-placement="top" title="Upload new files"><a  data-bs-toggle="modal"  class="waves-effect waves-light btn btn-info" href="#modal-flow-form"><i class="mdi mdi-upload"></i>&nbsp;Upload</a></span>
           </div>
           </div><br>
     <div class="card">

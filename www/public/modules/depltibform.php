@@ -51,7 +51,7 @@
           <button ng-show="depl.srv" type="button" class="waves-effect waves-light btn btn-light btn-sm"
                         ng-click="createjob('<?php echo $thisarray['p2'];?>','tibems','tibco_obj','<?php echo str_replace(array("tib","s"),"",$thisarray['p1']);?>','<?php echo $page;?>')"><i
                             class="mdi mdi-play-circle-outline"></i>&nbsp;Create job</button>
-            <button ng-show="depl.srv" type="button" ng-click="deplform.$valid && deployTibSelected('<?php echo $thisarray['p2'];?>','<?php echo str_replace(array("tib","s"),"",$thisarray['p1']);?>');" class="waves-effect waves-light btn btn-light btn-sm"><svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy"/></svg>&nbsp;Deploy</button>
+            <button ng-show="depl.srv" type="button" ng-click="deplform.$valid && deployTibSelected('<?php echo $thisarray['p2'];?>','<?php echo str_replace(array("tib","s"),"",$thisarray['p1']);?>');" class="waves-effect waves-light btn btn-light btn-sm"><i class="mdi mdi-upload"></i>&nbsp;Deploy</button>
             <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
           </div>
         </form>

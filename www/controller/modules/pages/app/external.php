@@ -3,7 +3,7 @@
     "title"=>"Save the configurtion",
     "link"=>"javascript:void(0)",
     "onclick"=>"document.getElementById('saveadm').click();",
-    "midicon"=>"save",
+    "icon"=>"mdi-content-save-outline",
     "active"=>true,
   ));
 ?>
@@ -14,11 +14,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4><i class="mdi mdi-git"></i>&nbsp;Version control
-                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-warning"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-warning" />
-                            </svg>&nbsp;for package automation
+                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i class="mdi mdi-alert-outline"></i>&nbsp;for package automation
                         </div>
                     </h4>
                 </div>
@@ -149,15 +145,8 @@
             <?php if (method_exists("Class_onedrive", "getPage") && is_callable(array("Class_onedrive", "getPage"))){ ?>
             <div class="card">
                 <div class="card-header">
-                    <h4><svg class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-onedrive"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-onedrive" />
-                        </svg>&nbsp;Microsoft OneDrive
-                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-warning"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-warning" />
-                            </svg>&nbsp;For OneDrive documents collaboration
+                    <h4><i class="mdi mdi-microsoft-onedrive"></i>&nbsp;Microsoft OneDrive
+                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i class="mdi mdi-alert-outline"></i>&nbsp;For OneDrive documents collaboration
                         </div>
                     </h4>
                 </div>
@@ -200,15 +189,8 @@
             <?php if (method_exists("Class_dropbox", "getPage") && is_callable(array("Class_dropbox", "getPage"))){ ?>
             <div class="card">
                 <div class="card-header">
-                    <h4><svg class="midico midico-outline">
-                            <use href="/assets/images/icon/midleoicons.svg#i-dropbox"
-                                xlink:href="/assets/images/icon/midleoicons.svg#i-dropbox" />
-                        </svg>&nbsp;Dropbox
-                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-warning"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-warning" />
-                            </svg>&nbsp;For Dropbox documents collaboration
+                    <h4><i class="mdi mdi-dropbox"></i>&nbsp;Dropbox
+                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i class="mdi mdi-alert-outline"></i>&nbsp;For Dropbox documents collaboration
                         </div>
                     </h4>
                 </div>
@@ -244,27 +226,21 @@
                 <table class="table browser mt-3 table-borderless">
                     <tbody>
                         <tr>
-                            <td style="width:40px"><i class="mdi mdi-git mdi-24px"></i></td>
+                            <td style="width:40px"><i class="mdi mdi-git"></i></td>
                             <td>Version Control</td>
                             <td class="text-end"><span
                                     class="badge badge-<?php echo !empty($website['gitreposurl'])?"success":"danger";?>"><?php echo !empty($website['gittype'])?$website['gittype']:"Disabled";?></span>
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:40px"><svg class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-onedrive"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-onedrive" />
-                                </svg></td>
+                            <td style="width:40px"><i class="mdi mdi-microsoft-onedrive"></i></td>
                             <td>Microsoft OneDrive</td>
                             <td class="text-end"><span
                                     class="badge badge-<?php echo !empty($website['odappid'])?"success":"danger";?>"><?php echo !empty($website['odappid'])?"Enabled":"Disabled";?></span>
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:40px"><svg class="midico midico-outline">
-                                    <use href="/assets/images/icon/midleoicons.svg#i-dropbox"
-                                        xlink:href="/assets/images/icon/midleoicons.svg#i-dropbox" />
-                                </svg></td>
+                            <td style="width:40px"><i class="mdi mdi-dropbox"></i></td>
                             <td>Dropbox</td>
                             <td class="text-end"><span
                                     class="badge badge-<?php echo !empty($website['dbclid'])?"success":"danger";?>"><?php echo !empty($website['dbclid'])?"Enabled":"Disabled";?></span>

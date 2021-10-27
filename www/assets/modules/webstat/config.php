@@ -29,13 +29,13 @@ class Class_webstat
         array(
           "title"=>"Request statistics",
           "link"=>"/webstat/charts",
-          "midicon"=>"stats",
+          "icon"=>"mdi-chart-bell-curve-cumulative",
           "active"=>($thisarray['p1']=="charts")?"active":"",
         ),
         array(
             "title"=>"IBM MQ statistics",
             "link"=>"/webstat/ibmmq",
-            "midicon"=>"mq",
+            "icon"=>"mdi-tray-full",
             "active"=>($thisarray['p1']=="ibmmq")?"active":"",
           )
       );

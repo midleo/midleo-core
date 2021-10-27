@@ -31,7 +31,7 @@ class Class_browse{
             array_push($brarr,array(
               "title"=>"Back to app servers",
               "link"=>"/env/appservers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""),
-              "midicon"=>"app-srv",
+              "icon"=>"mdi-application-brackets-outline",
               "active"=>true,
             ));
           } 
@@ -40,7 +40,7 @@ class Class_browse{
             array_push($brarr,array(
               "title"=>"Back to servers",
               "link"=>"/env/servers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""),
-              "midicon"=>"server",
+              "icon"=>"mdi-server mdi-24px",
               "active"=>true,
             ));
           } 
@@ -52,7 +52,7 @@ class Class_browse{
             array_push($brarr,array(
               "title"=>"Back to home",
               "link"=>"//".$_SERVER['HTTP_HOST']."//p=welcome",
-              "midicon"=>"dashboard",
+              "icon"=>"mdi-view-dashboard-outline",
               "active"=>true,
             ));
           } 

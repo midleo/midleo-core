@@ -304,7 +304,7 @@
   </div>
   <div class="modal-footer">
   <button ng-show="depl.deplenv" type="button" class="waves-effect waves-light btn btn-light btn-sm" ng-click="createjob('<?php echo $thisarray['p2'];?>','fte','mqenv_mqfte','','')"><i class="mdi mdi-play-circle-outline"></i>&nbsp;Create job</button>
-  <button ng-show="depl.deplenv" type="button" ng-click="form.$valid && deployMQftesel('<?php echo $thisarray['p2'];?>');" class="waves-effect waves-light btn btn-primary btn-sm"><svg class="midico midico-outline" ><use href="/assets/images/icon/midleoicons.svg#i-deploy" xlink:href="/assets/images/icon/midleoicons.svg#i-deploy"/></svg>&nbsp;Deploy</button>
+  <button ng-show="depl.deplenv" type="button" ng-click="form.$valid && deployMQftesel('<?php echo $thisarray['p2'];?>');" class="waves-effect waves-light btn btn-primary btn-sm"><i class="mdi mdi-upload"></i>&nbsp;Deploy</button>
   <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
   </div>
  </form>

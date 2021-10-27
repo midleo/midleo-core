@@ -73,7 +73,7 @@ foreach($zobj as $val) {
 
         <div class="card  p-2 mb-3">
             <div class="d-flex align-items-start">
-                <img class="me-2 avatar-sm rounded-circle" src="/assets/images/avatar.svg"
+                <img class="me-2 avatar-sm rounded-circle" src="/<?php echo $website['corebase'];?>assets/images/avatar.svg"
                     alt="<?php echo $tmp["user"]["fullname"];?>" style="width:40px;">
                 <div class="w-100">
                     <h5 class="m-0"><?php echo $tmp["user"]["fullname"];?></h5>

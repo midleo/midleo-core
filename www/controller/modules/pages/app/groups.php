@@ -35,26 +35,17 @@ array_push($brarr,array(
                             <li style="width:300px;padding:5px;" ng-repeat="(ukey, user) in d.users"
                                 class="list-group-item border-bottom usr_{{d.id}}{{ukey}}">{{user}}<a class="float-end"
                                     ng-click="delusrgr(d.id,ukey,'<?php echo $_SESSION['user'];?>')"
-                                    style="cursor:pointer;"><svg class="midico midico-outline">
-                                        <use href="/assets/images/icon/midleoicons.svg#i-trash"
-                                            xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
-                                    </svg></a></li>
+                                    style="cursor:pointer;"><i class="mdi mdi-close"></i></a></li>
                         </ul>
                     </div>
                 </td>
                 <td style="vertical-align:top!important;">
-                    <div class="text-start d-grid gap-2 d-md-block">
+                    <div class="text-start d-grid mt-2 d-md-block">
                         <button ng-click="readgroup(d.id,'<?php echo $_SESSION['user'];?>')" type="button"
-                            class="btn waves-effect btn-sm btn-light"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-edit"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-edit" />
-                            </svg></button>
+                            class="btn waves-effect btn-sm btn-light"><i class="mdi mdi-pencil mdi-18px"></i></button>
                         <?php if($_SESSION['user_level']>=3){?><button
                             ng-click="delgroup(d.id,'<?php echo $_SESSION['user'];?>')" type="button"
-                            class="btn waves-effect btn-light btn-sm"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-trash"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-trash" />
-                            </svg></button><?php } ?>
+                            class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-close mdi-18px"></i></button><?php } ?>
                     </div>
                 </td>
             </tr>
@@ -143,23 +134,11 @@ array_push($brarr,array(
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                            </svg>&nbsp;Close</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
                         <button type="button" id="btn-create-group" class="waves-effect btn btn-info btn-sm"
-                            ng-click="form.$valid && creategroup('<?php echo $_SESSION['user'];?>')"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-check"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-check" />
-                            </svg>&nbsp;Create</button>
+                            ng-click="form.$valid && creategroup('<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-check"></i>&nbsp;Create</button>
                         <button type="button" id="btn-update-group" class="waves-effect btn btn-info btn-sm"
-                            ng-click="form.$valid && updategroup('<?php echo $_SESSION['user'];?>')"><svg
-                                class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-save"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-save" />
-                            </svg>&nbsp;Save</button>
+                            ng-click="form.$valid && updategroup('<?php echo $_SESSION['user'];?>')"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
 
                     </div>
             </div>

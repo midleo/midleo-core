@@ -130,7 +130,6 @@
                 <table class="table table-vmiddle table-hover stylish-table mb-0">
                     <thead>
                         <tr>
-                            <th class="text-center">App code</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Server type</th>
                             <th class="text-center">Package ID</th>
@@ -138,7 +137,7 @@
                             <th class="text-center">Released by</th>
                             <th class="text-center">Deployed in</th>
                             <th class="text-center"></th>
-                            <th class="text-center" width="100px">Action</th>
+                            <th class="text-center" width="130px">Action</th>
                         </tr>
                     </thead>
                     <tbody ng-init="getAllpack('<?php echo $thisarray['p2'];?>')">
@@ -149,7 +148,6 @@
                         <tr id="contloaded" class="hide"
                             dir-paginate="d in names | filter:search | orderBy:'-released' | itemsPerPage:10"
                             pagination-id="prodx">
-                            <td class="text-center">{{ d.proj }}</td>
                             <td class="text-center">{{ d.name }}</td>
                             <td class="text-center">{{ d.typesrv }}</td>
                             <td class="text-center">{{ d.packuid }}</td>
@@ -166,36 +164,22 @@
                                     <button ng-click="getQMlist('<?php echo $thisarray['p2'];?>',d.packuid,d.id)"
                                         class="btn btn-light mql{{d.id}}" ng-show="d.srvtype=='qm'"
                                         data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')"
-                                        title="Preview"><svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-show"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-show" />
-                                        </svg></button>
+                                        title="Preview"><i class="mdi mdi-eye-outline"></i></button>
                                     <button ng-show="d.isgitprepared" ng-click="getGitInfo(d.packuid,d.id)"
                                         class="btn btn-light gl{{d.id}}" data-bs-toggle="tooltip"
                                         onmouseenter="$(this).tooltip('show')" title="Check GIT deployments"><i
                                             class="mdi mdi-git"></i></button>
                                     <button data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')" title="Prepare"
                                         type="button" ng-click="preparepack('<?php echo $thisarray['p2'];?>',d.id)"
-                                        class="btn btn-light btn-sm waves-effect prepb{{d.id}}"><svg
-                                            class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-documents"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-documents" />
-                                        </svg></button>
+                                        class="btn btn-light btn-sm waves-effect prepb{{d.id}}"><i class="mdi mdi-file-document-multiple-outline"></i></button>
                                     <button ng-show="d.isdeployed" data-bs-toggle="tooltip"
                                         onmouseenter="$(this).tooltip('show')"
                                         title="You cannot delete a package if it is deployed already." type="button"
-                                        class="btn btn-light btn-sm waves-effect"><svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-help"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-help" />
-                                        </svg></button>
+                                        class="btn btn-light btn-sm waves-effect"><i class="mdi mdi-information-outline"></i></button>
                                     <button ng-hide="d.isdeployed" data-bs-toggle="tooltip"
                                         onmouseenter="$(this).tooltip('show')" title="Delete" type="button"
                                         ng-click="deletepack('<?php echo $thisarray['p2'];?>',d.id,d.packuid)"
-                                        class="btn btn-light btn-sm waves-effect delb{{d.id}}"><svg
-                                            class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-x"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                                        </svg></button>
+                                        class="btn btn-light btn-sm waves-effect delb{{d.id}}"><i class="mdi mdi-close"></i></button>
                                 </div>
                                 <?php } ?>
                             </td>
@@ -247,11 +231,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg
-                        class="midico midico-outline">
-                        <use href="/assets/images/icon/midleoicons.svg#i-x"
-                            xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                    </svg>&nbsp;Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
             </div>
         </div>
     </div>
@@ -293,16 +273,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg
-                        class="midico midico-outline">
-                        <use href="/assets/images/icon/midleoicons.svg#i-x"
-                            xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                    </svg>&nbsp;Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
                 <button ng-show="depl.deplenv" type="button" class="waves-effect waves-light btn btn-info btn-sm"
-                    ng-click="mqpreview('<?php echo $thisarray['p2'];?>')"><svg class="midico midico-outline">
-                        <use href="/assets/images/icon/midleoicons.svg#i-show"
-                            xlink:href="/assets/images/icon/midleoicons.svg#i-show" />
-                    </svg>&nbsp;Make preview</button>
+                    ng-click="mqpreview('<?php echo $thisarray['p2'];?>')"><i class="mdi mdi-eye-outline"></i>&nbsp;Make preview</button>
             </div>
         </div>
     </div>
@@ -327,10 +300,7 @@
                                     <button class="btn btn-light" data-bs-toggle="collapse"
                                         data-bs-target="#collapsed{{i}}{{j}}" aria-expanded="true"
                                         aria-controls="collapsed{{i}}{{j}}">
-                                        <svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-up"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-up" />
-                                        </svg>&nbsp;{{keyin}}
+                                        <i class="mdi mdi-arrow-up"></i>&nbsp;{{keyin}}
                                     </button>
                                 </a>
                                 <div id="collapsed{{i}}{{j}}" class="collapse" aria-labelledby="headingd{{i}}{{j}}"
@@ -370,10 +340,7 @@
                                     <button class="btn btn-light" data-bs-toggle="collapse"
                                         data-bs-target="#collapsel{{i}}{{j}}" aria-expanded="true"
                                         aria-controls="collapsel{{i}}{{j}}">
-                                        <svg class="midico midico-outline">
-                                            <use href="/assets/images/icon/midleoicons.svg#i-up"
-                                                xlink:href="/assets/images/icon/midleoicons.svg#i-up" />
-                                        </svg>&nbsp;{{keyin}}
+                                        <i class="mdi mdi-arrow-up"></i>&nbsp;{{keyin}}
                                     </button>
                                 </a>
                                 <div id="collapsel{{i}}{{j}}" class="collapse" aria-labelledby="headingl{{i}}{{j}}"
@@ -400,11 +367,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><svg
-                        class="midico midico-outline">
-                        <use href="/assets/images/icon/midleoicons.svg#i-x"
-                            xlink:href="/assets/images/icon/midleoicons.svg#i-x" />
-                    </svg>&nbsp;Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
             </div>
         </div>
     </div>

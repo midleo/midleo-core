@@ -2,10 +2,10 @@
     <div class="container">
     <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
             
-            <img data-bs-toggle="tooltip" src="/assets/images/midleo-logo-white.svg"
+            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-white.svg"
                 alt="Midleo CORE" title="Midleo CORE"
                 class="light-logo ml" />
-            <img data-bs-toggle="tooltip" src="/assets/images/midleo-icon-logo-white.svg"
+            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-icon-logo-white.svg"
                 alt="Midleo CORE" title="Midleo CORE"
                 class="light-logo-icon mli" />
        
@@ -28,10 +28,7 @@
             <ul class="navbar-nav mb-lg-0 nlinks">
                 <li class="nav-item d-none d-md-block search-box"> <a
                         class="nav-link d-none d-md-block text-muted waves-effect waves-dark"
-                        href="javascript:void(0)"><span class="itemicon"><svg class="midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-search"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-search" />
-                            </svg></span></a>
+                        href="javascript:void(0)"><span class="itemicon"><i class="mdi mdi-magnify mdi-24px"></i></span></a>
                     <?php if(!empty($_SESSION["user"])){?>
                     <form class="app-search p-relative" method="post" action="/searchall">
                         <input type="text" name="fd" class="hs-input hasselect"
@@ -82,11 +79,8 @@
                 <div class="theme-switch-wrapper">
                     <label class="theme-switch" for="checkbox">
                         <input type="checkbox" id="checkbox" />
-                        <div class="slidersw" style="margin-top: 7px;">
-                            <svg class="itemicon midico midico-outline">
-                                <use href="/assets/images/icon/midleoicons.svg#i-night"
-                                    xlink:href="/assets/images/icon/midleoicons.svg#i-night" />
-                            </svg>
+                        <div class="slidersw itemicon" style="">
+                        <i class="mdi mdi-weather-night mdi-24px"></i>
                         </div>
                     </label>
                 </div>
