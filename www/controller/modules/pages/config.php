@@ -429,7 +429,7 @@ class Class_mregister
     </head>
 
     <body
-        style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+        style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
         <section id="wrapper">
             <div class="login-register">
                 <div class="row justify-content-center">
@@ -762,7 +762,7 @@ class Class_mlogin
         </head>
 
         <body
-            style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+            style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
             <section id="wrapper">
                 <div class="login-register">
                     <div class="row justify-content-center">
@@ -994,7 +994,7 @@ class Class_profile
                             <div class="card p-2">
                                 <div class="mt-4 text-center">
                                     <img class="img img-fluid rounded-circle"
-                                        src="<?php echo !empty($uavatar) ? $uavatar : "/assets/images/avatar.svg"; ?>" alt=""
+                                        src="<?php echo !empty($uavatar) ? $uavatar : "/".$website['corebase']."assets/images/avatar.svg"; ?>" alt=""
                                         width="150">
                                     <h4 class="card-title mt-2"><?php echo $usname; ?></h4>
                                     <h6 class="card-subtitle"><?php echo $usemail; ?></h6>
