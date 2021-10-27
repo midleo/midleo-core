@@ -30,7 +30,7 @@ class textClass{
   }
   public static function sendUserMention($match,$url){
     $pdo = pdodb::connect();
-    $sqlin="SELECT email,fullname FROM ".explode("@", $match)[0]."s where mainuser=?";
+    $sqlin="SELECT email,fullname FROM users where mainuser=?";
     $qin = $pdo->prepare($sqlin);
     $qin->execute(array(explode("@", $match)[1]));
     if ($zobjin = $qin->fetch(PDO::FETCH_ASSOC)) { 

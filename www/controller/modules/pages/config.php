@@ -670,7 +670,11 @@ class Class_mlogin
                                 $q->execute(array($stamp, $ckey, $zobj['id']));
                                 setcookie("user_id", $_SESSION['user_id'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
                                 setcookie("user", $_SESSION['user'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
-                                if (!empty($_GET['next'])) {header("Location: " . base64_decode(htmlspecialchars($_GET["next"])));} else {header("Location: /?");}
+                                if (!empty($_GET['next'])) {
+                                    header("Location: " . base64_decode(htmlspecialchars($_GET["next"])));
+                                } else {
+                                    header("Location: /?");
+                                }
                             } else {
                                 $err[] = "No such user";
                                 if ($website["registration"] == 1) {
@@ -709,7 +713,11 @@ class Class_mlogin
                         $q->execute(array($stamp, $ckey, $zobj['id']));
                         setcookie("user_id", $_SESSION['user_id'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
                         setcookie("user", $_SESSION['user'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
-                        if (!empty($_GET['next'])) {header("Location: " . base64_decode(htmlspecialchars($_GET["next"])));} else {header("Location: /cp/?");}
+                        if (!empty($_GET['next'])) {
+                            header("Location: " . base64_decode(htmlspecialchars($_GET["next"])));
+                        } else {
+                            header("Location: /cp/?");
+                        }
                     } else {
                         $err[] = "Wrong password";
                         $sql = "insert into user_failure(fail_type,mainuser,what,ip) values('loginpass',?,?,?)";
