@@ -45,14 +45,14 @@ class Class_monitoring{
             $err[]="Monitoring configuratio failed";
         }
     }
-    include "public/modules/css.php";
+    include $website['corebase']."public/modules/css.php";
     if(!empty($thisarray['p1'])){ 
-        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-        <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">';
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/js/datatables/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/js/datatables/responsive.dataTables.min.css">';
         }
     echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
     $breadcrumb["text"]="Monitoring section"; 
-    include "public/modules/headcontent.php"; ?>
+    include $website['corebase']."public/modules/headcontent.php"; ?>
 <div class="page-wrapper">
     <div class="container-fluid">
         <?php 
@@ -246,7 +246,7 @@ class Class_monitoring{
             </form>
             </div>
     <div class="col-md-3">
-        <?php include "public/modules/breadcrumbin.php"; ?>
+        <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
     </div>
     </div>
         </div>
@@ -317,8 +317,8 @@ class Class_monitoring{
 
 
                 <div class="col-md-3">
-                <?php include "public/modules/filterbar.php"; ?>
-        <?php include "public/modules/breadcrumbin.php"; ?>
+                <?php include $website['corebase']."public/modules/filterbar.php"; ?>
+        <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
     </div>
     </div>
             </div>
@@ -329,18 +329,18 @@ class Class_monitoring{
 
 
 echo "</div>";
-    include "public/modules/footer.php";
-    include "public/modules/js.php"; 
+    include $website['corebase']."public/modules/footer.php";
+    include $website['corebase']."public/modules/js.php"; 
     if($thisarray["p2"]=="new"){
-    echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';
+    echo '<script src="/'.$website['corebase'].'assets/js/tagsinput.min.js" type="text/javascript"></script>';
     }
     if(!empty($thisarray['p1'])){ } else {
-       echo '<script  type="text/javascript" src="/assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/monitoring/assets/js/ng-controller.js"></script>';
+       echo '<script  type="text/javascript" src="/'.$website['corebase'].'assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/monitoring/assets/js/ng-controller.js"></script>';
     }
     if(!empty($thisarray['p1'])){ 
-        echo '<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-        <script src="/assets/js/datatables/dataTables.bootstrap5.min.js"></script>
-        <script src="/assets/js/datatables/dataTables.fixedColumns.min.js"></script>'; ?>
+        echo '<script src="/'.$website['corebase'].'assets/js/datatables/jquery.dataTables.min.js"></script>
+        <script src="/'.$website['corebase'].'assets/js/datatables/dataTables.bootstrap5.min.js"></script>
+        <script src="/'.$website['corebase'].'assets/js/datatables/dataTables.fixedColumns.min.js"></script>'; ?>
     <script type="text/javascript">
     let dtable = $('#data-table').DataTable({
         "oLanguage": {
@@ -356,7 +356,7 @@ echo "</div>";
     });
     </script>
     <?php }
-    include "public/modules/template_end.php";
+    include $website['corebase']."public/modules/template_end.php";
     echo '</body></html>';
   }
 }

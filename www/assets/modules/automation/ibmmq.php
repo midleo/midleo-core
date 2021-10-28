@@ -62,8 +62,8 @@
             </div>
 
         <div class="col-md-3">
-        <?php include "public/modules/filterbar.php"; ?>
-            <?php include "public/modules/breadcrumbin.php"; ?>
+        <?php include $website['corebase']."public/modules/filterbar.php"; ?>
+            <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
         </div>
     </div>
 </div>

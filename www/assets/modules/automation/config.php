@@ -20,11 +20,11 @@ class Class_automation{
     $pdo = pdodb::connect();
     $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
     if (!empty($env)) {$menudataenv = $env;} else { $menudataenv = array();}
-     include "public/modules/css.php";
-     echo '<link href="/assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />';
+     include $website['corebase']."public/modules/css.php";
+     echo '<link href="/'.$website['corebase'].'assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />';
     echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
     $breadcrumb["text"]="DevOps section"; 
-    include "public/modules/headcontent.php"; ?>
+    include $website['corebase']."public/modules/headcontent.php"; ?>
 <div class="page-wrapper">
     <div class="container-fluid">
         <?php 
@@ -210,8 +210,8 @@ $brarr=array(
                             </div>
             </div>
             <div class="col-md-3">
-                <?php include "public/modules/filterbar.php"; ?>
-                <?php include "public/modules/breadcrumbin.php"; ?>
+                <?php include $website['corebase']."public/modules/filterbar.php"; ?>
+                <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
             </div>
         </div>
     </div>
@@ -220,12 +220,12 @@ $brarr=array(
     <?php } 
             }
                echo "</div>";
-    include "public/modules/footer.php";
-    include "public/modules/js.php"; 
+    include $website['corebase']."public/modules/footer.php";
+    include $website['corebase']."public/modules/js.php"; 
     if(!empty($thisarray['p1'])){ } else {
-       echo '<script  type="text/javascript" src="/assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/automation/assets/js/ng-controller.js"></script>';
+       echo '<script  type="text/javascript" src="/'.$website['corebase'].'assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/automation/assets/js/ng-controller.js"></script>';
     }
-    include "public/modules/template_end.php";
+    include $website['corebase']."public/modules/template_end.php";
     echo '</body></html>';
   }
 }

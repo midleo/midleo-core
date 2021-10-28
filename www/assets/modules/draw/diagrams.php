@@ -51,7 +51,7 @@ class Class_diagrams
                 $blogcatname=$zobj['catname']; $blogcat=$zobj['category'];
             } else { $blogcatname="wrong category!"; }
           } else { $blogcatname="Category is empty!"; }}
-        include "public/modules/css.php";   
+        include $website['corebase']."public/modules/css.php";   
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"]="Diagrams"; 
      $brarr=array();
@@ -91,12 +91,12 @@ class Class_diagrams
         "active"=>($page=="dropbox")?"active":"",
       ));
     }
-        include "public/modules/headcontentdiagram.php";   
+        include $website['corebase']."public/modules/headcontentdiagram.php";   
         echo '<div class="page-wrapper">'; ?>
               <div class="container-fluid">
       
                   <?php     echo '<div class="row pt-3"><div class="col-lg-2">';
-                  include "public/modules/sidebardiagrams.php";
+                  include $website['corebase']."public/modules/sidebardiagrams.php";
                   echo '</div><div class="col-md-8">';
 
 
@@ -236,11 +236,11 @@ class Class_diagrams
                 }
 
         echo '</div><div class="col-md-2">'; 
-        include "public/modules/diagramsidebar.php";
+        include $website['corebase']."public/modules/diagramsidebar.php";
         echo '</div></div></div></div>'; 
-        include "public/modules/footer.php";
-        include "public/modules/js.php";
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/footer.php";
+        include $website['corebase']."public/modules/js.php";
+        include $website['corebase']."public/modules/template_end.php";
         if(!empty($text)){unset($text);}
          echo '</body></html>';
     }

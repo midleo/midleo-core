@@ -13,43 +13,42 @@ class Class_cp
         $err = array();
         $msg = array();
         $pdo = pdodb::connect();
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
         $breadcrumb["text"] = "Dashboard";
         $brarr = array();
         array_push($brarr, array(
             "title" => "Import documents",
-            "link" => "#mnewimp",
+            "link" => "/docimport",
             "icon" => "mdi-plus",
-            "modal" => true,
             "active" => false,
         ));
         array_push($brarr, array(
             "title" => "Create/edit articles",
             "link" => "/cpinfo",
             "icon" => "mdi-file-document-edit-outline",
-            "active" => ($page == "cpinfo") ? "active" : "",
+            "active" => false,
         ));
         array_push($brarr, array(
             "title" => "LDAP configuration",
-            "link" => "/" . $page . "/ldap",
+            "link" => "/appconfig/ldap",
             "icon" => "mdi-file-tree-outline",
-            "active" => ($thisarray['p1'] == "ldap") ? "active" : "",
+            "active" => false,
         ), array(
             "title" => "External connections",
-            "link" => "/" . $page . "/external",
+            "link" => "/appconfig/external",
             "icon" => "mdi-open-in-new",
-            "active" => ($thisarray['p1'] == "external") ? "active" : "",
+            "active" => false,
         ), array(
             "title" => "Core Configuration",
-            "link" => "/" . $page . "/main",
+            "link" => "/appconfig/main",
             "icon" => "mdi-application-cog-outline",
-            "active" => ($thisarray['p1'] == "main") ? "active" : "",
+            "active" => false,
         ));
 
         $page = "dashboard";
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
-        include "public/modules/headcontent.php";
+        include $website['corebase']."public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
 
         ?>
@@ -165,14 +164,14 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
         </div>
     </div>
     <div class="col-lg-2">
-        <?php include "public/modules/breadcrumbin.php";?>
+        <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
     </div>
 </div>
 <?php
-include "public/modules/footer.php";
-        include "public/modules/js.php";?>
-<script src="/assets/js/dirPagination.js"></script>
-<script src="/assets/js/chart.min.js" type="text/javascript"></script>
+include $website['corebase']."public/modules/footer.php";
+        include $website['corebase']."public/modules/js.php";?>
+<script src="/<?php echo $website['corebase'];?>assets/js/dirPagination.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/chart.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 var thiscolor = "#000";
 var thiscolorreq = "rgb(255, 54, 54)";
@@ -366,7 +365,7 @@ window.onload = function() {
     window.myLine = new Chart(ctx, config);
 };
 </script><?php
-include "public/modules/template_end.php";
+include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
 }
@@ -489,13 +488,13 @@ class Class_cpinfo
             gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Updated post:<a href='/info/posts/" . $thisarray['p2'] . "'>" . $_POST["posttitle"] . "</a>");
             $msg[] = 'The post was updated.';
         }
-        include "public/modules/css.php";?>
+        include $website['corebase']."public/modules/css.php";?>
 <?php if ($thisarray['p1'] != "new") {?>
-<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/responsive.dataTables.min.css">
 <?php }?>
-<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/tinyreset.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/tinyreset.css">
 <style type="text/css">
 .bootstrap-tagsinput {
     border-radius: 0px;
@@ -541,7 +540,7 @@ class Class_cpinfo
             ));
         }
 
-        include "public/modules/headcontent.php"; ?>
+        include $website['corebase']."public/modules/headcontent.php"; ?>
 <div class="page-wrapper">
     <div class="container-fluid">
         <!--diagrams modal-->
@@ -880,8 +879,8 @@ class Class_cpinfo
                 </div>
             </div>
             <div class="col-md-2">
-                <?php include "public/modules/filterbar.php";?>
-                <?php include "public/modules/breadcrumbin.php";?>
+                <?php include $website['corebase']."public/modules/filterbar.php";?>
+                <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
             </div>
         </div>
         <br>
@@ -924,13 +923,13 @@ class Class_cpinfo
 
 </div>
 <?php
-include "public/modules/footer.php";
+include $website['corebase']."public/modules/footer.php";
         echo "</div></div>";
-        include "public/modules/js.php";
-        echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';?>
+        include $website['corebase']."public/modules/js.php";
+        echo '<script src="/'.$website['corebase'].'assets/js/tagsinput.min.js" type="text/javascript"></script>';?>
 <?php if ($thisarray['p1'] != "new") {?>
-<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-<script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     <?php if ($thisarray['p1'] != "edit") {?>
@@ -976,7 +975,7 @@ $(document).ready(function() {
 });
 </script>
 <?php }?>
-<?php include "public/modules/template_end.php";
+<?php include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
 }

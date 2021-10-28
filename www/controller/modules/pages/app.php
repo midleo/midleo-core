@@ -95,22 +95,22 @@ class Class_appconfig
             $menudatabsteps = json_decode("[{}]", true);
         }
 
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         if ($thisarray['p1'] == "users" || $thisarray['p1'] == "groups") {?>
-<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/jquery-ui.min.css">
 <?php }
         if ($thisarray['p1'] == "modules") {?>
-<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/responsive.dataTables.min.css">
 <?php }
         if ($thisarray['p1'] == "env" || $thisarray['p1'] == "business") {?>
-<link rel="stylesheet" type="text/css" href="/assets/css/nestablemenu.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/nestablemenu.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/bootstrap-datetimepicker.css">
 <?php }
-        echo '<link rel="stylesheet" type="text/css" href="/assets/css/tinyreset.css">
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/tinyreset.css">
         </head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Midleo configuration";
-        include "public/modules/headcontent.php";
+        include $website['corebase']."public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
         $brarr=array();
         if($_SESSION["user_level"]>=3){
@@ -185,25 +185,25 @@ class Class_appconfig
     <div class="col-lg-10">
         <div class="row ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
             <div class="col-md-9">
-                <?php include "public/modules/breadcrumb.php"; ?><br>
+                <?php include $website['corebase']."public/modules/breadcrumb.php"; ?><br>
                 <?php if (file_exists(__DIR__ . "/app/" . $thisarray['p1'] . ".php")) {include "app/" . $thisarray['p1'] . ".php";} else {textClass::PageNotFound();}?>
             </div>
             <div class="col-md-3">
                 <?php if(!in_array($thisarray['p1'], array("external","mail","main"))){?>
-                    <?php include "public/modules/filterbar.php"; ?>
+                    <?php include $website['corebase']."public/modules/filterbar.php"; ?>
                 <?php } ?>
-                <?php include "public/modules/breadcrumbin.php"; ?>
+                <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
             </div>
         </div>
     </div>
 </div>
 <?php
-include "public/modules/footer.php";
+include $website['corebase']."public/modules/footer.php";
         echo "</div></div>";
-        include "public/modules/js.php";?>
+        include $website['corebase']."public/modules/js.php";?>
 <?php if ($thisarray['p1'] == "users" || $thisarray['p1'] == "groups") {?>
-<script src="/assets/js/dirPagination.js" type="text/javascript"></script>
-<script type="text/javascript" src="/assets/js/ng-controller.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/dirPagination.js" type="text/javascript"></script>
+<script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/ng-controller.js"></script>
 <?php }   if ($thisarray['p1'] == "external") {?>
 <script type="text/javascript">
 var app = angular.module('ngApp', []);
@@ -363,8 +363,8 @@ function saveupd() {
 </script>
 <?php }?>
 <?php if ($thisarray['p1'] == "modules") {?>
-<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-<script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     let table = $('#data-table').DataTable({
@@ -398,8 +398,8 @@ $(document).ready(function() {
 
 });
 </script>
-<?php } ?><script src="/assets/js/tagsinput.min.js" type="text/javascript"></script><?php 
-        include "public/modules/template_end.php";
+<?php } ?><script src="/<?php echo $website['corebase'];?>assets/js/tagsinput.min.js" type="text/javascript"></script><?php 
+        include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
 }

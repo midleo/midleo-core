@@ -274,7 +274,7 @@ html body .jqstooltip,html body .flotTip{width:auto!important;height:auto!import
 .percent:after{content:"%";margin-left:.1em;font-size:.8em}
 .c3-chart-arcs-title,.c3-legend-item{font-family:"Ubuntu",sans-serif;fill:#67757c}
 html body #visitor .c3-chart-arcs-title{font-size:18px;fill:#d5d6d8}
-.stylish-table thead th{font-weight:400;color:#636E82;border:0;border-bottom:1px;text-transform:uppercase;}
+.stylish-table thead th{font-weight:400;color:#636E82;border:0;border-bottom:1px;}
 .stylish-table tbody td{vertical-align:middle}
 .stylish-table tbody td h6{font-weight:500;margin-bottom:0;white-space:nowrap}
 .stylish-table tbody td small{line-height:12px;white-space:nowrap}
@@ -1133,7 +1133,7 @@ path.link { fill: none;stroke: #ccc; stroke-width: 2px;}
 .actions > li > a:hover > i{color:#000}
 .actions > li > a,.actions > li > a > i{-webkit-transition:all;-o-transition:all;transition:all;-webkit-transition-duration:400ms;transition-duration:400ms}
 .actions.a-alt > li > a > i{color:#fff}
-.badge{font-size: 100%;font-weight: 400;border-radius:'.$borderradius.';}
+.badge{font-weight: 400;border-radius:'.$borderradius.';}
 .dropdown-toggle::after {  display:none;}
 .middrmbut{border:0px solid transparent;}
 @media (min-width: 768px) {
@@ -1531,7 +1531,7 @@ select.form-control:focus {
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
 }*/
 .ui-autocomplete-loading {
-  background: white url("/assets/images/ui-anim_basic_16x16.gif") right center no-repeat;
+  background: white url("../images/ui-anim_basic_16x16.gif") right center no-repeat;
 }
 .ui-autocomplete{z-index:9999!important;}
 .reqbtngroup{display:inherit;}
@@ -1539,7 +1539,7 @@ select.form-control:focus {
 .rte-autocomplete{position:absolute;top:0;left:0;display:block;z-index:1100;float:left;min-width:160px;padding:5px 0;margin:2px 0 0;list-style:none;background-color:#fff;border:1px solid #ccc;border:1px solid rgba(0,0,0,0.2);-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;-webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);-moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);box-shadow:0 5px 10px rgba(0,0,0,0.2);-webkit-background-clip:padding-box;-moz-background-clip:padding;background-clip:padding-box;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px}
 .rte-autocomplete:before{content:"";display:inline-block;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #ccc;border-bottom-color:rgba(0,0,0,0.2);position:absolute;top:-7px;left:9px}
 .rte-autocomplete:after{content:"";display:inline-block;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff;position:absolute;top:-6px;left:10px}
-.rte-autocomplete > li.loading{background:url("/assets/images/ui-anim_basic_16x16.gif") center no-repeat;height:16px}
+.rte-autocomplete > li.loading{background:url("../images/ui-anim_basic_16x16.gif") center no-repeat;height:16px}
 .rte-autocomplete > li > a{display:block;padding:3px 20px;clear:both;font-weight:400;line-height:20px;color:#333;white-space:nowrap;text-decoration:none}
 .rte-autocomplete >li > a:hover,.rte-autocomplete > li > a:focus,.rte-autocomplete:hover > a,.rte-autocomplete:focus > a{color:#fff;text-decoration:none;background-color:#0081c2;background-image:-moz-linear-gradient(top,#08c,#0077b3);background-image:-webkit-gradient(linear,0 0,0 100%,from(#08c),to(#0077b3));background-image:-webkit-linear-gradient(top,#08c,#0077b3);background-image:-o-linear-gradient(top,#08c,#0077b3);background-image:linear-gradient(to bottom,#08c,#0077b3);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft}
 .rte-autocomplete >.active > a,.rte-autocomplete > .active > a:hover,.rte-autocomplete > .active > a:focus{color:#fff;text-decoration:none;background-color:#0081c2;background-image:-moz-linear-gradient(top,#08c,#0077b3);background-image:-webkit-gradient(linear,0 0,0 100%,from(#08c),to(#0077b3));background-image:-webkit-linear-gradient(top,#08c,#0077b3);background-image:-o-linear-gradient(top,#08c,#0077b3);background-image:linear-gradient(to bottom,#08c,#0077b3);background-repeat:repeat-x;outline:0;filter:progid:DXImageTransform.Microsoft}

@@ -17,7 +17,7 @@ class Class_reports
         $err = array();
         $msg = array();
         $pdo = pdodb::connect();
-        include "public/modules/css.php";   
+        include $website['corebase']."public/modules/css.php";   
    echo '<style type="text/css">@page {
     size: A4;
     margin: 0;
@@ -40,10 +40,10 @@ class Class_reports
         <?php if(file_exists(__DIR__."/types/".$thisarray['p1'].".php")){ include "types/".$thisarray['p1'].".php";}   else { textClass::PageNotFound(); }?>
 <?php 
     echo '</div>';
-    include "public/modules/js.php"; ?>
+    include $website['corebase']."public/modules/js.php"; ?>
     
 <?php if($thisarray['p1']=="apps"){?>
-<script src="/assets/js/chart.min.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/chart.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     var coleff = "rgb(82,194,247)";
 
@@ -119,7 +119,7 @@ class Class_reports
    </script>
    <?php } ?>
     <?php
-    include "public/modules/template_end.php";
+    include $website['corebase']."public/modules/template_end.php";
     if(!empty($text)){unset($text);}
      echo '</body></html>';
  }

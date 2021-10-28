@@ -65,7 +65,7 @@ else if(!empty($_GET["qmid"])){
                                 </ul>
                             </div>
                             <div class="col-md-3">
-                            <?php include "public/modules/filterbar.php"; ?>
+                            <?php include $website['corebase']."public/modules/filterbar.php"; ?>
                             </div>
                         </div>
                         <div class="tab-content">
@@ -129,7 +129,7 @@ else if(!empty($_GET["qmid"])){
         </div>
     </div>
     <div class="col-md-2">
-        <?php include "public/modules/breadcrumbin.php"; ?>
+        <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
     </div>
 </div>
 <?php } else { echo "<div class='alert alert-light'>No such Qmanager</div>";}} else { ?>
@@ -180,22 +180,22 @@ else if(!empty($_GET["qmid"])){
             </div>
 
             <div class="col-md-2">
-                <?php include "public/modules/filterbar.php"; ?>
-                <?php include "public/modules/breadcrumbin.php"; ?>
+                <?php include $website['corebase']."public/modules/filterbar.php"; ?>
+                <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
             </div>
         </div>
     </div>
     <?php } ?>
 
     <?php 
-include "public/modules/footer.php";
-include "public/modules/js.php"; ?>
-    <script src="/assets/js/dirPagination.js"></script>
-    <script type="text/javascript" src="/assets/js/dirPagination.js"></script>
+include $website['corebase']."public/modules/footer.php";
+include $website['corebase']."public/modules/js.php"; ?>
+    <script src="/<?php echo $website['corebase'];?>assets/js/dirPagination.js"></script>
+    <script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/dirPagination.js"></script>
     <script type="text/javascript" src="/assets/modules/automation/assets/js/ng-controller.js"></script>
     <?php if(!empty($_GET["qmid"]) && (empty($_GET["qid"]) || empty($_GET["chlid"]))){ ?>
-    <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         let table = $('#data-table').DataTable({
@@ -220,7 +220,7 @@ include "public/modules/js.php"; ?>
     });
     </script><?php } ?>
     <?php if(!empty($_GET["qid"]) || !empty($_GET["chlid"])){?>
-    <script src="/assets/js/chart.min.js" type="text/javascript"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/chart.min.js" type="text/javascript"></script>
     <script type="text/javascript">
     var thiscolor = "#000";
     var thiscolorreq = "rgb(255, 54, 54)";

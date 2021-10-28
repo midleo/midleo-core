@@ -16,10 +16,10 @@ class Class_docimport
         $msg = array();
         $pdo = pdodb::connect();
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Import documents";
-        include "public/modules/headcontent.php";?>
+        include $website['corebase']."public/modules/headcontent.php";?>
 <div class="page-wrapper">
     <div class="container-fluid">
         <?php
@@ -157,18 +157,18 @@ $brarr = array();
                         </div>
                     </div>
                     <div class="col-lg-3">
-                    <?php include "public/modules/filterbar.php"; ?>
-                        <?php include "public/modules/breadcrumbin.php";?>
+                    <?php include $website['corebase']."public/modules/filterbar.php"; ?>
+                        <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
                     </div>
                 </div>
             </div>
         </div>
-        <?php include "public/modules/footer.php";
+        <?php include $website['corebase']."public/modules/footer.php";
         echo "</div></div>";
-        include "public/modules/js.php";
-        echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';
-        echo '<script  type="text/javascript" src="/assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/docimport/assets/js/ng-controller.js"></script>';
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/js.php";
+        echo '<script src="/'.$website['corebase'].'assets/js/tagsinput.min.js" type="text/javascript"></script>';
+        echo '<script  type="text/javascript" src="/'.$website['corebase'].'assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/docimport/assets/js/ng-controller.js"></script>';
+        include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
 
     }

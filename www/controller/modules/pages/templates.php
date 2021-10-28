@@ -18,9 +18,9 @@ class Class_template{
     $err = array();
     $msg = array();
     $pdo = pdodb::connect();
-    include "public/modules/css.php";
+    include $website['corebase']."public/modules/css.php";
     echo '</head><body class="card-no-border"><div id="main-wrapper">';
-    include "public/modules/headcontent.php";
+    include $website['corebase']."public/modules/headcontent.php";
     echo '<div class="page-wrapper"><div class="container-fluid">';
     echo '<div class="row pt-3"><div class="col-lg-2">';
     include "public/modules/sidebar.php";
@@ -29,13 +29,13 @@ class Class_template{
 	
 	
     echo '<div class="col-md-2">';
-    include "public/modules/breadcrumbin.php";
+    include $website['corebase']."public/modules/breadcrumbin.php";
     echo '</div></div></div>';
-    include "public/modules/footer.php";
+    include $website['corebase']."public/modules/footer.php";
 	echo '</div></div>';
-    include "public/modules/js.php"; 
+    include $website['corebase']."public/modules/js.php"; 
 	echo '</body></html>';
-    include "public/modules/template_end.php";
+    include $website['corebase']."public/modules/template_end.php";
   }
 }
 class Class_templatecp{
@@ -51,21 +51,21 @@ class Class_templatecp{
     $msg = array();
     $pdo = pdodb::connect();
     $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
-    include "public/modules/css.php";
+    include $website['corebase']."public/modules/css.php";
     echo '</head><body class="card-no-border" '.($page=="reqchat"?"onload=\"setInterval('chat.update()', 20000)\"":"").'> <div id="main-wrapper">';
-    include "public/modules/headcontent.php";
+    include $website['corebase']."public/modules/headcontent.php";
 	echo '<div class="page-wrapper"><div class="container-fluid">';
-    include "public/modules/breadcrumb.php";
+    include $website['corebase']."public/modules/breadcrumb.php";
     echo '<div class="row"><div class="col-12">';
     
 	
 	
     
     echo '</div></div>';
-    include "public/modules/footer.php";
+    include $website['corebase']."public/modules/footer.php";
 	echo '</div></div>';
-    include "public/modules/js.php"; 
+    include $website['corebase']."public/modules/js.php"; 
 	echo '</body></html>';
-    include "public/modules/template_end.php";
+    include $website['corebase']."public/modules/template_end.php";
   }
 }

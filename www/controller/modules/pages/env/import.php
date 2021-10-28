@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  <?php include "public/modules/respform.php";?>
+  <?php include $website['corebase']."public/modules/respform.php";?>
   
   <?php }?>
   </div>

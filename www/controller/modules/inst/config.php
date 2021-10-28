@@ -179,9 +179,9 @@ class Class_install{
         }
         pdodb::disconnect();
       }   
-      include "public/modules/css.php";    ?>
+      include $website['corebase']."public/modules/css.php";    ?>
      </head>
-<body id="ngApp" ng-app="ngApp" ng-controller="instCtrl" style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+<body id="ngApp" ng-app="ngApp" ng-controller="instCtrl" style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
 <section id="wrapper">
         <div class="login-register">
         <div class="row justify-content-center">
@@ -227,11 +227,11 @@ class Class_install{
 
 <?php
 echo '</div></div>';
-include "public/modules/footer.php";
+include $website['corebase']."public/modules/footer.php";
 echo '</div></div>';
-include "public/modules/js.php"; 
+include $website['corebase']."public/modules/js.php"; 
 echo '</body></html>';
-include "public/modules/template_end.php";
+include $website['corebase']."public/modules/template_end.php";
 ?>
 <?php
       pdodb::disconnect();
@@ -254,9 +254,9 @@ include "public/modules/template_end.php";
       }
       if(isset($_POST['doDBsqlite'])){
       }
-      include "public/modules/css.php";?>
+      include $website['corebase']."public/modules/css.php";?>
         </head>
-<body id="ngApp" ng-app="ngApp" ng-controller="instCtrl" style="background-image: url('/assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+<body id="ngApp" ng-app="ngApp" ng-controller="instCtrl" style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
     <section id="wrapper">
         <div class="login-register">
         <div class="row justify-content-center">
@@ -321,12 +321,12 @@ include "public/modules/template_end.php";
 
 
 
-  <?php include "public/modules/footer.php";?>
-  <?php include "public/modules/js.php";?>
-  <script type="text/javascript" src="/assets/js/inst-controller.js"></script>
+  <?php include $website['corebase']."public/modules/footer.php";?>
+  <?php include $website['corebase']."public/modules/js.php";?>
+  <script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/inst-controller.js"></script>
 </body>
 </html>
-<?php include "public/modules/template_end.php";
+<?php include $website['corebase']."public/modules/template_end.php";
  }
     }
   }

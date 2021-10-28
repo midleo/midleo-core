@@ -23,20 +23,20 @@ class Class_dropbox
         $pdo = pdodb::connect();
         if (!empty($_SESSION["user"])) {$data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}}
         if (!empty($_SESSION["requser"])) {$data = sessionClassreq::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}}
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         foreach ($modulelist["dropbox"]["js"] as $jskey => $jslink) {
             if (!empty($jslink)) {?><script type="text/javascript" src="<?php echo $jslink; ?>"></script>
 <?php }
         }
-        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">';
-        echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/js/datatables/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/js/datatables/responsive.dataTables.min.css">';
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/jquery-ui.min.css">';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "DropBox";
         $breadcrumb["link"] = "/cp/?";
         $breadcrumb["special"] = '<a href="" id="authlink" data-bs-toggle="tooltip" title="Sign in to Dropbox" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i class="mdi mdi-login mdi-24px"></i>&nbsp;Sign in to Dropbox</a>';
         if ($thisarray["p1"] != "auth") {
-            include "public/modules/headcontent.php";
+            include $website['corebase']."public/modules/headcontent.php";
             echo '<div class="page-wrapper"><div class="container-fluid">';
             $brarr = array();
             array_push($brarr, array(
@@ -190,17 +190,17 @@ class Class_dropbox
         </div>
     </div>
     <div class="col-lg-2">
-        <?php include "public/modules/breadcrumbin.php";?>
+        <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
     </div>
 </div>
 <?php echo '</div></div>';
-            include "public/modules/footer.php";
+            include $website['corebase']."public/modules/footer.php";
             echo '</div></div>';
         }
-        include "public/modules/js.php"; ?>
-<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>
-<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-<script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+        include $website['corebase']."public/modules/js.php"; ?>
+<script src="/<?php echo $website['corebase'];?>assets/js/tagsinput.min.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
 <script>
 $('#data-table').DataTable({
     "oLanguage": {
@@ -291,7 +291,7 @@ if (isAuthenticated()) {
 }
 </script>
 <?php echo '</body></html>';
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/template_end.php";
 
     }
 }

@@ -57,7 +57,7 @@
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="usrdrdown">
                         <img alt="user" class="img-fluid rounded"
-                            src="<?php echo !empty($uavatar)?$uavatar:"/assets/images/avatar.svg";?>"
+                            src="<?php echo !empty($uavatar)?$uavatar:"/".$website['corebase']."assets/images/avatar.svg";?>"
                             style="width:22px;margin-top: -3px;">
                     </a>
                     <ul class="dropdown-menu usrdrdown" aria-labelledby="usrdrdown">

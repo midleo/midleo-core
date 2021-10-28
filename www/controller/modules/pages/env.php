@@ -116,8 +116,8 @@ class Class_env
           header("Location:/env/places/".$thisarray['p2']);
         }
         if (!empty($env)) {$menudataenv = json_decode($env, true);} else { $menudataenv = array();}
-        include "public/modules/css.php";
-        echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
+        include $website['corebase']."public/modules/css.php";
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/jquery-ui.min.css">';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         if (!empty($thisarray['p1'])) {
           $breadcrumb["text"] = "Environment";
@@ -126,7 +126,7 @@ class Class_env
       } else {
           $breadcrumb["text"] = "Environment";
       }
-        include "public/modules/headcontent.php";
+        include $website['corebase']."public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
         $arrayibmmqtab = array( "import", "qm", "queues", "channels", "topics", "subs", "process", "service", "dlqh", "authrec");
         $arraytibcoemstab = array("tibqueues", "tibtopics", "tibacl");
@@ -278,7 +278,7 @@ class Class_env
     <div class="col-lg-10">
         <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
             <div class="col-md-9">
-                <?php include "public/modules/breadcrumb.php"; ?>
+                <?php include $website['corebase']."public/modules/breadcrumb.php"; ?>
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="tab-content">
@@ -355,11 +355,11 @@ class Class_env
                         </div>
                 </div><br>
                 <?php if (file_exists(__DIR__ . "/env/" . $thisarray['p1'] . ".php")) {include "env/" . $thisarray['p1'] . ".php";}?>
-                <?php include "public/modules/respform.php";?>
+                <?php include $website['corebase']."public/modules/respform.php";?>
             </div>
             <div class="col-md-3">
-                <?php include "public/modules/filterbar.php"; ?>
-                <?php include "public/modules/breadcrumbin.php"; ?>
+                <?php include $website['corebase']."public/modules/filterbar.php"; ?>
+                <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
             </div>
         </div>
     </div>
@@ -368,20 +368,20 @@ class Class_env
 </div>
 </section>
 <?php
-include "public/modules/footer.php";
-include "public/modules/js.php";?>
-<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>
-<script src="/assets/js/dirPagination.js"></script>
-<script type="text/javascript" src="/assets/js/ng-controller.js"></script>
-<script src="/assets/js/alasql.min.js"></script>
-<script src="/assets/js/xlsx.core.min.js"></script>
+include $website['corebase']."public/modules/footer.php";
+include $website['corebase']."public/modules/js.php";?>
+<script src="/<?php echo $website['corebase'];?>assets/js/tagsinput.min.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/dirPagination.js"></script>
+<script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/ng-controller.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/alasql.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/xlsx.core.min.js"></script>
 <?php if(($thisarray["p1"]=="apps" && $_GET["type"]=="new") || !empty($_GET["app"])){ ?>
-<script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
-<script type="text/javascript" src="/assets/js/tinymce/mentions.min.js"></script>
+<script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/tinymce/mentions.min.js"></script>
 <?php } ?>
 <?php if($thisarray["p1"]=="places"){?>
-<script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-<script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
 <script>
 $('#data-table').DataTable({
     "oLanguage": {
@@ -391,7 +391,7 @@ $('#data-table').DataTable({
 });
 </script>
 <?php }
-include "public/modules/template_end.php";
+include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
 }

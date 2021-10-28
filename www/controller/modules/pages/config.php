@@ -113,8 +113,8 @@ class Class_info
         } else { $blogcatname = "Category is empty!";}}
         include $website['corebase']."public/modules/css.php";
         if ($forumcase == "posts") {?>
-    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/responsive.dataTables.min.css">
     <?php
 }
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
@@ -337,8 +337,8 @@ $sql = "update knowledge_info set views=views+1 where id=?";
         include $website['corebase']."public/modules/footer.php";
         include $website['corebase']."public/modules/js.php";
         if ($forumcase == "posts") {?>
-    <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
  <?php }
         include $website['corebase']."public/modules/template_end.php";
         if (!empty($text)) {unset($text);}
@@ -607,7 +607,7 @@ include $website['corebase']."public/modules/footer.php";
             convertEntities(pwsL10n);
         } catch (e) {};
         </script>
-        <script src="/assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
+        <script src="/<?php echo $website['corebase'];?>assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
 include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
 
@@ -986,7 +986,7 @@ class Class_profile
 
             <div class="row pt-3">
                 <div class="col-lg-2">
-                    <?php include $website['corebase']."public/modules/sidebar.php";?>
+                    <?php include "public/modules/sidebar.php";?>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">
@@ -1130,7 +1130,7 @@ class Class_profile
 <?php include $website['corebase']."public/modules/footer.php";
         echo "</div></div>";
         include $website['corebase']."public/modules/js.php";?>
-<script src="/assets/js/jquery/jquery.cropit.js" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/jquery/jquery.cropit.js" type="text/javascript"></script>
 <script type='text/javascript'>
 (function(a) {
     function b() {
@@ -1209,7 +1209,7 @@ try {
     convertEntities(pwsL10n);
 } catch (e) {};
 </script>
-<script src="/assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
+<script src="/<?php echo $website['corebase'];?>assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
 include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
@@ -1236,7 +1236,7 @@ class Class_searchall
         echo '<div class="page-wrapper"><div class="container-fluid">';
 
         echo '<div class="row pt-3"><div class="col-lg-2">';
-        include $website['corebase']."public/modules/sidebar.php";
+        include "public/modules/sidebar.php";
         echo '</div><div class="col-lg-8">';
         if (isset($_REQUEST["sa"])) {
             $data = array();

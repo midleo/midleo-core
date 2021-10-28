@@ -17,11 +17,11 @@ class Class_webstat
         $msg = array();
         $pdo = pdodb::connect();
         $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
-        include "public/modules/css.php";
-        echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
+        include $website['corebase']."public/modules/css.php";
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/jquery-ui.min.css">';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Statistics";
-        include "public/modules/headcontent.php"; ?>
+        include $website['corebase']."public/modules/headcontent.php"; ?>
 <div class="page-wrapper">
     <div class="container-fluid">
         <?php      
@@ -43,13 +43,13 @@ class Class_webstat
     
         if (file_exists(__DIR__ . "/views/" . $thisarray['p1'] . ".php")) { include "views/" . $thisarray['p1'] . ".php"; }
         else { 
-            include "public/modules/footer.php";
-            include "public/modules/js.php"; 
+            include $website['corebase']."public/modules/footer.php";
+            include $website['corebase']."public/modules/js.php"; 
             textClass::PageNotFound(); 
         }} else {
 
         }
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
 }

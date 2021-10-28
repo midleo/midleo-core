@@ -15,12 +15,12 @@ class Class_browse{
     $pdo = pdodb::connect();
     if(!empty($_SESSION["user"])){ $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; }  } 
     if(!empty($_SESSION["requser"])){ $data=sessionClassreq::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val;  }  } 
-    include "public/modules/css.php";
+    include $website['corebase']."public/modules/css.php";
     if($thisarray['p1']=="server" || $thisarray['p1']=="appserver" || $thisarray['p1']=="serverlist"){?>
-    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/responsive.dataTables.min.css">
     <?php if($thisarray['p3']=="obj"){?>
-    <script type="text/javascript" src="/assets/js/vis-network.min.js"></script>
+    <script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/vis-network.min.js"></script>
     <?php } ?>
     <?php } 
     echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
@@ -57,7 +57,7 @@ class Class_browse{
             ));
           } 
           else { $breadcrumb["text"]="User info"; } 
-    include "public/modules/headcontent.php";
+    include $website['corebase']."public/modules/headcontent.php";
     ?>
     <div class="page-wrapper"><div class="container-fluid">
     <div class="row pt-3">
@@ -68,20 +68,20 @@ class Class_browse{
        <?php if(file_exists(__DIR__."/browse/".$thisarray['p1'].".php")){ include "browse/".$thisarray['p1'].".php";}   else { textClass::PageNotFound(); }?>
        </div>
     <div class="col-md-2">
-        <?php include "public/modules/filterbar.php"; ?>
-        <?php include "public/modules/breadcrumbin.php"; ?>
+        <?php include $website['corebase']."public/modules/filterbar.php"; ?>
+        <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
     </div>
     </div>
     
       </div>
 </div>
 <?php
-    include "public/modules/footer.php";
+    include $website['corebase']."public/modules/footer.php";
     echo "</div></div>";
-    include "public/modules/js.php"; 
+    include $website['corebase']."public/modules/js.php"; 
     if($thisarray['p1']=="server" || $thisarray['p1']=="appserver" || $thisarray['p1']=="serverlist"){?>
-    <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
     <script>
         let dtable=$('.datainfo').DataTable({
           "oLanguage": {
@@ -106,7 +106,7 @@ var edgesarr = null;
 var network = null;
 var EDGE_LENGTH_MAIN = 150;
 var EDGE_LENGTH_SUB = 50;
-var DIR = '/assets/images/icon/';
+var DIR = '/<?php echo $website['corebase'];?>assets/images/icon/';
 var options = {
         groups: {
           server: { shape: 'image', image: DIR + 'network.png'  },
@@ -161,7 +161,7 @@ nodesarr.push({  id: '<?php echo $val["serverdns"];?>',    group: 'server',    l
   });
 </script>
     <?php } 
-    include "public/modules/template_end.php";
+    include $website['corebase']."public/modules/template_end.php";
     echo '</body></html>'; 
   }
 }

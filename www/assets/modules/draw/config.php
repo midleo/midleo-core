@@ -17,7 +17,7 @@ class Class_drawedit
         $msg = array();
         $pdo = pdodb::connect();
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
-        include "public/modules/css.php";?>
+        include $website['corebase']."public/modules/css.php";?>
 <script type="text/javascript">
 var urlParams = (function() {
     var result = new Object();
@@ -117,7 +117,7 @@ var isLocalStorage = true;
 <script type="text/javascript">
 App.main();
 </script>
-<?php include "public/modules/template_end.php";
+<?php include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
 }
@@ -180,8 +180,8 @@ class Class_draw
             }
             $msg[] = "Diagram info updated";
         }
-        include "public/modules/css.php";
-        echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
+        include $website['corebase']."public/modules/css.php";
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/jquery-ui.min.css">';
         if (!empty($thisarray['p1'])) {?>
 <script type="text/javascript">
 function editDiagram(image) {
@@ -268,12 +268,12 @@ iframe {
     height: 800px;
 }
 </style>
-<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/responsive.dataTables.min.css">
 <?php }
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Graph editor";
-        include "public/modules/headcontent.php";?>
+        include $website['corebase']."public/modules/headcontent.php";?>
 <div class="page-wrapper">
     <div class="container-fluid">
         <?php
@@ -492,8 +492,8 @@ $brarr = array();
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <?php include "public/modules/filterbar.php";?>
-                                <?php include "public/modules/breadcrumbin.php";?>
+                                <?php include $website['corebase']."public/modules/filterbar.php";?>
+                                <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
                             </div>
                         </div>
                     </div>
@@ -590,19 +590,19 @@ $brarr = array();
                     <?php }?>
                 </div>
             </div>
-            <?php include "public/modules/footer.php";
+            <?php include $website['corebase']."public/modules/footer.php";
         echo "</div></div>";
-        include "public/modules/js.php";
-        echo '<script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>';
+        include $website['corebase']."public/modules/js.php";
+        echo '<script src="/'.$website['corebase'].'assets/js/tagsinput.min.js" type="text/javascript"></script>';
         if (empty($thisarray['p1'])) {
-            echo '<script  type="text/javascript" src="/assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/js/ng-controller.js"></script>';
+            echo '<script  type="text/javascript" src="/'.$website['corebase'].'assets/js/dirPagination.js"></script><script type="text/javascript" src="/'.$website['corebase'].'assets/js/ng-controller.js"></script>';
         }
         if (!empty($thisarray['p1'])) {
         ?>
-            <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-            <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+            <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+            <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
             <?php }
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
 }

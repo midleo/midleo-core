@@ -12,7 +12,7 @@ class Class_flows{
     $err = array();
     $msg = array();
     $pdo = pdodb::connect();
-    include "public/modules/css.php";
+    include $website['corebase']."public/modules/css.php";
     $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
     if (!sessionClass::checkAcc($acclist, "ibmadm,ibmview")) { header("Location: /cp/?"); }
     echo '</head><body class="card-no-border"> <div id="main-wrapper">';
@@ -23,9 +23,9 @@ class Class_flows{
     $breadcrumb["text"]="Flows";
     $breadcrumb["text2"]=$zobj['flowname'];
     $breadcrumb["link"]="/env/flows/".$zobj['projid'];
-    include "public/modules/headcontent.php"; 
+    include $website['corebase']."public/modules/headcontent.php"; 
     echo '<div class="page-wrapper"><div class="container-fluid">';
-    include "public/modules/breadcrumb.php";
+    include $website['corebase']."public/modules/breadcrumb.php";
    if(!empty($thisarray['p1'])){ 
   $sql="select count(id) from iibenv_flows where flowid=?";
   $q = $pdo->prepare($sql);
@@ -131,11 +131,11 @@ class Class_flows{
   </div>
 </div>
 <?php
-    include "public/modules/footer.php";
+    include $website['corebase']."public/modules/footer.php";
     echo "</div></div>";
-    include "public/modules/js.php"; 
-    echo '<script src="/assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/js/ng-controller.js"></script>';
-    include "public/modules/template_end.php";
+    include $website['corebase']."public/modules/js.php"; 
+    echo '<script src="/'.$website['corebase'].'assets/js/dirPagination.js"></script><script type="text/javascript" src="/'.$website['corebase'].'assets/js/ng-controller.js"></script>';
+    include $website['corebase']."public/modules/template_end.php";
     echo '</body></html>';
   }
 }

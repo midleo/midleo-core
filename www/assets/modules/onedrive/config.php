@@ -22,7 +22,7 @@ class Class_onedrive
         $pdo = pdodb::connect();
         if (!empty($_SESSION["user"])) {$data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}}
         if (!empty($_SESSION["requser"])) {$data = sessionClassreq::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}}
-        include "public/modules/css.php";
+        include $website['corebase']."public/modules/css.php";
         foreach ($modulelist["onedrive"]["css"] as $csskey => $csslink) {
             if (!empty($csslink)) {?>
 <link rel="stylesheet" type="text/css" href="<?php echo $csslink; ?>"><?php }
@@ -34,9 +34,9 @@ class Class_onedrive
         if ($thisarray["p1"] == "auth") {
             echo '<script>onAuthCallback();</script>';
         }
-        echo '<link rel="stylesheet" type="text/css" href="/assets/js/datatables/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/js/datatables/responsive.dataTables.min.css">';
-    echo '<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.min.css">';
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/js/datatables/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/js/datatables/responsive.dataTables.min.css">';
+    echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/jquery-ui.min.css">';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "One Drive";
             $breadcrumb["link"] = "/cp/?";
@@ -45,7 +45,7 @@ class Class_onedrive
         <a href="#" onclick="signOut()" data-bs-toggle="tooltip" title="Sign Out from OneDrive" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action od-logoff" style="display: none;"><i class="mdi mdi-login mdi-24px"></i>&nbsp;Sign Out from OneDrive</a>
         ';
         if ($thisarray["p1"] != "auth") {
-            include "public/modules/headcontent.php";
+            include $website['corebase']."public/modules/headcontent.php";
             echo '<div class="page-wrapper"><div class="container-fluid">';
             $brarr=array();
             array_push($brarr,array(
@@ -207,19 +207,19 @@ class Class_onedrive
         </div>
     </div>
     <div class="col-lg-2">
-    <?php include "public/modules/breadcrumbin.php";?>
+    <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
                 </div>
                 </div>
 
 
     <?php echo '</div></div>';
- include "public/modules/footer.php";
+ include $website['corebase']."public/modules/footer.php";
  echo '</div></div>';
  }
- include "public/modules/js.php"; ?>
-    <script src="/assets/js/tagsinput.min.js" type="text/javascript"></script>
-    <script src="/assets/js/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/js/datatables/dataTables.responsive.min.js"></script>
+ include $website['corebase']."public/modules/js.php"; ?>
+    <script src="/<?php echo $website['corebase'];?>assets/js/tagsinput.min.js" type="text/javascript"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
     <script>
     $('#data-table-doc').DataTable({
         "oLanguage": {
@@ -393,6 +393,6 @@ class Class_onedrive
     odauth();
     </script>
     <?php echo '</body></html>';
-        include "public/modules/template_end.php";
+        include $website['corebase']."public/modules/template_end.php";
     }
 }

@@ -76,7 +76,7 @@ if (!empty($bsteps) && !empty($ugrarr) && !empty($widarr)) {
 </div>
 </div>
     <div class="col-md-2">
-        <?php include "public/modules/breadcrumbin.php"; ?>
+        <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
     </div>
     </div>
 <?php } else {?>
@@ -85,9 +85,9 @@ if (!empty($bsteps) && !empty($ugrarr) && !empty($widarr)) {
 </div>
 
 <?php 
-include "public/modules/footer.php";
-include "public/modules/js.php"; ?>
-<script src="/assets/js/chart.min.js" type="text/javascript"></script>
+include $website['corebase']."public/modules/footer.php";
+include $website['corebase']."public/modules/js.php"; ?>
+<script src="/<?php echo $website['corebase'];?>assets/js/chart.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 var coleff = "rgb(82,194,247)";
 var coldepl = "rgb(0,200,83)";
