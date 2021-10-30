@@ -22,9 +22,9 @@ if(in_array($_SERVER['REQUEST_URI'],$arrtiny) || in_array($page,$arrtiny)){ ?><s
 <script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/tinymce/mentions.min.js"></script>
 <?php } ?>
 <?php } ?>
-<script src="/<?php echo $website['corebase'];?>assets/js/custom.js?v=<?php echo filemtime('./assets/js/custom.js');?>" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/custom.js?v=<?php echo filemtime('./'.$website['corebase'].'assets/js/custom.js');?>" type="text/javascript"></script>
 <?php  if($thisarray["p0"]!="mlogin" || $thisarray["p0"]!="mregister"){ ?>
-<script src="/<?php echo $website['corebase'];?>assets/js/autocomplete.js?v=<?php echo filemtime('./assets/js/autocomplete.js');?>" type="text/javascript"></script>
+<script src="/<?php echo $website['corebase'];?>assets/js/autocomplete.js?v=<?php echo filemtime('./'.$website['corebase'].'assets/js/autocomplete.js');?>" type="text/javascript"></script>
 <?php } ?>
 <script type="text/javascript">
 <?php if(!empty($msg)){ if(is_array($msg)){?> $(document).ready(function() {

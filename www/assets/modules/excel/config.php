@@ -5,10 +5,11 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;    
   class Excel{
     public static function import($inputFileName,$inputFileType=null){
+      global $website;
       if (!file_exists($inputFileName)) { 
         exit("Please upload file first.");
       }
-      require_once 'controller/vendor/autoload.php'; 
+      require_once $website['corebase'].'controller/vendor/autoload.php'; 
       if($inputFileType=="ibmmq"){
         $array_data['qm']=array(
           'A'=>'active',

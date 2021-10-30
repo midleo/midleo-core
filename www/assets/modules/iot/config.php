@@ -43,13 +43,14 @@ http://localhost:8161/hawtio/jolokia/
 */
 class mqttClass{
   public static function getvars(){
+    global $website;
   return array("mq_server"=>"vps.vasilev.link",
                "mq_user"=>"test",
                "mq_pass"=>"test",
                "mq_vhost"=>"MIDLEO.AMQP");
   }
   public static function PublishMessage($messageBody){
-    require_once 'controller/vendor/autoload.php'; 
+    require_once $website['corebase'].'controller/vendor/autoload.php'; 
     $vars=mqttClass::getvars();
     $exchange="MIDLEO.TOPIC";
     $queue = "SYSTEM.MIDLEO.IOT.QUEUE";

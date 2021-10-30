@@ -82,7 +82,8 @@ class Class_docapi
     }
     public static function importPDF()
     {
-        require_once 'controller/vendor/autoload.php';
+        global $website;
+        require_once $website['corebase'].'controller/vendor/autoload.php';
         $parser = new \Smalot\PdfParser\Parser();
         $pdf = $parser->parseFile('public/temp/test.pdf');
         $text = $pdf->getText();
@@ -160,7 +161,8 @@ class Class_docapi
     }
     public static function odt2text($source)
     {
-        require_once 'controller/vendor/autoload.php';
+        global $website;
+        require_once $website['corebase'].'controller/vendor/autoload.php';
         $phpWord = \PhpOffice\PhpWord\IOFactory::load($source, 'ODText');
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
         ob_start();
@@ -170,7 +172,8 @@ class Class_docapi
     }
     public static function doc2text($source)
     {
-        require_once 'controller/vendor/autoload.php';
+        global $website;
+        require_once $website['corebase'].'controller/vendor/autoload.php';
         $phpWord = \PhpOffice\PhpWord\IOFactory::load($source, 'MsDoc');
         $text = '';
         foreach ($phpWord->getSections() as $section) {
@@ -208,7 +211,8 @@ class Class_docapi
     }
     public static function docx2text($source)
     {
-        require_once 'controller/vendor/autoload.php';
+        global $website;
+        require_once $website['corebase'].'controller/vendor/autoload.php';
         $phpWord = \PhpOffice\PhpWord\IOFactory::load($source);
         $text = '';
         foreach ($phpWord->getSections() as $section) {
@@ -248,8 +252,9 @@ class Class_docapi
     }
     public static function exportDocs()
     {
+        global $website;
         if (isset($_POST['pdfexport'])) {
-            require_once 'controller/vendor/autoload.php';
+            require_once $website['corebase'].'controller/vendor/autoload.php';
             if (!empty($_POST['thistype'])) {
                 $pdo = pdodb::connect();
                 if($_POST['thistype']=="kbase"){
