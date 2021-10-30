@@ -615,7 +615,7 @@ include $website['corebase']."public/modules/template_end.php";
 }
 class Class_mlogin
 {
-    public static function getPage()
+    public static function getPage($thisarray)
     {
         global $installedapp;
         global $website;
@@ -880,7 +880,7 @@ class Class_mlogin
   <![endif]--><?php
 include $website['corebase']."public/modules/footer.php";
         include $website['corebase']."public/modules/js.php";
-        echo '<script type="text/javascript">localStorage.clear();</script>';
+//        echo '<script type="text/javascript">localStorage.clear();</script>';
         include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
 
