@@ -315,7 +315,7 @@ $brarr = array();
         }
         ?>
         <?php if (!empty($thisarray['p1'])) {
-            $sql = "SELECT tags, id, gitprepared, desuser, desname, reqid, imgdata, accgroups FROM config_diagrams where binary desid=?";
+            $sql = "SELECT tags, id, gitprepared, desuser, desname, reqid, imgdata, accgroups FROM config_diagrams where desid=?";
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p1']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
