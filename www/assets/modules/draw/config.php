@@ -191,7 +191,7 @@ function editDiagram(image) {
     var initial = image.getAttribute('src');
     var getRef = document.getElementById("drawid");
     var parentDiv = getRef.parentNode;
-    image.setAttribute('src', '/assets/modules/draw/vendor/images/ajax-loader.gif');
+    image.setAttribute('src', '/<?php echo $website['corebase'];?>assets/modules/draw/vendor/images/ajax-loader.gif');
     var iframe = document.createElement('iframe');
     iframe.setAttribute('frameborder', '0');
     var close = function() {
@@ -488,7 +488,7 @@ $brarr = array();
                                     </table>
                                     <dir-pagination-controls pagination-id="prodx" boundary-links="true"
                                         on-page-change="pageChangeHandler(newPageNumber)"
-                                        template-url="/assets/templ/pagination.tpl.html"></dir-pagination-controls>
+                                        template-url="/<?php echo $website['corebase'];?>assets/templ/pagination.tpl.html"></dir-pagination-controls>
                                 </div>
                             </div>
                             <div class="col-lg-3">
