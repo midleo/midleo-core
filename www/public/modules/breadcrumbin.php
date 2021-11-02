@@ -42,7 +42,7 @@
             <?php if($val["ngshow"]){?>ng-show="<?php echo $val["ngshow"];?>" <?php } ?>
             <?php if($val["modal"]){?>data-bs-toggle="modal" data-bs-target="<?php echo $val["mtarget"];?>" <?php } ?>
             title="<?php echo $val["title"];?>"
-            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action <?php echo $val["main"]?"border-arrow":"";?>"><?php if($val["icon"]){?><i
+            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action <?php echo $val["class"]?$val["class"]:"";?>"><?php if($val["icon"]){?><i
                 class="mdi <?php echo $val["icon"];?>"></i><?php } ?><?php if($val["img"]){ ?><img
                 src="<?php echo $val["img"];?>" width="22px"><?php } ?>&nbsp;<?php echo $val["title"];?></a>
         <?php  } ?>
