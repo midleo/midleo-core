@@ -24,37 +24,6 @@ class Class_appconfig
         if (!is_array($website)) {$website = json_decode($website, true);}
         if (!sessionClass::checkAcc($acclist, "appconfig")) { header("Location:/cp/?");}
         if ($thisarray['p1']!="groups" && $_SESSION["user_level"]<3){ header("Location:/cp/?"); }
-        if (isset($_GET['truncate']) == "yes") {
-            $pdo->beginTransaction();
-            $st = $pdo->prepare("truncate table requests");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_approval");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_deployments");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_confirmation");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_efforts");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_efforts_all");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_flow");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_fte");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_general");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_seq");
-            $st->execute();
-            $st = $pdo->prepare("truncate table tracking");
-            $st->execute();
-            $st = $pdo->prepare("truncate table log");
-            $st->execute();
-            $st = $pdo->prepare("truncate table requests_queues");
-            $st->execute();
-            $pdo->commit();
-            $msg[] = "Requests table truncated";
-        }
         if (isset($_POST['addldap']) && !empty($_POST['ldapserver'])) {
             $sql = "insert into ldap_config (ldapserver,ldapport,ldaptree,ldapgtree,ldapinfo) values (?,?,?,?,?)";
             $q = $pdo->prepare($sql);

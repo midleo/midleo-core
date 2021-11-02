@@ -1250,15 +1250,6 @@ class Class_searchall
                             $data["/info/posts/" . $val["cat_latname"]] = $val["cat_name"];
                         }
                     }
-                } elseif ($_POST["st"] == "requests") {
-                    $sql = "SELECT sname,reqname FROM requests where (lower(reqname) like ? or info like ?) order by id desc";
-                    $q = $pdo->prepare($sql);
-                    $q->execute(array("%" . strtolower(htmlspecialchars($_POST['fd'])) . "%", "%" . htmlspecialchars($_POST['fd']) . "%"));
-                    if ($zobj = $q->fetchAll()) {
-                        foreach ($zobj as $val) {
-                            $data["/reqinfo/" . $val["sname"]] = $val["reqname"];
-                        }
-                    }
                 } elseif ($_POST["st"] == "diagram") {
                     $sql = "select desid,desname from config_diagrams where xmldata like ?";
                     $q = $pdo->prepare($sql);
@@ -1274,7 +1265,7 @@ class Class_searchall
                     $q->execute(array("%" . htmlspecialchars($_POST['fd']) . "%"));
                     if ($zobj = $q->fetchAll()) {
                         foreach ($zobj as $val) {
-                            $data[str_replace("console", "requests", $val["swhere"])] = $val["what"] . " with tags:" . $val["what"];
+                            $data[$val["swhere"]] = $val["what"] . " with tags:" . $val["what"];
                         }
                     }
                 } elseif ($_REQUEST["st"] == "tag") {
@@ -1283,7 +1274,7 @@ class Class_searchall
                     $q->execute(array("%" . htmlspecialchars($_REQUEST['fd']) . "%"));
                     if ($zobj = $q->fetchAll()) {
                         foreach ($zobj as $val) {
-                            $data[str_replace("console", "requests", $val["swhere"])] = $val["tags"] . " in:" . $val["what"];
+                            $data[$val["swhere"]] = $val["tags"] . " in:" . $val["what"];
                         }
                     }
                 }

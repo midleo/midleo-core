@@ -559,7 +559,46 @@ class Class_cpinfo
             </div>
         </div>
         <!--diagrams modal-->
-        <?php if ($thisarray['p1'] == "new") {?>
+        <?php if ($thisarray['p1'] == "new") {
+            $brarr=array();
+            array_push($brarr, array(
+                "title" => "Back to documentation",
+                "link" => "/cpinfo",
+                "icon" => "mdi-history",
+                "active" => false,
+            ));
+            array_push($brarr, array(
+                "title" => "Category",
+                "link" => "javascript:void(0)",
+                "modal"=> true,
+                "mtarget"=>"#modlcat",
+                "icon" => "mdi-border-all",
+                "active" => false,
+            ));
+            array_push($brarr, array(
+                "title" => "Permissions",
+                "link" => "javascript:void(0)",
+                "modal"=> true,
+                "mtarget"=>"#modlacc",
+                "icon" => "mdi-shield-lock-outline",
+                "active" => false,
+            ));
+            array_push($brarr, array(
+                "title" => "New Category",
+                "link" => "javascript:void(0)",
+                "modal"=> true,
+                "mtarget"=>"#modal-category-form",
+                "icon" => "mdi-plus",
+                "active" => false,
+            ));
+            array_push($brarr, array(
+                "title" => "Save article",
+                "link" => "javascript:void(0)",
+                "icon" => "mdi-content-save-outline",
+                "onclick" => "document.getElementById('addpost').click();",
+                "active" => false,
+            ));
+            ?>
         <form class="form-material" action="" method="post" enctype="multipart/form-data" name="frmUpload"
             onSubmit="return validateForm();">
 
@@ -582,27 +621,7 @@ class Class_cpinfo
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <br>
-                    <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
-                    <br>
-                    <div class="list-group">
-                        <a href="/cpinfo"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-history"></i>&nbsp;Back to Knowledge base</a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlcat"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-border-all"></i>&nbsp;Category</a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlacc"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-shield-lock-outline"></i>&nbsp;Permissions</a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modal-category-form"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-plus"></i>&nbsp;New Category</a>
-                        <a href="javascript:void(0)" onclick="document.getElementById('addpost').click();"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-content-save-outline"></i>&nbsp;Save</a>
-                    </div>
+                <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
                     <button type="submit" id="addpost" name="addpost" style="display:none;"></button>
 
                 </div>
@@ -679,7 +698,58 @@ class Class_cpinfo
             $q = $pdo->prepare($sql);
             $q->execute(array($thisarray['p2']));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
-
+                $brarr=array();
+                array_push($brarr, array(
+                    "title" => "Back to documentation",
+                    "link" => "/cpinfo",
+                    "icon" => "mdi-history",
+                    "active" => false,
+                ));
+                array_push($brarr, array(
+                    "title" => "Category",
+                    "link" => "javascript:void(0)",
+                    "modal"=> true,
+                    "mtarget"=>"#modlcat",
+                    "icon" => "mdi-border-all",
+                    "active" => false,
+                ));
+                array_push($brarr, array(
+                    "title" => "Permissions",
+                    "link" => "javascript:void(0)",
+                    "modal"=> true,
+                    "mtarget"=>"#modlacc",
+                    "icon" => "mdi-shield-lock-outline",
+                    "active" => false,
+                ));
+                array_push($brarr, array(
+                    "title" => "Change History",
+                    "link" => "javascript:void(0)",
+                    "icon" => "mdi-git",
+                    "onclick" => "getGITHistory('knowledge_info:".$zobj['id']."');",
+                    "active" => false,
+                ));
+                array_push($brarr, array(
+                    "title" => "New Category",
+                    "link" => "javascript:void(0)",
+                    "modal"=> true,
+                    "mtarget"=>"#modal-category-form",
+                    "icon" => "mdi-plus",
+                    "active" => false,
+                ));
+                array_push($brarr, array(
+                    "title" => "Save article",
+                    "link" => "javascript:void(0)",
+                    "icon" => "mdi-content-save-outline",
+                    "onclick" => "document.getElementById('updpost').click();",
+                    "active" => false,
+                ));
+                array_push($brarr, array(
+                    "title" => "Delete article",
+                    "link" => "javascript:void(0)",
+                    "icon" => "mdi-close",
+                    "onclick" => "document.getElementById('delpost').click();",
+                    "active" => false,
+                ));
                 ?><form action="" class="form-material" method="post">
             <div class="row pt-3">
                 <div class="col-lg-2">
@@ -697,36 +767,7 @@ class Class_cpinfo
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <br>
-                    <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
-                    <br>
-                    <div class="list-group">
-                        <a href="/cpinfo"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-history"></i>&nbsp;Back</a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlcat"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-border-all"></i>&nbsp;Category</a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modlacc"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-shield-lock-outline"></i>&nbsp;Permissions</a>
-                        <a href="javascript:void(0)"
-                            onclick="getGITHistory('knowledge_info:<?php echo $zobj['id']; ?>');"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-git"></i>&nbsp;Change History</a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modal-category-form"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-plus"></i>&nbsp;New Category</a>
-                        <a href="javascript:void(0)" onclick="document.getElementById('updpost').click();"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-content-save-outline"></i>&nbsp;Save</a>
-                        <a href="javascript:void(0)" onclick="document.getElementById('delpost').click();"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article"
-                            class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action"><i
-                                class="mdi mdi-close"></i>&nbsp;Delete</a>
-
-                    </div>
+                    <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
                     <input type="hidden" name="gitprepared" value="<?php echo $zobj['gitprepared']; ?>">
                     <button type="submit" id="updpost" name="updpost" style="display:none;"></button>
                     <button type="submit" id="delpost" name="delpost" style="display:none;"></button>
@@ -895,14 +936,12 @@ class Class_cpinfo
                     </div>
                     <form action="" method="post">
                         <div class="modal-body form-horizontal">
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Category name</label>
-                                <div class="col-md-9"> <input name="catname" type="text" class="form-control" required>
+                            <div class="form-group">
+                                <div class="col-md-12"> <input name="catname" type="text" placeholder="Category name" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="form-control-label text-lg-right col-md-3">Visibility</label>
-                                <div class="col-md-9"> <select name="public" class="form-control">
+                            <div class="form-group">
+                                <div class="col-md-12"> <select name="public" class="form-control">
                                         <option value="1">Public</option>
                                         <option value="0">Private</option>
                                     </select></div>

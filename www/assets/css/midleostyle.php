@@ -175,7 +175,7 @@ ul.list-style-none li a:hover{color:#'.$thiscolor.'}
 .progress{height:auto}
 .card-group{margin-bottom:30px}
 .tablesaw [type="checkbox"]:not(:checked),.tablesaw [type="checkbox"]:checked,.fixed-table-container [type="checkbox"]:not(:checked),.fixed-table-container [type="checkbox"]:checked{position:relative;left:0;opacity:1}
-#main-wrapper{width:100%;overflow:hidden}
+#main-wrapper{width:100%;/*overflow:hidden*/}
 .container-fluid{padding:0 15px 15px 15px;}
 @media (max-width: 767.98px) {
 .container-fluid{padding:0 15px 15px}

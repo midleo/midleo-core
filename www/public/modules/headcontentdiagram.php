@@ -64,8 +64,6 @@
                     <li><a href="/profile/" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-account-outline"></i>&nbsp;Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a href="/info/" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-post-outline"></i>&nbsp;Knowledge base</a></li>
-                            <?php if (sessionClass::checkAcc($acclist, "requests")) { ?><li><a
-                                    href="/requests" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-swap-vertical-bold"></i>&nbsp;Requests</a></li><?php } ?>
                             <li><a href="/logout" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-exit-to-app"></i>&nbsp;Logout</a></li>
                     </ul>
                 </li>

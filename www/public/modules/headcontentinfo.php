@@ -1,15 +1,12 @@
 <nav class="navbar top-navbar navbar-expand-md navbar-light">
     <div class="container">
-    <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
-            
+        <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
             <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-white.svg"
-                alt="Midleo CORE" title="Midleo CORE"
-                class="light-logo ml" />
-            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-icon-logo-white.svg"
-                alt="Midleo CORE" title="Midleo CORE"
-                class="light-logo-icon mli" />
-       
-    </a>
+                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" />
+            <img data-bs-toggle="tooltip"
+                src="/<?php echo $website['corebase'];?>assets/images/midleo-icon-logo-white.svg" alt="Midleo CORE"
+                title="Midleo CORE" class="light-logo-icon mli" />
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#midnav"
             aria-controls="midnav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,12 +20,12 @@
                             href="/info/category/<?php echo $blogcatname;?>"><?php echo $blogcat;?></a></li>
                     <?php } ?>
                 </ol>
-
             </ul>
             <ul class="navbar-nav mb-lg-0 nlinks">
                 <li class="nav-item d-none d-md-block search-box"> <a
                         class="nav-link d-none d-md-block text-muted waves-effect waves-dark"
-                        href="javascript:void(0)"><span class="itemicon"><i class="mdi mdi-magnify mdi-24px"></i></span></a>
+                        href="javascript:void(0)"><span class="itemicon"><i
+                                class="mdi mdi-magnify mdi-24px"></i></span></a>
                     <?php if(!empty($_SESSION["user"])){?>
                     <form class="app-search p-relative" method="post" action="/searchall">
                         <input type="text" name="fd" class="hs-input hasselect"
@@ -52,7 +49,6 @@
                     <?php } ?>
                 </li>
                 <?php if(!empty($_SESSION["user"])){?>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="usrdrdown">
@@ -61,27 +57,31 @@
                             style="width:22px;margin-top: -3px;">
                     </a>
                     <ul class="dropdown-menu usrdrdown" aria-labelledby="usrdrdown">
-                    <li><a href="/cp/?" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-monitor-dashboard"></i>&nbsp;Dashboard</a></li>
-                    <li><a href="/profile/?" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-account-outline"></i>&nbsp;Profile</a></li>
+                        <li><a href="/cp/?" class="dropdown-item waves-effect waves-dark"><i
+                                    class="mdi mdi-monitor-dashboard"></i>&nbsp;Dashboard</a></li>
+                        <li><a href="/profile/?" class="dropdown-item waves-effect waves-dark"><i
+                                    class="mdi mdi-account-outline"></i>&nbsp;Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a href="/info/" class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-post-outline"></i>&nbsp;Knowledge base</a></li>
-                         <li><a href="/logout"
-                                class="dropdown-item waves-effect waves-dark"><i class="mdi mdi-exit-to-app"></i>&nbsp;Logout</a></li> 
+                        <li><a href="/info/" class="dropdown-item waves-effect waves-dark"><i
+                                    class="mdi mdi-post-outline"></i>&nbsp;Knowledge base</a></li>
+                        <li><a href="/logout" class="dropdown-item waves-effect waves-dark"><i
+                                    class="mdi mdi-exit-to-app"></i>&nbsp;Logout</a></li>
                     </ul>
                 </li>
                 <?php } else { ?>
-                    <li class="nav-item">
-                    <a data-bs-toggle="tooltip" title="Login Console" class="nav-link text-muted waves-effect waves-dark"
-                        href="/mlogin/?"><span class="itemicon"><i class="mdi mdi-login mdi-24px"></i></a>
+                <li class="nav-item">
+                    <a data-bs-toggle="tooltip" title="Login Console"
+                        class="nav-link text-muted waves-effect waves-dark" href="/mlogin/?"><span class="itemicon"><i
+                                class="mdi mdi-login mdi-24px"></i></a>
                 </li>
                 <?php } ?>&nbsp;
                 <div class="theme-switch-wrapper">
                     <label class="theme-switch" for="checkbox">
                         <input type="checkbox" id="checkbox" />
                         <div class="slidersw itemicon">
-                        <i class="mdi mdi-weather-night mdi-24px"></i>
+                            <i class="mdi mdi-weather-night mdi-24px"></i>
                         </div>
                     </label>
                 </div>
