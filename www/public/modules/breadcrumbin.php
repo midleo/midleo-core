@@ -30,7 +30,7 @@
     </div>
     <?php } ?>
     <?php if($brarr2){ ?>
-    <br>
+    <br><br>
     <h4><i class="mdi <?php echo $brarr2headico;?>"></i>&nbsp;<?php echo $brarr2head;?></h4>
     <br>
     <div class="list-group">

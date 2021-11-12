@@ -1748,6 +1748,7 @@ display:none;}
 .tox-tinymce{border:0px solid transparent!important;border-top:1px solid #ccc!important;}
 .list-group-item-light{font-size:.9rem;}
 .nav-link{padding:0px;padding-top:5px;}
+.navbar-expand-md .navbar-nav .dropdown-menu{z-index:9999;}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);
