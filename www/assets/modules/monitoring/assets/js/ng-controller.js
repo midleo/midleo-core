@@ -37,4 +37,3 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
     });
   };  
 });
-angular.bootstrap(document.getElementById("ngApp"), ['ngApp']);

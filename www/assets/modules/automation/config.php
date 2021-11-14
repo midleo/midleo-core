@@ -225,7 +225,7 @@ $brarr=array(
     include $website['corebase']."public/modules/footer.php";
     include $website['corebase']."public/modules/js.php"; 
     if(!empty($thisarray['p1'])){ } else {
-       echo '<script  type="text/javascript" src="/'.$website['corebase'].'assets/js/dirPagination.js"></script><script type="text/javascript" src="/assets/modules/automation/assets/js/ng-controller.js"></script>';
+       echo '<script  type="text/javascript" src="/'.$website['corebase'].'assets/js/dirPagination.js"></script><script type="text/javascript" src="/'.$website['corebase'].'assets/modules/automation/assets/js/ng-controller.js"></script>';
     }
     include $website['corebase']."public/modules/template_end.php";
     echo '</body></html>';

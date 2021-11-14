@@ -104,7 +104,8 @@
                     </div>
                     <div class="form-group text-end"><br>
                         <button id="btn-create-obj" type="submit" name="createpack"
-                            class="waves-effect waves-light btn btn-light btn-sm"><i class="mdi mdi-plus mdi-18px"></i>&nbsp;Create</button>
+                            class="waves-effect waves-light btn btn-light btn-sm"><i
+                                class="mdi mdi-plus mdi-18px"></i>&nbsp;Create</button>
 
                     </div>
                 </div>
@@ -137,7 +138,7 @@
                             <th class="text-center">Released by</th>
                             <th class="text-center">Deployed in</th>
                             <th class="text-center"></th>
-                            <th class="text-center" width="130px">Action</th>
+                            <th class="text-center" width="100px">Action</th>
                         </tr>
                     </thead>
                     <tbody ng-init="getAllpack('<?php echo $thisarray['p2'];?>')">
@@ -158,29 +159,37 @@
                             <td class="text-center"><span
                                     class="badge badge-{{ d.gitpreparedspan }}">{{ d.gitprepared }}</span>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
-                                <div class="text-start d-grid gap-2 d-md-block">
-                                    <button ng-click="getQMlist('<?php echo $thisarray['p2'];?>',d.packuid,d.id)"
-                                        class="btn btn-light mql{{d.id}}" ng-show="d.srvtype=='qm'"
-                                        data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')"
-                                        title="Preview"><i class="mdi mdi-eye-outline"></i></button>
-                                    <button ng-show="d.isgitprepared" ng-click="getGitInfo(d.packuid,d.id)"
-                                        class="btn btn-light gl{{d.id}}" data-bs-toggle="tooltip"
-                                        onmouseenter="$(this).tooltip('show')" title="Check GIT deployments"><i
-                                            class="mdi mdi-git"></i></button>
-                                    <button data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')" title="Prepare"
-                                        type="button" ng-click="preparepack('<?php echo $thisarray['p2'];?>',d.id)"
-                                        class="btn btn-light btn-sm waves-effect prepb{{d.id}}"><i class="mdi mdi-file-document-multiple-outline"></i></button>
-                                    <button ng-show="d.isdeployed" data-bs-toggle="tooltip"
-                                        onmouseenter="$(this).tooltip('show')"
-                                        title="You cannot delete a package if it is deployed already." type="button"
-                                        class="btn btn-light btn-sm waves-effect"><i class="mdi mdi-information-outline"></i></button>
-                                    <button ng-hide="d.isdeployed" data-bs-toggle="tooltip"
-                                        onmouseenter="$(this).tooltip('show')" title="Delete" type="button"
-                                        ng-click="deletepack('<?php echo $thisarray['p2'];?>',d.id,d.packuid)"
-                                        class="btn btn-light btn-sm waves-effect delb{{d.id}}"><i class="mdi mdi-close"></i></button>
-                                </div>
+                                <button class="btn btn-light btn-sm dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-horizontal"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button ng-click="getQMlist('<?php echo $thisarray['p2'];?>',d.packuid,d.id)"
+                                            class="dropdown-item mql{{d.id}}" ng-show="d.srvtype=='qm'"><i
+                                                class="mdi mdi-eye-outline"></i>&nbsp; Preview</button></li>
+                                    <li> <button ng-show="d.isgitprepared" ng-click="getGitInfo(d.packuid,d.id)"
+                                            class="dropdown-item gl{{d.id}}" data-bs-toggle="tooltip"
+                                            onmouseenter="$(this).tooltip('show')" title="Check GIT deployments"><i
+                                                class="mdi mdi-git"></i>&nbsp;Version history</button></li>
+                                    <li> <button data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')"
+                                            title="Prepare a package" type="button"
+                                            ng-click="preparepack('<?php echo $thisarray['p2'];?>',d.id)"
+                                            class="dropdown-item btn-sm waves-effect prepb{{d.id}}"><i
+                                                class="mdi mdi-file-document-multiple-outline"></i>&nbsp;Prepare</button>
+                                    </li>
+                                    <li> <button ng-show="d.isdeployed" data-bs-toggle="tooltip"
+                                            onmouseenter="$(this).tooltip('show')"
+                                            title="You cannot delete a package if it is deployed already." type="button"
+                                            class="dropdown-item btn-sm waves-effect"><i
+                                                class="mdi mdi-information-outline"></i>&nbsp;Information</button></li>
+                                    <li> <button ng-hide="d.isdeployed" data-bs-toggle="tooltip"
+                                            onmouseenter="$(this).tooltip('show')" title="Delete" type="button"
+                                            ng-click="deletepack('<?php echo $thisarray['p2'];?>',d.id,d.packuid)"
+                                            class="dropdown-item waves-effect delb{{d.id}}"><i
+                                                class="mdi mdi-close"></i>&nbsp;Delete</button></li>
+                                </ul>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -204,21 +213,23 @@
             <div class="modal-body">
                 <div ng-if="gitlist.length>0">
                     <table class="table">
-                    <thead>
-                    <tr>
-                    <th>Time</th>
-                    <th>System</th>
-                    <th>CommitID</th>
-                    <th>Folder</th>
-                    <th>Type</th>
-                    <th>user</th>
-                    </tr>
-                    </thead>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>System</th>
+                                <th>CommitID</th>
+                                <th>Folder</th>
+                                <th>Type</th>
+                                <th>user</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr ng-repeat="(key, val) in gitlist">
-                            <td>{{val.steptime}}</td>
+                                <td>{{val.steptime}}</td>
                                 <td>{{val.gittype}}</td>
-                                <td><span class="badge badge-info" ng-click="copyToClipboard(val.commitid)">{{ val.commitid | limitTo: 10 }}{{val.commitid.length > 10 ? '...' : ''}}</span></td>
+                                <td><span class="badge badge-info"
+                                        ng-click="copyToClipboard(val.commitid)">{{ val.commitid | limitTo: 10 }}{{val.commitid.length > 10 ? '...' : ''}}</span>
+                                </td>
                                 <td>{{val.fileplace}}</td>
                                 <td>{{val.steptype}}</td>
                                 <td><a href="/browse/user/{{val.stepuser}}" target="_blank">View</a></td>
@@ -231,7 +242,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i
+                        class="mdi mdi-close"></i>&nbsp;Close</button>
             </div>
         </div>
     </div>
@@ -273,9 +285,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i
+                        class="mdi mdi-close"></i>&nbsp;Close</button>
                 <button ng-show="depl.deplenv" type="button" class="waves-effect waves-light btn btn-info btn-sm"
-                    ng-click="mqpreview('<?php echo $thisarray['p2'];?>')"><i class="mdi mdi-eye-outline"></i>&nbsp;Make preview</button>
+                    ng-click="mqpreview('<?php echo $thisarray['p2'];?>')"><i class="mdi mdi-eye-outline"></i>&nbsp;Make
+                    preview</button>
             </div>
         </div>
     </div>
@@ -285,39 +299,33 @@
     <div class="modal-dialog" style="width: 800px;">
         <div class="modal-content" style="background-color:#fff;">
             <div class="modal-body">
-
                 <div ng-if="response.diff">
                     <h4 class="text-danger">Difference</h4>
                     <div ng-repeat="(key, val) in response.diff"
                         ng-init="i = $parent.start; $parent.start=$parent.start+1;">
-                        <div id="accd{{i}}">
-                            <div class="card mb-0 br-0" style="box-shadow:none;border:1px solid #dfdfdf;"
-                                ng-repeat="(keyin, valin) in val"
+                        <div class="accordion accordion-flush" id="accld{{i}}">
+                            <div class="accordion-item" ng-repeat="(keyin, valin) in val"
                                 ng-init="j = $parent.start; $parent.start=$parent.start+1;">
-                                <div class="ribbon ribbon-default ribbon-right">{{key}}</div>
-                                <a class="card-header text-decoration-none" id="headingd{{i}}{{j}}">
-
-                                    <button class="btn btn-light" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsed{{i}}{{j}}" aria-expanded="true"
-                                        aria-controls="collapsed{{i}}{{j}}">
-                                        <i class="mdi mdi-arrow-up"></i>&nbsp;{{keyin}}
+                                <h2 class="accordion-header" id="flushd{{i}}{{j}}">
+                                    <button class="accordion-button collapsed p-1" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsed{{i}}{{j}}"
+                                        aria-expanded="false" aria-controls="flushd{{i}}{{j}}">
+                                        <span class="badge badge-info">{{key}}</span>:&nbsp;{{keyin}}
                                     </button>
-                                </a>
-                                <div id="collapsed{{i}}{{j}}" class="collapse" aria-labelledby="headingd{{i}}{{j}}"
-                                    data-parent="#accd{{i}}">
-                                    <div class="card-body">
-                                        <table class="table table-striped ">
+                                </h2>
+                                <div id="collapsed{{i}}{{j}}" class="accordion-collapse collapse"
+                                    aria-labelledby="flushd{{i}}{{j}}" data-bs-parent="#accld{{i}}">
+                                    <div class="accordion-body p-0">
+                                        <table class="stylish-table table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Property</th>
-                                                    <th>Old</th>
-                                                    <th>New</th>
+                                                    <th class="bg-dark text-white">Property</th>
+                                                    <th class="bg-dark text-white">Value</th>
                                                 </tr>
                                             </thead>
                                             <tr ng-repeat="(keyobj, valobj) in valin">
                                                 <td>{{keyobj}}</td>
-                                                <td class="table-danger">{{valobj.from}}</td>
-                                                <td class="table-success">{{valobj.to}}</td>
+                                                <td><code>{{valobj}}</code></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -331,31 +339,29 @@
                     <h4 class="text-info">New changes</h4>
                     <div ng-repeat="(key, val) in response.less"
                         ng-init="i = $parent.start; $parent.start=$parent.start+1;">
-                        <div id="accl1{{i}}">
-                            <div class="card mb-0 br-0" style="box-shadow:none;border:1px solid #dfdfdf;"
-                                ng-repeat="(keyin, valin) in val"
+                        <div class="accordion accordion-flush" id="accl1{{i}}">
+                            <div class="accordion-item" ng-repeat="(keyin, valin) in val"
                                 ng-init="j = $parent.start; $parent.start=$parent.start+1;">
-                                <div class="ribbon ribbon-default ribbon-right">{{key}}</div>
-                                <a class="card-header text-decoration-none" id="headingl{{i}}{{j}}">
-                                    <button class="btn btn-light" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsel{{i}}{{j}}" aria-expanded="true"
-                                        aria-controls="collapsel{{i}}{{j}}">
-                                        <i class="mdi mdi-arrow-up"></i>&nbsp;{{keyin}}
+                                <h2 class="accordion-header" id="flush{{i}}{{j}}">
+                                    <button class="accordion-button collapsed p-1" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsel{{i}}{{j}}"
+                                        aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <span class="badge badge-info">{{key}}</span>:&nbsp;{{keyin}}
                                     </button>
-                                </a>
-                                <div id="collapsel{{i}}{{j}}" class="collapse" aria-labelledby="headingl{{i}}{{j}}"
-                                    data-parent="#accl1{{i}}">
-                                    <div class="card-body">
-                                        <table class="table table-striped ">
+                                </h2>
+                                <div id="collapsel{{i}}{{j}}" class="accordion-collapse collapse"
+                                    aria-labelledby="flush{{i}}{{j}}" data-bs-parent="#accl1{{i}}">
+                                    <div class="accordion-body p-0">
+                                        <table class="stylish-table table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Property</th>
-                                                    <th>Value</th>
+                                                    <th class="bg-dark text-white">Property</th>
+                                                    <th class="bg-dark text-white">Value</th>
                                                 </tr>
                                             </thead>
                                             <tr ng-repeat="(keyobj, valobj) in valin">
                                                 <td>{{keyobj}}</td>
-                                                <td class="table-info">{{valobj}}</td>
+                                                <td><code>{{valobj}}</code></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -367,7 +373,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="mdi mdi-close"></i>&nbsp;Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i
+                        class="mdi mdi-close"></i>&nbsp;Close</button>
             </div>
         </div>
     </div>

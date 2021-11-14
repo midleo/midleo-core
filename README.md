@@ -21,8 +21,12 @@ Some screenshots from the Midleo app:
 ### Create package for IBM MQ deployment
 ![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/ibm-mq-package.png?raw=true)
 
+### IBM MQ Preview changes befor deployment
+![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/ibmmq-preview.png?raw=true)
+
 ### Server information page
 ![The Midleo web app](https://github.com/midleo/midleo-core/blob/master/github.assets/server-info.png?raw=true)
+
 
 ## How to install
 

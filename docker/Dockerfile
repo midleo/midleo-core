@@ -8,7 +8,9 @@ FROM php:fpm
 RUN apt-get update && apt-get install -y libpq-dev libzip-dev zip libpng-dev libjpeg-dev libfreetype6-dev  \ 
      && docker-php-ext-configure gd --with-jpeg --with-freetype \
      && docker-php-ext-install pdo pdo_mysql pdo_pgsql zip calendar gd \
-     && rm -rf /var/lib/apt/lists/*
+     && rm -rf /var/lib/apt/lists/* \
+     && apt-get install -y openjdk-11-jre-headless && \
+     && apt-get clean
 
 RUN curl -s -o /tmp/go-pear.phar http://pear.php.net/go-pear.phar && \
     echo '/usr/local/bin/php /tmp/go-pear.phar "$@"' > /usr/bin/pear && \
