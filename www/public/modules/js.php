@@ -16,7 +16,7 @@
 <script src="/<?php echo $website['corebase'];?>assets/js/moment.min.js"></script>
 <script src="/<?php echo $website['corebase'];?>assets/js/bootstrap-datetimepicker.min.js"></script>
 <?php 
-$arrtiny=array("/appconfig/mail","cpinfo");
+$arrtiny=array("/appconfig/mail","reqinfo","reqtasks","reqnew","cpinfo","reqinfocl","reqnewcl","projects","pjtemplates");
 if(in_array($_SERVER['REQUEST_URI'],$arrtiny) || in_array($page,$arrtiny)){ ?><script type="text/javascript"
     src="/<?php echo $website['corebase'];?>assets/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/tinymce/mentions.min.js"></script>
