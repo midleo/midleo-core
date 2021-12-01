@@ -1749,6 +1749,7 @@ display:none;}
 .list-group-item-light{font-size:.9rem;}
 .nav-link{padding:0px;padding-top:5px;}
 .navbar-expand-md .navbar-nav .dropdown-menu{z-index:9999;}
+.card-login{box-shadow: 0 25px 75px rgba(16,30,54,.25);}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);

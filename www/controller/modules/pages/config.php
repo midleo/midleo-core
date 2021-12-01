@@ -113,9 +113,11 @@ class Class_info
         } else { $blogcatname = "Category is empty!";}}
         include $website['corebase']."public/modules/css.php";
         if ($forumcase == "posts") {?>
-    <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/responsive.dataTables.min.css">
-    <?php
+<link rel="stylesheet" type="text/css"
+    href="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" type="text/css"
+    href="/<?php echo $website['corebase'];?>assets/js/datatables/responsive.dataTables.min.css">
+<?php
 }
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Knowledge base";
@@ -195,38 +197,38 @@ if (strpos($zobj['cattext'], 'diagram') !== false) {
 
     <!--history modal-->
     <div class="modal" id="modal-hist" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog" style="width:auto;">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div style="display:block;">
-                                <input type="text" ng-model="search" class="form-control topsearch dtfilter"
-                                    placeholder="Filter">
-                            </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body pt-0">
-                            <div class="table-responsive">
-                                <table id="data-table-hist" class="table table-hover stylish-table mb-0"
-                                    aria-busy="false" style="margin-top:0px !important;" style="width:100%;">
-                                    <thead>
-                                        <tr>
-                                            <th data-column-id="id" data-identifier="true" data-visible="false"
-                                                data-type="numeric">ID</th>
-                                            <th data-column-id="commitid">Commit ID</th>
-                                            <th data-column-id="filepl">File place</th>
-                                            <th data-column-id="author">Author</th>
-                                            <th data-column-id="commitdate">Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-
-                        </div>
+        <div class="modal-dialog" style="width:auto;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="display:block;">
+                        <input type="text" ng-model="search" class="form-control topsearch dtfilter"
+                            placeholder="Filter">
                     </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-0">
+                    <div class="table-responsive">
+                        <table id="data-table-hist" class="table table-hover stylish-table mb-0" aria-busy="false"
+                            style="margin-top:0px !important;" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-identifier="true" data-visible="false"
+                                        data-type="numeric">ID</th>
+                                    <th data-column-id="commitid">Commit ID</th>
+                                    <th data-column-id="filepl">File place</th>
+                                    <th data-column-id="author">Author</th>
+                                    <th data-column-id="commitdate">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
-            <!--history modal-->
+        </div>
+    </div>
+    <!--history modal-->
     <?php if (!empty($zobj['tags'])) {?><br>
     <div class="blogTags">
         <?php
@@ -317,7 +319,8 @@ $sql = "update knowledge_info set views=views+1 where id=?";
             <?php }
                 for ($i = 1; $i <= $total_pages; $i++) {
                     if (($page) == $i) {?>
-            <li class="page-item active"><a class="page-link" href="/info/pn/<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <li class="page-item active"><a class="page-link" href="/info/pn/<?php echo $i; ?>"><?php echo $i; ?></a>
+            </li>
             <?php } else {?>
             <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $i; ?>"><?php echo $i; ?></a>
             </li>
@@ -339,7 +342,7 @@ $sql = "update knowledge_info set views=views+1 where id=?";
         if ($forumcase == "posts") {?>
     <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
     <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
- <?php }
+    <?php }
         include $website['corebase']."public/modules/template_end.php";
         if (!empty($text)) {unset($text);}
         echo '</body></html>';
@@ -429,27 +432,42 @@ class Class_mregister
     </head>
 
     <body
-        style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+        style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_back.svg');background-repeat: no-repeat;background-size: cover;background-position:bottom;background-attachment:fixed;">
         <section id="wrapper">
+        <div class="container">
+                    <header
+                        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                        <a href="/"
+                            class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
+                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
+                        </a>
+                     
+                        <div class="col-md-3 text-end">
+                            <?php if ($website["registration"] && $website["registration"] == 1) {?>
+                                        <a href="/mlogin"
+                                                    class="btn btn-primary">Login</a>
+                                           
+                                        <?php }?>
+                        </div>
+                    </header>
+                </div>
             <div class="login-register">
                 <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <div class="card">
+                    <div class="col-md-3">
+                        <div class="card card-login">
                             <div class="card-body">
                                 <form class="form-material form-horizontal" id="loginform" action="" method="post">
                                     <div class="text-center">
-                                        <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-sq-dark.svg"
-                                            alt="Midleo CORE" title="Midleo CORE" class="light-logo"
-                                            style="width:100px;" />
-                                        <h3 class="p-2 rounded-title mb-3"></h3>
+                                        <h3 class="p-2 rounded-title mb-3">Let's go!</h3>
                                     </div>
                                     <?php $sql = "select ldapserver,ldapinfo from ldap_config";
         $q = $pdo->prepare($sql);
         $q->execute();
         if ($zobj = $q->fetchAll()) {?>
                                     <div class="form-group mb-3">
+                                    <label for="authtype" class="form-label">Authentication provider</label>
                                         <select name="authtype" id="authtype" class="form-control">
-                                            <option value="">Authentication provider</option>
                                             <?php foreach ($zobj as $val) {?><option
                                                 value="<?php echo $val['ldapserver']; ?>">
                                                 <?php echo $val['ldapinfo']; ?></option><?php }?>
@@ -459,20 +477,23 @@ class Class_mregister
                                     </div>
                                     <?php }?>
                                     <div class="form-group mb-1">
+                                    <label for="usr_name" class="form-label">Your name</label>
                                         <input name="usr_name" id="usr_name" class="form-control" type="text"
-                                            required="" placeholder="Your name">
+                                            required="">
                                     </div>
                                     <div class="form-group mb-1">
+                                    <label for="usr_email" class="form-label">Email address</label>
                                         <input name="usr_email" id="username" class="form-control" type="text"
-                                            required="" placeholder="Email address">
+                                            required="">
                                     </div>
                                     <div class="form-group mb-1">
-                                        <input type="password" id="pwdnew" name="pwdnew" class="form-control "
-                                            placeholder="Password">
+                                    <label for="pwdnew" class="form-label">Password</label>
+                                        <input type="password" id="pwdnew" name="pwdnew" class="form-control">
                                     </div>
                                     <div class="form-group mb-1">
+                                    <label for="pwdnew2" class="form-label">Confirm password</label>
                                         <input class="form-control" type="password" id="pwdnew2" name="pwdnew2"
-                                            equalto="#pwdnew" placeholder="Confirm password">
+                                            equalto="#pwdnew">
                                     </div>
                                     <div class="form-group mb-1">
                                         <div class="col-xs-12">
@@ -489,18 +510,10 @@ class Class_mregister
                                                 required="" placeholder="write the number">
                                         </div>
                                     </div>
-                                    <div class="form-group text-center mt-3">
-                                        <div class="col-xs-12">
+                                    <div class="form-group text-center mt-3 d-grid gap-2">
                                             <button name="doRegister"
-                                                class="btn m-btn-theme text-uppercase waves-effect waves-light"
+                                                class="btn btn-light text-uppercase waves-effect waves-light"
                                                 type="submit"><i class="mdi mdi-login"></i>&nbsp;Register</button>
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-0">
-                                        <div class="col-sm-12 text-center">
-                                            You have an account? <a href="/mlogin" class="text-info ml-1"><b>Sign
-                                                    In</b></a>
-                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -607,7 +620,8 @@ include $website['corebase']."public/modules/footer.php";
             convertEntities(pwsL10n);
         } catch (e) {};
         </script>
-        <script src="/<?php echo $website['corebase'];?>assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
+        <script src="/<?php echo $website['corebase'];?>assets/js/password-strength-meter.js" type="text/javascript">
+        </script> <?php
 include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
 
@@ -762,26 +776,41 @@ class Class_mlogin
         </head>
 
         <body
-            style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_bg.jpg');background-repeat: no-repeat;background-size: cover;">
+            style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_back.svg');background-repeat: no-repeat;background-size: cover;background-position:bottom;">
             <section id="wrapper">
+                <div class="container">
+                    <header
+                        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                        <a href="/"
+                            class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
+                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
+                        </a>
+                     
+                        <div class="col-md-3 text-end">
+                            <?php if ($website["registration"] && $website["registration"] == 1) {?>
+                                        <a href="/mregister"
+                                                    class="btn btn-primary">Sign Up</a>
+                                           
+                                        <?php }?>
+                        </div>
+                    </header>
+                </div>
                 <div class="login-register">
                     <div class="row justify-content-center">
                         <div class="col-md-3">
-                            <div class="card">
+                            <div class="card card-login">
                                 <div class="card-body">
                                     <form class="form-horizontal" id="loginform" action="" method="post">
                                         <div class="text-center">
-                                            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-sq-dark.svg"
-                                                alt="Midleo CORE" title="Midleo CORE" class="light-logo"
-                                                style="width:120px;" />
-                                            <h3 class="p-2 rounded-title mb-3"></h3>
+                                            <h3 class="p-2 rounded-title mb-3">Welcome Back!</h3>
                                         </div>
                                         <?php $sql = "select ldapserver,ldapinfo from ldap_config";
         $q = $pdo->prepare($sql);
         $q->execute();
         if ($zobj = $q->fetchAll()) {?>
                                         <div class="form-group mb-2">
-                                            <label for="authtype">Authentication provider</label>
+                                            <label for="authtype" class="form-label">Authentication provider</label>
                                             <select name="authtype" id="authtype" class="form-control">
                                                 <?php foreach ($zobj as $val) {?><option
                                                     value="<?php echo $val['ldapserver']; ?>">
@@ -791,13 +820,14 @@ class Class_mlogin
                                         </div>
                                         <?php }?>
                                         <div class="form-group mb-2">
+                                        <label for="usr_email" class="form-label">Username / Email address</label>
                                             <input name="usr_email" class="form-control" type="text" required=""
-                                                id="usr_email" placeholder="Username / Email address">
+                                                id="usr_email" >
 
                                         </div>
                                         <div class="form-group mb-2">
-                                            <input name="pwd" class="form-control" type="password" id="pwd" required=""
-                                                placeholder="Password">
+                                        <label for="pwd" class="form-label">Password</label>
+                                            <input name="pwd" class="form-control" type="password" id="pwd" required="">
 
                                         </div>
                                         <div class="form-group">
@@ -808,26 +838,16 @@ class Class_mlogin
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group text-center mt-3">
+                                        <div class="form-group text-center mt-3 d-grid gap-2">
                                             <button name="doLogin"
-                                                class="btn m-btn-theme text-uppercase waves-effect btn-block waves-light"
+                                                class="btn btn-light text-uppercase waves-effect waves-light"
                                                 type="submit"><i class="mdi mdi-login"></i>&nbsp;Log In</button>
                                         </div>
-                                        <?php if ($website["registration"] && $website["registration"] == 1) {?>
-                                        <div class="form-group mb-0">
-                                            <div class="col-sm-12 text-center">
-                                                Don't have an account? <a href="/mregister"
-                                                    class="text-info ml-1"><b>Sign Up</b></a>
-                                            </div>
-                                        </div>
-                                        <?php }?>
+                                        
                                     </form>
                                     <form class="form-horizontal " id="recoverform" action="" method="post">
                                         <div class="text-center">
-                                            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-sq-dark.svg"
-                                                alt="Midleo CORE" title="Midleo CORE" class="light-logo"
-                                                style="width:120px;" />
-                                            <h3 class="p-2 rounded-title mb-3"></h3>
+                                            <h3 class="p-2 rounded-title mb-3">Reset form</h3>
                                         </div>
                                         <div class="form-group ">
                                             <div class="col-xs-12">
@@ -838,21 +858,13 @@ class Class_mlogin
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="email_reset">Email</label>
-
                                             <input class="form-control" name="usr_email" id="email_reset" type="text"
                                                 required="">
                                         </div><br>
-                                        <div class="form-group text-center mt-3">
-                                            <div class="col-xs-12">
+                                        <div class="form-group text-center mt-3 d-grid gap-2">
                                                 <button
-                                                    class="btn m-btn-theme text-uppercase waves-effect btn-block waves-light"
+                                                    class="btn btn-light text-uppercase waves-effect waves-light"
                                                     name="doForgot" type="submit">Reset</button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <div class="col-sm-12 text-center">
-                                                <a href="/mlogin" class="text-info ml-1"><b>Log In</b></a>
-                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -994,13 +1006,13 @@ class Class_profile
                             <div class="card p-2">
                                 <div class="mt-4 text-center">
                                     <img class="img img-fluid rounded-circle"
-                                        src="<?php echo !empty($uavatar) ? $uavatar : "/".$website['corebase']."assets/images/avatar.svg"; ?>" alt=""
-                                        width="150">
+                                        src="<?php echo !empty($uavatar) ? $uavatar : "/".$website['corebase']."assets/images/avatar.svg"; ?>"
+                                        alt="" width="150">
                                     <h4 class="card-title mt-2"><?php echo $usname; ?></h4>
                                     <h6 class="card-subtitle"><?php echo $usemail; ?></h6>
                                     <div class="row text-center justify-content-md-center">
-                                        <?php if (!empty($uavatar)) {?> <form enctype="multipart/form-data" method="post"
-                                            action=""><input type="hidden" name="avatarid"
+                                        <?php if (!empty($uavatar)) {?> <form enctype="multipart/form-data"
+                                            method="post" action=""><input type="hidden" name="avatarid"
                                                 value="<?php echo $uavatar; ?>"><?php }?>
                                             <div class="btn-group">
                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#chgpic"
@@ -1009,7 +1021,8 @@ class Class_profile
                                                 </button>
                                                 <?php if (!empty($uavatar)) {?><button type="submit"
                                                     class="btn btn-light btn-sm waves-effect waves-dark"
-                                                    name="delavatar"><i class="mdi mdi-close"></i>&nbsp;Delete</button><?php }?>
+                                                    name="delavatar"><i
+                                                        class="mdi mdi-close"></i>&nbsp;Delete</button><?php }?>
                                             </div>
                                             <?php if (!empty($uavatar)) {?>
                                         </form><?php }?>
@@ -1027,88 +1040,89 @@ class Class_profile
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="profile" role="tabpanel">
-                                            <form class="form-material " method="post" action="">
-                                                <div class="form-group mt-3">
-                                                    <input type="text" placeholder="Your name" name="usname"
-                                                        value="<?php echo $usname; ?>" class="form-control">
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input type="text" placeholder="Your email" class="form-control"
-                                                        name="usemail" value="<?php echo $usemail; ?>">
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input type="text" placeholder="contact number" name="usphone"
-                                                        value="<?php echo $userphone; ?>" class="form-control">
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input type="text" placeholder="your job title" name="ustitle"
-                                                        value="<?php echo $usertitle; ?>" class="form-control">
+                                        <form class="form-material " method="post" action="">
+                                            <div class="form-group mt-3">
+                                                <input type="text" placeholder="Your name" name="usname"
+                                                    value="<?php echo $usname; ?>" class="form-control">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input type="text" placeholder="Your email" class="form-control"
+                                                    name="usemail" value="<?php echo $usemail; ?>">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input type="text" placeholder="contact number" name="usphone"
+                                                    value="<?php echo $userphone; ?>" class="form-control">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input type="text" placeholder="your job title" name="ustitle"
+                                                    value="<?php echo $usertitle; ?>" class="form-control">
 
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input type="text" placeholder="User Gorups"
-                                                        value="<?php if ($ugroups) {foreach ($ugroups as $key => $val) {echo $val . ", ";}}echo $accrights[$_SESSION["user_level"]];?>"
-                                                        class="form-control" disabled>
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <textarea class="form-control" placeholder="Access groups"
-                                                        disabled><?php if ($acclist) {?><?php foreach ($acclist as $key => $val) {echo $gracclist[$key] . ", ";}} else {echo "Not access yet";}?></textarea>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input type="text" placeholder="User Gorups"
+                                                    value="<?php if ($ugroups) {foreach ($ugroups as $key => $val) {echo $val . ", ";}}echo $accrights[$_SESSION["user_level"]];?>"
+                                                    class="form-control" disabled>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <textarea class="form-control" placeholder="Access groups"
+                                                    disabled><?php if ($acclist) {?><?php foreach ($acclist as $key => $val) {echo $gracclist[$key] . ", ";}} else {echo "Not access yet";}?></textarea>
 
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input type='hidden' value='0' name='user_online_show'>
-                                                    <input type="checkbox" value="1" name="user_online_show" id="onlsh"
-                                                        class="material-inputs filled-in chk-col-blue"
-                                                        <?php if ($user_online_show == 1) {?>checked="checked" <?php }?> />
-                                                    <label class="chbl" for="onlsh">Show Online status</label>
-                                                </div>
-                                                <div class="form-group mt-1">
-                                                    <input type='hidden' value='0' name='user_activity_show'>
-                                                    <input type="checkbox" value="1" name="user_activity_show"
-                                                        id="actsh" class="material-inputs filled-in chk-col-blue"
-                                                        <?php if ($user_activity_show == 1) {?>checked="checked"
-                                                        <?php }?> />
-                                                    <label class="chbl" for="actsh">Show My activity</label>
-                                                </div>
-                                                <div>
-                                                    <br><br>
-                                                    <button type="submit" name="edinf"
-                                                        class="btn btn-light waves-effect waves-dark"><i class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
-                                                </div>
-                                            </form>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input type='hidden' value='0' name='user_online_show'>
+                                                <input type="checkbox" value="1" name="user_online_show" id="onlsh"
+                                                    class="material-inputs filled-in chk-col-blue"
+                                                    <?php if ($user_online_show == 1) {?>checked="checked" <?php }?> />
+                                                <label class="chbl" for="onlsh">Show Online status</label>
+                                            </div>
+                                            <div class="form-group mt-1">
+                                                <input type='hidden' value='0' name='user_activity_show'>
+                                                <input type="checkbox" value="1" name="user_activity_show" id="actsh"
+                                                    class="material-inputs filled-in chk-col-blue"
+                                                    <?php if ($user_activity_show == 1) {?>checked="checked"
+                                                    <?php }?> />
+                                                <label class="chbl" for="actsh">Show My activity</label>
+                                            </div>
+                                            <div>
+                                                <br><br>
+                                                <button type="submit" name="edinf"
+                                                    class="btn btn-light waves-effect waves-dark"><i
+                                                        class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
+                                            </div>
+                                        </form>
                                     </div>
                                     <div class="tab-pane" id="security" role="tabpanel">
-                                            <form class="form-material" method="post" action="">
+                                        <form class="form-material" method="post" action="">
 
-                                                <div class="form-group mt-3">
-                                                    <input id="pwd" placeholder="Old password" type="password"
-                                                        name="pwd" class="form-control" required>
+                                            <div class="form-group mt-3">
+                                                <input id="pwd" placeholder="Old password" type="password" name="pwd"
+                                                    class="form-control" required>
 
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input placeholder="New password" type="password" id="pwdnew"
-                                                        name="pwdnew" class="form-control" required>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input placeholder="New password" type="password" id="pwdnew"
+                                                    name="pwdnew" class="form-control" required>
 
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input placeholder="repeat new password" type="password"
-                                                        id="pwdnew2" name="pwdnew2" equalto="#pwdnew"
-                                                        class="form-control" required>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input placeholder="repeat new password" type="password" id="pwdnew2"
+                                                    name="pwdnew2" equalto="#pwdnew" class="form-control" required>
 
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input type="hidden" id="username"
-                                                        value="<?php echo $_SESSION['user']; ?>">
-                                                    <div style="display: block;" id="pass-strength-result"><i
-                                                            class='mdi mdi-lock-open-outline'></i>&nbsp;Password
-                                                        Strenght</div>
-                                                </div>
-                                                <div><br><br>
-                                                    <button type="submit" name="changepass"
-                                                        class="btn btn-light waves-effect waves-dark"><i class="mdi mdi-content-save-outline"></i>&nbsp;Change</button>
-                                                </div>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <input type="hidden" id="username"
+                                                    value="<?php echo $_SESSION['user']; ?>">
+                                                <div style="display: block;" id="pass-strength-result"><i
+                                                        class='mdi mdi-lock-open-outline'></i>&nbsp;Password
+                                                    Strenght</div>
+                                            </div>
+                                            <div><br><br>
+                                                <button type="submit" name="changepass"
+                                                    class="btn btn-light waves-effect waves-dark"><i
+                                                        class="mdi mdi-content-save-outline"></i>&nbsp;Change</button>
+                                            </div>
 
-                                            </form>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -1298,8 +1312,8 @@ class Class_searchall
 </div>
 </div>
 <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
-    </div>
-    </div>
+</div>
+</div>
 <?php echo '</div></div>';
         include $website['corebase']."public/modules/footer.php";
         echo '</div></div>';
