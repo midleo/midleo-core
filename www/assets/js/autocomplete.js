@@ -12,7 +12,7 @@ $(document).ready(function () {
           $('#diagramslist').append(`
           <div class="col-md-3">
           <div class="custom-control custom-checkbox image-checkbox">
-              <input type="checkbox" name="dessel[]" id="did`+ element.id + `" value="` + element.desid + `">
+              <input type="checkbox" name="dessel[]" id="did`+ element.id + `" value="` + element.imgdata + `">
               <label class="custom-control-label" for="did`+ element.id + `">
                   <img src="`+ element.imgdata + `" alt="` + element.desname + `" class="img-fluid">
               </label>
@@ -58,7 +58,7 @@ $(document).ready(function () {
       }).toArray();
       //console.log(searchIDs);
       $.each(searchIDs, function (index, element) {
-        tinymce.activeEditor.execCommand('mceInsertContent', false, '<p>[diagram=' + element + ']</p>');
+        tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="' + element + '" class="img-fluid" style="max-width:300px">');
       });
       dialogApi.close();
     }

@@ -9,6 +9,7 @@
             <?php if($val["nglink"]){?>ng-click="<?php echo $val["nglink"];?>" <?php } ?>
             <?php if($val["onclick"]){?>onclick="<?php echo $val["onclick"];?>" <?php } ?>
             <?php if($val["ngshow"]){?>ng-show="<?php echo $val["ngshow"];?>" <?php } ?>
+            <?php if($val["target"]){?>target="<?php echo $val["target"];?>" <?php } ?>
             <?php if($val["modal"]){?>data-bs-toggle="modal" data-bs-target="<?php echo $val["mtarget"];?>" <?php } ?>
             title="<?php echo $val["title"];?>"
             class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action <?php echo $val["main"]?"border-arrow":"";?>"><?php if($val["icon"]){?><i

@@ -737,6 +737,13 @@ class Class_cpinfo
                     "active" => false,
                 ));
                 array_push($brarr, array(
+                    "title" => "Show article",
+                    "link" => "/info/posts/".$thisarray["p2"],
+                    "icon" => "mdi-magnify",
+                    "target" => "_blank",
+                    "active" => false,
+                ));
+                array_push($brarr, array(
                     "title" => "Save article",
                     "link" => "javascript:void(0)",
                     "icon" => "mdi-content-save-outline",

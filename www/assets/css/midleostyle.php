@@ -390,7 +390,7 @@ from{width:0}
 .jq-icon-warning{background-color:#ffb22b;color:#fff}
 .alert-rounded{border-radius:60px}
 .list-group a.list-group-item:hover{background:#0000001A}
-.list-group-item.active,.list-group .list-group-item.active:hover{background:#'.$thiscolor.';border-color:#'.$thiscolor.'}
+.list-group-item.active,.list-group .list-group-item.active:hover{background:#'.$thiscolor.'!important;border-color:#'.$thiscolor.'!important}
 .list-group-item.disabled{color:#d5d6d8;background:#f2f4f8}
 .dd3-handle:before{color:#67757c;top:7px}
 .tooltip-item{background:rgba(0,0,0,0.1);cursor:pointer;display:inline-block;font-weight:500;padding:0 10px}
