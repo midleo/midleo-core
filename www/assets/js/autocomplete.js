@@ -398,7 +398,7 @@ $(document).ready(function () {
         'searchreplace wordcount visualblocks visualchars code fullscreen',
         'insertdatetime media nonbreaking save table directionality',
         'emoticons template paste textpattern',
-        'mention'
+        'mention table'
       ],
       mentions: {
         delimiter: ['@', '#'],
@@ -449,7 +449,7 @@ $(document).ready(function () {
           return '<ul class="rte-autocomplete dropdown-menu"></ul>';
         }
       },
-      toolbar1: 'insertfile undo redo  | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print | forecolor backcolor | hr drawio',
+      toolbar1: 'insertfile undo redo  | styleselect | bold italic | table |  alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print | forecolor backcolor | hr drawio',
       setup: function (editor) {
 //        tinymce.ScriptLoader.load('/assets/js/bootstrap.min.js');
         editor.ui.registry.addButton('drawio', {
