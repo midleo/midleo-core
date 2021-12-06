@@ -20,12 +20,10 @@ if (sessionClass::checkAcc($acclist, "appadm,appview")) {
       ));
     
     ?>
-    <div class="card ">
-<div class="card-body p-0">
-
 <div class="row">
-    <div class="col-md-12">
-        <table class="table table-vmiddle table-hover stylish-table mb-0">
+    <div class="col-lg-12 pe-0 ps-0">
+        <div class="card p-0">
+            <table class="table table-vmiddle table-hover stylish-table mb-0">
             <thead>
                 <tr>
                     <th class="text-center" style="width:50px;"></th>
@@ -169,7 +167,6 @@ if (sessionClass::checkAcc($acclist, "appadm,appview")) {
         <?php // include $website['corebase']."public/modules/respform.php";?>
 
         </div>
-</div>
 </div>
 </div>
 <?php }}} else { echo "<div class='row'><div class='col-md-2'></div><div class='col-md-8'><div class='alert alert-danger text-center'>Deploy module not found!</div></div><div class='col-md-2'></div></div>";} ?>

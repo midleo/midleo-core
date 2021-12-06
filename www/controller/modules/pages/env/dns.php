@@ -15,12 +15,10 @@
         "active"=>false,
       ));
     ?>
-<div class="card ">
-    <div class="card-body p-0">
-        
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-vmiddle table-hover stylish-table mb-0">
+<div class="row">
+    <div class="col-lg-12 pe-0 ps-0">
+        <div class="card p-0">
+            <table class="table table-vmiddle table-hover stylish-table mb-0">
                     <thead>
                         <tr>
                             <th class="text-center">Application</th>
@@ -174,7 +172,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         </div>
         <?php } ?>

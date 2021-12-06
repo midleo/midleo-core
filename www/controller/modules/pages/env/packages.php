@@ -124,82 +124,80 @@
 </div>
 <?php } else { ?>
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
-<div class="card ">
-    <div class="card-body p-0">
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-vmiddle table-hover stylish-table mb-0">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">Server type</th>
-                            <th class="text-center">Package ID</th>
-                            <th class="text-center">Released date</th>
-                            <th class="text-center">Released by</th>
-                            <th class="text-center">Deployed in</th>
-                            <th class="text-center"></th>
-                            <th class="text-center" width="100px">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-init="getAllpack('<?php echo $thisarray['p2'];?>')">
-                        <tr ng-hide="contentLoaded">
-                            <td colspan="9" style="text-align:center;font-size:1.1em;"><i
-                                    class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
-                        </tr>
-                        <tr id="contloaded" class="hide"
-                            dir-paginate="d in names | filter:search | orderBy:'-released' | itemsPerPage:10"
-                            pagination-id="prodx">
-                            <td class="text-center">{{ d.name }}</td>
-                            <td class="text-center">{{ d.typesrv }}</td>
-                            <td class="text-center">{{ d.packuid }}</td>
-                            <td class="text-center">{{ d.released }}</td>
-                            <td class="text-center">{{ d.user }}</td>
-                            <td class="text-center"><span class="badge badge-secondary me-1 mt-1"
-                                    ng-repeat="(key,val) in d.deployedin">{{val}}</span></td>
-                            <td class="text-center"><span
-                                    class="badge badge-{{ d.gitpreparedspan }}">{{ d.gitprepared }}</span>
-                            </td>
-                            <td class="text-center">
-                                <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
-                                <button class="btn btn-light btn-sm dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-horizontal"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><button ng-click="getQMlist('<?php echo $thisarray['p2'];?>',d.packuid,d.id)"
-                                            class="dropdown-item mql{{d.id}}" ng-show="d.srvtype=='qm'"><i
-                                                class="mdi mdi-eye-outline"></i>&nbsp; Preview</button></li>
-                                    <li> <button ng-show="d.isgitprepared" ng-click="getGitInfo(d.packuid,d.id)"
-                                            class="dropdown-item gl{{d.id}}" data-bs-toggle="tooltip"
-                                            onmouseenter="$(this).tooltip('show')" title="Check GIT deployments"><i
-                                                class="mdi mdi-git"></i>&nbsp;Version history</button></li>
-                                    <li> <button data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')"
-                                            title="Prepare a package" type="button"
-                                            ng-click="preparepack('<?php echo $thisarray['p2'];?>',d.id)"
-                                            class="dropdown-item btn-sm waves-effect prepb{{d.id}}"><i
-                                                class="mdi mdi-file-document-multiple-outline"></i>&nbsp;Prepare</button>
-                                    </li>
-                                    <li> <button ng-show="d.isdeployed" data-bs-toggle="tooltip"
-                                            onmouseenter="$(this).tooltip('show')"
-                                            title="You cannot delete a package if it is deployed already." type="button"
-                                            class="dropdown-item btn-sm waves-effect"><i
-                                                class="mdi mdi-information-outline"></i>&nbsp;Information</button></li>
-                                    <li> <button ng-hide="d.isdeployed" data-bs-toggle="tooltip"
-                                            onmouseenter="$(this).tooltip('show')" title="Delete" type="button"
-                                            ng-click="deletepack('<?php echo $thisarray['p2'];?>',d.id,d.packuid)"
-                                            class="dropdown-item waves-effect delb{{d.id}}"><i
-                                                class="mdi mdi-close"></i>&nbsp;Delete</button></li>
-                                </ul>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <dir-pagination-controls pagination-id="prodx" boundary-links="true"
-                    on-page-change="pageChangeHandler(newPageNumber)" template-url="/assets/templ/pagination.tpl.html">
-                </dir-pagination-controls>
+<div class="row">
+    <div class="col-lg-12 pe-0 ps-0">
+        <div class="card p-0">
+            <table class="table table-vmiddle table-hover stylish-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Server type</th>
+                        <th class="text-center">Package ID</th>
+                        <th class="text-center">Released date</th>
+                        <th class="text-center">Released by</th>
+                        <th class="text-center">Deployed in</th>
+                        <th class="text-center"></th>
+                        <th class="text-center" width="100px">Action</th>
+                    </tr>
+                </thead>
+                <tbody ng-init="getAllpack('<?php echo $thisarray['p2'];?>')">
+                    <tr ng-hide="contentLoaded">
+                        <td colspan="9" style="text-align:center;font-size:1.1em;"><i
+                                class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                    </tr>
+                    <tr id="contloaded" class="hide"
+                        dir-paginate="d in names | filter:search | orderBy:'-released' | itemsPerPage:10"
+                        pagination-id="prodx">
+                        <td class="text-center">{{ d.name }}</td>
+                        <td class="text-center">{{ d.typesrv }}</td>
+                        <td class="text-center">{{ d.packuid }}</td>
+                        <td class="text-center">{{ d.released }}</td>
+                        <td class="text-center">{{ d.user }}</td>
+                        <td class="text-center"><span class="badge badge-secondary me-1 mt-1"
+                                ng-repeat="(key,val) in d.deployedin">{{val}}</span></td>
+                        <td class="text-center"><span
+                                class="badge badge-{{ d.gitpreparedspan }}">{{ d.gitprepared }}</span>
+                        </td>
+                        <td class="text-center">
+                            <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
+                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="mdi mdi-dots-horizontal"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><button ng-click="getQMlist('<?php echo $thisarray['p2'];?>',d.packuid,d.id)"
+                                        class="dropdown-item mql{{d.id}}" ng-show="d.srvtype=='qm'"><i
+                                            class="mdi mdi-eye-outline"></i>&nbsp; Preview</button></li>
+                                <li> <button ng-show="d.isgitprepared" ng-click="getGitInfo(d.packuid,d.id)"
+                                        class="dropdown-item gl{{d.id}}" data-bs-toggle="tooltip"
+                                        onmouseenter="$(this).tooltip('show')" title="Check GIT deployments"><i
+                                            class="mdi mdi-git"></i>&nbsp;Version history</button></li>
+                                <li> <button data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')"
+                                        title="Prepare a package" type="button"
+                                        ng-click="preparepack('<?php echo $thisarray['p2'];?>',d.id)"
+                                        class="dropdown-item btn-sm waves-effect prepb{{d.id}}"><i
+                                            class="mdi mdi-file-document-multiple-outline"></i>&nbsp;Prepare</button>
+                                </li>
+                                <li> <button ng-show="d.isdeployed" data-bs-toggle="tooltip"
+                                        onmouseenter="$(this).tooltip('show')"
+                                        title="You cannot delete a package if it is deployed already." type="button"
+                                        class="dropdown-item btn-sm waves-effect"><i
+                                            class="mdi mdi-information-outline"></i>&nbsp;Information</button></li>
+                                <li> <button ng-hide="d.isdeployed" data-bs-toggle="tooltip"
+                                        onmouseenter="$(this).tooltip('show')" title="Delete" type="button"
+                                        ng-click="deletepack('<?php echo $thisarray['p2'];?>',d.id,d.packuid)"
+                                        class="dropdown-item waves-effect delb{{d.id}}"><i
+                                            class="mdi mdi-close"></i>&nbsp;Delete</button></li>
+                            </ul>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <dir-pagination-controls pagination-id="prodx" boundary-links="true"
+                on-page-change="pageChangeHandler(newPageNumber)" template-url="/assets/templ/pagination.tpl.html">
+            </dir-pagination-controls>
 
-            </div>
         </div>
     </div>
 </div>

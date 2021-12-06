@@ -7,10 +7,10 @@
       "active"=>false,
     ));
      ?>
-  <div class="card ">
-<div class="card-body p-0">
-<div class="row"><div class="col-md-12">
-  <table class="table table-vmiddle table-hover stylish-table mb-0">
+<div class="row">
+    <div class="col-lg-12 pe-0 ps-0">
+        <div class="card p-0">
+            <table class="table table-vmiddle table-hover stylish-table mb-0">
     <thead>
       <tr>
         <th class="text-center">Date</th>
@@ -64,10 +64,8 @@
     </div>
   </div>
   <?php include $website['corebase']."public/modules/respform.php";?>
-  
   <?php }?>
   </div>
-</div>
 </div>
 </div>
 <?php } else {echo "<div class='row'><div class='col-md-2'></div><div class='col-md-8'><div class='alert alert-danger text-center'>Import module not found!</div></div><div class='col-md-2'></div></div>";}?>

@@ -1674,9 +1674,9 @@ padding-right:37px !important;
     background: #fff;
     height:100%;
     margin-right:18px;
-    margin-left:-14px;
-    border-top-left-radius: 3px;
-border-bottom-left-radius: 3px;
+    margin-left:-12px;
+    border-top-left-radius: 6px;
+   border-bottom-left-radius: 6px;
 }
 .nav-tabs .nav-item{min-height:50px;}
 .border-arrow:after, .menu:before {
