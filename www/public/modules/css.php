@@ -18,7 +18,7 @@
 <link href="/<?php echo $website['corebase'];?>assets/css/animate.css" rel="stylesheet" type="text/css" />
 <link href="/<?php echo $website['corebase'];?>assets/css/spinners.css" rel="stylesheet" type="text/css" />
 <link href="/<?php echo $website['corebase'];?>assets/css/midleostyle.php?&c=<?php echo $website["color"];?>&v=<?php echo filemtime('./'.$website['corebase'].'assets/css/midleostyle.php');?>" rel="stylesheet" type="text/css" />
-<?php  if($page=="env" ||  $page=="business"){ ?>
+<?php if(isset($_SESSION["user"])){?>
 <link href="/<?php echo $website['corebase'];?>assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 <?php } ?>
 <?php  if($thisarray["p0"]!="mlogin"){ ?>
