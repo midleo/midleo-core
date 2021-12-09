@@ -616,7 +616,6 @@ from{width:0}
 .fc-state-highlight{background:#f0f0f0}
 .fc-cell-overlay{background:#f0f0f0}
 .fc-unthemed .fc-today{background:#fff}
-.fc-event{border-radius:0;border:none;cursor:move;color:#fff!important;font-size:13px;margin:1px -1px 0;padding:5px;text-align:center;background:#1e88e5}
 .calendar-event{cursor:move;margin:10px 5px 0 0;padding:6px 10px;display:inline-block;color:#fff;min-width:140px;text-align:center;background:#1e88e5}
 .calendar-event a{float:right;opacity:.6;font-size:10px;margin:4px 0 0 10px;color:#fff}
 .fc-basic-view td.fc-week-number span{padding-right:5px}
@@ -1113,57 +1112,6 @@ path.link { fill: none;stroke: #ccc; stroke-width: 2px;}
 .invoice .card-header{background:#eee!important;padding:20px;margin:-10px -30px 25px}
 .invoice .block-header{display:none}
 .invoice .highlight{background:#eee!important}
-#fc-actions{position:absolute;bottom:10px;right:12px}
-.fc td,.fc th{border-color:transparent}
-.fc th{font-weight:400;padding:5px 0}
-.fc table{background:transparent}
-.fc table tr > td:first-child{border-left-width:0}
-#calendar-widget{margin-bottom:15px;box-shadow:0 1px 2px rgba(0,0,0,0.15);border-radius:2px;}
-#fc-actions{position:absolute;bottom:10px;right:12px}
-.fc{background-color:#fff;box-shadow:0 1px 1px rgba(0,0,0,0.15);margin-bottom:30px}
-.fc td,.fc th{border-color:#f0f0f0}
-.fc th{font-weight:400}
-.fc table tr > td:first-child{border-left-width:0}
-#calendar-widget .fc-toolbar{background:#F7f7f7;border-radius:2px 2px 0 0;}
-#calendar-widget .fc-day-header{color:#fff;background:#'.$thiscolor.';padding:5px 0;border-width:0}
-#calendar-widget .fc-day-number{text-align:center;padding:5px 0}
-#calendar-widget .fc-day-grid-event{margin:1px 3px}
-#calendar-widget .ui-widget-header th,#calendar-widget .ui-widget-header{border-width:0}
-#calendar .fc-day-header{text-align:left;font-size:14px;border-bottom-width:0;border-right-color:#eee;padding:10px 12px}
-#calendar .fc-day-number{padding-left:10px!important;text-align:left!important}
-@media screen and (min-width: 991px) {
-#calendar .fc-day-number{font-size:25px;letter-spacing:-2px}
-}
-#calendar .fc-day-grid-event{margin:1px 9px 0}
-.fc-toolbar{margin-bottom:0;padding:20px 7px 19px;position:relative}
-#calendar-widget .fc-toolbar h2{margin-top:6px;font-size:20px;font-weight:400;text-transform:uppercase;}
-/*.fc-toolbar .ui-button{border:0;padding:0;width:30px;height:30px;border-radius:50%;margin-top:2px;outline:none!important;text-align:center;}
-.fc-toolbar .ui-button:hover{background:#fff;color:#'.$thiscolor.'}
-.fc-toolbar .ui-button > span{position:relative;font-family:"Material Design Icons";font-size:20px;line-height:100%;width:30px;display:block;margin-top:2px}
-.fc-toolbar .ui-button > span:before{position:relative;z-index:1}
-.fc-toolbar .ui-button > span.ui-icon-circle-triangle-w:before{content:"\F0DBA"}
-.fc-toolbar .ui-button > span.ui-icon-circle-triangle-e:before{content:"\F0DBB"}*/
-.fc-event{padding:0;font-size:11px;border-radius:0px!important;border:0!important;background:#'.$thiscolor.';}
-.fc-event .fc-title{padding:2px 8px;display:block}
-.fc-event .fc-time{float:left;background:rgba(0,0,0,0.2);padding:2px 6px;margin:0 0 0 -1px}
-.fc-view,.fc-view > table{border:0;overflow:hidden}
-.fc-view > table > tbody > tr > .ui-widget-content{border-top:0}
-div.fc-row{margin-right:0!important;border:0!important}
-.fc-today{color:#'.$thiscolor.'!important;font-weight:bold;}
-.event-tag{margin-top:5px}
-.event-tag > span{border-radius:50%;width:30px;height:30px;margin-right:3px;position:relative;display:inline-block;cursor:pointer}
-.event-tag > span:hover{opacity:.8;filter:alpha(opacity=80)}
-.event-tag>span{width:30px;height:30px;margin:0 0 3px;position:relative;display:inline-block;vertical-align:top}
-.event-tag>span.color-tag__default{border:1px solid #eee;background-color:#fff!important}
-.event-tag>span.color-tag__default>i:before{color:#333}
-.event-tag>span,.event-tag>span>i{-webkit-transition:all;-o-transition:all;transition:all;-webkit-transition-duration:.2s;transition-duration:.2s}
-.event-tag>span>input[type=radio]{margin:0;width:100%;height:100%;position:relative;z-index:2;cursor:pointer;opacity:0;filter:alpha(opacity=0)}
-.event-tag>span>input[type=radio]:checked+i{opacity:1;filter:alpha(opacity=100);-webkit-transform:scale(1);-ms-transform:scale(1);-o-transform:scale(1);transform:scale(1)}
-.event-tag>span:hover{opacity:.8;filter:alpha(opacity=80)}
-.event-tag>span>i{position:absolute;left:0;top:0;width:100%;height:100%;padding:4px 0 0 7px;opacity:0;filter:alpha(opacity=0);-webkit-transform:scale(0);-ms-transform:scale(0);-o-transform:scale(0);transform:scale(0)}
-.event-tag>span>i:before{content:"\F012C";font-family:"Material Design Icons";color:#fff;font-size:16px;z-index:1}
-hr.fc-divider{border-width:1px;border-color:#eee}
-.fc-day-grid-container.fc-scroller{height:auto!important;overflow:hidden!important}
 .input-helper:before,.input-helper:after,.checkbox label:before,.radio label:before,.radio-inline:before,.checkbox-inline:before{-webkit-transition:all;-o-transition:all;transition:all;-webkit-transition-duration:250ms;transition-duration:250ms}
 .checkbox label,.radio label,.radio-inline,.checkbox-inline{padding-left:30px;position:relative}
 .checkbox label:before,.radio label:before,.radio-inline:before,.checkbox-inline:before{content:"";width:47px;height:47px;border-radius:50%;background-color:rgba(0,0,0,0.04);position:absolute;left:-15px;top:-15px;opacity:0;filter:alpha(opacity=0);-webkit-transform:scale(0);-ms-transform:scale(0);-o-transform:scale(0);transform:scale(0)}
