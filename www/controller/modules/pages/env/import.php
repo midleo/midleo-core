@@ -29,7 +29,7 @@
       </tr>
     </tbody>
   </table>
-  <dir-pagination-controls pagination-id="prodx" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/assets/templ/pagination.tpl.html"></dir-pagination-controls>
+  <dir-pagination-controls pagination-id="prodx" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/<?php echo $website['corebase'];?>assets/templ/pagination.tpl.html"></dir-pagination-controls>
   <?php if ($_SESSION['user_level'] == "5") {?>
   <div class="modal" id="modal-imp-form" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">

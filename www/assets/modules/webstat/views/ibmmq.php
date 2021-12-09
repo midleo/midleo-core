@@ -173,7 +173,7 @@ else if(!empty($_GET["qmid"])){
                     </table>
                     <dir-pagination-controls pagination-id="prodx" boundary-links="true"
                         on-page-change="pageChangeHandler(newPageNumber)"
-                        template-url="/assets/templ/pagination.tpl.html">
+                        template-url="/<?php echo $website['corebase'];?>assets/templ/pagination.tpl.html">
                     </dir-pagination-controls>
 
                 </div>

@@ -77,7 +77,7 @@
                 </tbody>
             </table>
             <dir-pagination-controls pagination-id="prodx" boundary-links="true"
-                on-page-change="pageChangeHandler(newPageNumber)" template-url="/assets/templ/pagination.tpl.html">
+                on-page-change="pageChangeHandler(newPageNumber)" template-url="/<?php echo $website['corebase'];?>assets/templ/pagination.tpl.html">
             </dir-pagination-controls>
             <div class="modal" id="modal-obj-form" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">

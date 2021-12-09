@@ -195,7 +195,7 @@
                 </tbody>
             </table>
             <dir-pagination-controls pagination-id="prodx" boundary-links="true"
-                on-page-change="pageChangeHandler(newPageNumber)" template-url="/assets/templ/pagination.tpl.html">
+                on-page-change="pageChangeHandler(newPageNumber)" template-url="/<?php echo $website['corebase'];?>assets/templ/pagination.tpl.html">
             </dir-pagination-controls>
 
         </div>
