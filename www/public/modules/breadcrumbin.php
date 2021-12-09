@@ -1,5 +1,4 @@
-<div class="sticky-top"><?php if($breadcrumb["special"] || $brarr){ ?>
-    <br>
+<div class="sticky-top p-2 bg-light br-4"><?php if($breadcrumb["special"] || $brarr){ ?>
     <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
     <br>
     <div class="list-group">

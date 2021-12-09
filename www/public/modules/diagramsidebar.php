@@ -1,4 +1,4 @@
-<br>
+<div class="sticky-top p-2 bg-light br-4">
 <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
 <br>
 <div class="list-group">
@@ -31,3 +31,4 @@
 </div>
 </div>
 <?php } ?>
+</div>

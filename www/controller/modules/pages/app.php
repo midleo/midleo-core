@@ -21,6 +21,7 @@ class Class_appconfig
         $msg = array();
         $pdo = pdodb::connect();
         $data=sessionClass::getSessUserData(); foreach($data as $key=>$val){  ${$key}=$val; } 
+        $arrcolor=array("40BC86","1ABC9C","27AE60","00D717","F31D2F","EC555C","FCB410","B17E22","F24D16","FF8600","EC6625","2980B9","3498DB","528CCB","0918EC","199EC7","03A2FD","7b68ee","BF4ACC","074354","34495E","181D21");
         if (!is_array($website)) {$website = json_decode($website, true);}
         if (!sessionClass::checkAcc($acclist, "appconfig")) { header("Location:/cp/?");}
         if ($thisarray['p1']!="groups" && $_SESSION["user_level"]<3){ header("Location:/cp/?"); }
@@ -69,15 +70,16 @@ class Class_appconfig
 <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/jquery-ui.min.css">
 <?php }
         if ($thisarray['p1'] == "modules") {?>
-<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/js/datatables/responsive.dataTables.min.css">
 <?php }
         if ($thisarray['p1'] == "env" || $thisarray['p1'] == "business") {?>
 <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/nestablemenu.css">
 <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/bootstrap-datetimepicker.css">
 <?php }
-        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/tinyreset.css">
-        </head><body class="fix-header card-no-border"><div id="main-wrapper">';
+        echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/tinyreset.css">';
+        echo '<style type="text/css">';
+        foreach($arrcolor as $key=>$val){ echo '#styleradio [type="radio"].radio-'.$val.' + label:after{background-color:#'.$val.';border-color:#'.$val.';animation:ripple .2s linear forwards}'; }
+        echo '</style>';
+        echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Midleo configuration";
         include $website['corebase']."public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';

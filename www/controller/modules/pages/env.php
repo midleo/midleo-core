@@ -280,7 +280,7 @@ class Class_env
             <div class="col-md-9">
                 <?php include $website['corebase']."public/modules/breadcrumb.php"; ?>
                 <div class="row">
-                  <div class="col-lg-12 align-self-center"><br>
+                  <div class="col-lg-12 align-self-center p-0"><br>
                     <div class="tab-content">
                         <?php if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {?>
                         <div class="tab-pane <?php echo in_array($thisarray['p1'], $arrayibmmqtab) ? "active" : ""; ?>"
