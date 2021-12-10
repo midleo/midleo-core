@@ -299,11 +299,11 @@ html body #visitor .c3-chart-arcs-title{font-size:18px;fill:#d5d6d8}
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){width:100%}
 .input-form .btn{padding:7px 12px}
 input[type="radio"]{border-radius:'.$borderradius.';}
-.form-control{border-radius:6px;height: auto;float:none;}
+.form-control{border-radius:4px;height: auto;float:none;border: 0px;border-bottom: 1px solid #ccc;}
 .form-control.focus,.form-control:focus{box-shadow:none;float:none}
 .form-control-line .form-group{overflow:hidden}
 .form-control-line .form-control{border:0;border-radius:0;padding-left:0;border-bottom:1px solid #d9d9d9}
-.form-control-line .form-control:focus{border-bottom:1px solid #'.$thiscolor.'}
+.form-control:focus{border:0px;border-bottom:1px solid #'.$thiscolor.'}
 .has-warning .bar:before,.has-warning .bar:after{background:#ffb22b}
 .has-success .bar:before,.has-success .bar:after{background:#21c1d6}
 .has-error .bar:before,.has-error .bar:after{background:#fc4b6c}
@@ -670,7 +670,7 @@ from{width:0}
 .little-profile .pro-img{margin-top:-80px;margin-bottom:20px}
 .little-profile .pro-img img{width:128px;height:128px}
 .bootstrap-touchspin .input-group-btn{align-items:normal}
-.form-control:required:focus{border:1px solid #E81625;box-shadow:none;}
+.form-control:required:focus{border:0px;border-bottom:1px solid #E81625;box-shadow:none;}
 .form-control-line .form-control.form-control-success:focus{border-bottom:1px solid #21c1d6}
 .form-control-line .form-control.form-control-warning:focus{border-bottom:1px solid #ffb22b}
 .form-control-line .form-control.form-control-danger:focus{border-bottom:1px solid #fc4b6c}
@@ -678,17 +678,16 @@ from{width:0}
 .form-control-danger,.form-control-success,.form-control-warning{padding-right:2.25rem;background-repeat:no-repeat;background-position:center right .5625rem;-webkit-background-size:1.125rem 1.125rem;background-size:1.125rem 1.125rem}
 .has-success .col-form-label,.has-success .custom-control,.has-success .form-check-label,.has-success .form-control-label{color:#21c1d6}
 /*.has-success .form-control-success{background-image:url(../images/icon/success.svg);background-repeat: no-repeat;background-position-x: right;}*/
-.has-success .form-control{border:1px solid #0CC44F;}
+.has-success .form-control{border:0px;border-bottom:1px solid #0CC44F;}
 .has-warning .col-form-label,.has-warning .custom-control,.has-warning .form-check-label,.has-warning .form-control-label{color:#ffb22b}
 /*.has-warning .form-control-warning{background-image:url(../images/icon/warning.svg);background-repeat: no-repeat;background-position-x: right;}*/
-.has-warning .form-control{border-color:#ffb22b}
+.has-warning .form-control{border:0px;border-bottom:1px solid #ffb22b}
 .has-danger .col-form-label,.has-danger .custom-control,.has-danger .form-check-label,.has-danger .form-control-label{color:#fc4b6c}
 /*.has-danger .form-control-danger{background-image:url(../images/icon/danger.svg);background-repeat: no-repeat;background-position-x: right;}*/
-.has-danger .form-control{border:1px solid #E81625;box-shadow:none;}
+.has-danger .form-control{border:0px;border-bottom:1px solid #E81625;box-shadow:none;}
 .input-group-addon [type="radio"]:not(:checked),.input-group-addon [type="radio"]:checked,.input-group-addon [type="checkbox"]:not(:checked),.input-group-addon [type="checkbox"]:checked{position:initial;opacity:1}
 .custom-select{background:url(../images/custom-select.png) right .75rem center no-repeat;-webkit-appearance:none}
 textarea{resize:none}
-
 .form-control-sm{min-height:20px}
 .form-control:disabled,.form-control[readonly]{opacity:.7}
 form label{font-weight:400}
@@ -1012,7 +1011,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after,input[type=checkbox]:n
 #pass-strength-result.good{background-color:#F3AB19;font-size:15px;color:#000;}
 #pass-strength-result.short{background-color:#A51C2A;font-size:15px;color:#fff;}
 #pass-strength-result.strong{background-color:#1BF16A;font-size:15px;color:#000;}
-.has-error{color:#f44242;}input.ng-invalid {color:white;background: #f44242;}
+.has-error{color:#f44242;}input.ng-invalid {color:white;border-bottom:1px solid #f44242;}
 .node circle {cursor: pointer;fill: #fff;stroke:#'.$thiscolor.';stroke-width: 2px;}
 .node text { font-size: 11px;}
 path.link { fill: none;stroke: #ccc; stroke-width: 2px;}

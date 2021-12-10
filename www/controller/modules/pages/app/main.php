@@ -9,7 +9,7 @@
 ?>
 <form method="post" action="" class="form-material">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6"  style="padding-left:0px;">
             <div class="card">
                 <div class="card-header">General</div>
                 <div class="card-body">
@@ -75,7 +75,7 @@ echo "<option value='".$val['timezone_id']."'>".$val['timezone_id']."</option>";
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6"  style="padding-right:0px;">
             <div class="card">
                 <div class="card-header">Color pallete</div>
                 <div class="card-body" id="styleradio">

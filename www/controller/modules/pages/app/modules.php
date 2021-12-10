@@ -31,7 +31,7 @@ array_push($brarr,array(
     }  
  }
  ?>
-<div class="card p-0">
+<div class="row card p-0">
     <form action="" method="post" enctype="multipart/form-data" name="frmUpload">
      <table id="data-table" class="table table-vmiddle table-hover stylish-table mb-0" aria-busy="false" style="margin-top:0px!important;">
         <thead>

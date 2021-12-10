@@ -8,7 +8,7 @@ array_push($brarr,array(
     "active"=>true,
   ));
   ?>
-<div class="card p-0">
+<div class="row card p-0">
     <table class="table table-vmiddle table-hover stylish-table mb-0">
         <thead>
             <tr>

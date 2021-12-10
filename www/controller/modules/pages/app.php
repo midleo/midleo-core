@@ -154,7 +154,9 @@ class Class_appconfig
         <?php include "public/modules/sidebar.php"; ?>
     </div>
     <div class="col-lg-10">
+    <?php if(in_array($thisarray['p1'], array("external","users","groups"))){?>
         <div class="row ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
+            <?php } else { ?><div class="row"><?php } ?>
             <div class="col-md-9">
                 <?php include $website['corebase']."public/modules/breadcrumb.php"; ?><br>
                 <?php if (file_exists(__DIR__ . "/app/" . $thisarray['p1'] . ".php")) {include "app/" . $thisarray['p1'] . ".php";} else {textClass::PageNotFound();}?>
@@ -178,7 +180,6 @@ include $website['corebase']."public/modules/footer.php";
 <?php }   if ($thisarray['p1'] == "external") {?>
 <script type="text/javascript">
 var app = angular.module('ngApp', []);
-
 app.config(['$compileProvider',
     function($compileProvider) {
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
@@ -188,151 +189,8 @@ app.controller('ngCtrl', function($scope, $http) {
     $scope.ext = [];
     $scope.ext.gittype = "<?php echo $website['gittype'];?>";
 });
-angular.bootstrap(document.getElementById("ngApp"), ['ngApp']);
 </script>
-
-<?php }  if ($thisarray['p1'] == "update") {?>
-<script type="text/javascript">
-function getChlist() {
-    $(".loading").show();
-    $thisdiv = $("#chlistinfo");
-    $("#updinfo").empty();
-    $thisdiv.empty();
-    $thisdiv.append("<li class='list-group-item'>Getting info from the main server</li>");
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/server/listupdhistory",
-        cache: false,
-        success: function(data) {
-            if (data.error) {
-                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.errorlog +
-                    "</li>");
-                $(".loading").hide();
-            } else if (data.resp.error) {
-                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.resp.errorlog +
-                    "</li>");
-                $(".loading").hide();
-            } else {
-                $.each(data.resp.history, function(k, v) {
-                    $thisdiv.append(
-                        "<li class='list-group-item list-group-item-action flex-column align-items-start'>" +
-                        "<div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +
-                        v.author_name + "</h5>" +
-                        "<small class='text-muted'>" + moment(v.committed_date).format(
-                            'DD.MM.YYYY-HH:mm') + "</small></div><p class='mb-1'>" + v.message +
-                        "</p>" +
-                        "<small class='text-muted'><a href='" + v.web_url +
-                        "' target='_blank'>Commit #" + v.short_id + "</a></small></li>");
-                });
-                $(".loading").hide();
-            }
-        }
-    });
-
-}
-
-function startUpdate() {
-    $(".loading").show();
-    $(".btnsrvupd").hide();
-    $thisdiv = $("#updinfo");
-    $thisdiv.empty();
-    $("#chlistinfo").empty();
-    $thisdiv.append("<li class='list-group-item'>Starting MIDLEO application update.</li>");
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/server/backupapp",
-        cache: false,
-        success: function(data) {
-            if (data.success) {
-                $thisdiv.append(data.resp);
-                $thisdiv.append("<li class='list-group-item'>Backup finished.</li>");
-                setTimeout(downloadupd(), 1000);
-            }
-        }
-    });
-}
-
-function downloadupd() {
-    $thisdiv = $("#updinfo");
-    $thisdiv.append("<li class='list-group-item'>Тhe download of the update begins..</li>");
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/server/downloadupd",
-        cache: false,
-        success: function(data) {
-            if (data.error) {
-                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.errorlog +
-                    "</li>");
-                $(".loading").hide();
-            } else if (data.resp.error) {
-                $thisdiv.append("<li class='list-group-item list-group-item-danger'>" + data.resp.errorlog +
-                    "</li>");
-                $(".loading").hide();
-            } else if (!data.resp) {
-                $thisdiv.append(
-                    "<li class='list-group-item list-group-item-danger'>Problem getting the update! Please try again.</li>"
-                );
-                $(".loading").hide();
-            } else {
-                $thisdiv.append("<li class='list-group-item'>" + data.resp + "</li>");
-                restoreupd();
-            }
-        }
-    });
-}
-
-function restoreupd() {
-    $thisdiv = $("#updinfo");
-    $thisdiv.append("<li class='list-group-item'>Restoring the backup..</li>");
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/server/restoreupd",
-        cache: false,
-        success: function(data) {
-            if (data.success) {
-                $thisdiv.append("<li class='list-group-item'>" + data.resp + "</li>");
-                $thisdiv.append("<li class='list-group-item'>Update finished!</li>");
-                saveupd();
-            }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert("Status: " + textStatus);
-            alert("Error: " + errorThrown);
-            $(".loading").hide();
-        }
-    });
-}
-
-function saveupd() {
-    $thisdiv = $("#updinfo");
-    $thisdiv.append("<li class='list-group-item'>Updating server configuration..</li>");
-    $.ajax({
-        type: "POST",
-        url: "/server/saveupd",
-        data: '',
-        cache: false,
-        success: function(data) {
-            if (data.success) {
-                $thisdiv.append("<li class='list-group-item'>" + data.resp + "</li>");
-                $thisdiv.append(
-                    "<li class='list-group-item'>You can proceed working with MIDLEO. Thank you!</li>");
-                $(".loading").hide();
-            }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert("Status: " + textStatus);
-            alert("Error: " + errorThrown);
-            $(".loading").hide();
-            $(".btnsrvupd").show();
-        }
-    });
-}
-</script>
-<?php }?>
+<?php }  ?>
 <?php if ($thisarray['p1'] == "modules") {?>
 <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
 <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>

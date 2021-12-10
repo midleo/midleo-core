@@ -9,7 +9,7 @@ array_push($brarr,array(
 ?>
 <?php $reqRows = $pdo->query('select count(id) from requests')->fetchColumn(); ?>
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-10"  style="padding-left:0px;">
         <form method="post" action="">
             <?php if(isset($modulelist["sysnestable"]) && !empty($modulelist["sysnestable"])){ ?>
             <div class="row">

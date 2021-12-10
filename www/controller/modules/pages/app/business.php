@@ -17,7 +17,7 @@ array_push($brarr,array(
 <form method="post" action="">
     <?php if(isset($modulelist["budget"]) && !empty($modulelist["budget"])){ ?>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6"  style="padding-left:0px;">
             <div class="form-group row">
                 <label class="form-control-label text-lg-right col-md-4">Efforts Unit</label>
                 <div class="col-md-8"> <input type="text" name="conf#effort_unit"
@@ -51,8 +51,8 @@ array_push($brarr,array(
 
     </div>
     <div class="form-group row">
-        <label class="form-control-label text-lg-right col-md-2">Kanban workflow</label>
-        <div class="col-md-6 ">
+        <label class="form-control-label text-lg-right col-md-2 p-0">Kanban workflow</label>
+        <div class="col-md-6"  style="padding-left:2px;">
           <div class="card p-0">
             <?php echo SysNestable::createMenu($menudatabsteps,"1");   ?>
             <input type="text" id="thistype" value="bsteps" style="display:none;">
