@@ -165,7 +165,12 @@ $(document).ready(function () {
   if ($('.date-time-picker-cal')[0]) {
     $('.date-time-picker-cal').datetimepicker({
       format: 'YYYY-MM-DD HH:mm',
-      //   minDate: moment(),
+      stepping: 15,
+      minDate: moment(),
+      daysOfWeekDisabled: [0,6],
+      disabledHours: [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23, 24],
+      calendarWeeks: true,
+      sideBySide: true,
       keepOpen: false
     });
   }
@@ -187,15 +192,6 @@ $(document).ready(function () {
   if ($('.time-picker')[0]) {
     $('.time-picker').datetimepicker({
       format: 'HH:mm'
-    });
-  }
-  if ($('.time-picker-cal')[0]) {
-    $('.time-picker-cal').datetimepicker({
-      format: 'HH:mm',
-      useCurrent: false,
-      viewMode: 'times',
-      disabledTimeIntervals: [[moment({ h: 9 }), moment({ h: 24 })]],
-      keepOpen: false
     });
   }
   if ($('.date-picker')[0]) {
