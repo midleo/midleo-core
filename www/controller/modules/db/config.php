@@ -77,7 +77,6 @@ class clearSESS{
      if($k){ unset($k); } 
      if(isset($GLOBALS[$k])){ unset($GLOBALS[$k]); }
      }
-    unset($GLOBALS);
   }
   }
 }

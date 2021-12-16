@@ -88,7 +88,6 @@ class gTable
             unset($k);
             unset($GLOBALS[$k]);
         }
-        unset($GLOBALS);
     }
     public static function track($trackuser, $trackuserid,?array $trackdata, $trackinfo)
     {

@@ -935,6 +935,40 @@ CREATE TABLE IF NOT EXISTS `env_docimport` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `changes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tags` varchar(155) DEFAULT NULL,
+  `chgname` varchar(50) NOT NULL,
+  `chgnum` varchar(20) DEFAULT NULL,
+  `info` varchar(150) NOT NULL DEFAULT '',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deadline` date NOT NULL,
+  `owner` varchar(100) DEFAULT NULL,
+  `chgstatus` int(1) NOT NULL DEFAULT '0',
+  `priority` int(2) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `chgnum` (`chgnum`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `changes_tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentid` int(11) NOT NULL DEFAULT '0',
+  `nextid` int(11) NOT NULL DEFAULT '0',
+  `chgnum` varchar(20) DEFAULT NULL,
+  `owner` varchar(100) DEFAULT NULL,
+  `appid` varchar(10) DEFAULT NULL,
+  `groupid` varchar(150) DEFAULT NULL,
+  `taskstatus` int(1) NOT NULL DEFAULT '0',
+  `taskname` text DEFAULT NULL,
+  `taskinfo` text DEFAULT NULL,
+  `email` varchar(1500) DEFAULT NULL,
+  `started` datetime NOT NULL DEFAULT '2001-01-01 00:00:00',
+  `finished` datetime NOT NULL DEFAULT '2001-01-01 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
 --
 -- Create default roles
 -- madmin/admin

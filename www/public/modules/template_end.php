@@ -6,12 +6,13 @@
   }
   if($GLOBALS){
     foreach (array_keys($GLOBALS) as $k) {
-      if($k){
+      if(isset($k)){
         unset($$k);
         unset($k);
+        if(isset($GLOBALS[$k])){
         unset($GLOBALS[$k]); 
+        }
       }
      }
-  unset($GLOBALS);
   }  
 ?>
