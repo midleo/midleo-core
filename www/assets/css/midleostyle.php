@@ -1234,7 +1234,7 @@ body[data-color="dark"] .card {background: #49515e;}
 /*body[data-color="dark"] .stylish-table tbody tr:nth-child(even) {background: #414651}*/
 body[data-color="dark"] #loginform .rounded-title{color: #f1f1f1;}
 body[data-color="dark"] {background-color:#263238;}
-.table tr:hover td{border-color:#'.$thiscolor.';border-top:1px solid #'.$thiscolor.'!important;border-bottom:1px solid #'.$thiscolor.'!important;}
+.table tr:hover td,.taskfin{border-color:#'.$thiscolor.';border-top:1px solid #'.$thiscolor.'!important;border-bottom:1px solid #'.$thiscolor.'!important;}
 body[data-color="dark"] .h1, body[data-color="dark"] .h2, body[data-color="dark"] .h3, body[data-color="dark"] .h4, body[data-color="dark"] .h5, body[data-color="dark"] .h6, body[data-color="dark"] h1, body[data-color="dark"] h2,body[data-color="dark"]  h3, body[data-color="dark"] h4, body[data-color="dark"] h5,body[data-color="dark"]  h6,body[data-color="dark"]  .ms-container .ms-selectable li.ms-elem-selectable,body[data-color="dark"]  .ms-container .ms-selection li.ms-elem-selection,body[data-color="dark"]  .close,body[data-color="dark"]  .page-item .page-link {color: #fff;}
 body[data-color="dark"] .page-titles{background:#31353d;margin:0 -15px 15px;box-shadow: 0px 1px 0px #3d424d;}
 body[data-color="dark"] .page-titles h3{margin-bottom:0;margin-top:0px}
@@ -1672,6 +1672,7 @@ display:none;}
 #styleradio [type="radio"].tabbed:focus + label:before{box-shadow:0 0 0 10px rgba(0,0,0,0.1);animation:ripple .2s linear forwards}
 #styleradio [type="radio"]:not(:checked) + label{padding-left:30px;height:25px;line-height:25px;font-weight:400}
 #styleradio [type="radio"]:checked + label{padding-left:30px;height:25px;line-height:25px;font-weight:400}
+.taskfin{--bs-table-accent-bg: var(--bs-table-hover-bg);}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);

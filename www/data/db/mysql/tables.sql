@@ -945,6 +945,8 @@ CREATE TABLE IF NOT EXISTS `changes` (
   `deadline` date NOT NULL,
   `owner` varchar(100) DEFAULT NULL,
   `chgstatus` int(1) NOT NULL DEFAULT '0',
+  `taskcurr` int(1) NOT NULL DEFAULT '0',
+  `taskall` int(2) NOT NULL DEFAULT '0',
   `priority` int(2) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `chgnum` (`chgnum`)
@@ -953,8 +955,7 @@ CREATE TABLE IF NOT EXISTS `changes` (
 
 CREATE TABLE IF NOT EXISTS `changes_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parentid` int(11) NOT NULL DEFAULT '0',
-  `nextid` int(11) NOT NULL DEFAULT '0',
+  `nestid` int(2) NOT NULL DEFAULT '0',
   `chgnum` varchar(20) DEFAULT NULL,
   `owner` varchar(100) DEFAULT NULL,
   `appid` varchar(10) DEFAULT NULL,
