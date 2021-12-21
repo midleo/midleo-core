@@ -71,6 +71,17 @@ class gTable
             $query = "select " . $what . " from " . $table . $where;
             $stmt = $pdo->prepare($query);
             $stmt->execute();
+            return $stmt;
+            pdodb::disconnect();
+        }
+    }
+    public static function get($table, $what = "val", $where = null)
+    {
+        if (!empty($table)) {
+            $pdo = pdodb::connect();
+            $query = "select " . $what . " from " . $table . $where;
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
             return $stmt->fetchColumn();
             pdodb::disconnect();
         }
