@@ -948,6 +948,8 @@ CREATE TABLE IF NOT EXISTS `changes` (
   `taskcurr` int(1) NOT NULL DEFAULT '0',
   `taskall` int(2) NOT NULL DEFAULT '0',
   `priority` int(2) DEFAULT '0',
+  `started` datetime NOT NULL DEFAULT '2001-01-01 00:00:00',
+  `finished` datetime NOT NULL DEFAULT '2001-01-01 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `chgnum` (`chgnum`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -963,7 +965,8 @@ CREATE TABLE IF NOT EXISTS `changes_tasks` (
   `taskstatus` int(1) NOT NULL DEFAULT '0',
   `taskname` text DEFAULT NULL,
   `taskinfo` text DEFAULT NULL,
-  `email` varchar(1500) DEFAULT NULL,
+  `emailsend` int(1) NOT NULL DEFAULT '0',
+  `email` varchar(150) DEFAULT NULL,
   `started` datetime NOT NULL DEFAULT '2001-01-01 00:00:00',
   `finished` datetime NOT NULL DEFAULT '2001-01-01 00:00:00',
   PRIMARY KEY (`id`)

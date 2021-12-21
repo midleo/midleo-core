@@ -82,7 +82,7 @@ class gTable
             $query = "select " . $what . " from " . $table . $where;
             $stmt = $pdo->prepare($query);
             $stmt->execute();
-            return $stmt->fetchColumn();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
             pdodb::disconnect();
         }
     }
