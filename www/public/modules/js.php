@@ -6,6 +6,9 @@
 <!--[if IE 9 ]>
 <script src="/<?php echo $website['corebase'];?>assets/js/jquery/jquery.placeholder.min.js"></script>
 <![endif]-->
+<?php  if($thisarray["p0"]!="mlogin"){ ?>
+<script src="/<?php echo $website['corebase'];?>assets/js/angular.min.js"></script>
+<?php } ?>
 <script src="/<?php echo $website['corebase'];?>assets/js/bootstrap-growl.min.js" type="text/javascript"></script>
 <script src="/<?php echo $website['corebase'];?>assets/js/waves.min.js" type="text/javascript"></script>
 <?php  if($thisarray["p0"]!="mlogin" || $thisarray["p0"]!="mregister"){ ?>

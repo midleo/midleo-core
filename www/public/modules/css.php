@@ -21,9 +21,6 @@
 <?php if(isset($_SESSION["user"])){?>
 <link href="/<?php echo $website['corebase'];?>assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 <?php } ?>
-<?php  if($thisarray["p0"]!="mlogin"){ ?>
-<script src="/<?php echo $website['corebase'];?>assets/js/angular.min.js"></script>
-<?php } ?>
 <!--[if lt IE 9]>
 <script src="/<?php echo $website['corebase'];?>assets/js/html5shiv.js"></script>
 <script src="/<?php echo $website['corebase'];?>assets/js/respond.min.js"></script>
