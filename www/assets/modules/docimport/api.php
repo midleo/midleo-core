@@ -275,6 +275,7 @@ class Class_docapi
                         'margin_bottom' => 10,
                         'margin_header' => 5,
                         'margin_footer' => 5,
+                        'tempDir' => '/var/tmp',
                       ]);
                       $mpdf->SetProtection(array('print'));  
                       $mpdf->SetAuthor("midleo.CORE");
