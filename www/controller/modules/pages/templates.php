@@ -1,11 +1,4 @@
 <?php 
-class Class_test{
-  public static function getPage(){
-
-
-
-  }
-}
 class Class_template{
   public static function getPage($thisarray){
     global $installedapp;
@@ -25,9 +18,9 @@ class Class_template{
     echo '<div class="row pt-3"><div class="col-lg-2">';
     include "public/modules/sidebar.php";
     echo '</div><div class="col-lg-8">';
-	
-	
-	
+
+
+    
     echo '<div class="col-md-2">';
     include $website['corebase']."public/modules/breadcrumbin.php";
     echo '</div></div></div>';

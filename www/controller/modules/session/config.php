@@ -115,7 +115,7 @@ class sessionClass{
       setcookie("visitor",$_SERVER['REMOTE_ADDR'], time()+3600, "/", ".".$domain);
     };     
   }
-  public static function page_protect($next=null) {
+  public static function page_protect() {
     session_start();
     if (isset($_SESSION['HTTP_USER_AGENT']))
     {
@@ -152,7 +152,7 @@ class sessionClass{
         pdodb::disconnect();
         unset($zobj); unset($sql); unset($q);
       } else {
-        header("Location: /mlogin/?next=".$next);
+        header("Location: /mlogin");
         exit();
       }
     }

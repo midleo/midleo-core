@@ -158,15 +158,16 @@ class Class_info
                 "active" => ($page == "dropbox") ? "active" : "",
             ));
         }
-        include $website['corebase']."public/modules/headcontentinfo.php";
-        echo '<div class="page-wrapper">';?>
-<div class="container-fluid">
+        include $website['corebase']."public/modules/headcontentinfo.php"; ?>
+<section>
+      <div class="container-fluid">
 
-    <?php echo '<div class="row pt-3">
-            <div class="col-lg-2" style="overflow-x:auto;overflow-y:auto;">';
+    <?php echo '<div class="row d-flex">
+            <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom sidenav sidenav-start bg-light" style="padding-left: 1rem !important;">
+            <div class="collapse d-lg-block" id="sidenavCollapse">';
         include $website['corebase']."public/modules/sidebarinfo.php";
-        echo '</div>
-            <div class="col-lg-8">';
+        echo '</div></div>
+        <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">';
         if ($forumcase == "posts") {
             $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and (" . $sactive . ")" : "");
             $q = $pdo->prepare($sql);
@@ -334,9 +335,9 @@ $sql = "update knowledge_info set views=views+1 where id=?";
     <?php }
         }
 
-        echo '</div><div class="col-lg-2">';
+        echo '</div><div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-end">';
         include $website['corebase']."public/modules/blogsidebar.php";
-        echo '</div></div></div></div></div></div>';
+        echo '</div></div></div></section>';
         include $website['corebase']."public/modules/footer.php";
         include $website['corebase']."public/modules/js.php";
         if ($forumcase == "posts") {?>
@@ -417,7 +418,7 @@ class Class_mregister
                             $q->execute(array($stamp, $ckey, $zobj['id']));
                             setcookie("user_id", $_SESSION['user_id'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
                             setcookie("user", $_SESSION['user'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
-                            if (!empty($_GET['next'])) {header("Location: " . base64_decode(htmlspecialchars($_GET["next"])));} else {header("Location: /cp/?");}
+                            header("Location: /cp/?");
                         }
                     } else {
                         $err[] = "Problem occur. Please try again";
@@ -434,24 +435,23 @@ class Class_mregister
     <body
         style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_back.svg');background-repeat: no-repeat;background-size: cover;background-position:bottom;background-attachment:fixed;">
         <section id="wrapper">
-        <div class="container">
-                    <header
-                        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-                        <a href="/"
-                            class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
-                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
-                        </a>
-                     
-                        <div class="col-md-3 text-end">
-                            <?php if ($website["registration"] && $website["registration"] == 1) {?>
-                                        <a href="/mlogin"
-                                                    class="btn btn-primary">Login</a>
-                                           
-                                        <?php }?>
-                        </div>
-                    </header>
-                </div>
+            <div class="container">
+                <header
+                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                        <img data-bs-toggle="tooltip"
+                            src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
+                            alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
+                    </a>
+
+                    <div class="col-md-3 text-end">
+                        <?php if ($website["registration"] && $website["registration"] == 1) {?>
+                        <a href="/mlogin" class="btn btn-primary">Login</a>
+
+                        <?php }?>
+                    </div>
+                </header>
+            </div>
             <div class="login-register">
                 <div class="row justify-content-center">
                     <div class="col-md-3">
@@ -466,7 +466,7 @@ class Class_mregister
         $q->execute();
         if ($zobj = $q->fetchAll()) {?>
                                     <div class="form-group mb-3">
-                                    <label for="authtype" class="form-label">Authentication provider</label>
+                                        <label for="authtype" class="form-label">Authentication provider</label>
                                         <select name="authtype" id="authtype" class="form-control">
                                             <?php foreach ($zobj as $val) {?><option
                                                 value="<?php echo $val['ldapserver']; ?>">
@@ -477,21 +477,21 @@ class Class_mregister
                                     </div>
                                     <?php }?>
                                     <div class="form-group mb-1">
-                                    <label for="usr_name" class="form-label">Your name</label>
+                                        <label for="usr_name" class="form-label">Your name</label>
                                         <input name="usr_name" id="usr_name" class="form-control" type="text"
                                             required="">
                                     </div>
                                     <div class="form-group mb-1">
-                                    <label for="usr_email" class="form-label">Email address</label>
+                                        <label for="usr_email" class="form-label">Email address</label>
                                         <input name="usr_email" id="username" class="form-control" type="text"
                                             required="">
                                     </div>
                                     <div class="form-group mb-1">
-                                    <label for="pwdnew" class="form-label">Password</label>
+                                        <label for="pwdnew" class="form-label">Password</label>
                                         <input type="password" id="pwdnew" name="pwdnew" class="form-control">
                                     </div>
                                     <div class="form-group mb-1">
-                                    <label for="pwdnew2" class="form-label">Confirm password</label>
+                                        <label for="pwdnew2" class="form-label">Confirm password</label>
                                         <input class="form-control" type="password" id="pwdnew2" name="pwdnew2"
                                             equalto="#pwdnew">
                                     </div>
@@ -511,9 +511,9 @@ class Class_mregister
                                         </div>
                                     </div>
                                     <div class="form-group text-center mt-3 d-grid gap-2">
-                                            <button name="doRegister"
-                                                class="btn btn-light text-uppercase waves-effect waves-light"
-                                                type="submit"><i class="mdi mdi-login"></i>&nbsp;Register</button>
+                                        <button name="doRegister"
+                                            class="btn btn-light text-uppercase waves-effect waves-light"
+                                            type="submit"><i class="mdi mdi-login"></i>&nbsp;Register</button>
                                     </div>
                                 </form>
                             </div>
@@ -684,11 +684,7 @@ class Class_mlogin
                                 $q->execute(array($stamp, $ckey, $zobj['id']));
                                 setcookie("user_id", $_SESSION['user_id'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
                                 setcookie("user", $_SESSION['user'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
-                                if (!empty($_GET['next'])) {
-                                    header("Location: " . base64_decode(htmlspecialchars($_GET["next"])));
-                                } else {
-                                    header("Location: /?");
-                                }
+                                header("Location: /?");
                             } else {
                                 $err[] = "No such user";
                                 if ($website["registration"] == 1) {
@@ -727,11 +723,7 @@ class Class_mlogin
                         $q->execute(array($stamp, $ckey, $zobj['id']));
                         setcookie("user_id", $_SESSION['user_id'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
                         setcookie("user", $_SESSION['user'], time() + 1 * 60 * 24 * COOKIE_TIME_OUT, "/", "." . $domain);
-                        if (!empty($_GET['next'])) {
-                            header("Location: " . base64_decode(htmlspecialchars($_GET["next"])));
-                        } else {
-                            header("Location: /cp/?");
-                        }
+                        header("Location: /?");
                     } else {
                         $err[] = "Wrong password";
                         $sql = "insert into user_failure(fail_type,mainuser,what,ip) values('loginpass',?,?,?)";
@@ -783,16 +775,16 @@ class Class_mlogin
                         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
                         <a href="/"
                             class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                            <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
-                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
+                            <img data-bs-toggle="tooltip"
+                                src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
+                                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
                         </a>
-                     
+
                         <div class="col-md-3 text-end">
                             <?php if ($website["registration"] && $website["registration"] == 1) {?>
-                                        <a href="/mregister"
-                                                    class="btn btn-primary">Sign Up</a>
-                                           
-                                        <?php }?>
+                            <a href="/mregister" class="btn btn-primary">Sign Up</a>
+
+                            <?php }?>
                         </div>
                     </header>
                 </div>
@@ -820,13 +812,13 @@ class Class_mlogin
                                         </div>
                                         <?php }?>
                                         <div class="form-group mb-2">
-                                        <label for="usr_email" class="form-label">Username / Email address</label>
+                                            <label for="usr_email" class="form-label">Username / Email address</label>
                                             <input name="usr_email" class="form-control" type="text" required=""
-                                                id="usr_email" >
+                                                id="usr_email">
 
                                         </div>
                                         <div class="form-group mb-2">
-                                        <label for="pwd" class="form-label">Password</label>
+                                            <label for="pwd" class="form-label">Password</label>
                                             <input name="pwd" class="form-control" type="password" id="pwd" required="">
 
                                         </div>
@@ -843,7 +835,7 @@ class Class_mlogin
                                                 class="btn btn-light text-uppercase waves-effect waves-light"
                                                 type="submit"><i class="mdi mdi-login"></i>&nbsp;Log In</button>
                                         </div>
-                                        
+
                                     </form>
                                     <form class="form-horizontal " id="recoverform" action="" method="post">
                                         <div class="text-center">
@@ -862,9 +854,8 @@ class Class_mlogin
                                                 required="">
                                         </div><br>
                                         <div class="form-group text-center mt-3 d-grid gap-2">
-                                                <button
-                                                    class="btn btn-light text-uppercase waves-effect waves-light"
-                                                    name="doForgot" type="submit">Reset</button>
+                                            <button class="btn btn-light text-uppercase waves-effect waves-light"
+                                                name="doForgot" type="submit">Reset</button>
                                         </div>
                                     </form>
                                 </div>
@@ -1328,6 +1319,7 @@ class Class_welcome
     {
         global $installedapp;
         global $website;
+        global $mainlinks;
         global $maindir;
         global $page;
         global $modulelist;
@@ -1338,94 +1330,78 @@ class Class_welcome
         echo '<style type="text/css">.card-header + .card-body{padding-top:15px;}</style></head>';
         echo '<body class="fix-header card-no-border no-sidebar"><div id="main-wrapper">';
         include $website['corebase']."public/modules/headcontentmain.php";
-        echo '<div class="page-wrapper">'; ?>
-<div class="container-fluid">
-
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <br>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card maincard">
-                        <div class="row">
-                            <div class="col-md-3 text-end">
-                                <img src="/<?php echo $website['corebase'];?>assets/images/icon/documentation.svg"
-                                    style="padding-top: 20px;width:80px;display: block;float: right;">
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body">
-                                    <h4 class="card-title">Documentation</h4>
-                                    <p class="card-text">Get help using and administering MidlEO</p><br>
-                                    <a href="/info/" class="btn btn-light">Docs</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    ?>
+<div class="bg-light">
+    <div class="container" style="padding-top:5rem;padding-bottom:5rem;">
+        <div class="row justify-content-lg-between align-items-md-center">
+            <div class="col-md-6 mb-5 mb-md-0">
+                <div class="mb-3">
+                    <h1>How can we help?</h1>
                 </div>
-                <div class="col-md-6">
-                    <div class="card maincard">
-                        <div class="row">
-                            <div class="col-md-3 text-end">
-                                <img src="/<?php echo $website['corebase'];?>assets/images/icon/support.svg"
-                                    style="padding-top: 20px;width:80px;display: block;float: right;">
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body">
-                                    <h4 class="card-title">Contact support</h4>
-                                    <p class="card-text">Open a service request or browse the middleware
-                                        environment</p>
-                                    <a href="/requests" class="btn btn-light">Open request</a>
-                                </div>
-                            </div>
+                <form method="post" action="/info">
+                    <div class="input-card mb-3">
+                        <div class="input-card-form">
+                            <label for="searchAnswersForm" class="form-label visually-hidden">Search for answers</label>
+                            <input name="searchkey" type="text" class="form-control form-control-lg"
+                                id="searchAnswersForm" placeholder="Search for answers" aria-label="Search for answers">
                         </div>
+                        <input type="submit" name="searchbut" style="display:none;">
                     </div>
+                </form>
+                <?php if (!empty($_SESSION["user"])) {?>
+                <div class="d-flex">
+                    <p class="text-nowrap">Popular from Tag cloud:</p>
+                    <?php  $clientkeyws="";
+if(DBTYPE=='postgresql'){
+  $sql = "SELECT tags FROM knowledge_info order by random() limit 5";
+} else {
+  $sql = "SELECT tags FROM knowledge_info order by rand() limit 5";
+}
+  $q = $pdo->prepare($sql);
+  $q->execute();
+  if($zobj = $q->fetchAll()){ ?>
+                    <ul class="list-inline ms-1 mb-0">
+                    <?php
+    foreach($zobj as $val) { $clientkeyws.=$val['tags'].",";  }
+    $kt=explode(",",$clientkeyws);
+    $kt=array_unique($kt);
+    shuffle($kt);
+    foreach($kt as $key=>$val){ if($val<>" " and strlen($val) < 60 and strlen($val) > 0){ 
+      $val=ltrim($val, ' ');
+      $val=rtrim($val, ' '); ?>
+                        <li class="list-inline-item"><a class="link" href="/info/tags/<?php echo $val;?>"><i class="mdi mdi-pound"></i>&nbsp;<?php echo $val;?></a></li>
+                        <?php }} ?>
+                    </ul>
+                    <?php } ?>
                 </div>
-                <div class="col-md-6">
-                    <div class="card maincard">
-                        <div class="row">
-                            <div class="col-md-3 text-end">
-                                <img src="/<?php echo $website['corebase'];?>assets/images/icon/status.svg"
-                                    style="padding-top: 20px;width:80px;display: block;float: right;">
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body">
-                                    <h4 class="card-title">Middleware status</h4>
-                                    <p class="card-text">Check the health of your servers and applications</p>
-                                    <br>
-                                    <a href="/browse/serverlist" class="btn btn-light">Browse</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card maincard">
-                        <div class="row">
-                            <div class="col-md-3 text-end">
-                                <img src="/<?php echo $website['corebase'];?>assets/images/icon/idea.svg"
-                                    style="padding-top: 20px;width:80px;display: block;float: right;">
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body">
-                                    <h4 class="card-title">Suggestions and bug reports</h4>
-                                    <p class="card-text">Find existing feature suggestions and bug reports</p>
-                                    <br>
-                                    <a href="/info/category/bugs" class="btn btn-light">Browse</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+                <?php } ?>
+            </div>
+            <div class="col-md-5">
+                <img class="img-fluid" src="<?php echo $website['corebase'];?>assets/images/looking-for-answers.svg"
+                    alt="Image Description">
             </div>
         </div>
-        <div class="col-md-1"></div>
     </div>
+    </div>
+    <?php if($mainlinks){ ?>
+    <div class="container">
+        <div class="row mb-5 mt-5 d-flex justify-content-center">
+            <?php foreach(json_decode($mainlinks,true) as $key=>$val){ ?>
+            <div class="col-lg-3 mb-3 mb-lg-5">
+                <a class="card card-border maincard h-100" href="<?php echo $val["link"];?>">
+                    <div class="card-body">
+                        <h4><?php echo $val["heading"];?></h4>
+                        <?php echo $val["text"];?>
+                    </div>
+                </a>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+    <?php } ?>
 
-    <?php 
-        echo '</div></div>';
+<?php 
+        echo '</div>';
         include $website['corebase']."public/modules/footer.php";
         include $website['corebase']."public/modules/js.php";
         include $website['corebase']."public/modules/template_end.php";

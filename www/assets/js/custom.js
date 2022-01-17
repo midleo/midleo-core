@@ -145,7 +145,7 @@ $(document).ready(function () {
     $('h2').each(function () {
       if ($(this).attr("id")) {
         showdiv = true;
-        $(".h2-menu").append("<a class='waves-effect waves-light list-group-item list-group-item-light list-group-item-action' href='#" + $(this).attr("id") + "'>" + $(this).text() + "</a>");
+        $(".h2-menu").append("<li class='list-item'><a class='list-link' href='#" + $(this).attr("id") + "'>" + $(this).text() + "</a></li>");
       }
     });
     if (showdiv == true) {

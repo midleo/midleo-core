@@ -10,7 +10,7 @@
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#midnav"
                 aria-controls="midnav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span  class="itemicon text-white"><i class="mdi mdi-view-headline mdi-24px"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="midnav">
                 <ul class="navbar-nav me-auto mb-lg-0">
@@ -45,28 +45,15 @@
                             <a class="srh-btn"><i class="mdi mdi-close mdi-24px"></i></a>
                         </form>
                     </li>
-                    <?php } else {?>
-
-                    <li class="nav-item d-none d-md-block search-box"> <a
-                            class="nav-link d-none d-md-block text-muted waves-effect waves-dark"
-                            href="javascript:void(0)"><span class="itemicon"> <i
-                                    class="mdi mdi-magnify mdi-24px"></i></span></a>
-                        <form class="app-search p-relative" method="post" action="/info">
-                            <input type="text" name="searchkey" class="hs-input hasselect"
-                                placeholder="Search in MidlEO knowledge base" style="margin-left:initial;">
-                            <button type="submit" name="searchbut" style="display:none"></button>
-                            <a class="srh-btn"><i class="mdi mdi-close mdi-24px"></i></a>
-                        </form>
-                    </li>
-
-                    <?php }?>
+                    <?php } ?>
+                    <?php if (!empty($_SESSION["user"])) {?>
                     <li class="nav-item">
                         <a data-bs-toggle="tooltip" title="Create new article"
                             class="nav-link text-muted waves-effect waves-dark" href="/cpinfo/"><span
                                 class="itemicon"><i class="mdi mdi-square-edit-outline mdi-24px"></i></span></a>
                     </li>
 
-                    <?php if (!empty($_SESSION["user"])) {?>
+                    
                     <li class="nav-item">
                         <a data-bs-toggle="tooltip" title="Control Panel"
                             class="nav-link text-muted waves-effect waves-dark" href="/cp/?"><span class="itemicon"><i
@@ -78,7 +65,12 @@
                             class="nav-link text-muted waves-effect waves-dark" href="/mlogin/?"><span
                                 class="itemicon"><i class="mdi mdi-login mdi-24px"></i></a>
                     </li>
-                    <?php }?>&nbsp;&nbsp;&nbsp;
+                    <?php }?>
+                    <li class="nav-item d-none d-sm-block d-md-none">
+                        <a class="nav-link text-muted waves-effect waves-dark" data-bs-toggle="collapse" data-bs-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span  class="itemicon"><i class="mdi mdi-view-headline mdi-24px"></i></span>
+                    </a>
+                    </li>&nbsp;&nbsp;&nbsp;
                     <div class="theme-switch-wrapper">
                         <label class="theme-switch" for="checkbox">
                             <input type="checkbox" id="checkbox" />

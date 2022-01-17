@@ -55,6 +55,23 @@ $css='
 .btn-light-inverse:hover,.btn-outline-light-inverse:hover{box-shadow:0 8px 15px rgba(246,246,246,0.3)}
 .btn-light-megna,.btn-outline-light-megna{box-shadow:0 2px 2px rgba(224,242,244,0.05)}
 .btn-light-megna:hover,.btn-outline-light-megna:hover{box-shadow:0 8px 15px rgba(224,242,244,0.3)}
+/*paddings*/
+@media (min-width:992px) {
+  .px-lg-0{padding-left:0!important;padding-right:0!important}
+}
+@media (min-width:992px) {
+  .offset-lg-3{margin-left:25%}
+  .py-lg-9{padding-bottom:4rem!important;padding-top:4rem!important}
+  .px-lg-7{padding-left:2.5rem!important;padding-right:2.5rem!important}
+}
+@media (min-width:1200px) {
+.offset-xl-2{margin-left:16.66667%}
+.col-xl-8{flex:0 0 auto;width:66.66667%}
+}
+.py-7{padding-bottom:2rem!important;padding-top:1.5rem!important}
+.row{--bs-gutter-x:2.5rem;--bs-gutter-y:0;display:flex;flex-wrap:wrap;margin-left:calc(var(--bs-gutter-x)*-.5);margin-right:calc(var(--bs-gutter-x)*-.5);margin-top:calc(var(--bs-gutter-y)*-1)}
+.col{flex:1 0 0}
+/*paddings*/
 .h3, h3 {font-size: 1.3125rem;}
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{font-weight: 400;}
 .navbar-brand {font-size: 1.09375rem;z-index:30;}
@@ -1673,6 +1690,15 @@ display:none;}
 #styleradio [type="radio"]:not(:checked) + label{padding-left:30px;height:25px;line-height:25px;font-weight:400}
 #styleradio [type="radio"]:checked + label{padding-left:30px;height:25px;line-height:25px;font-weight:400}
 .taskfin{--bs-table-accent-bg: var(--bs-table-hover-bg);}
+@media (min-width:992px) {
+  .sidenav{height:calc(100vh - 84px);overflow:auto;position:fixed;}
+  .sidenav-start{left:0}
+  .sidenav-end{right:0}
+}
+.list{list-style-type:none;margin-bottom:0;padding-left:0}
+.list-item+.list-item{margin-top:.35rem}
+.list-link{align-items:center;color:#506690;display:flex;flex-wrap:nowrap;font-size:.9375rem}
+.list-link:focus,.list-link:hover{color:#335eea;text-decoration:none}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);
