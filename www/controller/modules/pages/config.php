@@ -1332,7 +1332,7 @@ class Class_welcome
         include $website['corebase']."public/modules/headcontentmain.php";
     ?>
 <div class="bg-light">
-    <div class="container" style="padding-top:5rem;padding-bottom:5rem;">
+    <div class="container" style="padding:5rem;">
         <div class="row justify-content-lg-between align-items-md-center">
             <div class="col-md-6 mb-5 mb-md-0">
                 <div class="mb-3">
