@@ -115,7 +115,7 @@ class sessionClass{
       setcookie("visitor",$_SERVER['REMOTE_ADDR'], time()+3600, "/", ".".$domain);
     };     
   }
-  public static function page_protect() {
+  public static function page_protect($next=null) {
     session_start();
     if (isset($_SESSION['HTTP_USER_AGENT']))
     {
