@@ -26,14 +26,14 @@ array_push($brarr,array(
                 dir-paginate="d in names | filter:search | orderBy:'group_name':reverse | itemsPerPage:10"
                 pagination-id="prodx">
                 <td class="text-center" style="padding: .5rem;vertical-align:top!important;"><span class="uavatar"
-                        style="background-color:{{d.uacolor}}">{{d.shortname}}</span>
+                        style="background-color:var(--usercolor)">{{d.shortname}}</span>
                 </td>
                 <td class="text-start"><a ng-click="showgrinfo(d.id)" style="cursor:pointer;" id="grtext{{d.id}}"><span
                             id="svg{{d.id}}"><i class="mdi mdi-plus mdi-18px"></i></span>&nbsp;{{ d.group_name | limitTo:textlimit }}{{d.group_name.length > textlimit ? '...' : ''}}</a>
                     <div class="grudiv{{d.id}} grudivnt">
                         <ul style="margin: 0 auto;padding: 5px;" class="list-group list-group-flush">
                             <li style="width:300px;padding:5px;" ng-repeat="(ukey, user) in d.users"
-                                class="list-group-item border-bottom usr_{{d.id}}{{ukey}}">{{user}}<a class="float-end"
+                                class="list-group-item border-bottom usr_{{d.id}}{{ukey}}">{{user}}<a class="float-end text-danger"
                                     ng-click="delusrgr(d.id,ukey,'<?php echo $_SESSION['user'];?>')"
                                     style="cursor:pointer;"><i class="mdi mdi-close"></i></a></li>
                         </ul>
@@ -45,7 +45,7 @@ array_push($brarr,array(
                             class="btn waves-effect btn-sm btn-light"><i class="mdi mdi-pencil mdi-18px"></i></button>
                         <?php if($_SESSION['user_level']>=3){?><button
                             ng-click="delgroup(d.id,'<?php echo $_SESSION['user'];?>')" type="button"
-                            class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-close mdi-18px"></i></button><?php } ?>
+                            class="btn waves-effect btn-light text-danger btn-sm"><i class="mdi mdi-close mdi-18px"></i></button><?php } ?>
                     </div>
                 </td>
             </tr>

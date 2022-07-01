@@ -1161,14 +1161,12 @@ class Class_api
             $q = $pdo->prepare($sql);
             $q->execute(array(htmlspecialchars($data->user)));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
-                $d['rights'] = !empty($zobj['user_level']) ? $zobj['user_level'] : "";
+                $d['rights'] = !empty($zobj['user_level']) ? strval($zobj['user_level']) : "";
                 $d['fullname'] = $zobj['fullname'];
                 $d['name'] = $zobj['mainuser'];
                 $d['title'] = $zobj['utitle'];
                 $d['email'] = $zobj['email'];
                 $d['wid'] = $zobj['wid'];
-                //$d['uacolor']=sprintf('#%06X', mt_rand(0, 0x222222));
-                $d['uacolor'] = "var(--usercolor)";
                 $d['shortname'] = substr(textClass::initials($zobj['fullname']), 0, 2);
             }
             echo json_encode($d, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -1196,8 +1194,6 @@ class Class_api
                 $d['fullname'] = $val['fullname'];
                 $d['acc'] = $accrights[$val['user_level']];
                 $d['name'] = $val['mainuser'];
-                // $d['uacolor']=sprintf('#%06X', mt_rand(0, 0xffffff));
-                $d['uacolor'] = "var(--usercolor)";
                 $d['shortname'] = substr(textClass::initials($val['fullname']), 0, 2);
                 $newdata[] = $d;
             }
@@ -1646,8 +1642,6 @@ class Class_api
                     $d['group_name'] = $val['group_name'];
                     $d['group_avatar'] = $val['group_avatar'];
                     $d['users'] = json_decode($val['users'], true);
-                    // $d['uacolor']=sprintf('#%06X', mt_rand(0, 0xffffff));
-                    $d['uacolor'] = "var(--usercolor)";
                     $d['shortname'] = substr(textClass::initials($val['group_name']), 0, 2);
                     $newdata[] = $d;
                 }

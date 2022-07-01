@@ -39,7 +39,7 @@ array_push($brarr,array(
                 dir-paginate="d in names | filter:search | orderBy:'fullname':reverse | itemsPerPage:10"
                 pagination-id="prodx">
                 <td class="text-center" style="padding: .5rem;"><span class="uavatar"
-                        style="background-color:{{d.uacolor}}">{{d.shortname}}</span></td>
+                        style="background-color:var(--usercolor)">{{d.shortname}}</span></td>
                 <td class="text-center">
                     {{ d.fullname | limitTo:textlimit }}{{d.fullname.length > textlimit ? '...' : ''}}</td>
                 <td class="text-center">{{ d.name | limitTo:textlimit }}{{d.name.length > textlimit ? '...' : ''}}</td>
@@ -50,7 +50,7 @@ array_push($brarr,array(
                             class="btn waves-effect btn-sm btn-light"><i class="mdi mdi-pencil"></i></button>
                         <?php if($_SESSION['user_level']>=3){?><button
                             ng-click="delusr(d.name,'<?php echo $_SESSION['user'];?>')" type="button"
-                            class="btn waves-effect btn-light btn-sm"><i class="mdi mdi-close"></i></button><?php } ?>
+                            class="btn waves-effect btn-light text-danger btn-sm"><i class="mdi mdi-close"></i></button><?php } ?>
                     </div>
                 </td>
             </tr>
@@ -72,7 +72,7 @@ array_push($brarr,array(
 
                         <div class="form-group row" ng-show="user.shortname">
                             <div class="col-md-3"><span class="uavatar float-end uabig"
-                                    style="background-color:{{user.uacolor}}">{{user.shortname}}</span></div>
+                                    style="background-color:var(--usercolor)">{{user.shortname}}</span></div>
                             <div class="col-md-9"></div>
                         </div>
                         <div class="form-group row">
