@@ -1,4 +1,4 @@
-<br>
+<br><div class="sticky-top" style="top:70px;">
 <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Navigation</h4>
 <br>
 <ul class="list-unstyled fw-normal pb-2 small">
@@ -30,3 +30,4 @@ if($zobjin = $qin->rowCount()>0){
    ?></li>
     <?php }?>
 </ul>
+        </div>

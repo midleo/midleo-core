@@ -1,4 +1,4 @@
-<div class="sticky-top" style="top:70px;"><?php if($breadcrumb["special"] || $brarr){ ?>
+<div class="sticky-top" style="top:70px;z-index:100;"><?php if($breadcrumb["special"] || $brarr){ ?>
     <div class="list-group">
         <?php  if($brarr){ foreach($brarr as $key=>$val){ ?>
         <a href="<?php echo $val["link"];?>" <?php if($val["tab"]){?>data-bs-toggle="tab" role="tab" <?php } ?>

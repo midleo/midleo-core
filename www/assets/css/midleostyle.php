@@ -538,7 +538,6 @@ from{width:0}
 .user-profile .profile-text > a{color:#fff!important;width:100%;padding:6px 30px;background:rgba(0,0,0,0.5);display:block}
 .user-profile .profile-text > a:after{position:absolute;right:20px;top:20px}
 .user-profile .dropdown-menu{left:0;right:0;width:180px;margin:0 auto}
-.sidebar-footer{position:fixed;z-index:10;bottom:0;left:0;width:300px;border-top:1px solid rgba(120,130,140,0.13)}
 .sidebar-footer a{color:#d5d6d8!important;padding:12px;width:33.3%;float:left;text-align:center;font-size:20px}
 .collapse.in{display:block}
 .sidebar-nav > ul{padding:0 0 60px}

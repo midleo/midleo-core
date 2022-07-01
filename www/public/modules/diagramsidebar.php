@@ -1,4 +1,4 @@
-<div class="sticky-top" style="top:70px;">
+<div class="sticky-top" style="top:70px;z-index:100;">
 <div class="list-group text-start">
 <form method='post' action='/docapi/export'>
 <a href="/draw" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action" ><i class="mdi mdi-plus"></i>&nbsp;New Diagram</a>
