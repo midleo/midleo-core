@@ -8,8 +8,7 @@ array_push($brarr,array(
     "active"=>true,
   ));
   ?>
-<div class="row">
-    <div class="col-md-12 p-0">
+<div class="card">
         <form method="post" action="">
             <div class="modal" id="modaladdldap" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -65,8 +64,7 @@ $q = $pdo->prepare($sql);
                     </tbody>
                 </table>
             </div>
-            <?php } else { echo "<div class='alert alert-light col-6'>There are no ldap servers configured yet</div>";} ?>
+            <?php } else { echo "<div class='alert text-dark col-6'>There are no ldap servers configured yet</div>";} ?>
         </form>
-    </div>
 </div>
 <?php } ?>

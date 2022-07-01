@@ -160,16 +160,15 @@ class Class_info
         }
         include $website['corebase']."public/modules/headcontentinfo.php"; ?>
 <section>
-      <div class="container-fluid">
-
+      <div class="container-fluid page-wrapper">
     <?php echo '<div class="row d-flex">
-            <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom sidenav sidenav-start bg-light" style="padding-left: 1rem !important;">
+            <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom sidenav sidenav-start bg-white leftsidebar" style="padding-left: 1rem !important;margin-top:0px;">
             <div class="collapse d-lg-block" id="sidenavCollapse">';
         include $website['corebase']."public/modules/sidebarinfo.php";
         echo '</div></div>
-        <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">';
+        <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-3">';
         if ($forumcase == "posts") {
-            $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and (" . $sactive . ")" : "");
+            $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,author,tags FROM knowledge_info where cat_latname=?" . (!empty($sactive) ? " and (" . $sactive . ")" : "");
             $q = $pdo->prepare($sql);
             $q->execute(array($keyws));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) { ?>
@@ -187,13 +186,13 @@ if (strpos($zobj['cattext'], 'diagram') !== false) {
             }
                 ?></p>
         </div>
-        <ul class="wall-attrs clearfix list-inline list-unstyled" style="margin-left: 10px;">
+        <div class="card-footer border-top">
+        <ul class="wall-attrs clearfix list-inline list-unstyled mb-0">
             <li class="wa-stats"><span><i class="mdi mdi-eye"></i> <?php echo $zobj['views']; ?>
-                    views</span><span style="padding:0;"><a href=""
-                        style="color:red;display:block;width:100%;height:100%;padding: 7px 12px;"><i
-                            class="mdi mdi-heart"></i> <?php echo $zobj['catlikes']; ?> likes</a></span><span><i
+                    views</span><span><i
                         class="mdi mdi-open-in-new"></i> <?php echo $zobj['category']; ?></span></li>
         </ul>
+        </div>
     </div>
 
     <!--history modal-->
@@ -257,14 +256,14 @@ $sql = "update knowledge_info set views=views+1 where id=?";
                     $kt = explode(" ", $clientkeyws);
                     foreach ($kt as $key => $val) {if ($val != " " and strlen($val) > 0) {$qt .= " tags like '%$val%' or ";}}
                     $qt = substr($qt, 0, (strLen($qt) - 3));
-                    $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where $qt " . (!empty($sactive) ? " and" . $sactive : "") . " order by id desc";
+                    $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,author,tags FROM knowledge_info where $qt " . (!empty($sactive) ? " and" . $sactive : "") . " order by id desc";
                 } else {
-                    $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info " . (!empty($sactive) ? " where" . $sactive : "") . " order by id desc";
+                    $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,author,tags FROM knowledge_info " . (!empty($sactive) ? " where" . $sactive : "") . " order by id desc";
                 }
                 $q = $pdo->prepare($sql);
                 $q->execute(array());
             } elseif ($forumcase == "category") {
-                $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,catlikes,author,tags FROM knowledge_info where category=? " . (!empty($sactcat) ? " and (" . $sactcat . ")" : "") . " order by id desc";
+                $sql = "SELECT id,cat_latname,cat_name,category,cattext,catdate,views,author,tags FROM knowledge_info where category=? " . (!empty($sactcat) ? " and (" . $sactcat . ")" : "") . " order by id desc";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($keyws));
             } else {
@@ -294,15 +293,13 @@ $sql = "update knowledge_info set views=views+1 where id=?";
             <p><?php echo strip_tags(textClass::word_limiter($val['cattext'], 120, 400)); ?></p>
         </div>
 
-
-        <ul class="wall-attrs clearfix list-inline list-unstyled blogstat" style="margin-left: 10px;">
-            <li class="wa-stats">
-                <span><i class="mdi mdi-eye"></i> <?php echo $val['views']; ?> views</span>
-                <span style="color:red;"><i class="mdi mdi-heart"></i> <?php echo $val['catlikes']; ?>
-                    likes</span>
-                <span><i class="mdi mdi-open-in-new"></i> <?php echo $val['category']; ?></span>
-            </li>
+        <div class="card-footer border-top">
+        <ul class="wall-attrs clearfix list-inline list-unstyled mb-0">
+            <li class="wa-stats"><span><i class="mdi mdi-eye"></i> <?php echo $val['views']; ?>
+                    views</span><span><i
+                        class="mdi mdi-open-in-new"></i> <?php echo $val['category']; ?></span></li>
         </ul>
+        </div>
     </div>
     <?php }} else {?> <div class="card" style="box-shadow:none;">
         <div class="card-body card-padding">
@@ -335,7 +332,7 @@ $sql = "update knowledge_info set views=views+1 where id=?";
     <?php }
         }
 
-        echo '</div><div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-end">';
+        echo '</div><div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 me-1 sidenav sidenav-end">';
         include $website['corebase']."public/modules/blogsidebar.php";
         echo '</div></div></div></section>';
         include $website['corebase']."public/modules/footer.php";
@@ -988,7 +985,7 @@ class Class_profile
             </div>
 
             <div class="row pt-3">
-                <div class="col-lg-2">
+                <div class="col-lg-2 bg-white leftsidebar">
                     <?php include "public/modules/sidebar.php";?>
                 </div>
                 <div class="col-lg-8">
@@ -1240,7 +1237,7 @@ class Class_searchall
         include $website['corebase']."public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
 
-        echo '<div class="row pt-3"><div class="col-lg-2">';
+        echo '<div class="row pt-3"><div class="col-lg-2 bg-white leftsidebar">';
         include "public/modules/sidebar.php";
         echo '</div><div class="col-lg-8">';
         if (isset($_REQUEST["sa"])) {
@@ -1334,16 +1331,16 @@ class Class_welcome
 <div class="bg-light">
     <div class="container" style="padding:5rem;">
         <div class="row justify-content-lg-between align-items-md-center">
-            <div class="col-md-6 mb-5 mb-md-0">
+            <div class="col-md-5 text-start mb-5 mb-md-0">
                 <div class="mb-3">
-                    <h1>How can we help?</h1>
+                    <h1>Knowledge base</h1>
                 </div>
                 <form method="post" action="/info">
                     <div class="input-card mb-3">
                         <div class="input-card-form">
-                            <label for="searchAnswersForm" class="form-label visually-hidden">Search for answers</label>
+                            <label for="searchAnswersForm" class="form-label visually-hidden">Search for articles</label>
                             <input name="searchkey" type="text" class="form-control form-control-lg"
-                                id="searchAnswersForm" placeholder="Search for answers" aria-label="Search for answers">
+                                id="searchAnswersForm" placeholder="Search for articles" aria-label="Search for articles">
                         </div>
                         <input type="submit" name="searchbut" style="display:none;">
                     </div>
@@ -1376,9 +1373,9 @@ if(DBTYPE=='postgresql'){
                 </div>
                 <?php } ?>
             </div>
-            <div class="col-md-5">
+            <div class="col-7 text-end">
                 <img class="img-fluid" src="<?php echo $website['corebase'];?>assets/images/looking-for-answers.svg"
-                    alt="Image Description">
+                    alt="Image Description" style="max-width:400px;">
             </div>
         </div>
     </div>

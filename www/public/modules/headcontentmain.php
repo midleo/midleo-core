@@ -1,4 +1,4 @@
-    <nav class="navbar top-navbar navbar-expand-md navbar-light ml-0">
+    <nav class="navbar top-navbar sticky-top navbar-expand-md navbar-light ml-0">
         <div class="container">
             <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
                 <img data-bs-toggle="tooltip"

@@ -1,4 +1,4 @@
-<nav class="navbar top-navbar navbar-expand-md navbar-light">
+<nav class="navbar top-navbar sticky-top navbar-expand-md navbar-light">
     <div class="container">
         <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
             <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-white.svg"

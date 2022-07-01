@@ -53,7 +53,7 @@ class Class_cp
 
         ?>
 <div class="row pt-3">
-    <div class="col-lg-2">
+    <div class="col-lg-2 bg-white leftsidebar">
         <?php include "public/modules/sidebar.php";?></div>
     <div class="col-lg-8">
         <div class="row">
@@ -548,7 +548,6 @@ class Class_cpinfo
             <div class="modal-dialog" style="width: auto;">
                 <div class="modal-content">
                     <div class="modal-body">
-
                         <br><br>
                     </div>
                     <div class="modal-footer">
@@ -603,7 +602,7 @@ class Class_cpinfo
             onSubmit="return validateForm();">
 
             <div class="row pt-3">
-                <div class="col-lg-2">
+                <div class="col-lg-2 bg-white leftsidebar">
                     <?php include "public/modules/sidebar.php";?></div>
                 <div class="col-lg-8">
                     <div class="card p-0">
@@ -759,7 +758,7 @@ class Class_cpinfo
                 ));
                 ?><form action="" class="form-material" method="post">
             <div class="row pt-3">
-                <div class="col-lg-2">
+                <div class="col-lg-2 bg-white leftsidebar">
                     <?php include "public/modules/sidebar.php";?></div>
                 <div class="col-lg-8">
                     <div class="card p-0">
@@ -890,10 +889,9 @@ class Class_cpinfo
         <?php
 } else {textClass::PageNotFound();}} else {?>
         <div class="row pt-3">
-            <div class="col-lg-2">
+            <div class="col-lg-2 bg-white leftsidebar">
                 <?php include "public/modules/sidebar.php";?></div>
             <div class="col-lg-8">
-                <div class="row">
                     <div class="card p-0">
                         <table id="data-table-ki" class="table table-hover stylish-table mb-0" aria-busy="false"
                             style="margin-top:0px !important;">
@@ -924,14 +922,12 @@ class Class_cpinfo
                             </tbody>
                         </table>
                     </div>
-                </div>
             </div>
             <div class="col-md-2">
                 <?php include $website['corebase']."public/modules/filterbar.php";?>
                 <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
             </div>
         </div>
-        <br>
         <?php }?>
         <!--modal start -->
         <div class="modal fade" id="modal-category-form" tabindex="-1" role="dialog" aria-hidden="true">

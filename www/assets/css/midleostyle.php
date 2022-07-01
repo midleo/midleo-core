@@ -1,5 +1,5 @@
 <?php 
-$thiscolor=!empty($_GET["c"])?htmlspecialchars($_GET["c"]):"00AFFF";
+$thiscolor="28A7DF";
 $borderradius="3px;";
 header('Cache-Control: public');
 header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 86400) . ' GMT');
@@ -1241,7 +1241,7 @@ body[data-color="light"] .sidebar-nav > ul > li.active > a:after,body[data-color
 .sidebar-nav ul li a{text-decoration:none;padding:10px 35px 10px 15px;display:block;white-space:nowrap;border:1px solid transparent;border-right:2px solid transparent;}
 body[data-color="light"] .sidebar-nav ul li a{color:#636464;}
 body[data-color="light"] .sidebar-nav ul li a.active,body[data-color="light"] .sidebar-nav ul li a:hover{color:#000;}
-body[data-color="light"] .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{background:transparent;border-color:transparent;}
+body[data-color="light"] .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{background:#ddd;border-color:transparent;}
 .search-box .app-search{background:#fff;}
 body[data-color="dark"] .dropdown-menu{background-color:#414651;color:#fff;}
 body[data-color="dark"] .dropdown-menu a{color:#fff!important;}
@@ -1616,9 +1616,10 @@ animation-timing-function: linear;
 }
 .border-arrow:after {
     border-color: rgba(136, 183, 213, 0);
-    border-left-color: #fff;
+    border-left-color: #ddd;
     border-width: 24px;
     margin-top: -24px;
+    margin-left: -10px;
 }
 body[data-color="dark"] .border-arrow{background-color:#1c1e23}
 body[data-color="dark"] .border-arrow:after{border-left-color: #1c1e23;}
@@ -1699,6 +1700,8 @@ display:none;}
 .list-item+.list-item{margin-top:.35rem}
 .list-link{align-items:center;color:#506690;display:flex;flex-wrap:nowrap;font-size:.9375rem}
 .list-link:focus,.list-link:hover{color:#335eea;text-decoration:none}
+.leftsidebar{margin-top: -1rem; margin-bottom: -1.1rem; min-height: 90vh;}
+.hidden{display:none;}
 ';
 $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
 $css = str_replace(': ', ':', $css);

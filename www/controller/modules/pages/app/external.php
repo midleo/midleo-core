@@ -8,7 +8,7 @@
   ));
 ?>
 <div class="row">
-    <div class="col-md-8" style="padding-left:0px;">
+    <div class="col-md-8">
         <form method="post" action="" class="form-material">
             <?php if (method_exists("vc", "gitAdd") && is_callable(array("vc", "gitAdd"))){ ?>
             <div class="card">
@@ -215,7 +215,7 @@
             <?php } ?>
         </form>
     </div>
-    <div class="col-md-4"  style="padding-right:0px;">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h4>Eternal module Status</h4>

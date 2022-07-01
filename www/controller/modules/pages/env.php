@@ -272,7 +272,7 @@ class Class_env
             $zobj['lockedby'] = $_SESSION['user'];
 ?>
 <div class="row pt-3">
-    <div class="col-lg-2">
+    <div class="col-lg-2 bg-white leftsidebar">
         <?php include "public/modules/sidebar.php"; ?>
     </div>
     <div class="col-lg-10">
@@ -280,7 +280,7 @@ class Class_env
             <div class="col-md-9">
                 <?php include $website['corebase']."public/modules/breadcrumb.php"; ?>
                 <div class="row">
-                  <div class="col-lg-12 align-self-center p-0"><br>
+                  <div class="col-lg-12 align-self-center"><br>
                     <div class="tab-content">
                         <?php if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {?>
                         <div class="tab-pane <?php echo in_array($thisarray['p1'], $arrayibmmqtab) ? "active" : ""; ?>"
@@ -353,7 +353,7 @@ class Class_env
                         <?php }?>
                         </div>
                         </div>
-                </div><br>
+                </div><br class="hidden">
                 <?php if (file_exists(__DIR__ . "/env/" . $thisarray['p1'] . ".php")) {include "env/" . $thisarray['p1'] . ".php";}?>
                 <?php include $website['corebase']."public/modules/respform.php";?>
             </div>

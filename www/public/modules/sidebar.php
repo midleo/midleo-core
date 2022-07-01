@@ -1,4 +1,4 @@
-<div class="sticky-top">
+<br><div class="sticky-top" style="top:70px;">
     <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Navigation</h4>
     <br>
     <div class="list-group">

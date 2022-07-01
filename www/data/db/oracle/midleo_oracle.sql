@@ -429,7 +429,6 @@ CREATE TABLE knowledge_info (
   cattext clob DEFAULT '',
   catdate timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
   views number(10) DEFAULT '0' NOT NULL,
-  catlikes number(10) DEFAULT '0' NOT NULL,
   public number(10) DEFAULT '1' NOT NULL,
   accgroups varchar2(255) DEFAULT NULL,
   author varchar2(100) DEFAULT NULL,

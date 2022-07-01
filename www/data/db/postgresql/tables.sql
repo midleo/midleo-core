@@ -412,7 +412,6 @@ CREATE TABLE IF NOT EXISTS knowledge_info (
   cattext text NOT NULL,
   catdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   views NUMERIC(50) NOT NULL DEFAULT '0',
-  catlikes NUMERIC(50) NOT NULL DEFAULT '0',
   public NUMERIC(1) NOT NULL DEFAULT '1',
   accgroups varchar(255) DEFAULT NULL,
   author varchar(100) DEFAULT NULL,

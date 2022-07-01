@@ -263,7 +263,7 @@ $(document).ready(function () {
     });
   }
 });
-function notify(message, type) {
+function notify(message, type) { 
   notice = $.notify({ message: message }, {
     type: type,
     allow_dismiss: true,

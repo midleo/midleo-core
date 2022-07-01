@@ -95,8 +95,8 @@ class Class_diagrams
         echo '<div class="page-wrapper">'; ?>
               <div class="container-fluid">
       
-                  <?php     echo '<div class="row pt-3"><div class="col-lg-2">';
-                  include $website['corebase']."public/modules/sidebardiagrams.php";
+                  <?php     echo '<div class="row pt-3"><div class="col-lg-2 bg-white leftsidebar">';
+                  include $website['corebase']."public/modules/sidebarinfo.php";
                   echo '</div><div class="col-md-8">';
 
 
@@ -172,8 +172,12 @@ class Class_diagrams
                         <div class="col-md-12 text-start cardwf">
                             <p class="card-text">
                             <img src="<?php echo $val['imgdata'];?>" class="img-fluid"></p>
-                            <div class="d-flex no-block align-items-center mb-3">
-                            <?php  
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer border-top">
+                <?php  
                             if($val['tags']){
   $kt=explode(",",$val['tags']);
   $kt=array_unique($kt);
@@ -182,11 +186,7 @@ class Class_diagrams
     $val=ltrim($val, ' ');
     $val=rtrim($val, ' '); ?><a class="waves-effect btn btn-light btn-sm" style="margin: 0 4px 6px 0;" href="/diagrams/tags/<?php echo $val;?>"><i class="mdi mdi-tag"></i>&nbsp;<?php echo $val;?></a><?php }} 
   }?>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+  </div>
             </div>
         </li>
 

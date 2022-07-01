@@ -78,7 +78,7 @@ class Class_appconfig
         echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/tinyreset.css">';
         echo '<style type="text/css">';
         foreach($arrcolor as $key=>$val){ echo '#styleradio [type="radio"].radio-'.$val.' + label:after{background-color:#'.$val.';border-color:#'.$val.';animation:ripple .2s linear forwards}'; }
-        echo '</style>';
+        echo '.tox-tinymce {height: 300px !important;}</style>';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
         $breadcrumb["text"] = "Midleo configuration";
         include $website['corebase']."public/modules/headcontent.php";
@@ -150,7 +150,7 @@ class Class_appconfig
         }
         ?>
 <div class="row pt-3">
-    <div class="col-lg-2">
+    <div class="col-lg-2 bg-white leftsidebar">
         <?php include "public/modules/sidebar.php"; ?>
     </div>
     <div class="col-lg-10">

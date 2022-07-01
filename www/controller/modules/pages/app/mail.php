@@ -9,7 +9,7 @@
 ?>
 <form method="post" action="" class="form-material">
     <div class="row">
-        <div class="col-md-7"  style="padding-left:0px;">
+        <div class="col-md-7">
             <div class="form-group">
                 <textarea name="conf#varheader" rows="5" class="textarea" placeholder="Template header">
                                 <?php echo isset($_POST['conf#varheader'])?$_POST['conf#varheader']:$website['varheader'];?>
@@ -21,7 +21,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="col-md-5"  style="padding-right:0px;">
+        <div class="col-md-5">
             <div class="form-group">
                 <input type="text" placeholder="SMTP server; eg. mail.domain.com" name="conf#smtp_host"
                     value="<?php echo isset($_POST['conf#smtp_host'])?$_POST['conf#smtp_host']:$website['smtp_host'];?>"

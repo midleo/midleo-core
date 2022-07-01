@@ -464,7 +464,6 @@ CREATE TABLE IF NOT EXISTS `knowledge_info` (
   `cattext` mediumtext NOT NULL,
   `catdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `views` int(50) NOT NULL DEFAULT '0',
-  `catlikes` int(50) NOT NULL DEFAULT '0',
   `public` int(1) NOT NULL DEFAULT '1',
   `accgroups` varchar(255) DEFAULT NULL,
   `author` varchar(100) DEFAULT NULL,

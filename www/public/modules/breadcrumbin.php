@@ -1,6 +1,4 @@
-<div class="sticky-top p-2 bg-light br-4"><?php if($breadcrumb["special"] || $brarr){ ?>
-    <h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
-    <br>
+<div class="sticky-top" style="top:70px;"><?php if($breadcrumb["special"] || $brarr){ ?>
     <div class="list-group">
         <?php  if($brarr){ foreach($brarr as $key=>$val){ ?>
         <a href="<?php echo $val["link"];?>" <?php if($val["tab"]){?>data-bs-toggle="tab" role="tab" <?php } ?>

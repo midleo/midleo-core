@@ -321,7 +321,7 @@ $brarr = array();
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
                 ?>
         <div class="row pt-3">
-            <div class="col-lg-2">
+            <div class="col-lg-2 bg-white leftsidebar">
                 <?php include "public/modules/sidebar.php";?></div>
             <div class="col-lg-10">
                 <form method="post" action="">
@@ -429,7 +429,7 @@ $brarr = array();
                 </form>
                 <?php } else { ?>
                 <div class="row pt-3">
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 bg-white leftsidebar">
                         <?php include "public/modules/sidebar.php";?></div>
                     <div class="col-lg-8"><?php textClass::PageNotFound(); ?>
                     </div>
@@ -438,7 +438,7 @@ $brarr = array();
                 <?php }
         } else {?>
                 <div class="row pt-3">
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 bg-white leftsidebar">
                         <?php include "public/modules/sidebar.php";?></div>
                     <div class="col-lg-10" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
                         <div class="row">

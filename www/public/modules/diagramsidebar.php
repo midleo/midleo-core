@@ -1,7 +1,5 @@
-<div class="sticky-top p-2 bg-light br-4">
-<h4><i class="mdi mdi-gesture-double-tap"></i>&nbsp;Actions</h4>
-<br>
-<div class="list-group">
+<div class="sticky-top" style="top:70px;">
+<div class="list-group text-start">
 <form method='post' action='/docapi/export'>
 <a href="/draw" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Article" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action" ><i class="mdi mdi-plus"></i>&nbsp;New Diagram</a>
 <?php if($forumcase=="v"){?>
@@ -18,8 +16,6 @@
 </div>
 <?php if($clientkeyws){?>
   <br><br>
-<h4><i class="mdi mdi-tag-outline"></i>&nbsp;Tags</h4>
-<br>
 <div class="nav tag-cloud">
 <?php  
   $kt=explode(",",$clientkeyws);

@@ -15,7 +15,7 @@ class Class_template{
     echo '</head><body class="card-no-border"><div id="main-wrapper">';
     include $website['corebase']."public/modules/headcontent.php";
     echo '<div class="page-wrapper"><div class="container-fluid">';
-    echo '<div class="row pt-3"><div class="col-lg-2">';
+    echo '<div class="row pt-3"><div class="col-lg-2 bg-white leftsidebar">';
     include "public/modules/sidebar.php";
     echo '</div><div class="col-lg-8">';
 

@@ -205,7 +205,7 @@ if($zobj = $q->fetchAll()){ ?>
 <?php } else { echo "Wrong ID";}} else { ?>
 <?php if(empty($thisarray['p2'])){ include "applist.php"; } else { ?>
 <div class="row">
-    <div class="col-lg-12 pe-0 ps-0">
+    <div class="col-lg-12 ">
         <div class="card p-0">
             <table class="table table-vmiddle table-hover stylish-table mb-0">
                 <thead>

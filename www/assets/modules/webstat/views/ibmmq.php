@@ -34,7 +34,7 @@ else if(!empty($_GET["qmid"])){
         $tmp["qminv"]=json_decode($zobj["qminv"],true);
     ?>
 <div class="row pt-3">
-    <div class="col-lg-2">
+    <div class="col-lg-2 bg-white leftsidebar">
         <?php include "public/modules/sidebar.php"; ?>
     </div>
     <div class="col-lg-8">
@@ -134,7 +134,7 @@ else if(!empty($_GET["qmid"])){
 </div>
 <?php } else { echo "<div class='alert alert-light'>No such Qmanager</div>";}} else { ?>
 <div class="row pt-3">
-    <div class="col-lg-2">
+    <div class="col-lg-2 bg-white leftsidebar">
         <?php include "public/modules/sidebar.php"; ?>
     </div>
     <div class="col-lg-10">

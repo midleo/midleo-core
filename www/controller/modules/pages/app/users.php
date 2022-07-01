@@ -10,7 +10,7 @@ array_push($brarr,array(
   ));
 }
   ?>
-<div class="row card p-0">
+<div class="card">
     <table class="table  table-vmiddle table-hover stylish-table mb-0">
         <thead>
             <tr>
