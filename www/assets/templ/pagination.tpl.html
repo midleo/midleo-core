@@ -1,21 +1,23 @@
-<ul class="pagination ps-2 pt-2 pb-0" ng-if="1 < pages.length">
-  <li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }">
-    <a href="" ng-click="setCurrent(1)"><i class="mdi mdi-chevron-double-left"></i></a>
-  </li>
-  <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }" class="ng-scope">
-    <a href="" ng-click="setCurrent(pagination.current - 1)" class="ng-binding">
-      <i class="mdi mdi-chevron-left"></i>
-    </a>
-  </li>
-  <li ng-repeat="pageNumber in pages track by $index" ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == '...' }">
-    <a href="" ng-click="setCurrent(pageNumber)">{{ pageNumber }}</a>
-  </li>  
-  <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }" class="ng-scope">
-    <a href="" ng-click="setCurrent(pagination.current + 1)" class="ng-binding">
-      <i class="mdi mdi-chevron-right"></i>
-    </a>
-  </li>
-  <li ng-if="boundaryLinks"  ng-class="{ disabled : pagination.current == pagination.last }">
-    <a href="" ng-click="setCurrent(pagination.last)"><i class="mdi mdi-chevron-double-right"></i></a>
-  </li>
-</ul>
+<nav aria-label="navigation ">
+  <ul class="pagination justify-content-center ps-2 pt-2 mb-2 pb-0" ng-if="1 < pages.length">
+    <li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }">
+      <a href="" ng-click="setCurrent(1)" class="page-link border-0"><i class="mdi mdi-chevron-double-left"></i></a>
+    </li>
+    <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }" class="page-item ng-scope">
+      <a href="" ng-click="setCurrent(pagination.current - 1)" class="page-link border-0 ng-binding">
+        <i class="mdi mdi-chevron-left"></i>
+      </a>
+    </li>
+    <li ng-repeat="pageNumber in pages track by $index" class="page-item" ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == '...' }">
+      <a href="" class="page-link border-0" ng-click="setCurrent(pageNumber)">{{ pageNumber }}</a>
+    </li>  
+    <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }" class="page-item ng-scope">
+      <a href="" ng-click="setCurrent(pagination.current + 1)" class="page-link border-0 ng-binding">
+        <i class="mdi mdi-chevron-right"></i>
+      </a>
+    </li>
+    <li ng-if="boundaryLinks" class="page-item"  ng-class="{ disabled : pagination.current == pagination.last }">
+      <a href="" ng-click="setCurrent(pagination.last)" class="page-link border-0"><i class="mdi mdi-chevron-double-right"></i></a>
+    </li>
+  </ul>
+</nav>
