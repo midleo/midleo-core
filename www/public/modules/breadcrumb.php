@@ -11,8 +11,8 @@
                         class="mdi <?php echo $val["icon"];?>"></i><?php } ?><?php if($val["img"]){ ?><img
                         src="<?php echo $val["img"];?>"
                         width="22px"></a><?php } ?><?php echo isset($val["text"])?"&nbsp;".$val["text"]:"";?>
-                <?php if($val["main"]){ if(!empty($thisarray['p2'])){ echo "&nbsp;".$thisarray['p2']; } }?>
-                </a><?php if($val["main"]){ if(!empty($thisarray['p2'])){ ?>&nbsp;&nbsp;&nbsp;<a href="/env/apps"
+                <?php if($val["main"]){ if(!empty($thisarray['p2']) && $thisarray['p2']!="?type=new"){ echo "&nbsp;".$thisarray['p2']; } }?>
+                </a><?php if($val["main"]){ if(!empty($thisarray['p2']) && $thisarray['p2']!="?type=new"){ ?>&nbsp;&nbsp;&nbsp;<a href="/env/apps"
                     style="top: 16px;position: absolute;z-index: 9;right:0px;" target="_parent" class="text-danger"><i
                         class="mdi mdi-close mdi-18px"></i></a><?php  }} ?></li>
             <?php  } ?>

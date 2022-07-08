@@ -1,6 +1,6 @@
 <?php if($_GET["type"]=="new"){ ?>
 <div class="row">
-    <div class="col-md-8 ps-0 pe-0">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">
                 <h4>Create an application

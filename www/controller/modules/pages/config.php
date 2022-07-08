@@ -160,8 +160,8 @@ class Class_info
         }
         include $website['corebase']."public/modules/headcontentinfo.php"; ?>
 <section>
-      <div class="container-fluid page-wrapper">
-    <?php echo '<div class="row d-flex">
+    <div class="container-fluid page-wrapper">
+        <?php echo '<div class="row d-flex">
             <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom sidenav sidenav-start bg-white leftsidebar" style="padding-left: 1rem !important;margin-top:0px;">
             <div class="collapse d-lg-block" id="sidenavCollapse">';
         include $website['corebase']."public/modules/sidebarinfo.php";
@@ -172,66 +172,66 @@ class Class_info
             $q = $pdo->prepare($sql);
             $q->execute(array($keyws));
             if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) { ?>
-    <div class="card" style="box-shadow:none;">
-        <div class="card-body">
-            <h4 class="card-title"><?php echo $zobj['cat_name']; ?></h4>
-            <h6 class="card-subtitle" style="margin-bottom: 0px;">Posted
-                <?php echo textClass::ago($zobj['catdate']); ?></h6>
-            <br>
-            <p><?php
+        <div class="card" style="box-shadow:none;">
+            <div class="card-body">
+                <h4 class="card-title"><?php echo $zobj['cat_name']; ?></h4>
+                <h6 class="card-subtitle" style="margin-bottom: 0px;">Posted
+                    <?php echo textClass::ago($zobj['catdate']); ?></h6>
+                <br>
+                <p><?php
 if (strpos($zobj['cattext'], 'diagram') !== false) {
                 echo documentClass::replaceDiagramsWithImage($zobj['cattext']);
             } else {
                 echo $zobj['cattext'];
             }
                 ?></p>
+            </div>
+            <div class="card-footer border-top">
+                <ul class="wall-attrs clearfix list-inline list-unstyled mb-0">
+                    <li class="wa-stats"><span><i class="mdi mdi-eye"></i> <?php echo $zobj['views']; ?>
+                            views</span><span><i class="mdi mdi-open-in-new"></i>
+                            <?php echo $zobj['category']; ?></span></li>
+                </ul>
+            </div>
         </div>
-        <div class="card-footer border-top">
-        <ul class="wall-attrs clearfix list-inline list-unstyled mb-0">
-            <li class="wa-stats"><span><i class="mdi mdi-eye"></i> <?php echo $zobj['views']; ?>
-                    views</span><span><i
-                        class="mdi mdi-open-in-new"></i> <?php echo $zobj['category']; ?></span></li>
-        </ul>
-        </div>
-    </div>
 
-    <!--history modal-->
-    <div class="modal" id="modal-hist" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog" style="width:auto;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div style="display:block;">
-                        <input type="text" ng-model="search" class="form-control topsearch dtfilter"
-                            placeholder="Filter">
+        <!--history modal-->
+        <div class="modal" id="modal-hist" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog" style="width:auto;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="display:block;">
+                            <input type="text" ng-model="search" class="form-control topsearch dtfilter"
+                                placeholder="Filter">
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body pt-0">
-                    <div class="table-responsive">
-                        <table id="data-table-hist" class="table table-hover stylish-table mb-0" aria-busy="false"
-                            style="margin-top:0px !important;" style="width:100%;">
-                            <thead>
-                                <tr>
-                                    <th data-column-id="id" data-identifier="true" data-visible="false"
-                                        data-type="numeric">ID</th>
-                                    <th data-column-id="commitid">Commit ID</th>
-                                    <th data-column-id="filepl">File place</th>
-                                    <th data-column-id="author">Author</th>
-                                    <th data-column-id="commitdate">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+                    <div class="modal-body pt-0">
+                        <div class="table-responsive">
+                            <table id="data-table-hist" class="table table-hover stylish-table mb-0" aria-busy="false"
+                                style="margin-top:0px !important;" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th data-column-id="id" data-identifier="true" data-visible="false"
+                                            data-type="numeric">ID</th>
+                                        <th data-column-id="commitid">Commit ID</th>
+                                        <th data-column-id="filepl">File place</th>
+                                        <th data-column-id="author">Author</th>
+                                        <th data-column-id="commitdate">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--history modal-->
-    <?php if (!empty($zobj['tags'])) {?><br>
-    <div class="blogTags">
-        <?php
+        <!--history modal-->
+        <?php if (!empty($zobj['tags'])) {?><br>
+        <div class="blogTags">
+            <?php
 $clientkeyws = $zobj['tags'];
                     $kt = explode(",", $clientkeyws);
                     foreach ($kt as $key => $val) {if ($val != " " and strlen($val) < 70 and strlen($val) > 0) {
@@ -239,7 +239,7 @@ $clientkeyws = $zobj['tags'];
                         $val = rtrim($val, ' ');
                         echo '<a class="btn btn-light btn-sm waves-effect" style="margin-right:5px;margin-top:5px;" href="/info/tags/' . $val . '"><i class="mdi mdi-pound"></i>&nbsp;' . $val . '</a>';
                     }}?></div><?php }?>
-    <?php
+        <?php
 $sql = "update knowledge_info set views=views+1 where id=?";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($zobj['id']));
@@ -283,53 +283,54 @@ $sql = "update knowledge_info set views=views+1 where id=?";
             if ($zobj = $q->fetchAll()) {
                 foreach ($zobj as $val) {
                     ?>
-    <div class="card waves-effect" style="display:block;box-shadow:none;"
-        onclick="location.href='/info/posts/<?php echo $val['cat_latname']; ?>'">
-        <div class="card-body">
-            <h4 class="card-title"><?php echo $val['cat_name']; ?></h4>
-            <h6 class="card-subtitle" style="margin-bottom: 0px;">Posted
-                <?php echo textClass::ago($val['catdate']); ?></h6>
-            <br>
-            <p><?php echo strip_tags(textClass::word_limiter($val['cattext'], 120, 400)); ?></p>
-        </div>
+        <div class="card waves-effect" style="display:block;box-shadow:none;"
+            onclick="location.href='/info/posts/<?php echo $val['cat_latname']; ?>'">
+            <div class="card-body">
+                <h4 class="card-title"><?php echo $val['cat_name']; ?></h4>
+                <h6 class="card-subtitle" style="margin-bottom: 0px;">Posted
+                    <?php echo textClass::ago($val['catdate']); ?></h6>
+                <br>
+                <p><?php echo strip_tags(textClass::word_limiter($val['cattext'], 120, 400)); ?></p>
+            </div>
 
-        <div class="card-footer border-top">
-        <ul class="wall-attrs clearfix list-inline list-unstyled mb-0">
-            <li class="wa-stats"><span><i class="mdi mdi-eye"></i> <?php echo $val['views']; ?>
-                    views</span><span><i
-                        class="mdi mdi-open-in-new"></i> <?php echo $val['category']; ?></span></li>
-        </ul>
-        </div>
-    </div>
-    <?php }} else {?> <div class="card" style="box-shadow:none;">
-        <div class="card-body card-padding">
-            <div class="text-center">
-                <p class="lead">There are no posts in this category</p>
-                <p class="lead"><a href="/cpinfo/new">Create one</a></p>
+            <div class="card-footer border-top">
+                <ul class="wall-attrs clearfix list-inline list-unstyled mb-0">
+                    <li class="wa-stats"><span><i class="mdi mdi-eye"></i> <?php echo $val['views']; ?>
+                            views</span><span><i class="mdi mdi-open-in-new"></i> <?php echo $val['category']; ?></span>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div><?php }?>
-    <?php if ($blognum > 0) {?>
-    <nav style="padding-top:10px">
-        <ul class="pagination">
-            <?php if ($page > 1) {?>
-            <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $prev; ?>">Previous</a></li>
-            <?php }
+        <?php }} else {?> <div class="card" style="box-shadow:none;">
+            <div class="card-body card-padding">
+                <div class="text-center">
+                    <p class="lead">There are no posts in this category</p>
+                    <p class="lead"><a href="/cpinfo/new">Create one</a></p>
+                </div>
+            </div>
+        </div><?php }?>
+        <?php if ($blognum > 0) {?>
+        <nav style="padding-top:10px">
+            <ul class="pagination">
+                <?php if ($page > 1) {?>
+                <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $prev; ?>">Previous</a></li>
+                <?php }
                 for ($i = 1; $i <= $total_pages; $i++) {
                     if (($page) == $i) {?>
-            <li class="page-item active"><a class="page-link" href="/info/pn/<?php echo $i; ?>"><?php echo $i; ?></a>
-            </li>
-            <?php } else {?>
-            <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $i; ?>"><?php echo $i; ?></a>
-            </li>
-            <?php }
+                <li class="page-item active"><a class="page-link"
+                        href="/info/pn/<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+                <?php } else {?>
+                <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+                <?php }
                 }
                 if ($page < $total_pages) {?>
-            <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $next; ?>">Next</a></li>
-            <?php }?>
-        </ul>
-    </nav>
-    <?php }
+                <li class="page-item"><a class="page-link" href="/info/pn/<?php echo $next; ?>">Next</a></li>
+                <?php }?>
+            </ul>
+        </nav>
+        <?php }
         }
 
         echo '</div><div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 me-1 sidenav sidenav-end">';
@@ -338,9 +339,9 @@ $sql = "update knowledge_info set views=views+1 where id=?";
         include $website['corebase']."public/modules/footer.php";
         include $website['corebase']."public/modules/js.php";
         if ($forumcase == "posts") {?>
-    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
-    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
-    <?php }
+        <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+        <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
+        <?php }
         include $website['corebase']."public/modules/template_end.php";
         if (!empty($text)) {unset($text);}
         echo '</body></html>';
@@ -427,102 +428,103 @@ class Class_mregister
 
         }
         include $website['corebase']."public/modules/css.php";?>
-    </head>
+        </head>
 
-    <body
-        style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_back.svg');background-repeat: no-repeat;background-size: cover;background-position:bottom;background-attachment:fixed;">
-        <section id="wrapper">
-            <div class="container">
-                <header
-                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-                    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                        <img data-bs-toggle="tooltip"
-                            src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
-                            alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
-                    </a>
+        <body
+            style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_back.svg');background-repeat: no-repeat;background-size: cover;background-position:bottom;background-attachment:fixed;">
+            <section id="wrapper">
+                <div class="container">
+                    <header
+                        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                        <a href="/"
+                            class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                            <img data-bs-toggle="tooltip"
+                                src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
+                                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
+                        </a>
 
-                    <div class="col-md-3 text-end">
-                        <?php if ($website["registration"] && $website["registration"] == 1) {?>
-                        <a href="/mlogin" class="btn btn-primary">Login</a>
+                        <div class="col-md-3 text-end">
+                            <?php if ($website["registration"] && $website["registration"] == 1) {?>
+                            <a href="/mlogin" class="btn btn-primary">Login</a>
 
-                        <?php }?>
-                    </div>
-                </header>
-            </div>
-            <div class="login-register">
-                <div class="row justify-content-center">
-                    <div class="col-md-3">
-                        <div class="card card-login">
-                            <div class="card-body">
-                                <form class="form-material form-horizontal" id="loginform" action="" method="post">
-                                    <div class="text-center">
-                                        <h3 class="p-2 rounded-title mb-3">Let's go!</h3>
-                                    </div>
-                                    <?php $sql = "select ldapserver,ldapinfo from ldap_config";
+                            <?php }?>
+                        </div>
+                    </header>
+                </div>
+                <div class="login-register">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <div class="card card-login">
+                                <div class="card-body">
+                                    <form class="form-material form-horizontal" id="loginform" action="" method="post">
+                                        <div class="text-center">
+                                            <h3 class="p-2 rounded-title mb-3">Let's go!</h3>
+                                        </div>
+                                        <?php $sql = "select ldapserver,ldapinfo from ldap_config";
         $q = $pdo->prepare($sql);
         $q->execute();
         if ($zobj = $q->fetchAll()) {?>
-                                    <div class="form-group mb-3">
-                                        <label for="authtype" class="form-label">Authentication provider</label>
-                                        <select name="authtype" id="authtype" class="form-control">
-                                            <?php foreach ($zobj as $val) {?><option
-                                                value="<?php echo $val['ldapserver']; ?>">
-                                                <?php echo $val['ldapinfo']; ?></option><?php }?>
-                                            <option value="">Default</option>
-                                        </select>
+                                        <div class="form-group mb-3">
+                                            <label for="authtype" class="form-label">Authentication provider</label>
+                                            <select name="authtype" id="authtype" class="form-control">
+                                                <?php foreach ($zobj as $val) {?><option
+                                                    value="<?php echo $val['ldapserver']; ?>">
+                                                    <?php echo $val['ldapinfo']; ?></option><?php }?>
+                                                <option value="">Default</option>
+                                            </select>
 
-                                    </div>
-                                    <?php }?>
-                                    <div class="form-group mb-1">
-                                        <label for="usr_name" class="form-label">Your name</label>
-                                        <input name="usr_name" id="usr_name" class="form-control" type="text"
-                                            required="">
-                                    </div>
-                                    <div class="form-group mb-1">
-                                        <label for="usr_email" class="form-label">Email address</label>
-                                        <input name="usr_email" id="username" class="form-control" type="text"
-                                            required="">
-                                    </div>
-                                    <div class="form-group mb-1">
-                                        <label for="pwdnew" class="form-label">Password</label>
-                                        <input type="password" id="pwdnew" name="pwdnew" class="form-control">
-                                    </div>
-                                    <div class="form-group mb-1">
-                                        <label for="pwdnew2" class="form-label">Confirm password</label>
-                                        <input class="form-control" type="password" id="pwdnew2" name="pwdnew2"
-                                            equalto="#pwdnew">
-                                    </div>
-                                    <div class="form-group mb-1">
-                                        <div class="col-xs-12">
-                                            <div style="display: block;" id="pass-strength-result"><i
-                                                    class='mdi mdi-lock-open-outline'></i>&nbsp;Password
-                                                Strenght</div>
                                         </div>
-                                    </div>
+                                        <?php }?>
+                                        <div class="form-group mb-1">
+                                            <label for="usr_name" class="form-label">Your name</label>
+                                            <input name="usr_name" id="usr_name" class="form-control" type="text"
+                                                required="">
+                                        </div>
+                                        <div class="form-group mb-1">
+                                            <label for="usr_email" class="form-label">Email address</label>
+                                            <input name="usr_email" id="username" class="form-control" type="text"
+                                                required="">
+                                        </div>
+                                        <div class="form-group mb-1">
+                                            <label for="pwdnew" class="form-label">Password</label>
+                                            <input type="password" id="pwdnew" name="pwdnew" class="form-control">
+                                        </div>
+                                        <div class="form-group mb-1">
+                                            <label for="pwdnew2" class="form-label">Confirm password</label>
+                                            <input class="form-control" type="password" id="pwdnew2" name="pwdnew2"
+                                                equalto="#pwdnew">
+                                        </div>
+                                        <div class="form-group mb-1">
+                                            <div class="col-xs-12">
+                                                <div style="display: block;" id="pass-strength-result"><i
+                                                        class='mdi mdi-lock-open-outline'></i>&nbsp;Password
+                                                    Strenght</div>
+                                            </div>
+                                        </div>
 
-                                    <div class="form-group row">
-                                        <div class="col-md-6 text-end"><img src="/pubapi/captcha" /></div>
-                                        <div class="col-md-6">
-                                            <input name="captcha" id="captcha" class="form-control" type="text"
-                                                required="" placeholder="write the number">
+                                        <div class="form-group row">
+                                            <div class="col-md-6 text-end"><img src="/pubapi/captcha" /></div>
+                                            <div class="col-md-6">
+                                                <input name="captcha" id="captcha" class="form-control" type="text"
+                                                    required="" placeholder="write the number">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group text-center mt-3 d-grid gap-2">
-                                        <button name="doRegister"
-                                            class="btn btn-light text-uppercase waves-effect waves-light"
-                                            type="submit"><i class="mdi mdi-login"></i>&nbsp;Register</button>
-                                    </div>
-                                </form>
+                                        <div class="form-group text-center mt-3 d-grid gap-2">
+                                            <button name="doRegister"
+                                                class="btn btn-light text-uppercase waves-effect waves-light"
+                                                type="submit"><i class="mdi mdi-login"></i>&nbsp;Register</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
 
-        <!-- Older IE warning message -->
-        <!--[if lt IE 9]>
+            <!-- Older IE warning message -->
+            <!--[if lt IE 9]>
   <div class="ie-warning">
   <h1 class="c-red">Warning!!</h1>
   <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -538,87 +540,88 @@ class Class_mregister
   <![endif]--><?php
 include $website['corebase']."public/modules/footer.php";
         include $website['corebase']."public/modules/js.php";?>
-        <script type='text/javascript'>
-        (function(a) {
-            function b() {
-                var e = a("#pwdnew").val(),
-                    d = a("#username").val(),
-                    c = a("#pwdnew2").val(),
-                    f;
-                a("#pass-strength-result").removeClass("short bad good strong");
-                if (!e) {
-                    a("#pass-strength-result").html(pwsL10n.empty);
-                    return
-                }
-                f = passwordStrength(e, d, c);
-                switch (f) {
-                    case 2:
-                        a("#pass-strength-result").addClass("bad").html(pwsL10n.bad);
-                        break;
-                    case 3:
-                        a("#pass-strength-result").addClass("good").html(pwsL10n.good);
-                        break;
-                    case 4:
-                        a("#pass-strength-result").addClass("strong").html(pwsL10n.strong);
-                        break;
-                    case 5:
-                        a("#pass-strength-result").addClass("short").html(pwsL10n.mismatch);
-                        break;
-                    default:
-                        a("#pass-strength-result").addClass("short").html(pwsL10n["short"])
-                }
-            }
-            a(document).ready(function() {
-                a("#pwdnew").val("").keyup(b);
-                a("#pwdnew2").val("").keyup(b);
-                a("#pass-strength-result").show();
-                a(".color-palette").click(function() {
-                    a(this).siblings('input[name="admin_color"]').prop("checked", true)
-                });
-                a("#first_name, #last_name, #nickname").blur(function() {
-                    var c = a("#display_name"),
-                        e = c.find("option:selected").attr("id"),
-                        f = [],
-                        d = {
-                            display_nickname: a("#nickname").val(),
-                            display_username: a("#username").val(),
-                            display_firstname: a("#first_name").val(),
-                            display_lastname: a("#last_name").val()
-                        };
-                    if (d.display_firstname && d.display_lastname) {
-                        d.display_firstlast = d.display_firstname + " " + d
-                            .display_lastname;
-                        d.display_lastfirst = d.display_lastname + " " + d.display_firstname
+            <script type='text/javascript'>
+            (function(a) {
+                function b() {
+                    var e = a("#pwdnew").val(),
+                        d = a("#username").val(),
+                        c = a("#pwdnew2").val(),
+                        f;
+                    a("#pass-strength-result").removeClass("short bad good strong");
+                    if (!e) {
+                        a("#pass-strength-result").html(pwsL10n.empty);
+                        return
                     }
-                    a("option", c).remove();
-                    a.each(d, function(i, g) {
-                        var h = g.replace(/<\/?[a-z][^>]*>/gi, "");
-                        if (d[i].length && a.inArray(h, f) == -1) {
-                            f.push(h);
-                            a("<option />", {
-                                id: i,
-                                text: h,
-                                selected: (i == e)
-                            }).appendTo(c)
+                    f = passwordStrength(e, d, c);
+                    switch (f) {
+                        case 2:
+                            a("#pass-strength-result").addClass("bad").html(pwsL10n.bad);
+                            break;
+                        case 3:
+                            a("#pass-strength-result").addClass("good").html(pwsL10n.good);
+                            break;
+                        case 4:
+                            a("#pass-strength-result").addClass("strong").html(pwsL10n.strong);
+                            break;
+                        case 5:
+                            a("#pass-strength-result").addClass("short").html(pwsL10n.mismatch);
+                            break;
+                        default:
+                            a("#pass-strength-result").addClass("short").html(pwsL10n["short"])
+                    }
+                }
+                a(document).ready(function() {
+                    a("#pwdnew").val("").keyup(b);
+                    a("#pwdnew2").val("").keyup(b);
+                    a("#pass-strength-result").show();
+                    a(".color-palette").click(function() {
+                        a(this).siblings('input[name="admin_color"]').prop("checked", true)
+                    });
+                    a("#first_name, #last_name, #nickname").blur(function() {
+                        var c = a("#display_name"),
+                            e = c.find("option:selected").attr("id"),
+                            f = [],
+                            d = {
+                                display_nickname: a("#nickname").val(),
+                                display_username: a("#username").val(),
+                                display_firstname: a("#first_name").val(),
+                                display_lastname: a("#last_name").val()
+                            };
+                        if (d.display_firstname && d.display_lastname) {
+                            d.display_firstlast = d.display_firstname + " " + d
+                                .display_lastname;
+                            d.display_lastfirst = d.display_lastname + " " + d.display_firstname
                         }
+                        a("option", c).remove();
+                        a.each(d, function(i, g) {
+                            var h = g.replace(/<\/?[a-z][^>]*>/gi, "");
+                            if (d[i].length && a.inArray(h, f) == -1) {
+                                f.push(h);
+                                a("<option />", {
+                                    id: i,
+                                    text: h,
+                                    selected: (i == e)
+                                }).appendTo(c)
+                            }
+                        })
                     })
                 })
-            })
-        })(jQuery);
-        var pwsL10n = {
-            empty: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Password Strenght",
-            short: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Too Short",
-            bad: "<i class='mdi mdi-lock-open'></i>&nbsp;Bad",
-            good: "<i class='mdi mdi-lock'></i>&nbsp;Good",
-            strong: "<i class='mdi mdi-shield-lock-outline'></i>&nbsp;Strong",
-            mismatch: "<i class='mdi mdi-lock-question'></i>&nbsp;Mismatch"
-        };
-        try {
-            convertEntities(pwsL10n);
-        } catch (e) {};
-        </script>
-        <script src="/<?php echo $website['corebase'];?>assets/js/password-strength-meter.js" type="text/javascript">
-        </script> <?php
+            })(jQuery);
+            var pwsL10n = {
+                empty: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Password Strenght",
+                short: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Too Short",
+                bad: "<i class='mdi mdi-lock-open'></i>&nbsp;Bad",
+                good: "<i class='mdi mdi-lock'></i>&nbsp;Good",
+                strong: "<i class='mdi mdi-shield-lock-outline'></i>&nbsp;Strong",
+                mismatch: "<i class='mdi mdi-lock-question'></i>&nbsp;Mismatch"
+            };
+            try {
+                convertEntities(pwsL10n);
+            } catch (e) {};
+            </script>
+            <script src="/<?php echo $website['corebase'];?>assets/js/password-strength-meter.js"
+                type="text/javascript">
+            </script> <?php
 include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
 
@@ -762,109 +765,114 @@ class Class_mlogin
             }
         }
         include $website['corebase']."public/modules/css.php";?>
-        </head>
+            </head>
 
-        <body
-            style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_back.svg');background-repeat: no-repeat;background-size: cover;background-position:bottom;">
-            <section id="wrapper">
-                <div class="container">
-                    <header
-                        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-                        <a href="/"
-                            class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                            <img data-bs-toggle="tooltip"
-                                src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
-                                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" style="max-height:40px;" />
-                        </a>
+            <body
+                style="background-image: url('/<?php echo $website['corebase'];?>assets/images/login_back.svg');background-repeat: no-repeat;background-size: cover;background-position:bottom;">
+                <section id="wrapper">
+                    <div class="container">
+                        <header
+                            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                            <a href="/"
+                                class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                                <img data-bs-toggle="tooltip"
+                                    src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-dark.svg"
+                                    alt="Midleo CORE" title="Midleo CORE" class="light-logo ml"
+                                    style="max-height:40px;" />
+                            </a>
 
-                        <div class="col-md-3 text-end">
-                            <?php if ($website["registration"] && $website["registration"] == 1) {?>
-                            <a href="/mregister" class="btn btn-primary">Sign Up</a>
+                            <div class="col-md-3 text-end">
+                                <?php if ($website["registration"] && $website["registration"] == 1) {?>
+                                <a href="/mregister" class="btn btn-primary">Sign Up</a>
 
-                            <?php }?>
-                        </div>
-                    </header>
-                </div>
-                <div class="login-register">
-                    <div class="row justify-content-center">
-                        <div class="col-md-3">
-                            <div class="card card-login">
-                                <div class="card-body">
-                                    <form class="form-horizontal" id="loginform" action="" method="post">
-                                        <div class="text-center">
-                                            <h3 class="p-2 rounded-title mb-3">Welcome Back!</h3>
-                                        </div>
-                                        <?php $sql = "select ldapserver,ldapinfo from ldap_config";
+                                <?php }?>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="login-register">
+                        <div class="row justify-content-center">
+                            <div class="col-md-3">
+                                <div class="card card-login">
+                                    <div class="card-body">
+                                        <form class="form-horizontal" id="loginform" action="" method="post">
+                                            <div class="text-center">
+                                                <h3 class="p-2 rounded-title mb-3">Welcome Back!</h3>
+                                            </div>
+                                            <?php $sql = "select ldapserver,ldapinfo from ldap_config";
         $q = $pdo->prepare($sql);
         $q->execute();
         if ($zobj = $q->fetchAll()) {?>
-                                        <div class="form-group mb-2">
-                                            <label for="authtype" class="form-label">Authentication provider</label>
-                                            <select name="authtype" id="authtype" class="form-control">
-                                                <?php foreach ($zobj as $val) {?><option
-                                                    value="<?php echo $val['ldapserver']; ?>">
-                                                    <?php echo $val['ldapinfo']; ?></option><?php }?>
-                                                <option value="">Default</option>
-                                            </select>
-                                        </div>
-                                        <?php }?>
-                                        <div class="form-group mb-2">
-                                            <label for="usr_email" class="form-label">Username / Email address</label>
-                                            <input name="usr_email" class="form-control" type="text" required=""
-                                                id="usr_email">
+                                            <div class="form-group mb-2">
+                                                <label for="authtype" class="form-label">Authentication provider</label>
+                                                <select name="authtype" id="authtype" class="form-control">
+                                                    <?php foreach ($zobj as $val) {?><option
+                                                        value="<?php echo $val['ldapserver']; ?>">
+                                                        <?php echo $val['ldapinfo']; ?></option><?php }?>
+                                                    <option value="">Default</option>
+                                                </select>
+                                            </div>
+                                            <?php }?>
+                                            <div class="form-group mb-2">
+                                                <label for="usr_email" class="form-label">Username / Email
+                                                    address</label>
+                                                <input name="usr_email" class="form-control" type="text" required=""
+                                                    id="usr_email">
 
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <label for="pwd" class="form-label">Password</label>
-                                            <input name="pwd" class="form-control" type="password" id="pwd" required="">
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="pwd" class="form-label">Password</label>
+                                                <input name="pwd" class="form-control" type="password" id="pwd"
+                                                    required="">
 
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="d-flex no-block align-items-center">
-                                                <div class="ml-auto">
-                                                    <a href="javascript:void(0)" id="to-recover" class="text-muted"><i
-                                                            class="mdi mdi-lock-alert me-1"></i> Forgot pwd?</a>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div class="ml-auto">
+                                                        <a href="javascript:void(0)" id="to-recover"
+                                                            class="text-muted"><i class="mdi mdi-lock-alert me-1"></i>
+                                                            Forgot pwd?</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group text-center mt-3 d-grid gap-2">
-                                            <button name="doLogin"
-                                                class="btn btn-light text-uppercase waves-effect waves-light"
-                                                type="submit"><i class="mdi mdi-login"></i>&nbsp;Log In</button>
-                                        </div>
-
-                                    </form>
-                                    <form class="form-horizontal " id="recoverform" action="" method="post">
-                                        <div class="text-center">
-                                            <h3 class="p-2 rounded-title mb-3">Reset form</h3>
-                                        </div>
-                                        <div class="form-group ">
-                                            <div class="col-xs-12">
-                                                <p class="text-muted" style="line-height:initial;">Enter your Email and
-                                                    instructions will be
-                                                    sent to you! </p>
+                                            <div class="form-group text-center mt-3 d-grid gap-2">
+                                                <button name="doLogin"
+                                                    class="btn btn-light text-uppercase waves-effect waves-light"
+                                                    type="submit"><i class="mdi mdi-login"></i>&nbsp;Log In</button>
                                             </div>
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <label for="email_reset">Email</label>
-                                            <input class="form-control" name="usr_email" id="email_reset" type="text"
-                                                required="">
-                                        </div><br>
-                                        <div class="form-group text-center mt-3 d-grid gap-2">
-                                            <button class="btn btn-light text-uppercase waves-effect waves-light"
-                                                name="doForgot" type="submit">Reset</button>
-                                        </div>
-                                    </form>
+
+                                        </form>
+                                        <form class="form-horizontal " id="recoverform" action="" method="post">
+                                            <div class="text-center">
+                                                <h3 class="p-2 rounded-title mb-3">Reset form</h3>
+                                            </div>
+                                            <div class="form-group ">
+                                                <div class="col-xs-12">
+                                                    <p class="text-muted" style="line-height:initial;">Enter your Email
+                                                        and
+                                                        instructions will be
+                                                        sent to you! </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="email_reset">Email</label>
+                                                <input class="form-control" name="usr_email" id="email_reset"
+                                                    type="text" required="">
+                                            </div><br>
+                                            <div class="form-group text-center mt-3 d-grid gap-2">
+                                                <button class="btn btn-light text-uppercase waves-effect waves-light"
+                                                    name="doForgot" type="submit">Reset</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
 
-            <!-- Older IE warning message -->
-            <!--[if lt IE 9]>
+                <!-- Older IE warning message -->
+                <!--[if lt IE 9]>
   <div class="ie-warning">
   <h1 class="c-red">Warning!!</h1>
   <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -944,274 +952,281 @@ class Class_profile
         echo '<div class="page-wrapper"><div class="container-fluid">';
         ?>
 
-            <div class="modal" id="chgpic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" style="width:380px;">
-                    <div class="modal-content">
-                        <form enctype="multipart/form-data" method="post" action="">
-                            <div class="modal-body form-horizontal form-material">
-                                <div class="image-editor text-center">
-                                    <button type="button" id="fileupload" onClick="getFile('tufile')"
-                                        class="btn btn-light btn-sm">upload</button>
-                                    <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file"
-                                            class="cropit-image-input" name="tufile" id="tufile"
-                                            onChange="sub(this,'fileupload')"
-                                            accept=".bmp, .gif, .jpeg, .jpg, .png, .tif, .tiff, image/jpeg" size="1" />
-                                    </div>
-                                    <div class="cropit-preview profileprev" style="margin: 10px auto;">
-                                    </div>
-                                    <div class="image-size-label">Resize image</div>
-                                    <input type="range" class="cropit-image-zoom-input" id="input-slider">
-                                    <input type="hidden" name="ufile" class="ufile" />
-                                    <div class="row">
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-light btn-sm prevbutton">View</button>
+                <div class="modal" id="chgpic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" style="width:380px;">
+                        <div class="modal-content">
+                            <form enctype="multipart/form-data" method="post" action="">
+                                <div class="modal-body form-horizontal form-material">
+                                    <div class="image-editor text-center">
+                                        <button type="button" id="fileupload" onClick="getFile('tufile')"
+                                            class="btn btn-light btn-sm">upload</button>
+                                        <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file"
+                                                class="cropit-image-input" name="tufile" id="tufile"
+                                                onChange="sub(this,'fileupload')"
+                                                accept=".bmp, .gif, .jpeg, .jpg, .png, .tif, .tiff, image/jpeg"
+                                                size="1" />
                                         </div>
-                                        <div class="col-md-3"></div>
+                                        <div class="cropit-preview profileprev" style="margin: 10px auto;">
+                                        </div>
+                                        <div class="image-size-label">Resize image</div>
+                                        <input type="range" class="cropit-image-zoom-input" id="input-slider">
+                                        <input type="hidden" name="ufile" class="ufile" />
+                                        <div class="row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-6">
+                                                <button type="button"
+                                                    class="btn btn-light btn-sm prevbutton">View</button>
+                                            </div>
+                                            <div class="col-md-3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="avatarid" value="<?php echo $uavatar; ?>">
+                                    <button type="submit" class="btn btn-info btn-sm uploaddata"
+                                        name="addfile">Save</button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row pt-3">
+                    <div class="col-lg-2 bg-white leftsidebar">
+                        <?php include "public/modules/sidebar.php";?>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="card p-2">
+                                    <div class="mt-4 text-center">
+                                        <img class="img img-fluid rounded-circle"
+                                            src="<?php echo !empty($uavatar) ? $uavatar : "/".$website['corebase']."assets/images/avatar.svg"; ?>"
+                                            alt="" width="150">
+                                        <h4 class="card-title mt-2"><?php echo $usname; ?></h4>
+                                        <h6 class="card-subtitle"><?php echo $usemail; ?></h6>
+                                        <div class="row text-center justify-content-md-center">
+                                            <?php if (!empty($uavatar)) {?> <form enctype="multipart/form-data"
+                                                method="post" action=""><input type="hidden" name="avatarid"
+                                                    value="<?php echo $uavatar; ?>"><?php }?>
+                                                <div class="btn-group">
+                                                    <button type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#chgpic"
+                                                        class="btn btn-light waves-effect waves-dark btn-sm">
+                                                        <i class="mdi mdi-camera"></i> <span
+                                                            class="hidden-xs">Upload</span>
+                                                    </button>
+                                                    <?php if (!empty($uavatar)) {?><button type="submit"
+                                                        class="btn btn-light btn-sm waves-effect waves-dark"
+                                                        name="delavatar"><i
+                                                            class="mdi mdi-close"></i>&nbsp;Delete</button><?php }?>
+                                                </div>
+                                                <?php if (!empty($uavatar)) {?>
+                                            </form><?php }?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <input type="hidden" name="avatarid" value="<?php echo $uavatar; ?>">
-                                <button type="submit" class="btn btn-info btn-sm uploaddata"
-                                    name="addfile">Save</button>&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-danger btn-sm"
-                                    data-bs-dismiss="modal">Cancel</button>
-                            </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="card p-3">
+                                    <ul class="nav nav-tabs profile-tab" role="tablist">
+                                        <li class="nav-item"> <a class="nav-link active waves-effect waves-dark"
+                                                data-bs-toggle="tab" href="#profile" role="tab">Profile</a> </li>
+                                        <li class="nav-item"> <a class="nav-link waves-effect waves-dark"
+                                                data-bs-toggle="tab" href="#security" role="tab">Security</a> </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="profile" role="tabpanel">
+                                            <form class="form-material " method="post" action="">
+                                                <div class="form-group mt-3">
+                                                    <input type="text" placeholder="Your name" name="usname"
+                                                        value="<?php echo $usname; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <input type="text" placeholder="Your email" class="form-control"
+                                                        name="usemail" value="<?php echo $usemail; ?>">
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <input type="text" placeholder="contact number" name="usphone"
+                                                        value="<?php echo $userphone; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <input type="text" placeholder="your job title" name="ustitle"
+                                                        value="<?php echo $usertitle; ?>" class="form-control">
 
-            <div class="row pt-3">
-                <div class="col-lg-2 bg-white leftsidebar">
-                    <?php include "public/modules/sidebar.php";?>
-                </div>
-                <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="card p-2">
-                                <div class="mt-4 text-center">
-                                    <img class="img img-fluid rounded-circle"
-                                        src="<?php echo !empty($uavatar) ? $uavatar : "/".$website['corebase']."assets/images/avatar.svg"; ?>"
-                                        alt="" width="150">
-                                    <h4 class="card-title mt-2"><?php echo $usname; ?></h4>
-                                    <h6 class="card-subtitle"><?php echo $usemail; ?></h6>
-                                    <div class="row text-center justify-content-md-center">
-                                        <?php if (!empty($uavatar)) {?> <form enctype="multipart/form-data"
-                                            method="post" action=""><input type="hidden" name="avatarid"
-                                                value="<?php echo $uavatar; ?>"><?php }?>
-                                            <div class="btn-group">
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#chgpic"
-                                                    class="btn btn-light waves-effect waves-dark btn-sm">
-                                                    <i class="mdi mdi-camera"></i> <span class="hidden-xs">Upload</span>
-                                                </button>
-                                                <?php if (!empty($uavatar)) {?><button type="submit"
-                                                    class="btn btn-light btn-sm waves-effect waves-dark"
-                                                    name="delavatar"><i
-                                                        class="mdi mdi-close"></i>&nbsp;Delete</button><?php }?>
-                                            </div>
-                                            <?php if (!empty($uavatar)) {?>
-                                        </form><?php }?>
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <input type="text" placeholder="User Gorups"
+                                                        value="<?php if ($ugroups) {foreach ($ugroups as $key => $val) {echo $val . ", ";}}echo $accrights[$_SESSION["user_level"]];?>"
+                                                        class="form-control" disabled>
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <textarea class="form-control" placeholder="Access groups"
+                                                        disabled><?php if ($acclist) {?><?php foreach ($acclist as $key => $val) {echo $gracclist[$key] . ", ";}} else {echo "Not access yet";}?></textarea>
+
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <input type='hidden' value='0' name='user_online_show'>
+                                                    <input type="checkbox" value="1" name="user_online_show" id="onlsh"
+                                                        class="material-inputs filled-in chk-col-blue"
+                                                        <?php if ($user_online_show == 1) {?>checked="checked"
+                                                        <?php }?> />
+                                                    <label class="chbl" for="onlsh">Show Online status</label>
+                                                </div>
+                                                <div class="form-group mt-1">
+                                                    <input type='hidden' value='0' name='user_activity_show'>
+                                                    <input type="checkbox" value="1" name="user_activity_show"
+                                                        id="actsh" class="material-inputs filled-in chk-col-blue"
+                                                        <?php if ($user_activity_show == 1) {?>checked="checked"
+                                                        <?php }?> />
+                                                    <label class="chbl" for="actsh">Show My activity</label>
+                                                </div>
+                                                <div>
+                                                    <br><br>
+                                                    <button type="submit" name="edinf"
+                                                        class="btn btn-light waves-effect waves-dark"><i
+                                                            class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane" id="security" role="tabpanel">
+                                            <form class="form-material" method="post" action="">
+
+                                                <div class="form-group mt-3">
+                                                    <input id="pwd" placeholder="Old password" type="password"
+                                                        name="pwd" class="form-control" required>
+
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <input placeholder="New password" type="password" id="pwdnew"
+                                                        name="pwdnew" class="form-control" required>
+
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <input placeholder="repeat new password" type="password"
+                                                        id="pwdnew2" name="pwdnew2" equalto="#pwdnew"
+                                                        class="form-control" required>
+
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <input type="hidden" id="username"
+                                                        value="<?php echo $_SESSION['user']; ?>">
+                                                    <div style="display: block;" id="pass-strength-result"><i
+                                                            class='mdi mdi-lock-open-outline'></i>&nbsp;Password
+                                                        Strenght</div>
+                                                </div>
+                                                <div><br><br>
+                                                    <button type="submit" name="changepass"
+                                                        class="btn btn-light waves-effect waves-dark"><i
+                                                            class="mdi mdi-content-save-outline"></i>&nbsp;Change</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="card p-3">
-                                <ul class="nav nav-tabs profile-tab" role="tablist">
-                                    <li class="nav-item"> <a class="nav-link active waves-effect waves-dark"
-                                            data-bs-toggle="tab" href="#profile" role="tab">Profile</a> </li>
-                                    <li class="nav-item"> <a class="nav-link waves-effect waves-dark"
-                                            data-bs-toggle="tab" href="#security" role="tab">Security</a> </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="profile" role="tabpanel">
-                                        <form class="form-material " method="post" action="">
-                                            <div class="form-group mt-3">
-                                                <input type="text" placeholder="Your name" name="usname"
-                                                    value="<?php echo $usname; ?>" class="form-control">
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <input type="text" placeholder="Your email" class="form-control"
-                                                    name="usemail" value="<?php echo $usemail; ?>">
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <input type="text" placeholder="contact number" name="usphone"
-                                                    value="<?php echo $userphone; ?>" class="form-control">
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <input type="text" placeholder="your job title" name="ustitle"
-                                                    value="<?php echo $usertitle; ?>" class="form-control">
 
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <input type="text" placeholder="User Gorups"
-                                                    value="<?php if ($ugroups) {foreach ($ugroups as $key => $val) {echo $val . ", ";}}echo $accrights[$_SESSION["user_level"]];?>"
-                                                    class="form-control" disabled>
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <textarea class="form-control" placeholder="Access groups"
-                                                    disabled><?php if ($acclist) {?><?php foreach ($acclist as $key => $val) {echo $gracclist[$key] . ", ";}} else {echo "Not access yet";}?></textarea>
 
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <input type='hidden' value='0' name='user_online_show'>
-                                                <input type="checkbox" value="1" name="user_online_show" id="onlsh"
-                                                    class="material-inputs filled-in chk-col-blue"
-                                                    <?php if ($user_online_show == 1) {?>checked="checked" <?php }?> />
-                                                <label class="chbl" for="onlsh">Show Online status</label>
-                                            </div>
-                                            <div class="form-group mt-1">
-                                                <input type='hidden' value='0' name='user_activity_show'>
-                                                <input type="checkbox" value="1" name="user_activity_show" id="actsh"
-                                                    class="material-inputs filled-in chk-col-blue"
-                                                    <?php if ($user_activity_show == 1) {?>checked="checked"
-                                                    <?php }?> />
-                                                <label class="chbl" for="actsh">Show My activity</label>
-                                            </div>
-                                            <div>
-                                                <br><br>
-                                                <button type="submit" name="edinf"
-                                                    class="btn btn-light waves-effect waves-dark"><i
-                                                        class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="tab-pane" id="security" role="tabpanel">
-                                        <form class="form-material" method="post" action="">
-
-                                            <div class="form-group mt-3">
-                                                <input id="pwd" placeholder="Old password" type="password" name="pwd"
-                                                    class="form-control" required>
-
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <input placeholder="New password" type="password" id="pwdnew"
-                                                    name="pwdnew" class="form-control" required>
-
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <input placeholder="repeat new password" type="password" id="pwdnew2"
-                                                    name="pwdnew2" equalto="#pwdnew" class="form-control" required>
-
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <input type="hidden" id="username"
-                                                    value="<?php echo $_SESSION['user']; ?>">
-                                                <div style="display: block;" id="pass-strength-result"><i
-                                                        class='mdi mdi-lock-open-outline'></i>&nbsp;Password
-                                                    Strenght</div>
-                                            </div>
-                                            <div><br><br>
-                                                <button type="submit" name="changepass"
-                                                    class="btn btn-light waves-effect waves-dark"><i
-                                                        class="mdi mdi-content-save-outline"></i>&nbsp;Change</button>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-2">
+                            <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
                         </div>
                     </div>
-
-
-                    <div class="col-md-2">
-                        <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
-                    </div>
                 </div>
-            </div>
 
 
 
-</div>
-</div>
+    </div>
+    </div>
 
-<?php include $website['corebase']."public/modules/footer.php";
+    <?php include $website['corebase']."public/modules/footer.php";
         echo "</div></div>";
         include $website['corebase']."public/modules/js.php";?>
-<script src="/<?php echo $website['corebase'];?>assets/js/jquery/jquery.cropit.js" type="text/javascript"></script>
-<script type='text/javascript'>
-(function(a) {
-    function b() {
-        var e = a("#pwdnew").val(),
-            d = a("#username").val(),
-            c = a("#pwdnew2").val(),
-            f;
-        a("#pass-strength-result").removeClass("short bad good strong");
-        if (!e) {
-            a("#pass-strength-result").html(pwsL10n.empty);
-            return
-        }
-        f = passwordStrength(e, d, c);
-        switch (f) {
-            case 2:
-                a("#pass-strength-result").addClass("bad").html(pwsL10n.bad);
-                break;
-            case 3:
-                a("#pass-strength-result").addClass("good").html(pwsL10n.good);
-                break;
-            case 4:
-                a("#pass-strength-result").addClass("strong").html(pwsL10n.strong);
-                break;
-            case 5:
-                a("#pass-strength-result").addClass("short").html(pwsL10n.mismatch);
-                break;
-            default:
-                a("#pass-strength-result").addClass("short").html(pwsL10n["short"])
-        }
-    }
-    a(document).ready(function() {
-        a("#pwdnew").val("").keyup(b);
-        a("#pwdnew2").val("").keyup(b);
-        a("#pass-strength-result").show();
-        a(".color-palette").click(function() {
-            a(this).siblings('input[name="admin_color"]').prop("checked", true)
-        });
-        a("#first_name, #last_name, #nickname").blur(function() {
-            var c = a("#display_name"),
-                e = c.find("option:selected").attr("id"),
-                f = [],
-                d = {
-                    display_nickname: a("#nickname").val(),
-                    display_username: a("#username").val(),
-                    display_firstname: a("#first_name").val(),
-                    display_lastname: a("#last_name").val()
-                };
-            if (d.display_firstname && d.display_lastname) {
-                d.display_firstlast = d.display_firstname + " " + d.display_lastname;
-                d.display_lastfirst = d.display_lastname + " " + d.display_firstname
+    <script src="/<?php echo $website['corebase'];?>assets/js/jquery/jquery.cropit.js" type="text/javascript"></script>
+    <script type='text/javascript'>
+    (function(a) {
+        function b() {
+            var e = a("#pwdnew").val(),
+                d = a("#username").val(),
+                c = a("#pwdnew2").val(),
+                f;
+            a("#pass-strength-result").removeClass("short bad good strong");
+            if (!e) {
+                a("#pass-strength-result").html(pwsL10n.empty);
+                return
             }
-            a("option", c).remove();
-            a.each(d, function(i, g) {
-                var h = g.replace(/<\/?[a-z][^>]*>/gi, "");
-                if (d[i].length && a.inArray(h, f) == -1) {
-                    f.push(h);
-                    a("<option />", {
-                        id: i,
-                        text: h,
-                        selected: (i == e)
-                    }).appendTo(c)
+            f = passwordStrength(e, d, c);
+            switch (f) {
+                case 2:
+                    a("#pass-strength-result").addClass("bad").html(pwsL10n.bad);
+                    break;
+                case 3:
+                    a("#pass-strength-result").addClass("good").html(pwsL10n.good);
+                    break;
+                case 4:
+                    a("#pass-strength-result").addClass("strong").html(pwsL10n.strong);
+                    break;
+                case 5:
+                    a("#pass-strength-result").addClass("short").html(pwsL10n.mismatch);
+                    break;
+                default:
+                    a("#pass-strength-result").addClass("short").html(pwsL10n["short"])
+            }
+        }
+        a(document).ready(function() {
+            a("#pwdnew").val("").keyup(b);
+            a("#pwdnew2").val("").keyup(b);
+            a("#pass-strength-result").show();
+            a(".color-palette").click(function() {
+                a(this).siblings('input[name="admin_color"]').prop("checked", true)
+            });
+            a("#first_name, #last_name, #nickname").blur(function() {
+                var c = a("#display_name"),
+                    e = c.find("option:selected").attr("id"),
+                    f = [],
+                    d = {
+                        display_nickname: a("#nickname").val(),
+                        display_username: a("#username").val(),
+                        display_firstname: a("#first_name").val(),
+                        display_lastname: a("#last_name").val()
+                    };
+                if (d.display_firstname && d.display_lastname) {
+                    d.display_firstlast = d.display_firstname + " " + d.display_lastname;
+                    d.display_lastfirst = d.display_lastname + " " + d.display_firstname
                 }
+                a("option", c).remove();
+                a.each(d, function(i, g) {
+                    var h = g.replace(/<\/?[a-z][^>]*>/gi, "");
+                    if (d[i].length && a.inArray(h, f) == -1) {
+                        f.push(h);
+                        a("<option />", {
+                            id: i,
+                            text: h,
+                            selected: (i == e)
+                        }).appendTo(c)
+                    }
+                })
             })
         })
-    })
-})(jQuery);
-var pwsL10n = {
-    empty: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Password Strenght",
-    short: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Too Short",
-    bad: "<i class='mdi mdi-lock-open'></i>&nbsp;Bad",
-    good: "<i class='mdi mdi-lock'></i>&nbsp;Good",
-    strong: "<i class='mdi mdi-shield-lock-outline'></i>&nbsp;Strong",
-    mismatch: "<i class='mdi mdi-lock-question'></i>&nbsp;Mismatch"
-};
-try {
-    convertEntities(pwsL10n);
-} catch (e) {};
-</script>
-<script src="/<?php echo $website['corebase'];?>assets/js/password-strength-meter.js" type="text/javascript"></script> <?php
+    })(jQuery);
+    var pwsL10n = {
+        empty: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Password Strenght",
+        short: "<i class='mdi mdi-lock-open-outline'></i>&nbsp;Too Short",
+        bad: "<i class='mdi mdi-lock-open'></i>&nbsp;Bad",
+        good: "<i class='mdi mdi-lock'></i>&nbsp;Good",
+        strong: "<i class='mdi mdi-shield-lock-outline'></i>&nbsp;Strong",
+        mismatch: "<i class='mdi mdi-lock-question'></i>&nbsp;Mismatch"
+    };
+    try {
+        convertEntities(pwsL10n);
+    } catch (e) {};
+    </script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/password-strength-meter.js" type="text/javascript">
+    </script> <?php
 include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }
@@ -1283,26 +1298,26 @@ class Class_searchall
             }
         } else { $data = array();}
         ?>
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Search Result For "<?php echo htmlspecialchars($_REQUEST['fd']); ?>"</h4>
-        <h6 class="card-subtitle"></h6>
-        <ul class="search-listing">
-            <?php if (is_array($data) && !empty($data)) {foreach ($data as $key => $val) {?>
-            <li>
-                <h3><a href="<?php echo $key; ?>"><?php echo $val; ?></a></h3>
-            </li>
-            <?php }} else {?>
-            <li>No data found</li>
-            <?php }?>
-        </ul>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Search Result For "<?php echo htmlspecialchars($_REQUEST['fd']); ?>"</h4>
+            <h6 class="card-subtitle"></h6>
+            <ul class="search-listing">
+                <?php if (is_array($data) && !empty($data)) {foreach ($data as $key => $val) {?>
+                <li>
+                    <h3><a href="<?php echo $key; ?>"><?php echo $val; ?></a></h3>
+                </li>
+                <?php }} else {?>
+                <li>No data found</li>
+                <?php }?>
+            </ul>
+        </div>
     </div>
-</div>
-</div>
-<?php include $website['corebase']."public/modules/breadcrumbin.php";?>
-</div>
-</div>
-<?php echo '</div></div>';
+    </div>
+    <?php include $website['corebase']."public/modules/breadcrumbin.php";?>
+    </div>
+    </div>
+    <?php echo '</div></div>';
         include $website['corebase']."public/modules/footer.php";
         echo '</div></div>';
         include $website['corebase']."public/modules/js.php";
@@ -1328,27 +1343,29 @@ class Class_welcome
         echo '<body class="fix-header card-no-border no-sidebar"><div id="main-wrapper">';
         include $website['corebase']."public/modules/headcontentmain.php";
     ?>
-<div class="bg-light">
-    <div class="container" style="padding:5rem;">
-        <div class="row justify-content-lg-between align-items-md-center">
-            <div class="col-md-5 text-start mb-5 mb-md-0">
-                <div class="mb-3">
-                    <h1>Knowledge base</h1>
-                </div>
-                <form method="post" action="/info">
-                    <div class="input-card mb-3">
-                        <div class="input-card-form">
-                            <label for="searchAnswersForm" class="form-label visually-hidden">Search for articles</label>
-                            <input name="searchkey" type="text" class="form-control form-control-lg"
-                                id="searchAnswersForm" placeholder="Search for articles" aria-label="Search for articles">
-                        </div>
-                        <input type="submit" name="searchbut" style="display:none;">
+    <div class="bg-light">
+        <div class="container" style="padding:5rem;">
+            <div class="row justify-content-lg-between align-items-md-center">
+                <div class="col-md-5 text-start mb-5 mb-md-0">
+                    <div class="mb-3">
+                        <h1>Knowledge base</h1>
                     </div>
-                </form>
-                <?php if (!empty($_SESSION["user"])) {?>
-                <div class="d-flex">
-                    <p class="text-nowrap">Popular from Tag cloud:</p>
-                    <?php  $clientkeyws="";
+                    <form method="post" action="/info">
+                        <div class="input-card mb-3">
+                            <div class="input-card-form">
+                                <label for="searchAnswersForm" class="form-label visually-hidden">Search for
+                                    articles</label>
+                                <input name="searchkey" type="text" class="form-control form-control-lg"
+                                    id="searchAnswersForm" placeholder="Search for articles"
+                                    aria-label="Search for articles">
+                            </div>
+                            <input type="submit" name="searchbut" style="display:none;">
+                        </div>
+                    </form>
+                    <?php if (!empty($_SESSION["user"])) {?>
+                    <div class="d-flex">
+                        <p class="text-nowrap">Popular from Tag cloud:</p>
+                        <?php  $clientkeyws="";
 if(DBTYPE=='postgresql'){
   $sql = "SELECT tags FROM knowledge_info order by random() limit 5";
 } else {
@@ -1357,8 +1374,8 @@ if(DBTYPE=='postgresql'){
   $q = $pdo->prepare($sql);
   $q->execute();
   if($zobj = $q->fetchAll()){ ?>
-                    <ul class="list-inline ms-1 mb-0">
-                    <?php
+                        <ul class="list-inline ms-1 mb-0">
+                            <?php
     foreach($zobj as $val) { $clientkeyws.=$val['tags'].",";  }
     $kt=explode(",",$clientkeyws);
     $kt=array_unique($kt);
@@ -1366,42 +1383,66 @@ if(DBTYPE=='postgresql'){
     foreach($kt as $key=>$val){ if($val<>" " and strlen($val) < 60 and strlen($val) > 0){ 
       $val=ltrim($val, ' ');
       $val=rtrim($val, ' '); ?>
-                        <li class="list-inline-item"><a class="link" href="/info/tags/<?php echo $val;?>"><i class="mdi mdi-pound"></i>&nbsp;<?php echo $val;?></a></li>
-                        <?php }} ?>
-                    </ul>
+                            <li class="list-inline-item"><a class="link" href="/info/tags/<?php echo $val;?>"><i
+                                        class="mdi mdi-pound"></i>&nbsp;<?php echo $val;?></a></li>
+                            <?php }} ?>
+                        </ul>
+                        <?php } ?>
+                    </div>
                     <?php } ?>
                 </div>
-                <?php } ?>
-            </div>
-            <div class="col-7 text-end">
-                <img class="img-fluid" src="<?php echo $website['corebase'];?>assets/images/looking-for-answers.svg"
-                    alt="Image Description" style="max-width:400px;">
+                <div class="col-7 text-end">
+                    <img class="img-fluid" src="<?php echo $website['corebase'];?>assets/images/looking-for-answers.svg"
+                        alt="Image Description" style="max-width:400px;">
+                </div>
             </div>
         </div>
     </div>
-    </div>
     <?php if($mainlinks){ ?>
-    <div class="container">
-        <div class="row mb-5 mt-5 d-flex justify-content-center">
-            <?php foreach(json_decode($mainlinks,true) as $key=>$val){ ?>
-            <div class="col-lg-3 mb-3 mb-lg-5">
-                <a class="card card-border maincard h-100" href="<?php echo $val["link"];?>">
-                    <div class="card-body">
-                        <h4><?php echo $val["heading"];?></h4>
-                        <?php echo $val["text"];?>
-                    </div>
-                </a>
+    <div class="container" ng-app="clApp" ng-controller="clCntrl">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-3 mt-3">
+                <input type="text" class="form-control" ng-model="search" placeholder="Filter">
             </div>
-            <?php } ?>
+        </div>
+        <div class="row mb-5 mt-5 d-flex justify-content-center">
+            <div class="col-lg-3 mb-3" ng-repeat="item in apps | filter:search">
+                <div class="card card-border" ng-click="redirect(item.link)" style="cursor:pointer;">
+                    <div class="card-body text-end h-100">
+                        {{item.text}}
+                    </div>
+                    <div class="card-footer text-end text-muted">
+                        {{item.name}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <?php } ?>
 
-<?php 
+    <?php 
         echo '</div>';
         include $website['corebase']."public/modules/footer.php";
-        include $website['corebase']."public/modules/js.php";
-        include $website['corebase']."public/modules/template_end.php";
+        include $website['corebase']."public/modules/js.php"; ?>
+    <?php if($mainlinks){ ?>
+    <script type="text/javascript">
+    var app = angular.module("clApp", []);
+    app.controller("clCntrl", function($scope, $http, $location, $window) {
+        $scope.apps = [
+            <?php foreach(json_decode($mainlinks,true) as $key=>$val){ ?> {
+                name: "<?php echo $val["heading"];?>",
+                text: "<?php echo $val["text"];?>",
+                link: "<?php echo $val["link"];?>"
+            }, <?php } ?>
+        ];
+        $scope.$location = $location;
+        $scope.redirect = function(url, refresh) {
+            $window.open(url);
+        };
+    })
+    </script>
+    <?php } ?>
+    <?php include $website['corebase']."public/modules/template_end.php";
         if (!empty($text)) {unset($text);}
         echo '</body></html>';
 
