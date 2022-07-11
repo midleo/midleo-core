@@ -1,5 +1,5 @@
 <?php 
-$thiscolor="28A7DF";
+$thiscolor=!empty($_GET['c'])?$_GET['c']:"28A7DF";
 $borderradius="3px;";
 header('Cache-Control: public');
 header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 86400) . ' GMT');
@@ -282,7 +282,7 @@ html body #visitor .c3-chart-arcs-title{font-size:18px;fill:#d5d6d8}
 .product-review li{display:block;padding:20px 0;list-style:none}
 .social-profile{text-align:center;background:rgba(7,10,43,0.8)}
 .customtab{background: #fff;border-radius: 6px;}
-.profile-tab li a.nav-link,.customtab li a.nav-link{border:0;padding:.8rem 1rem;font-size:1rem}
+.profile-tab li a.nav-link,.customtab li a.nav-link{border:0;padding:.8rem .6rem;}
 .profile-tab li a.nav-link:hover,.customtab li a.nav-link:hover{color:#'.$thiscolor.'}
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){width:100%}
 .input-form .btn{padding:7px 12px}
@@ -1086,6 +1086,7 @@ body[data-color="dark"] .page-titlesinfo .breadcrumb .breadcrumb-item.active{col
 body[data-color="dark"] .page-wrapper{background:#1c1e23;padding-bottom:60px}
 body[data-color="dark"] .table thead th,body[data-color="dark"]  .table th{color:#fff;}
 body[data-color="dark"] .list-group-item,body[data-color="dark"]  .checkbox label::before,body[data-color="dark"]  .btn-outline-primary,body[data-color="dark"]  .customvtab .tabs-vertical li .nav-link.active,body[data-color="dark"]  .customvtab .tabs-vertical li .nav-link:hover,body[data-color="dark"]  .customvtab .tabs-vertical li .nav-link:focus,body[data-color="dark"]  .bd-example-popover-static,body[data-color="dark"]  .highlight,body[data-color="dark"]  .custom-file-control {background:transparent;}
+body[data-color="dark"] .list-group-item-light.list-group-item-action:focus,body[data-color="dark"] .list-group-item-light.list-group-item-action:hover{color:#'.$thiscolor.';}
 body[data-color="dark"] .preloader{width:100%;height:100%;top:0;position:fixed;z-index:99999;background:#fff}
 body[data-color="dark"] .preloader .cssload-speeding-wheel{position:absolute;top:calc(50% - 3.5px);left:calc(50% - 3.5px)}
 body[data-color="dark"] .btn-primary,body[data-color="dark"] .btn-outline-primary{box-shadow:0 2px 2px rgba(116,96,238,0.05)}
@@ -1357,22 +1358,8 @@ animation-timing-function: linear;
   .nav-tabs .nav-link.disabled{color: #b6c7d6!important;}  
   .border-arrow {
     position: relative;
-    height:100%;
-    margin-right:18px;
-    border-top-left-radius: 6px;
-   border-bottom-left-radius: 6px;
 }
-.nav-tabs .nav-item{min-height:50px;}
-.border-arrow:after, .menu:before {
-    left: 100%;
-    top: 50%;
-    content: " ";
-    height: 2px;
-    width: 2px;
-    position: absolute;
-    pointer-events: none;
-}
-.nav-tabs .nav-link.active{background:transparent;}
+.nav-tabs .nav-link.active{background:transparent;color:#'.$thiscolor.'!important;}
 body[data-color="dark"] .border-arrow:after{border-left-color: #1c1e23;}
 .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle{background-color: #0380FE;border-color: #0380FE;}
 .anim-tada{animation: tada 1.5s ease infinite;}

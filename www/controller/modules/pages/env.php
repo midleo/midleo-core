@@ -149,21 +149,24 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"Applications",
             "link"=>"/".$page."/apps",
-            "icon"=>"mdi-application-cog-outline",
+            "icon"=>false,
+            "text"=>(!empty($thisarray['p2']) && $thisarray['p2']!="?type=new")?"&nbsp;".$thisarray['p2']:"Apps",
             "main"=>true,
             "active"=>($thisarray['p1'] == "apps")?"active":"",
           ),
           array(
             "title"=>"Deploy packages",
             "link"=>"/".$page."/deploy/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-upload mdi-18px",
+            "icon"=>false,
+            "text"=>"Deploy",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "deploy")?"active":"",
           ),
           array(
             "title"=>"Create packages",
             "link"=>"/".$page."/packages/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-package-variant mdi-18px",
+            "icon"=>false,
+            "text"=>"Packages",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "packages")?"active":"",
           )
@@ -173,7 +176,8 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"Firewall entries",
             "link"=>"/".$page."/firewall/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-wall mdi-18px",
+            "icon"=>false,
+            "text"=>"Firewall",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "firewall")?"active":"",
           ));
@@ -182,7 +186,8 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"DNS Configuration",
             "link"=>"/".$page."/dns/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-web mdi-18px",
+            "icon"=>false,
+            "text"=>"DNS",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "dns")?"active":"",
           ));
@@ -191,7 +196,8 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"Server information",
             "link"=>"/".$page."/servers/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-server mdi-18px",
+            "icon"=>false,
+            "text"=>"Servers",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "servers")?"active":"",
           ));
@@ -200,7 +206,8 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"Application servers",
             "link"=>"/".$page."/appservers/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-application-brackets-outline mdi-18px",
+            "icon"=>false,
+            "text"=>"APPS",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "appservers")?"active":"",
           ));
@@ -209,7 +216,8 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"Variables",
             "link"=>"/".$page."/vars/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-variable mdi-18px",
+            "icon"=>false,
+            "text"=>"Variables",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "vars")?"active":"",
           ));
@@ -219,7 +227,8 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"IBM MQ",
             "link"=>"#ibmmq",
-            "icon"=>"mdi-tray-full mdi-18px",
+            "icon"=>false,
+            "text"=>"IBM MQ",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "tab"=>true,
             "active"=>in_array($thisarray['p1'], $arrayibmmqtab)?"active":"",
@@ -230,7 +239,8 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"IBM MQ File transfer",
             "link"=>"/".$page."/fte/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-transfer mdi-18px",
+            "icon"=>false,
+            "text"=>"IBM FTE",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "fte")?"active":"",
           ));
@@ -239,7 +249,8 @@ class Class_env
           array_push($brenvarr,array(
             "title"=>"IBM ACE/IIB",
             "link"=>"/".$page."/flows/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-cog-transfer-outline mdi-18px",
+            "icon"=>false,
+            "text"=>"IBM ACE",
             "disabled"=>!empty($thisarray['p2'])?"":"disabled",
             "active"=>($thisarray['p1'] == "flows")?"active":"",
           ));
@@ -249,7 +260,8 @@ class Class_env
             array_push($brenvarr,array(
               "title"=>"TIBCO EMS",
               "link"=>"#tibcoems",
-              "icon"=>"mdi-tray-full mdi-18px",
+              "icon"=>false,
+              "text"=>"Tibco EMS",
               "tab"=>true,
               "disabled"=>!empty($thisarray['p2'])?"":"disabled",
               "active"=>in_array($thisarray['p1'], $arraytibcoemstab)?"active":"",
@@ -261,7 +273,8 @@ class Class_env
             array_push($brenvarr,array(
               "title"=>"Places",
               "link"=>"/".$page."/places/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-              "icon"=>"mdi-map-marker-outline mdi-18px",
+              "icon"=>false,
+              "text"=>"Places",
               "disabled"=>!empty($thisarray['p2'])?"":"disabled",
               "active"=>($thisarray['p1'] == "places")?"active":"",
             ));

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-lg-12 align-self-center" style="min-height:50px;">
         <?php if($brenvarr){?>
-        <ul class="nav nav-tabs customtab">
+        <ul class="nav nav-tabs small customtab">
             <?php foreach($brenvarr as $key=>$val){ ?>
             <li class="nav-item <?php echo $val["main"]?"border-arrow":"";?>" data-bs-toggle="tooltip"
                 title="<?php echo $val["title"];?>"><a <?php if($val["tab"]){?>data-bs-toggle="tab" role="tab" onclick="$('.hidden').show()"
@@ -10,10 +10,9 @@
                     href="<?php echo $val["link"];?>"><?php if($val["icon"]){?><i
                         class="mdi <?php echo $val["icon"];?>"></i><?php } ?><?php if($val["img"]){ ?><img
                         src="<?php echo $val["img"];?>"
-                        width="22px"></a><?php } ?><?php echo isset($val["text"])?"&nbsp;".$val["text"]:"";?>
-                <?php if($val["main"]){ if(!empty($thisarray['p2']) && $thisarray['p2']!="?type=new"){ echo "&nbsp;".$thisarray['p2']; } }?>
+                        width="22px"><?php } ?><?php echo isset($val["text"])?"&nbsp;".$val["text"]:"";?>
                 </a><?php if($val["main"]){ if(!empty($thisarray['p2']) && $thisarray['p2']!="?type=new"){ ?>&nbsp;&nbsp;&nbsp;<a href="/env/apps"
-                    style="top: 16px;position: absolute;z-index: 9;right:0px;" target="_parent" class="text-danger"><i
+                    style="top: 29%;position: absolute;z-index: 9;right:0px;" target="_parent" class="text-danger"><i
                         class="mdi mdi-close mdi-18px"></i></a><?php  }} ?></li>
             <?php  } ?>
         </ul>

@@ -71,8 +71,7 @@ class Class_appconfig
 <?php }
         if ($thisarray['p1'] == "modules") {?>
 <?php }
-        if ($thisarray['p1'] == "env" || $thisarray['p1'] == "business") {?>
-<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/nestablemenu.css">
+        if ($thisarray['p1'] == "env" || $thisarray['p1'] == "main") {?>
 <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/bootstrap-datetimepicker.css">
 <?php }
         echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/tinyreset.css">';
@@ -89,7 +88,8 @@ class Class_appconfig
                 array(
                     "title"=>"View/Edit users",
                     "link"=>"/".$page."/users",
-                    "icon"=>"mdi-account-multiple mdi-18px",
+                    "icon"=>false,
+                    "text"=>"Users",
                     "active"=>($thisarray['p1'] == "users")?"active":"",
                 )
               );
@@ -97,56 +97,47 @@ class Class_appconfig
                 array_push($brenvarr,array(
                     "title"=>"View/Edit groups",
                     "link"=>"/".$page."/groups",
-                    "icon"=>"mdi-account-group-outline mdi-18px",
+                    "icon"=>false,
+                    "text"=>"Groups",
                     "active"=>($thisarray['p1'] == "groups")?"active":"",
                   ));
               }
               array_push($brenvarr,array(
                 "title"=>"LDAP entries",
                 "link"=>"/".$page."/ldap",
-                "icon"=>"mdi-file-tree-outline mdi-18px",
+                "icon"=>false,
+                "text"=>"LDAP",
                 "active"=>($thisarray['p1'] == "ldap")?"active":"",
               ),
               array(
                 "title"=>"External connections",
                 "link"=>"/".$page."/external",
-                "icon"=>"mdi-open-in-new mdi-18px",
+                "icon"=>false,
+                "text"=>"External",
                 "active"=>($thisarray['p1'] == "external")?"active":"",
               ),
               array(
                 "title"=>"MAIL Configuration",
                 "link"=>"/".$page."/mail",
-                "icon"=>"mdi-email-edit-outline mdi-18px",
+                "icon"=>false,
+                "text"=>"Mail",
                 "active"=>($thisarray['p1'] == "mail")?"active":"",
               ),
               array(
                 "title"=>"Core Configuration",
                 "link"=>"/".$page."/main",
-                "icon"=>"mdi-application-cog-outline mdi-18px",
+                "icon"=>false,
+                "text"=>"Core",
                 "active"=>($thisarray['p1'] == "main")?"active":"",
               ),
               array(
                 "title"=>"Core Modules",
                 "link"=>"/".$page."/modules",
-                "icon"=>"mdi-cards mdi-18px",
+                "icon"=>false,
+                "text"=>"Modules",
                 "active"=>($thisarray['p1'] == "modules")?"active":"",
-              ),
-              array(
-                "title"=>"Business logic",
-                "link"=>"/".$page."/business",
-                "icon"=>"mdi-head-cog-outline mdi-18px",
-                "active"=>($thisarray['p1'] == "business")?"active":"",
-              ),
-              array(
-                "title"=>"Environment configuration",
-                "link"=>"/".$page."/env",
-                "icon"=>"mdi-gate-xnor mdi-18px",
-                "active"=>($thisarray['p1'] == "env")?"active":"",
               )
-
-
             );
-
         }
         ?>
 <div class="row pt-3">
@@ -227,7 +218,7 @@ $(document).ready(function() {
 
 });
 </script>
-<?php } ?><script src="/<?php echo $website['corebase'];?>assets/js/tagsinput.min.js" type="text/javascript"></script><?php 
+<?php }  ?><script src="/<?php echo $website['corebase'];?>assets/js/tagsinput.min.js" type="text/javascript"></script><?php 
         include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }

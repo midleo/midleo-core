@@ -16,7 +16,7 @@ if(!empty($ugroups)){
                         <th class="text-center">Type</th>
                         <th class="text-center">IP</th>
                         <th class="text-center">Updated</th>
-                        <th class="text-center" style="width:130px;">Action</th>
+                        <th class="text-center" style="width:50px;">Action</th>
                     </tr>
                 </thead>
                 <tbody ng-init="getAllsrv('<?php echo $ugr;?>')">
@@ -28,7 +28,7 @@ if(!empty($ugroups)){
                         dir-paginate="d in names | filter:search | orderBy:'server':reverse | itemsPerPage:10"
                         pagination-id="prodx">
                         <td class="text-center"><a class="btn btn-light btn-sm" href="/browse/server/{{ d.serverid}}"><i
-                                    class="mdi mdi-server mdi-24px"></i></a></td>
+                                    class="mdi mdi-magnify mdi-24px"></i></a></td>
                         <td class="text-center">{{ d.server}}</td>
                         <td class="text-center">{{ d.servertype}}</td>
                         <td class="text-center">{{ d.serverip}}</td>

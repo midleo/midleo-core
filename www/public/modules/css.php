@@ -17,7 +17,7 @@
 <link href="/<?php echo $website['corebase'];?>assets/css/google_ubuntu_fonts.css" rel="stylesheet" />
 <link href="/<?php echo $website['corebase'];?>assets/css/animate.css" rel="stylesheet" type="text/css" />
 <link href="/<?php echo $website['corebase'];?>assets/css/spinners.css" rel="stylesheet" type="text/css" />
-<link href="/<?php echo $website['corebase'];?>assets/css/midleostyle.php?v=<?php echo filemtime('./'.$website['corebase'].'assets/css/midleostyle.php');?>" rel="stylesheet" type="text/css" />
+<link href="/<?php echo $website['corebase'];?>assets/css/midleostyle.php?<?php echo !empty($website['color'])?"c=".$website['color']."&":"";?>v=<?php echo filemtime('./'.$website['corebase'].'assets/css/midleostyle.php');?>" rel="stylesheet" type="text/css" />
 <?php if(isset($_SESSION["user"])){?>
 <link href="/<?php echo $website['corebase'];?>assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 <?php } ?>

@@ -315,9 +315,6 @@ if ($('.chkbb')[0]) {
     };
   }
 }
-if ($('#nestable1')[0]) {
-  $('#nestable1,#nestable2').nestable({ group: 1, maxDepth: 3 });
-}
 function delmodule(thisid) {
   $.ajax({
     type: "POST",

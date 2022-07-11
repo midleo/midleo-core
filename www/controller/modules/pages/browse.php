@@ -29,9 +29,9 @@ class Class_browse{
           elseif($thisarray['p1']=="appserver"){ 
             $breadcrumb["text"]="Application server information"; 
             array_push($brarr,array(
-              "title"=>"Back to app servers",
+              "title"=>"Back to server list",
               "link"=>"/env/appservers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""),
-              "icon"=>"mdi-application-brackets-outline",
+              "icon"=>"mdi-arrow-left",
               "active"=>true,
             ));
           } 
@@ -40,7 +40,7 @@ class Class_browse{
             array_push($brarr,array(
               "title"=>"Back to servers",
               "link"=>"/env/servers/".(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:""),
-              "icon"=>"mdi-server mdi-24px",
+              "icon"=>"mdi-arrow-left",
               "active"=>true,
             ));
           } 

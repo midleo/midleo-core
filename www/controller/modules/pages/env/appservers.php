@@ -32,7 +32,7 @@
                         dir-paginate="d in names | filter:search | orderBy:'server':reverse | itemsPerPage:10"
                         pagination-id="prodx">
                         <td class="text-center"><a class="btn btn-light btn-sm" href="/browse/appserver/{{ d.id}}"><i
-                                    class="mdi mdi-application-brackets-outline mdi-24px"></i></a></td>
+                                    class="mdi mdi-magnify mdi-24px"></i></a></td>
                         <td class="text-center">{{ d.server}}</td>
                         <td class="text-center">{{ d.appsrvname}}</td>
                         <td class="text-center">{{ d.port}}</td>
