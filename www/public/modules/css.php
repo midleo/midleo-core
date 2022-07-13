@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
-<meta name="description" content="midleo.CORE - Knowledge Base, automation and tracking of your Middleware Environment">
+<meta name="description" content="<?php if($blogtitle){ echo $blogtitle." :: midleo.CORE"; } elseif($website["env_name"]){ echo $website["env_name"]." :: midleo.CORE"; } else { ?>midleo.CORE<?php } ?>">
 <meta name="author" content="Vasilev.link">
-<meta property="description" content='midleo.CORE - Knowledge Base, automation and tracking of your Middleware Environment'/>
+<meta property="description" content='<?php if($blogtitle){ echo $blogtitle." :: midleo.CORE"; } elseif($website["env_name"]){ echo $website["env_name"]." :: midleo.CORE"; } else { ?>midleo.CORE<?php } ?>'/>
 <meta name="keywords" content="Middleware, Source Control, Request system, midleo.CORE">
 <meta name="application-name" content="MidlEO">
 <link rel="shortcut icon" href="/<?php echo $website['corebase'];?>favicon.ico">
-<title><?php if($blogtitle){ echo $blogtitle." :: midleo.CORE"; } elseif($website["env_name"]){ echo $website["env_name"]." :: midleo.CORE"; } else { ?>midleo.CORE - Knowledge Base, automation and tracking of your Middleware Environment<?php } ?></title>
+<title><?php if($blogtitle){ echo $blogtitle." :: midleo.CORE"; } elseif($website["env_name"]){ echo $website["env_name"]." :: midleo.CORE"; } else { ?>midleo.CORE<?php } ?></title>
 <link href="/<?php echo $website['corebase'];?>assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
 <link href="/<?php echo $website['corebase'];?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/tagsinput.css" />

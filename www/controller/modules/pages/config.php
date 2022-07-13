@@ -158,7 +158,7 @@ class Class_info
                 "active" => ($page == "dropbox") ? "active" : "",
             ));
         }
-        include $website['corebase']."public/modules/headcontentinfo.php"; ?>
+        include $website['corebase']."public/modules/headcontent.php"; ?>
 <section>
     <div class="container-fluid page-wrapper">
         <?php echo '<div class="row d-flex">
@@ -1341,7 +1341,7 @@ class Class_welcome
         include $website['corebase']."public/modules/css.php";
         echo '<style type="text/css">.card-header + .card-body{padding-top:15px;}</style></head>';
         echo '<body class="fix-header card-no-border no-sidebar"><div id="main-wrapper">';
-        include $website['corebase']."public/modules/headcontentmain.php";
+        include $website['corebase']."public/modules/headcontent.php";
     ?>
     <div class="bg-light">
         <div class="container" style="padding:5rem;">

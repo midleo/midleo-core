@@ -1,5 +1,6 @@
 <?php
 $modulelist["server"]["name"]="Server units module";
+include "api.php";
 class serverClass{
   public static function fsConvert($bytes)
   {

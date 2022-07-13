@@ -2,10 +2,14 @@
     <div class="container">
         <a class="navbar-brand" href="//<?php echo $_SERVER['HTTP_HOST']; ?>//p=welcome">
             <img data-bs-toggle="tooltip" src="/<?php echo $website['corebase'];?>assets/images/midleo-logo-white.svg"
-                alt="Midleo CORE" title="Midleo CORE" class="light-logo ml" />
+                alt="<?php if($blogtitle){ echo $blogtitle." :: midleo.CORE"; } elseif($website["env_name"]){ echo $website["env_name"]." :: midleo.CORE"; } else { ?>midleo.CORE<?php } ?>"
+                title="<?php if($blogtitle){ echo $blogtitle." :: midleo.CORE"; } elseif($website["env_name"]){ echo $website["env_name"]." :: midleo.CORE"; } else { ?>midleo.CORE<?php } ?>"
+                class="light-logo ml" />
             <img data-bs-toggle="tooltip"
-                src="/<?php echo $website['corebase'];?>assets/images/midleo-icon-logo-white.svg" alt="Midleo CORE"
-                title="Midleo CORE" class="light-logo-icon mli" />
+                src="/<?php echo $website['corebase'];?>assets/images/midleo-icon-logo-white.svg"
+                alt="<?php if($blogtitle){ echo $blogtitle." :: midleo.CORE"; } elseif($website["env_name"]){ echo $website["env_name"]." :: midleo.CORE"; } else { ?>midleo.CORE<?php } ?>"
+                title="<?php if($blogtitle){ echo $blogtitle." :: midleo.CORE"; } elseif($website["env_name"]){ echo $website["env_name"]." :: midleo.CORE"; } else { ?>midleo.CORE<?php } ?>"
+                class="light-logo-icon mli" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#midnav"
             aria-controls="midnav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,9 +23,23 @@
                     <li class="breadcrumb-item"><a href="<?php echo $breadcrumb["link"];?>"
                             target="_parent"><?php echo $breadcrumb["text"];?></a></li>
                     <li class="breadcrumb-item active"><?php echo $breadcrumb["text2"];?></li>
-                    <?php } else { ?>
+                    <?php } else {  
+                        if(!empty($breadcrumb["text"])){ ?>
                     <li class="breadcrumb-item active"><?php echo $breadcrumb["text"];?></li>
+                    <?php } 
+                    } ?>
+                    <?php if(!empty($blogcatname)){?>
+                    <li class="breadcrumb-item active"><a
+                            href="/info/category/<?php echo $blogcatname;?>"><?php echo $blogcat;?></a></li>
                     <?php } ?>
+                    <?php if($thisarray["p0"]=="info"){ if ($forumcase == "posts") {?>
+                    <li class="breadcrumb-item"><a href="/info/category/<?php echo $blogcategory; ?>"
+                            title="<?php echo $blogcategoryname; ?>"><?php echo $blogcategoryname; ?></a></li>
+                    <li class="breadcrumb-item active"><?php echo $blogtitle; ?></li><?php } else {?><li
+                        class="breadcrumb-item active"><a
+                            href="<?php echo ($forumcase == "category") ? "/info/category/" . $keyws : (($forumcase == "tags") ? "/info/tags/" . $keyws : "/info/"); ?>"><?php echo ($forumcase == "category") ? $blogcategory : (($forumcase == "tags") ? $keyws : "Latest posts"); ?></a>
+                    </li><?php } 
+                    } ?>
                 </ol>
             </ul>
             <ul class="navbar-nav mb-lg-0 nlinks">
@@ -53,14 +71,21 @@
                     <?php } ?>
                 </li>
                 <?php if(!empty($_SESSION["user"])){?>
+                <li class="nav-item">
+                    <a data-bs-toggle="tooltip" title="Create new article"
+                        class="nav-link text-muted waves-effect waves-dark" href="/cpinfo/"><span class="itemicon"><i
+                                class="mdi mdi-square-edit-outline mdi-24px"></i></span></a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="usrdrdown">
                         <img alt="user" class="img-fluid rounded"
                             src="<?php echo !empty($uavatar)?$uavatar:"/".$website['corebase']."assets/images/avatar.svg";?>"
-                            style="width:22px;margin-top: -3px;">
+                            style="width:22px;">
                     </a>
                     <ul class="dropdown-menu usrdrdown" aria-labelledby="usrdrdown">
+                        <li><a href="/cp/?" class="dropdown-item waves-effect waves-dark"><i
+                                    class="mdi mdi-monitor-dashboard"></i>&nbsp;Dashboard</a></li>
                         <li><a href="/profile/" class="dropdown-item waves-effect waves-dark"><i
                                     class="mdi mdi-account-outline"></i>&nbsp;Profile</a></li>
                         <li>
@@ -76,13 +101,13 @@
                 <li class="nav-item">
                     <a data-bs-toggle="tooltip" title="Login Console"
                         class="nav-link text-muted waves-effect waves-dark" href="/mlogin/?"><span class="itemicon"><i
-                                class="mdi mdi-login mdi-24px"></i></a>
+                                class="mdi mdi-login mdi-24px"></i></span></a>
                 </li>
                 <?php } ?>&nbsp;
                 <div class="theme-switch-wrapper">
                     <label class="theme-switch" for="checkbox">
                         <input type="checkbox" id="checkbox" />
-                        <div class="slidersw itemicon" style="">
+                        <div class="slidersw itemicon">
                             <i class="mdi mdi-weather-night mdi-24px"></i>
                         </div>
                     </label>

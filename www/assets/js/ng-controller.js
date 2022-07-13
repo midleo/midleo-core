@@ -1604,7 +1604,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       if (response.data != "null") { $scope.names = response.data; } else { $scope.names = []; }
     });
   };
-  $scope.delplace = function (id, user, thisname, projid) {
+  $scope.delplace = function (id, user, thisname) {
     Swal.fire({
       title: 'Delete this object?',
       icon: 'error',
@@ -1620,7 +1620,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       if (result.value) {
         $http({
           method: 'POST',
-          data: { 'id': id, 'user': user, 'name': thisname, 'projid': projid },
+          data: { 'id': id, 'user': user, 'name': thisname },
           url: '/api/readplaces/delete'
         }).then(function successCallback(response) {
           notify(response.data, 'success');

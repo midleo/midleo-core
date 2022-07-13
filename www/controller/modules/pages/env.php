@@ -7,6 +7,7 @@ class Class_env
         global $website;
         global $page;
         global $env;
+        global $reltypes;
         global $modulelist;
         global $ibmmqchlciph;
         global $maindir;
@@ -96,11 +97,10 @@ class Class_env
         }
         if(isset($_POST["saveplace"])){
           $hash = textClass::getRandomStr(16);
-          $sql="insert into env_places (tags,proj,placename,plregion,plcity,pltype,pluid,plcontact,created_by) values(?,?,?,?,?,?,?,?,?)";
+          $sql="insert into env_places (tags,placename,plregion,plcity,pltype,pluid,plcontact,created_by) values(?,?,?,?,?,?,?,?)";
           $stmt = $pdo->prepare($sql);
           if($stmt->execute(array(
               htmlspecialchars($_POST["tags"]),
-              $thisarray['p2'],
               htmlspecialchars($_POST["place"]),
               htmlspecialchars($_POST["region"]),
               htmlspecialchars($_POST["city"]),
@@ -109,6 +109,7 @@ class Class_env
               htmlspecialchars($_POST["contact"]),
               $_SESSION["user"]
           ))){
+              gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Defined new place:<a href='/env/places//?type=edit&uid=" . $hash . "'>" . htmlspecialchars($_POST["place"]) . "</a>");
               $msg[]="Place added";
           } else {
               $err[]="Error occured. Please try again.";
@@ -268,17 +269,21 @@ class Class_env
             ));
           }
         }
-        if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
-          if (method_exists("tibco", "execJava") && is_callable(array("tibco", "execJava"))) {
+        if (sessionClass::checkAcc($acclist, "appadm,appview")) {
             array_push($brenvarr,array(
               "title"=>"Places",
-              "link"=>"/".$page."/places/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
+              "link"=>"/".$page."/places/",
               "icon"=>false,
               "text"=>"Places",
-              "disabled"=>!empty($thisarray['p2'])?"":"disabled",
               "active"=>($thisarray['p1'] == "places")?"active":"",
             ));
-          }
+            array_push($brenvarr,array(
+              "title"=>"Software Releases",
+              "link"=>"/".$page."/release/",
+              "icon"=>false,
+              "text"=>"Releases",
+              "active"=>($thisarray['p1'] == "release")?"release":"",
+            ));
         }
       }
             $zobj['projid'] == "";

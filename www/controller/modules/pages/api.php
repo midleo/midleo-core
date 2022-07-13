@@ -1837,7 +1837,7 @@ class Class_api
             $sql = "delete from env_places where pluid=?";
             $stmt = $pdo->prepare($sql);
             if ($stmt->execute(array(htmlspecialchars($data->id)))) {
-                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($data->projid)), "Deleted Place:" . htmlspecialchars($data->name));
+                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Deleted Place:" . htmlspecialchars($data->name));
                 echo "Place was deleted";
             } else {
                 echo "Error deleting Place configuration";

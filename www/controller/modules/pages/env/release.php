@@ -1,7 +1,7 @@
 <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { 
       array_push($brarr,array(
-        "title"=>"Create new place",
-        "link"=>"/env/places//?type=new",
+        "title"=>"Define new release",
+        "link"=>"/env/release//?type=new",
         "icon"=>"mdi-plus",
         "active"=>false,
       ));
@@ -9,67 +9,62 @@
     ?>
 <?php  if($_GET["type"]=="new"){ ?>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <div class="card ">
             <div class="card-header">
-                <h4>Region definition</h4>
+                <h4>Release definition</h4>
             </div>
             <div class="card-body form-material">
                 <form action="" method="post" name="form">
                     <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-3">Place name</label>
-                        <div class="col-md-9">
-                            <input name="place" type="text" class="form-control">
+                        <label class="form-control-label text-lg-right col-md-5">Release name</label>
+                        <div class="col-md-7">
+                            <input name="release" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-3">Tags</label>
-                        <div class="col-md-8"><input id="tags" name="tags" data-role="tagsinput" type="text"
+                        <label class="form-control-label text-lg-right col-md-5">Tags</label>
+                        <div class="col-md-5"><input id="tags" name="tags" data-role="tagsinput" type="text"
                                 class="form-control"></div>
-                        <div class="col-md-1" style="padding-left:0px;"><button type="button" class="btn btn-light"
+                        <div class="col-md-2" style="padding-left:0px;"><button type="button" class="btn btn-light"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="You can search this object with tags"><i
                                     class="mdi mdi-information-variant mdi-18px"></i></button></div>
                     </div>
                     <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-3">Region</label>
-                        <div class="col-md-9"><select name="region" class="form-control">
-                                <option value="">Please select</option>
-                                <?php 
-foreach($countries as $keyin=>$valin) { ?><option value="<?php echo $keyin;?>"><?php echo $valin;?></option><?php  }
-?>
+                        <label class="form-control-label text-lg-right col-md-5">Release period</label>
+                        <div class="col-md-7">
+                        <select name="relperiod" class="form-control">
+                                <option value="1 day">Daily</option>
+                                <option value="1 week">Weekly</option>
+                                <option value="1 month">Monthly</option>
+                                <option value="3 months">Once each 3 months</option>
+                                <option value="6 months">Once each 6 months</option>
+                                <option value="1 year">Yearly</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-3">City</label>
-                        <div class="col-md-9">
-                            <input name="city" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-3">Type</label>
-                        <div class="col-md-9">
+                        <label class="form-control-label text-lg-right col-md-5">Type</label>
+                        <div class="col-md-7">
                             <select name="type" class="form-control">
-                                <option value="room">a Room</option>
-                                <option value="datacenter">a Datacenter</option>
-                                <option value="closet">a Closet</option>
-                                <option value="closet">a Desk</option>
-                                <option value="cloud">Cloud Provider</option>
+                                <?php foreach($reltypes as $key=>$val){ ?>
+                                    <option value="<?php echo $key;?>"><?php echo $val;?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-3">Contact person</label>
-                        <div class="col-md-9">
+                        <label class="form-control-label text-lg-right col-md-5">Contact person</label>
+                        <div class="col-md-7">
                             <input type="text" class="form-control" id="autocomplete">
                             <input type="text" name="contact" id="respusersselected" style="display:none;" value="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-9">
-                            <button type="submit" name="saveplace" class="btn btn-info"><i
+                        <div class="col-md-5"></div>
+                        <div class="col-md-7"><br>
+                            <button type="submit" name="saverelease" class="btn btn-info"><i
                                     class="mdi mdi-content-save-outline"></i>&nbsp;Save</button>
                         </div>
                     </div>
@@ -77,7 +72,7 @@ foreach($countries as $keyin=>$valin) { ?><option value="<?php echo $keyin;?>"><
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
 
 
     </div>
@@ -167,7 +162,7 @@ foreach($countries as $keyin=>$valin) { ?><option value="<?php echo $keyin;?>"
             </div>
         </div>
     </div>
-    <div class="col-md-4"><?php if($zobj["plused"]>0){?>
+    <div class="col-md-4">
         <div class="card ">
             <div class="card-body p-0">
                 <?php
@@ -198,7 +193,6 @@ if($zobj = $q->fetchAll()){ ?>
                 <?php } ?>
             </div>
         </div>
-        <?php } ?>
     </div>
 </div>
 
@@ -233,11 +227,11 @@ if($zobj = $q->fetchAll()){ ?>
                         <td>
                             <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { ?>
                             <div class="text-start d-grid gap-2 d-md-block">
-                                <a href="/env/places//?type=edit&uid={{d.id}}"
+                                <a href="/env/places/<?php echo $thisarray['p2'];?>/?type=edit&uid={{d.id}}"
                                     class="btn waves-effect btn-light btn-sm"><i
                                         class="mdi mdi-pencil mdi-18px"></i></a>
                                 <?php if($_SESSION['user_level']>=3){?><button type="button"
-                                    ng-click="delplace(d.id,'<?php echo $_SESSION['user'];?>',d.name)"
+                                    ng-click="delplace(d.id,'<?php echo $_SESSION['user'];?>',d.name,'<?php echo $thisarray['p2'];?>')"
                                     class="btn waves-effect btn-light btn-sm"><i
                                         class="mdi mdi-close"></i></button><?php } ?>
                             </div>

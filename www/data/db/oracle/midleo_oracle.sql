@@ -1161,7 +1161,6 @@ BEGIN EXECUTE IMMEDIATE 'DROP TABLE env_places'; EXCEPTION WHEN OTHERS THEN NULL
 CREATE TABLE env_places (
   id number(10) NOT NULL,
   tags varchar2(255) DEFAULT NULL,
-  proj varchar2(20) DEFAULT '' NOT NULL,
   placename varchar2(80) NOT NULL,
   plregion varchar2(5) DEFAULT NULL,
   plcity varchar2(100) DEFAULT NULL,

@@ -818,7 +818,6 @@ CREATE TABLE IF NOT EXISTS `external_files` (
 CREATE TABLE IF NOT EXISTS `env_places` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tags` varchar(255) DEFAULT NULL,
-  `proj` varchar(20) DEFAULT NULL,
   `placename` varchar(80) NOT NULL,
   `plregion` varchar(5) DEFAULT NULL,
   `plcity` varchar(100) DEFAULT NULL,

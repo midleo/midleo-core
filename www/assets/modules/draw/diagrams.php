@@ -91,7 +91,7 @@ class Class_diagrams
         "active"=>($page=="dropbox")?"active":"",
       ));
     }
-        include $website['corebase']."public/modules/headcontentdiagram.php";   
+        include $website['corebase']."public/modules/headcontent.php";   
         echo '<div class="page-wrapper">'; ?>
               <div class="container-fluid">
       
