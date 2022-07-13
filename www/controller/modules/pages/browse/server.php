@@ -11,9 +11,13 @@ if (!empty($thisarray['p2'])){
             <div class="card-header border-bottom">Server information</div>
             <div class="card-body p-0">
                 <table class="table table-hover small mb-0">
-                    <tr>
-                        <td>Description</td>
+                <tr>
+                    <td>Description</td>
                         <td><?php echo $val["info"];?></td>
+                    </tr>
+                    <tr>
+                        <td>info updated</td>
+                        <td><?php echo $val["servupdated"];?></td>
                     </tr>
                     <tr>
                         <td>DNS</td>
@@ -27,6 +31,33 @@ if (!empty($thisarray['p2'])){
                         <td>OS</td>
                         <td><?php echo $val["servertype"];?></td>
                     </tr>
+                    <?php if(!empty($val["serverhw"])){ 
+                        $tmp["serverhw"]=json_decode($val["serverhw"],true); ?>
+                    <tr>
+                        <td>CPU name</td>
+                        <td><?php echo $tmp["serverhw"]["cpu"]["name"];?></td>
+                    </tr>
+                    <tr>
+                        <td>CPU cores</td>
+                        <td><?php echo $tmp["serverhw"]["cpu"]["num_cores"];?></td>
+                    </tr>
+                    <tr>
+                        <td>Architecture</td>
+                        <td><?php echo $tmp["serverhw"]["arch"];?></td>
+                    </tr>
+                    <tr>
+                        <td>Machine type</td>
+                        <td><?php echo $tmp["serverhw"]["machinetype"];?></td>
+                    </tr>
+                    <tr>
+                        <td>Memory total</td>
+                        <td><?php echo serverClass::fsConvert($tmp["serverhw"]["memory"]["total"]);?></td>
+                    </tr>
+                    <tr>
+                        <td>Memory free</td>
+                        <td><?php echo serverClass::fsConvert($tmp["serverhw"]["memory"]["free"]);?></td>
+                    </tr>
+                    <?php } ?>
                     <?php if(!empty($val["pluid"])){
                                     $sql="select placename from env_places where pluid=?";
                                     $q = $pdo->prepare($sql); 

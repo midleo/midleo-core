@@ -235,13 +235,13 @@ class Class_pubapi{
       $pdo = pdodb::connect();
       $temparr["count"]=gTable::countAll("env_servers"," where serverid='".$data->uid."'");
       if($temparr["count"]>0){
-        $sql="update env_servers set servertype=?,serverdns=?,serverip=?,serverprog=?,serverdisc=?,servernet=?, servupdated=now(), groupid=? where serverid=?";
+        $sql="update env_servers set servertype=?,serverdns=?,serverip=?,serverhw=?,serverprog=?,serverdisc=?,servernet=?, servupdated=now(), groupid=? where serverid=?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($data->hw_info->servtype,$data->hw_info->name,$data->net_info->dns,json_encode($data->installed_software,true),json_encode($data->hw_info->disk_partitions,true),json_encode($data->net_info->if_addresses,true),$data->groupid,$data->uid));
+        $q->execute(array($data->hw_info->servtype,$data->hw_info->name,$data->net_info->dns,json_encode(array("cpu"=>$data->hw_info->cpu,"memory"=>$data->hw_info->memory,"arch"=>$data->hw_info->architecture,"machinetype"=>$data->hw_info->machineType),true),json_encode($data->installed_software,true),json_encode($data->hw_info->disk_partitions,true),json_encode($data->net_info->if_addresses,true),$data->groupid,$data->uid));
       } else {
-        $sql="insert into env_servers (serverid,serverdns,servertype,serverip,serverprog,serverdisc,servernet,groupid,updperiod) values (?,?,?,?,?,?,?,?,?)";
+        $sql="insert into env_servers (serverid,serverdns,servertype,serverip,serverhw,serverprog,serverdisc,servernet,groupid,updperiod) values (?,?,?,?,?,?,?,?,?,?)";
         $q = $pdo->prepare($sql);
-        $q->execute(array($data->uid,$data->hw_info->name,$data->hw_info->servtype,$data->net_info->dns,json_encode($data->installed_software,true),json_encode($data->hw_info->disk_partitions,true),json_encode($data->net_info->if_addresses,true),$data->groupid,$data->updint));
+        $q->execute(array($data->uid,$data->hw_info->name,$data->hw_info->servtype,$data->net_info->dns,json_encode(array("cpu"=>$data->hw_info->cpu,"memory"=>$data->hw_info->memory,"arch"=>$data->hw_info->architecture,"machinetype"=>$data->hw_info->machineType),true),json_encode($data->installed_software,true),json_encode($data->hw_info->disk_partitions,true),json_encode($data->net_info->if_addresses,true),$data->groupid,$data->updint));
       }
       pdodb::disconnect();
       echo json_encode(array("log"=>"Updated machine:".$data->hw_info->name),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

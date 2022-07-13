@@ -1048,6 +1048,7 @@ CREATE TABLE env_servers (
   serverdns varchar2(255) DEFAULT NULL,
   servertype varchar2(80) DEFAULT NULL,
   serverip varchar2(100) DEFAULT NULL,
+  serverhw clob DEFAULT '',
   serverdisc clob DEFAULT '',
   servernet clob DEFAULT '',
   serverprog  MEDIUMTEXT DEFAULT '',

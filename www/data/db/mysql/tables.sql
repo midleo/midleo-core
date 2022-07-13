@@ -758,6 +758,7 @@ CREATE TABLE IF NOT EXISTS `env_servers` (
   `serverdns` varchar(255) NOT NULL,
   `servertype` varchar(80) NOT NULL,
   `serverip` varchar(100) DEFAULT NULL,
+  `serverhw` TEXT DEFAULT NULL,
   `serverdisc` text DEFAULT NULL,
   `servernet` text DEFAULT NULL,
   `serverprog` MEDIUMTEXT DEFAULT NULL,
