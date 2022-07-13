@@ -586,7 +586,6 @@ CREATE TABLE IF NOT EXISTS user_groups (
   group_latname varchar(150) NOT NULL,
   group_name varchar(150) NOT NULL,
   group_email varchar(150) DEFAULT NULL,
-  group_avatar varchar(150) DEFAULT NULL,
   users varchar  NOT NULL DEFAULT '[]',
   wid varchar DEFAULT NULL,
   appid varchar DEFAULT NULL,

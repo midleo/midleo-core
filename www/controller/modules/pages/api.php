@@ -1640,7 +1640,6 @@ class Class_api
                 foreach ($zobj as $val) {
                     $d['id'] = $val['group_latname'];
                     $d['group_name'] = $val['group_name'];
-                    $d['group_avatar'] = $val['group_avatar'];
                     $d['users'] = json_decode($val['users'], true);
                     $d['shortname'] = substr(textClass::initials($val['group_name']), 0, 2);
                     $newdata[] = $d;

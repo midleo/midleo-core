@@ -811,7 +811,6 @@ CREATE TABLE user_groups (
   group_latname varchar2(150) NOT NULL,
   group_name varchar2(150) NOT NULL,
   group_email varchar2(150) DEFAULT NULL,
-  group_avatar varchar2(150) DEFAULT NULL,
   users varchar2(255) DEFAULT '[]',
   wid varchar2(255) DEFAULT NULL,
   appid varchar2(255) DEFAULT NULL,

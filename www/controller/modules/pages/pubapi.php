@@ -60,16 +60,16 @@ class Class_pubapi{
     $q->execute();
       if($zobj = $q->fetchAll()){  
         foreach($zobj as $val) {  
-         $data[]=array("name"=>$val['fullname'],"nameid"=>$val['mainuser'],"email"=>$val['email'],"avatar"=>!empty($val['avatar'])?$val['avatar']:"/assets/images/avatar.svg","type"=>"user");
+         $data[]=array("name"=>$val['fullname'],"nameid"=>$val['mainuser'],"email"=>$val['email'],"avatar"=>!empty($val['avatar'])?$val['avatar']:"/".$website['corebase']."assets/images/avatar.svg","type"=>"user");
       }
     }
     if($d1=="all"){
-      $sql="select group_latname,group_name,group_email,group_avatar from user_groups WHERE group_name like'%".htmlspecialchars($_POST['search'])."%' limit 10";
+      $sql="select group_latname,group_name,group_email from user_groups WHERE group_name like'%".htmlspecialchars($_POST['search'])."%' limit 10";
       $q = $pdo->prepare($sql);
       $q->execute();
       if($zobj = $q->fetchAll()){  
         foreach($zobj as $val) {  
-         $data[]=array("name"=>$val['group_name'],"nameid"=>$val['group_latname'],"email"=>$val['group_email'],"avatar"=>!empty($val['group_avatar'])?$val['group_avatar']:"/assets/images/avatar.svg","type"=>"group");
+         $data[]=array("name"=>$val['group_name'],"nameid"=>$val['group_latname'],"email"=>$val['group_email'],"avatar"=>"/".$website['corebase']."assets/images/avatar.svg","type"=>"group");
       }
      }
     }

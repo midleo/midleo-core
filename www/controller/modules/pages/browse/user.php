@@ -28,7 +28,7 @@ if(!empty($tmp["user"]) && is_array($tmp["user"])){ ?>
         <div class="card p-2">
                 <div class="mt-4 text-center">
                     <div class="position-relative">
-                        <img src="<?php echo !empty($tmp["user"]["avatar"])?$tmp["user"]["avatar"]:"/assets/images/avatar.svg";?>"
+                        <img src="<?php echo !empty($tmp["user"]["avatar"])?$tmp["user"]["avatar"]:"/".$website['corebase']."assets/images/avatar.svg";?>"
                             class="rounded-circle" width="150" />
                         <span
                             class="position-absolute top-0 translate-middle p-2 bg-<?php echo $tmp["user"]["user_online_show"]==1?($tmp["user"]["user_online"]==1?"success":"danger"):"secondary";?> border border-light rounded-circle">

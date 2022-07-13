@@ -652,7 +652,6 @@ CREATE TABLE IF NOT EXISTS `user_groups` (
   `group_latname` varchar(150) NOT NULL,
   `group_name` varchar(150) NOT NULL,
   `group_email` varchar(150) DEFAULT NULL,
-  `group_avatar` varchar(150) DEFAULT NULL,
   `users` varchar(255)  NOT NULL DEFAULT '[]',
   `wid` varchar(255) DEFAULT NULL,
   `appid` varchar(255) DEFAULT NULL,
@@ -978,8 +977,8 @@ CREATE TABLE IF NOT EXISTS `changes_tasks` (
 -- madmin/admin
 --
 
-INSERT INTO `user_groups` (`id`, `group_latname`, `group_name`, `group_email`, `group_avatar`, `users`, `wid`, `appid`, `pjid`, `wsteps`, `acclist`) VALUES
-(1, 'defadm', 'Default Admin Group', 'admin@local.lan', NULL, '{\"madmin\":\"Default Admin\"}', NULL, NULL, NULL, NULL, '[\"tibcoview\",\"tibcoadm\",\"pjm\",\"pja\",\"pjv\",\"unixadm\",\"unixview\",\"appadm\",\"appview\",\"ibmadm\",\"ibmview\",\"appconfig\",\"environment\",\"monview\",\"monadm\",\"designer\",\"automation\",\"smanagement\",\"smanagementadm\"]');
+INSERT INTO `user_groups` (`id`, `group_latname`, `group_name`, `group_email`, `users`, `wid`, `appid`, `pjid`, `wsteps`, `acclist`) VALUES
+(1, 'defadm', 'Default Admin Group', 'admin@local.lan', '{\"madmin\":\"Default Admin\"}', NULL, NULL, NULL, NULL, '[\"tibcoview\",\"tibcoadm\",\"pjm\",\"pja\",\"pjv\",\"unixadm\",\"unixview\",\"appadm\",\"appview\",\"ibmadm\",\"ibmview\",\"appconfig\",\"environment\",\"monview\",\"monadm\",\"designer\",\"automation\",\"smanagement\",\"smanagementadm\"]');
 
 INSERT INTO `users` (`id`, `uuid`, `ldap`, `ldapserver`, `mainuser`, `email`, `pwd`, `users_ip`, `fullname`, `active`, `user_level`, `wsteps`, `ugroups`, `effgroup`, `ckey`, `ctime`, `user_online`, `user_online_show`, `user_activity_show`, `online_time`, `avatar`, `phone`, `utitle`, `uaddress`, `modules`, `wid`, `appid`, `pjid`, `navfav`) VALUES
 (1, '365cd45fa661b5795e9747c6b416bbca', 0, NULL, 'madmin', 'admin@local.lan', '$2y$11$h4EXDS5YAx8DeQiTlO6ouOaGGBIIlTKtASzz/V7KuS37SHwc2tGfe', '', 'Default Admin', 0, 5, NULL, '{\"defadm\":\"Default admin group\"}', NULL, '', '', 0, 1, 0, '', '', '', '', NULL, NULL, NULL, '{\"test\":\"1\"}', NULL, '[\"1\"]');
