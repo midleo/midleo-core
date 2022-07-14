@@ -829,6 +829,20 @@ CREATE TABLE IF NOT EXISTS `env_places` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+CREATE TABLE IF NOT EXISTS `env_releases` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `relid` varchar(10) DEFAULT NULL,
+  `tags` varchar(255) DEFAULT NULL,
+  `releasename` varchar(80) NOT NULL,
+  `relperiod` varchar(20) DEFAULT NULL,
+  `reltype` varchar(20) DEFAULT NULL,
+  `relcontact` varchar(255) DEFAULT NULL,
+  `created_by` varchar(100) NOT NULL DEFAULT '',
+  `lastcheck` datetime DEFAULT NULL,
+  `latestver` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 CREATE TABLE IF NOT EXISTS `users_recent` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
   `uuid` int(20) NOT NULL,

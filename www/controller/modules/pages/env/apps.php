@@ -267,9 +267,12 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
                     </tr>
                 </thead>
                 <tbody ng-init="getAllapps()">
-                    <tr ng-hide="contentLoaded">
-                        <td colspan="5" style="text-align:center;font-size:1.1em;"><i
-                                class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                <tr ng-hide="contentLoaded">
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     </tr>
                     <tr id="contloaded" class="hide"
                         dir-paginate="d in names | filter:search | orderBy:'appcode' | itemsPerPage:10"

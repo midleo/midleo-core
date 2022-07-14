@@ -615,7 +615,7 @@ class Class_cpinfo
                         <div class="card-footer">
                             <input placeholder="Tags" type="text" name="tags" id="tags"
                                 value="<?php echo $_POST["tags"]; ?>" class="form-control br-0 validatefield"
-                                data-role="tagsinput" required>
+                                data-role="tagsinput" >
                         </div>
                     </div>
                 </div>

@@ -1358,3 +1358,31 @@ BEGIN
  SELECT config_projrequest_seq.NEXTVAL INTO :NEW.id FROM DUAL;
 END;
 /
+
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE env_releases'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE TABLE env_releases (
+  id number(10) NOT NULL,
+  tags varchar2(255) DEFAULT NULL,
+  relid varchar2(10) NOT NULL,
+  releasename varchar2(80) DEFAULT NULL,
+  relperiod varchar2(20) DEFAULT NULL,
+  reltype varchar2(20) DEFAULT NULL,
+  relcontact varchar2(255) DEFAULT NULL,
+  created_by varchar2(100) NOT NULL DEFAULT '',
+  lastcheck timestamp(0) DEFAULT NULL,
+  latestver clob DEFAULT '',
+  PRIMARY KEY (id)
+)  ;
+BEGIN EXECUTE IMMEDIATE 'drop sequence env_releases_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE SEQUENCE env_releases_seq START WITH 1 INCREMENT BY 1;
+BEGIN EXECUTE IMMEDIATE 'drop trigger env_releases_seq_tr'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE OR REPLACE TRIGGER env_releases_seq_tr
+ BEFORE INSERT ON env_releases FOR EACH ROW
+ WHEN (NEW.id IS NULL)
+BEGIN
+ SELECT env_releases_seq.NEXTVAL INTO :NEW.id FROM DUAL;
+END;
+/

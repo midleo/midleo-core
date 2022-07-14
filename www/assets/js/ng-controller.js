@@ -1593,12 +1593,23 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       $scope.getAllpack(appcode);
     });
   };
-  $scope.getAllplaces = function (proj) {
+  $scope.getAllplaces = function () {
     if ($('#contloaded')[0]) { angular.element(document.querySelector('#contloaded')).removeClass('hide'); }
     $http({
       method: 'POST',
-      data: { 'proj': proj },
+      data: { },
       url: '/api/readplaces'
+    }).then(function successCallback(response) {
+      $scope.contentLoaded = true;
+      if (response.data != "null") { $scope.names = response.data; } else { $scope.names = []; }
+    });
+  };
+  $scope.getAllreleses = function () {
+    if ($('#contloaded')[0]) { angular.element(document.querySelector('#contloaded')).removeClass('hide'); }
+    $http({
+      method: 'POST',
+      data: { },
+      url: '/api/readreleases'
     }).then(function successCallback(response) {
       $scope.contentLoaded = true;
       if (response.data != "null") { $scope.names = response.data; } else { $scope.names = []; }
@@ -1609,12 +1620,10 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
-        confirmButton: 'btn btn-success btn-sm',
-        cancelButton: 'btn btn-danger btn-sm',
+        confirmButton: 'btn btn-danger btn-sm',
+        cancelButton: 'btn btn-light btn-sm',
       }
     }).then((result) => {
       if (result.value) {
@@ -1625,6 +1634,29 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
         }).then(function successCallback(response) {
           notify(response.data, 'success');
           $scope.getAllplaces('');
+        });
+      }
+    })
+  };
+  $scope.delrelease = function (id, user, thisname) {
+    Swal.fire({
+      title: 'Delete this object?',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      customClass: {
+        confirmButton: 'btn btn-danger btn-sm',
+        cancelButton: 'btn btn-light btn-sm',
+      }
+    }).then((result) => {
+      if (result.value) {
+        $http({
+          method: 'POST',
+          data: { 'id': id, 'user': user, 'name': thisname },
+          url: '/api/readreleases/delete'
+        }).then(function successCallback(response) {
+          notify(response.data, 'success');
+          $scope.getAllreleses('');
         });
       }
     })

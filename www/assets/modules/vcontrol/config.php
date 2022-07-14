@@ -210,7 +210,6 @@ class vc{
            )
           );   
         }
-
         $result = curl_exec($ch);
         if (curl_errno($ch)) {
          return array("err"=>curl_error($ch));

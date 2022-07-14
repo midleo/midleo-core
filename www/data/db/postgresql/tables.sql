@@ -867,3 +867,16 @@ CREATE TABLE IF NOT EXISTS config_projrequest (
   created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   requser varchar(100) DEFAULT NULL
 );
+
+CREATE TABLE IF NOT EXISTS env_releases (
+  id SERIAL PRIMARY KEY,
+  relid varchar(10) DEFAULT NULL,
+  tags varchar(255) DEFAULT NULL,
+  releasename varchar(80) NOT NULL,
+  relperiod varchar(20) DEFAULT NULL,
+  reltype varchar(20) DEFAULT NULL,
+  relcontact varchar(255) DEFAULT NULL,
+  created_by varchar(100) NOT NULL DEFAULT '',
+  lastcheck timestamp DEFAULT NULL,
+  latestver text DEFAULT NULL
+) ;

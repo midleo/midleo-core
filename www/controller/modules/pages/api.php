@@ -77,6 +77,8 @@ class Class_api
                     break;
                 case 'readplaces':Class_api::readPlaces($thisarray["p2"]);
                     break;
+                case 'readreleases':Class_api::readReleases($thisarray["p2"]);
+                    break;
                 case 'readimp':Class_api::readImported();
                     break;
                 case 'readdepl':Class_api::readDeployments();
@@ -1858,6 +1860,43 @@ class Class_api
                 $data['city'] = $val['plcity'];
                 $data['user'] = explode("#", $val['plcontact'])[2];
                 $data['id'] = $val['pluid'];
+                $newdata[] = $data;
+            }
+            pdodb::disconnect();
+            echo json_encode($newdata, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        }
+    }
+    public static function readReleases($d1)
+    {
+        if ($d1 == "delete") {
+            $pdo = pdodb::connect();
+            $data = json_decode(file_get_contents("php://input"));
+            $sql = "delete from env_releases where relid=?";
+            $stmt = $pdo->prepare($sql);
+            if ($stmt->execute(array(htmlspecialchars($data->id)))) {
+                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Deleted Release:" . htmlspecialchars($data->name));
+                echo "Release was deleted";
+            } else {
+                echo "Error deleting Release configuration";
+            }
+            pdodb::disconnect();
+        } else {
+            global $reltypes;
+            $pdo = pdodb::connect();
+            $data = json_decode(file_get_contents("php://input"));
+            $sql = "select * from env_releases";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $data = array();
+            $zobj = $stmt->fetchAll();
+            foreach ($zobj as $val) {
+                $data['name'] = $val['releasename'];
+                $data['period'] = $val['relperiod'];
+                $data['reltype'] = $reltypes[$val['reltype']];
+                $data['user'] = explode("#", $val['relcontact'])[2];
+                $data['id'] = $val['relid'];
+                $data['latestver'] = !empty($val['latestver'])?json_decode($val['latestver'],true):array();
+                $data['lastcheck'] = !empty($val['lastcheck'])?$val['lastcheck']:"Not yet";
                 $newdata[] = $data;
             }
             pdodb::disconnect();

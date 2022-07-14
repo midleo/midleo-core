@@ -218,10 +218,14 @@ if($zobj = $q->fetchAll()){ ?>
                         <th class="text-center" width="100px">Action</th>
                     </tr>
                 </thead>
-                <tbody ng-init="getAllplaces('<?php echo $thisarray['p2'];?>')">
+                <tbody ng-init="getAllplaces()">
                     <tr ng-hide="contentLoaded">
-                        <td colspan="6" style="text-align:center;font-size:1.1em;"><i
-                                class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     </tr>
                     <tr id="contloaded" class="hide" dir-paginate="d in names | filter:search | itemsPerPage:10"
                         pagination-id="prodx">

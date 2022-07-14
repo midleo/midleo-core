@@ -95,6 +95,41 @@ class Class_env
             $err[]="Error occured. Please try again.";
           }
         }
+        if(isset($_POST["updrelease"])){
+          $sql="update env_releases set tags=?, releasename=?, relperiod=?, reltype=?".(!empty($_POST["contact"])?",relcontact='".htmlspecialchars($_POST["contact"])."'":"")." where relid=?";
+          $stmt = $pdo->prepare($sql); 
+          if($stmt->execute(array(
+            htmlspecialchars($_POST["tags"]),
+            htmlspecialchars($_POST["release"]),
+            htmlspecialchars($_POST["relperiod"]),
+            htmlspecialchars($_POST["reltype"]),
+            htmlspecialchars($_GET["uid"])
+          ))){
+            $msg[]="Release updated";
+          } else {
+            $err[]="Error occured. Please try again.";
+          }
+        }
+        if(isset($_POST["saverelease"])){
+          $hash = textClass::getRandomStr(8);
+          $sql="insert into env_releases (relid,tags,releasename,relperiod,reltype,relcontact,created_by) values(?,?,?,?,?,?,?)";
+          $stmt = $pdo->prepare($sql);
+          if($stmt->execute(array(
+              $hash,
+              htmlspecialchars($_POST["tags"]),
+              htmlspecialchars($_POST["release"]),
+              htmlspecialchars($_POST["relperiod"]),
+              htmlspecialchars($_POST["reltype"]),
+              htmlspecialchars($_POST["contact"]),
+              $_SESSION["user"]
+          ))){
+              gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Defined new release:<a href='/env/release//?type=edit&uid=" . $hash . "'>" . htmlspecialchars($_POST["release"]) . "</a>");
+              $msg[]="Release added";
+          } else {
+              $err[]="Error occured. Please try again.";
+          }
+          header("Location:/env/release/");
+        }
         if(isset($_POST["saveplace"])){
           $hash = textClass::getRandomStr(16);
           $sql="insert into env_places (tags,placename,plregion,plcity,pltype,pluid,plcontact,created_by) values(?,?,?,?,?,?,?,?)";
@@ -114,7 +149,7 @@ class Class_env
           } else {
               $err[]="Error occured. Please try again.";
           }
-          header("Location:/env/places/".$thisarray['p2']);
+          header("Location:/env/places/");
         }
         if (!empty($env)) {$menudataenv = json_decode($env, true);} else { $menudataenv = array();}
         include $website['corebase']."public/modules/css.php";
