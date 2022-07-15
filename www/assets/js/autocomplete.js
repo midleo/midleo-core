@@ -184,6 +184,32 @@ $(document).ready(function () {
       }
     });
   }
+  if ($('#groupauto')[0]) {
+    $('#groupauto').autocomplete({
+      source: function (request, response) {
+        $.ajax({
+          url: "/pubapi/getallgr",
+          type: 'post',
+          dataType: "json",
+          data: { search: request.term },
+          success: function (data) {
+            response(data.map(function (value) {
+              return {
+                'label': value.name,
+                'nameid': value.nameid,
+                'email': value.email
+              };
+            }));
+          }
+        });
+      },
+      minLength: 2,
+      select: function (event, ui) {
+        $("#groupname").val(ui.item.nameid);
+        $("#groupemail").val(ui.item.email);
+      }
+    });
+  }
   if ($('.placeauto')[0]) {
     $('.placeauto').autocomplete({
       source: function (request, response) {

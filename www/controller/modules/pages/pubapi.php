@@ -83,12 +83,12 @@ class Class_pubapi{
     if(isset($_POST['search'])){
     $pdo = pdodb::connect();
     $data=array();
-    $sql="select group_latname,group_name from user_groups WHERE group_name like '%".htmlspecialchars($_POST['search'])."%' or group_latname like '%".htmlspecialchars($_POST['search'])."%' limit 10";
+    $sql="select group_latname,group_name,group_email from user_groups WHERE group_name like '%".htmlspecialchars($_POST['search'])."%' or group_latname like '%".htmlspecialchars($_POST['search'])."%' limit 10";
     $q = $pdo->prepare($sql);
     $q->execute();
     if($zobj = $q->fetchAll()){  
       foreach($zobj as $val) {  
-       $data[]=array("name"=>$val['group_name'],"nameid"=>$val['group_latname']);
+       $data[]=array("name"=>$val['group_name'],"nameid"=>$val['group_latname'],"email"=>$val['group_email']);
      }
     }
     echo json_encode($data,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
