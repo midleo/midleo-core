@@ -127,8 +127,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -152,8 +150,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Copy this object',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Copy',
       customClass: {
         confirmButton: 'btn btn-primary btn-sm',
@@ -181,8 +177,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this Server?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -206,8 +200,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -231,8 +223,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -256,8 +246,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -281,8 +269,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -306,8 +292,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -848,8 +832,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this application?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -888,8 +870,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this user?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -913,8 +893,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -938,8 +916,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -1012,8 +988,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this package?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -1196,8 +1170,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -1316,8 +1288,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -1352,8 +1322,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this object?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',
@@ -1474,8 +1442,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
         input: 'select',
         inputOptions: options,
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
         confirmButtonText: 'Copy',
         customClass: {
           confirmButton: 'btn btn-primary btn-sm',
@@ -1703,8 +1669,6 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       title: 'Delete this user?',
       icon: 'error',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Delete',
       customClass: {
         confirmButton: 'btn btn-success btn-sm',

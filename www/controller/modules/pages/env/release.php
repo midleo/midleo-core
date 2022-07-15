@@ -22,15 +22,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-5">Tags</label>
-                        <div class="col-md-5"><input id="tags" name="tags" data-role="tagsinput" type="text"
-                                class="form-control"></div>
-                        <div class="col-md-2" style="padding-left:0px;"><button type="button" class="btn btn-light"
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="You can search this object with tags"><i
-                                    class="mdi mdi-information-variant mdi-18px"></i></button></div>
-                    </div>
-                    <div class="form-group row">
                         <label class="form-control-label text-lg-right col-md-5">Release period</label>
                         <div class="col-md-7">
                             <select name="relperiod" class="form-control">
@@ -51,6 +42,25 @@
                                 <option value="<?php echo $key;?>"><?php echo $val;?></option>
                                 <?php } ?>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-5">Main version</label>
+                        <div class="col-md-7">
+                        <input name="relversion" type="text" value=""
+                                class="form-control" placeholder="eg. 9, 2.2, 8.1">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-5">Version match text</label>
+                        <div class="col-md-5">
+                            <input name="versionmatch" type="text" value=""
+                                class="form-control">
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <button type="button" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Some releases require additional matching text to be specified. For example LTS or z/OS"><i
+                                    class="mdi mdi-information-variant mdi-18px"></i></button>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -98,15 +108,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="form-control-label text-lg-right col-md-5">Tags</label>
-                        <div class="col-md-6"><input id="tags" name="tags" data-role="tagsinput" type="text"
-                                value="<?php echo $zobj["tags"];?>" class="form-control"></div>
-                        <div class="col-md-1" style="padding-left:0px;"><button type="button" class="btn btn-light"
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="You can search this object with tags"><i
-                                    class="mdi mdi-information-variant mdi-18px"></i></button></div>
-                    </div>
-                    <div class="form-group row">
                         <label class="form-control-label text-lg-right col-md-5">Release period</label>
                         <div class="col-md-7">
                             <select name="relperiod" class="form-control">
@@ -134,6 +135,25 @@
                                     <?php echo $val;?></option>
                                 <?php } ?>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-5">Main version</label>
+                        <div class="col-md-7">
+                        <input name="relversion" type="text" value="<?php echo $zobj["relversion"];?>"
+                                class="form-control" placeholder="eg. 9, 2.2, 8.1">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-5">Version match text</label>
+                        <div class="col-md-5">
+                            <input name="versionmatch" type="text" value="<?php echo $zobj["versionmatch"];?>"
+                                class="form-control">
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <button type="button" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Some releases require additional matching text to be specified. For example LTS or z/OS"><i
+                                    class="mdi mdi-information-variant mdi-18px"></i></button>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -175,6 +195,7 @@
                         <th class="text-center">Release</th>
                         <th class="text-center">Period</th>
                         <th class="text-center">Type</th>
+                        <th class="text-center">Main version</th>
                         <th class="text-center">Latest version</th>
                         <th class="text-center">Last check</th>
                         <th class="text-center">Contact</th>
@@ -190,18 +211,15 @@
                         <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                         <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                         <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     </tr>
                     <tr id="contloaded" class="hide" dir-paginate="d in names | filter:search | itemsPerPage:10"
                         pagination-id="prodx">
                         <td class="text-center">{{ d.name }}</td>
                         <td class="text-center">{{ d.period }}</td>
                         <td class="text-center">{{ d.reltype }}</td>
-                        <td class="text-center">
-                            <div class="row" ng-show="d.latestver.length" ng-repeat="item in d.latestver">
-                                <div class="col-md-8 text-end">{{ item.version }}</div>
-                                <div class="col-md-4 text-start">{{ item.fixpack }}</div>
-                            </div>
-                        </td>
+                        <td class="text-center">{{ d.relversion }}</td>
+                        <td class="text-center">{{ d.latestver }}</td>
                         <td class="text-center">{{ d.lastcheck }}</td>
                         <td class="text-center">{{ d.user }}</td>
                         <td>

@@ -610,7 +610,7 @@ from{width:0}
 .form-control-line .form-control.form-control-warning:focus{border-bottom:1px solid #ffb22b}
 .form-control-line .form-control.form-control-danger:focus{border-bottom:1px solid #fc4b6c}
 .form-control-label{line-height:36px;}
-.form-control-danger,.form-control-success,.form-control-warning{padding-right:2.25rem;background-repeat:no-repeat;background-position:center right .5625rem;-webkit-background-size:1.125rem 1.125rem;background-size:1.125rem 1.125rem}
+.form-control-danger,.form-control-success,.form-control-warning{padding-right:2.25rem;background:transparent;background-repeat:no-repeat;background-position:center right .5625rem;-webkit-background-size:1.125rem 1.125rem;background-size:1.125rem 1.125rem}
 .has-success .col-form-label,.has-success .custom-control,.has-success .form-check-label,.has-success .form-control-label{color:#21c1d6}
 /*.has-success .form-control-success{background-image:url(../images/icon/success.svg);background-repeat: no-repeat;background-position-x: right;}*/
 .has-success .form-control{border:0px;border-bottom:1px solid #0CC44F;}

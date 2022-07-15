@@ -1363,12 +1363,13 @@ BEGIN EXECUTE IMMEDIATE 'DROP TABLE env_releases'; EXCEPTION WHEN OTHERS THEN NU
 /
 CREATE TABLE env_releases (
   id number(10) NOT NULL,
-  tags varchar2(255) DEFAULT NULL,
+  versionmatch varchar2(50) DEFAULT NULL,
   relid varchar2(10) NOT NULL,
   releasename varchar2(80) DEFAULT NULL,
   relperiod varchar2(20) DEFAULT NULL,
   reltype varchar2(20) DEFAULT NULL,
   relcontact varchar2(255) DEFAULT NULL,
+  relversion varchar2(25) DEFAULT NULL,
   created_by varchar2(100) NOT NULL DEFAULT '',
   lastcheck timestamp(0) DEFAULT NULL,
   latestver clob DEFAULT '',

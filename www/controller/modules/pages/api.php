@@ -1895,7 +1895,8 @@ class Class_api
                 $data['reltype'] = $reltypes[$val['reltype']];
                 $data['user'] = explode("#", $val['relcontact'])[2];
                 $data['id'] = $val['relid'];
-                $data['latestver'] = !empty($val['latestver'])?json_decode($val['latestver'],true):array();
+                $data['relversion'] = $val['relversion'];
+                $data['latestver'] = $val['latestver'];
                 $data['lastcheck'] = !empty($val['lastcheck'])?$val['lastcheck']:"Not yet";
                 $newdata[] = $data;
             }

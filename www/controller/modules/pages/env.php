@@ -96,12 +96,13 @@ class Class_env
           }
         }
         if(isset($_POST["updrelease"])){
-          $sql="update env_releases set tags=?, releasename=?, relperiod=?, reltype=?".(!empty($_POST["contact"])?",relcontact='".htmlspecialchars($_POST["contact"])."'":"")." where relid=?";
+          $sql="update env_releases set versionmatch=?, releasename=?, relperiod=?, relversion=?, reltype=?".(!empty($_POST["contact"])?",relcontact='".htmlspecialchars($_POST["contact"])."'":"")." where relid=?";
           $stmt = $pdo->prepare($sql); 
           if($stmt->execute(array(
-            htmlspecialchars($_POST["tags"]),
+            htmlspecialchars($_POST["versionmatch"]),
             htmlspecialchars($_POST["release"]),
             htmlspecialchars($_POST["relperiod"]),
+            htmlspecialchars($_POST["relversion"]),
             htmlspecialchars($_POST["reltype"]),
             htmlspecialchars($_GET["uid"])
           ))){
@@ -112,15 +113,16 @@ class Class_env
         }
         if(isset($_POST["saverelease"])){
           $hash = textClass::getRandomStr(8);
-          $sql="insert into env_releases (relid,tags,releasename,relperiod,reltype,relcontact,created_by) values(?,?,?,?,?,?,?)";
+          $sql="insert into env_releases (relid,versionmatch,releasename,relperiod,reltype,relcontact,relversion,created_by) values(?,?,?,?,?,?,?,?)";
           $stmt = $pdo->prepare($sql);
           if($stmt->execute(array(
               $hash,
-              htmlspecialchars($_POST["tags"]),
+              htmlspecialchars($_POST["versionmatch"]),
               htmlspecialchars($_POST["release"]),
               htmlspecialchars($_POST["relperiod"]),
               htmlspecialchars($_POST["reltype"]),
               htmlspecialchars($_POST["contact"]),
+              htmlspecialchars($_POST["relversion"]),
               $_SESSION["user"]
           ))){
               gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => "system"), "Defined new release:<a href='/env/release//?type=edit&uid=" . $hash . "'>" . htmlspecialchars($_POST["release"]) . "</a>");
@@ -228,16 +230,6 @@ class Class_env
             "active"=>($thisarray['p1'] == "dns")?"active":"",
           ));
         }
-        if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
-          array_push($brenvarr,array(
-            "title"=>"Server information",
-            "link"=>"/".$page."/servers/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>false,
-            "text"=>"Servers",
-            "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-            "active"=>($thisarray['p1'] == "servers")?"active":"",
-          ));
-        }
         if (sessionClass::checkAcc($acclist, "appadm,appview")) {
           array_push($brenvarr,array(
             "title"=>"Application servers",
@@ -303,6 +295,15 @@ class Class_env
               "active"=>in_array($thisarray['p1'], $arraytibcoemstab)?"active":"",
             ));
           }
+        }
+        if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
+          array_push($brenvarr,array(
+            "title"=>"Server information",
+            "link"=>"/".$page."/servers/",
+            "icon"=>false,
+            "text"=>"Servers",
+            "active"=>($thisarray['p1'] == "servers")?"active":"",
+          ));
         }
         if (sessionClass::checkAcc($acclist, "appadm,appview")) {
             array_push($brenvarr,array(
