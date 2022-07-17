@@ -959,7 +959,7 @@ CREATE TABLE IF NOT EXISTS `changes` (
   `owner` varchar(100) DEFAULT NULL,
   `chgstatus` int(1) NOT NULL DEFAULT '0',
   `taskcurr` int(1) NOT NULL DEFAULT '0',
-  `taskall` int(2) NOT NULL DEFAULT '0',
+  `taskall` int(5) NOT NULL DEFAULT '0',
   `priority` int(2) DEFAULT '0',
   `started` datetime NOT NULL DEFAULT '2001-01-01 00:00:00',
   `finished` datetime NOT NULL DEFAULT '2001-01-01 00:00:00',
@@ -970,7 +970,8 @@ CREATE TABLE IF NOT EXISTS `changes` (
 
 CREATE TABLE IF NOT EXISTS `changes_tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nestid` int(2) NOT NULL DEFAULT '0',
+  `nestid` int(3) NOT NULL DEFAULT '0',
+  `uid` varchar(6) DEFAULT NULL,
   `chgnum` varchar(20) DEFAULT NULL,
   `owner` varchar(100) DEFAULT NULL,
   `appid` varchar(10) DEFAULT NULL,

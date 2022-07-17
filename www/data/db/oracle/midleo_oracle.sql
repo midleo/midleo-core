@@ -1387,3 +1387,88 @@ BEGIN
  SELECT env_releases_seq.NEXTVAL INTO :NEW.id FROM DUAL;
 END;
 /
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE env_docimport'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE TABLE env_docimport (
+  id number(10) NOT NULL,
+  fileid varchar2(255) DEFAULT NULL,
+  importedon timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
+  tags varchar2(255) NOT NULL DEFAULT '',
+  author varchar2(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+)   ;
+BEGIN EXECUTE IMMEDIATE 'drop sequence env_docimport_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE SEQUENCE env_docimport_seq START WITH 1 INCREMENT BY 1;
+BEGIN EXECUTE IMMEDIATE 'drop trigger env_docimport_seq_tr'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE OR REPLACE TRIGGER env_docimport_seq_tr
+ BEFORE INSERT ON env_docimport FOR EACH ROW
+ WHEN (NEW.id IS NULL)
+BEGIN
+ SELECT env_docimport_seq.NEXTVAL INTO :NEW.id FROM DUAL;
+END
+/
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE changes'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE TABLE changes (
+  id number(10) NOT NULL,
+  tags varchar2(255) DEFAULT NULL,
+  chgname varchar2(50) DEFAULT NULL,
+  chgnum varchar2(20) DEFAULT NULL,
+  info varchar2(155) DEFAULT NULL,
+  created timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
+  deadline char(10) DEFAULT DATE '2000-01-01',
+  owner varchar2(100) DEFAULT NULL,
+  chgstatus number(1) DEFAULT 0,
+  taskcurr number(1) DEFAULT 0,
+  taskall number(5) DEFAULT 0,
+  priority number(1) DEFAULT 0,
+  started timestamp(0) DEFAULT TO_TIMESTAMP('2001-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS.FF'),
+  finished timestamp(0) DEFAULT TO_TIMESTAMP('2001-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS.FF'),
+  PRIMARY KEY (id),
+  CONSTRAINT chgnum UNIQUE  (chgnum)
+)   ;
+BEGIN EXECUTE IMMEDIATE 'drop sequence changes_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE SEQUENCE changes_seq START WITH 1 INCREMENT BY 1;
+BEGIN EXECUTE IMMEDIATE 'drop trigger changes_seq_tr'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE OR REPLACE TRIGGER changes_seq_tr
+ BEFORE INSERT ON changes FOR EACH ROW
+ WHEN (NEW.id IS NULL)
+BEGIN
+ SELECT changes_seq.NEXTVAL INTO :NEW.id FROM DUAL;
+END;
+/ 
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE changes_tasks'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE TABLE changes_tasks (
+  id number(10) NOT NULL,
+  nestid number(3) DEFAULT 0,
+  uid varchar2(6) DEFAULT NULL,
+  chgnum varchar2(20) DEFAULT NULL,
+  owner varchar2(100) DEFAULT NULL,
+  appid varchar2(10) DEFAULT NULL,
+  groupid varchar2(150) DEFAULT NULL,
+  taskstatus number(1) DEFAULT 0,
+  taskname clob DEFAULT '',
+  taskinfo clob DEFAULT '',
+  emailsend number(1) DEFAULT 0,
+  email varchar2(150) DEFAULT NULL,
+  started timestamp(0) DEFAULT TO_TIMESTAMP('2001-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS.FF'),
+  finished timestamp(0) DEFAULT TO_TIMESTAMP('2001-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS.FF'),
+  PRIMARY KEY (id)
+)   ;
+BEGIN EXECUTE IMMEDIATE 'drop sequence changes_tasks_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE SEQUENCE changes_tasks_seq START WITH 1 INCREMENT BY 1;
+BEGIN EXECUTE IMMEDIATE 'drop trigger changes_tasks_seq_tr'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+CREATE OR REPLACE TRIGGER changes_tasks_seq_tr
+ BEFORE INSERT ON changes_tasks FOR EACH ROW
+ WHEN (NEW.id IS NULL)
+BEGIN
+ SELECT changes_tasks_seq.NEXTVAL INTO :NEW.id FROM DUAL;
+END;
+/ 

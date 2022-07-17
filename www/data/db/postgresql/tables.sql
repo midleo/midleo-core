@@ -556,7 +556,7 @@ CREATE TABLE IF NOT EXISTS config_diagrams (
   accgroups varchar(255) DEFAULT NULL,
   author varchar(100) DEFAULT NULL,
   category varchar(100) DEFAULT NULL,
-  gitprepared int NOT NULL DEFAULT '0',
+  gitprepared int DEFAULT 0,
    UNIQUE(desid)
 ) ;
 
@@ -750,8 +750,8 @@ CREATE TABLE IF NOT EXISTS env_packages (
   pkgobjects text NULL,
   created_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   modified_time timestamp NOT NULL DEFAULT '2001-01-01 00:00:00',
-  modified int NOT NULL DEFAULT '0',
-  gitprepared int NOT NULL DEFAULT '0',
+  modified int DEFAULT 0,
+  gitprepared int DEFAULT 0,
   created_by varchar(100)  DEFAULT ''
 ) ;
 
@@ -881,3 +881,46 @@ CREATE TABLE IF NOT EXISTS env_releases (
   lastcheck timestamp DEFAULT NULL,
   latestver text DEFAULT NULL
 ) ;
+
+CREATE TABLE IF NOT EXISTS changes (
+  id SERIAL PRIMARY KEY,
+  tags varchar(255) DEFAULT NULL,
+  chgname varchar(50) DEFAULT NULL,
+  chgnum varchar(20) DEFAULT NULL,
+  info varchar(155) DEFAULT NULL,
+  created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deadline date DEFAULT NULL,
+  owner varchar(100) DEFAULT NULL,
+  chgstatus int DEFAULT 0,
+  taskcurr int DEFAULT 0,
+  taskall int DEFAULT 0,
+  priority int DEFAULT 0,
+  started timestamp NOT NULL DEFAULT '2001-01-01 00:00:00',
+  finished timestamp NOT NULL DEFAULT '2001-01-01 00:00:00',
+  UNIQUE(chgnum)
+);
+
+CREATE TABLE IF NOT EXISTS env_docimport (
+  id SERIAL PRIMARY KEY,
+  fileid varchar(255) DEFAULT NULL,
+  importedon timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  tags varchar(255) NOT NULL DEFAULT '',
+  author varchar(50) DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS changes_tasks (
+  id SERIAL PRIMARY KEY,
+  nestid int DEFAULT 0,
+  uid varchar(6) DEFAULT NULL,
+  chgnum varchar(20) DEFAULT NULL,
+  owner varchar(100) DEFAULT NULL,
+  appid varchar(10) DEFAULT NULL,
+  groupid varchar(150) DEFAULT NULL,
+  taskstatus int DEFAULT 0,
+  taskname text DEFAULT NULL,
+  taskinfo text DEFAULT NULL,
+  emailsend int DEFAULT 0,
+  email varchar(150) DEFAULT NULL,
+  started timestamp NOT NULL DEFAULT '2001-01-01 00:00:00',
+  finished timestamp NOT NULL DEFAULT '2001-01-01 00:00:00'
+);
