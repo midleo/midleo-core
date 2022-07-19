@@ -884,7 +884,7 @@ CREATE TABLE IF NOT EXISTS env_releases (
 
 CREATE TABLE IF NOT EXISTS changes (
   id SERIAL PRIMARY KEY,
-  tags varchar(255) DEFAULT NULL,
+  proj varchar(25) DEFAULT NULL,
   chgname varchar(50) DEFAULT NULL,
   chgnum varchar(20) DEFAULT NULL,
   info varchar(155) DEFAULT NULL,

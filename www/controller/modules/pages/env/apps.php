@@ -168,7 +168,7 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
                     <a href="/browse/user/<?php echo $zobj["owner"];?>" target="_blank"
                         class="py-3 px-2 border-bottom d-block text-decoration-none">
                         <div class="user-img position-relative d-inline-block me-2">
-                            <img src="<?php echo !empty($zobjin["avatar"])?$zobjin["avatar"] : '/'.$website['corebase'].'assets/images/avatar.svg' ;?>"
+                            <img src="<?php echo !empty($zobjin["avatar"])?'/'.$website['corebase'].substr($zobjin["avatar"],1) : '/'.$website['corebase'].'assets/images/avatar.svg' ;?>"
                                 width="40" alt="<?php echo $zobjin["fullname"];?>" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="<?php echo $zobjin["fullname"];?>"
                                 class="rounded-circle">
@@ -217,7 +217,7 @@ if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
                     <a href="/browse/user/<?php echo $key;?>" target="_blank"
                         class="py-3 px-2 border-bottom d-block text-decoration-none">
                         <div class="user-img position-relative d-inline-block me-2">
-                            <img src="<?php echo !empty($val["uavatar"])?'/assets/images/users/'.$val["uavatar"] : '/'.$website['corebase'].'assets/images/avatar.svg' ;?>"
+                            <img src="<?php echo !empty($val["uavatar"])?'/'.$website['corebase'].'assets/images/users/'.$val["uavatar"] : '/'.$website['corebase'].'assets/images/avatar.svg' ;?>"
                                 width="40" alt="<?php echo $val["uname"];?>" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="<?php echo $val["uname"];?>" class="rounded-circle">
                         </div>

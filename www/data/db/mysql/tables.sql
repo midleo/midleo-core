@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS requests_seq
 
 CREATE TABLE IF NOT EXISTS `mqenv_imported_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-    `proj` varchar(20) DEFAULT NULL,
+  `proj` varchar(20) DEFAULT NULL,
   `impfile` varchar(256) NOT NULL,
   `impobjects` int(20) NOT NULL DEFAULT '0',
   `impdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -950,7 +950,7 @@ CREATE TABLE IF NOT EXISTS `env_docimport` (
 
 CREATE TABLE IF NOT EXISTS `changes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tags` varchar(155) DEFAULT NULL,
+  `proj` varchar(25) DEFAULT NULL,
   `chgname` varchar(50) NOT NULL,
   `chgnum` varchar(20) DEFAULT NULL,
   `info` varchar(150) NOT NULL DEFAULT '',

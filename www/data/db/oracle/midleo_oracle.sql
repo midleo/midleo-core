@@ -1413,7 +1413,7 @@ BEGIN EXECUTE IMMEDIATE 'DROP TABLE changes'; EXCEPTION WHEN OTHERS THEN NULL; E
 /
 CREATE TABLE changes (
   id number(10) NOT NULL,
-  tags varchar2(255) DEFAULT NULL,
+  proj varchar2(25) DEFAULT NULL,
   chgname varchar2(50) DEFAULT NULL,
   chgnum varchar2(20) DEFAULT NULL,
   info varchar2(155) DEFAULT NULL,
