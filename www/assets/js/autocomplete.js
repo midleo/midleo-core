@@ -12,7 +12,7 @@ $(document).ready(function () {
           $('#diagramslist').append(`
           <div class="col-md-3">
           <div class="custom-control custom-checkbox image-checkbox">
-              <input type="checkbox" name="dessel[]" id="did`+ element.id + `" value="` + element.imgdata + `">
+              <input type="checkbox" name="dessel[]" data-desname="` + element.desname + `" data-desid="`+element.desid+`" id="did`+ element.id + `" value="` + element.imgdata + `">
               <label class="custom-control-label" for="did`+ element.id + `">
                   <img src="`+ element.imgdata + `" alt="` + element.desname + `" class="img-fluid">
               </label>
@@ -54,11 +54,10 @@ $(document).ready(function () {
     onSubmit: function (dialogApi, details) {
       //var data = dialogApi.getData();
       var searchIDs = $('#diagramslist input:checkbox:checked').map(function(){
-        return $(this).val();
+        return {"desid":$(this).attr('data-desid'),"desname":$(this).attr('data-desname'),"img":$(this).val()}
       }).toArray();
-      //console.log(searchIDs);
-      $.each(searchIDs, function (index, element) {
-        tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="' + element + '" class="img-fluid" style="max-width:300px">');
+      $.each(searchIDs, function (index, element) { 
+        tinymce.activeEditor.execCommand('mceInsertContent', false, '<a href="/diagrams/v/' + element.desid + '" title="' + element.desname + '" alt="' + element.desname + '" target="_blank"><img src="' + element.img + '" class="img-fluid" style="max-width:300px"></a>');
       });
       dialogApi.close();
     }

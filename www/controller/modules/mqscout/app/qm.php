@@ -68,7 +68,7 @@
                                     class="btn btn-light btn-sm bg waves-effect" title="Duplicate"><i
                                         class="mdi mdi-content-duplicate mdi-18px"></i></button>
                                 <button type="button"
-                                    ng-click="delete('<?php echo $page=="env"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
+                                    ng-click="delete('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
                                     class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button>
                                 <?php } ?>
                             </div>
@@ -150,7 +150,7 @@ $stmt->execute(array($thisarray['p2']));
                                             </div>
                                             <div class="form-group row">
                                                 <label class="form-control-label text-lg-right col-md-3">ENV</label>
-                                                <div class="col-md-9"><select class="form-control" ng-model="mq.env">
+                                                <div class="col-md-9"><select class="form-control" ng-model="mq.mqscout">
                                                         <option value="">Please select</option>
                                                         <?php foreach($menudataenv as $key=>$val){  ?>
                                                         <option value="<?php echo $val['nameshort'];?>">

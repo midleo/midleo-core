@@ -166,23 +166,8 @@ class Class_env
       }
         include $website['corebase']."public/modules/headcontent.php";
         echo '<div class="page-wrapper"><div class="container-fluid">';
-        $arrayibmmqtab = array( "import", "qm", "queues", "channels", "topics", "subs", "process", "service", "dlqh", "authrec");
-        $arraytibcoemstab = array("tibqueues", "tibtopics", "tibacl");
         $brenvarr=array();
         $brarr=array();
-        if(($page=="apps" && $_GET["type"]=="new") || !empty($_GET["app"])){
-          array_push($brenvarr,array(
-            "title"=>"Applications",
-            "link"=>"/".$page."/apps",
-            "icon"=>"mdi-application-cog-outline",
-          ));
-        } elseif(($thisarray['p1']=="preview")){
-          array_push($brenvarr,array(
-            "title"=>"Packages",
-            "link"=>"/".$page."/packages/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>"mdi-package-variant mdi-18px",
-          ));
-        } else {
         if (sessionClass::checkAcc($acclist, "appadm,appview")) {
           array_push($brenvarr,array(
             "title"=>"Applications",
@@ -191,24 +176,8 @@ class Class_env
             "text"=>(!empty($thisarray['p2']) && $thisarray['p2']!="?type=new")?"&nbsp;".$thisarray['p2']:"Apps",
             "main"=>true,
             "active"=>($thisarray['p1'] == "apps")?"active":"",
-          ),
-          array(
-            "title"=>"Deploy packages",
-            "link"=>"/".$page."/deploy/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>false,
-            "text"=>"Deploy",
-            "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-            "active"=>($thisarray['p1'] == "deploy")?"active":"",
-          ),
-          array(
-            "title"=>"Create packages",
-            "link"=>"/".$page."/packages/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>false,
-            "text"=>"Packages",
-            "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-            "active"=>($thisarray['p1'] == "packages")?"active":"",
           )
-          );
+        );
         }
         if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
           array_push($brenvarr,array(
@@ -250,52 +219,6 @@ class Class_env
             "active"=>($thisarray['p1'] == "vars")?"active":"",
           ));
         }
-        if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {
-          if (method_exists("IBMMQ", "execJava") && is_callable(array("IBMMQ", "execJava"))) {
-          array_push($brenvarr,array(
-            "title"=>"IBM MQ",
-            "link"=>"#ibmmq",
-            "icon"=>false,
-            "text"=>"IBM MQ",
-            "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-            "tab"=>true,
-            "active"=>in_array($thisarray['p1'], $arrayibmmqtab)?"active":"",
-          ));
-        }
-        }
-        if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {
-          array_push($brenvarr,array(
-            "title"=>"IBM MQ File transfer",
-            "link"=>"/".$page."/fte/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>false,
-            "text"=>"IBM FTE",
-            "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-            "active"=>($thisarray['p1'] == "fte")?"active":"",
-          ));
-        }
-        if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {
-          array_push($brenvarr,array(
-            "title"=>"IBM ACE/IIB",
-            "link"=>"/".$page."/flows/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>false,
-            "text"=>"IBM ACE",
-            "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-            "active"=>($thisarray['p1'] == "flows")?"active":"",
-          ));
-        }
-        if (sessionClass::checkAcc($acclist, "tibcoadm,tibcoview")) {
-          if (method_exists("tibco", "execJava") && is_callable(array("tibco", "execJava"))) {
-            array_push($brenvarr,array(
-              "title"=>"TIBCO EMS",
-              "link"=>"#tibcoems",
-              "icon"=>false,
-              "text"=>"Tibco EMS",
-              "tab"=>true,
-              "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-              "active"=>in_array($thisarray['p1'], $arraytibcoemstab)?"active":"",
-            ));
-          }
-        }
         if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
           array_push($brenvarr,array(
             "title"=>"Server information",
@@ -321,7 +244,7 @@ class Class_env
               "active"=>($thisarray['p1'] == "release")?"release":"",
             ));
         }
-      }
+    
             $zobj['projid'] == "";
             $zobj['lockedby'] = $_SESSION['user'];
 ?>
@@ -333,81 +256,7 @@ class Class_env
         <div class="row" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
             <div class="col-md-9">
                 <?php include $website['corebase']."public/modules/breadcrumb.php"; ?>
-                <div class="row">
-                  <div class="col-lg-12 align-self-center"><br>
-                    <div class="tab-content">
-                        <?php if (sessionClass::checkAcc($acclist, "ibmadm,ibmview")) {?>
-                        <div class="tab-pane <?php echo in_array($thisarray['p1'], $arrayibmmqtab) ? "active" : ""; ?>"
-                            id="ibmmq" role="tabpanel">
-                            <ul class="nav nav-tabs customtab">
-                                <?php if (method_exists("Excel", "import") && is_callable(array("Excel", "import"))) {?>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "import" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/import/<?php echo $thisarray['p2']; ?>">Import</a>
-                                </li>
-                                <?php }?>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "qm" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/qm/<?php echo $thisarray['p2']; ?>">Qmanager</a>
-                                </li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "queues" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/queues/<?php echo $thisarray['p2']; ?>">Queues</a>
-                                </li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "channels" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/channels/<?php echo $thisarray['p2']; ?>">Channels</a>
-                                </li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "topics" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/topics/<?php echo $thisarray['p2']; ?>">Topics</a>
-                                </li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "subs" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/subs/<?php echo $thisarray['p2']; ?>">SUB</a></li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "process" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/process/<?php echo $thisarray['p2']; ?>">Process</a>
-                                </li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "service" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/service/<?php echo $thisarray['p2']; ?>">Service</a>
-                                </li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "dlqh" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/dlqh/<?php echo $thisarray['p2']; ?>">DLQH</a></li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "authrec" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/authrec/<?php echo $thisarray['p2']; ?>">Authrec</a>
-                                </li>
-                                <!-- <li class="nav-item"><a class="nav-link waves-effect<?php echo $thisarray['p1'] == "prepost" ? " active" : ""; ?>" href="/<?php echo $page . "/" . $thisarray['p1'] . "/" . $secsubpage; ?>/prepost">Pre/Post</a></li>-->
-                                <!-- <li class="nav-item"><a class="nav-link waves-effect<?php echo $thisarray['p1'] == "cert" ? " active" : ""; ?>" href="/<?php echo $page . "/" . $thisarray['p1'] . "/" . $secsubpage; ?>/cert">Certificates</a></li>-->
-                                <!-- <li class="nav-item"><a class="nav-link waves-effect<?php echo $thisarray['p1'] == "clusters" ? " active" : ""; ?>" href="/<?php echo $page . "/" . $thisarray['p1'] . "/" . $secsubpage; ?>/clusters">Clusters</a></li>-->
-                                <!-- <li class="nav-item"><a class="nav-link waves-effect<?php echo $thisarray['p1'] == "nl" ? " active" : ""; ?>" href="/<?php echo $page . "/" . $thisarray['p1'] . "/" . $secsubpage; ?>/nl">Namelists</a></li>-->
-                            </ul>
-                        </div>
-                        <?php }?>
-                        <?php if (sessionClass::checkAcc($acclist, "tibcoadm,tibcoview")) {?>
-                        <div class="tab-pane <?php echo in_array($thisarray['p1'], $arraytibcoemstab) ? "active" : ""; ?>"
-                            id="tibcoems" role="tabpanel">
-                            <ul class="nav nav-tabs customtab">
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "tibqueues" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/tibqueues/<?php echo $thisarray['p2']; ?>">Queues</a>
-                                </li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "tibtopics" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/tibtopics/<?php echo $thisarray['p2']; ?>">Topics</a>
-                                </li>
-                                <li class="nav-item"><a
-                                        class="nav-link waves-effect<?php echo $thisarray['p1'] == "tibacl" ? " active" : ""; ?>"
-                                        href="/<?php echo $page; ?>/tibacl/<?php echo $thisarray['p2']; ?>">ACL</a></li>
-                            </ul>
-                        </div>
-                        <?php }?>
-                        </div>
-                        </div>
-                </div><br class="hidden">
+                <br class="hidden">
                 <?php if (file_exists(__DIR__ . "/env/" . $thisarray['p1'] . ".php")) {include "env/" . $thisarray['p1'] . ".php";}?>
                 <?php include $website['corebase']."public/modules/respform.php";?>
             </div>

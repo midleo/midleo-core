@@ -20,7 +20,7 @@
                     <tr id="contloaded" class="hide"
                         dir-paginate="d in names | filter:search | orderBy:'appcode' | itemsPerPage:10"
                         pagination-id="prodx">
-                        <td class="text-center"><a href="/env/<?php echo $thisarray['p1'];?>/{{ d.appcode }}"
+                        <td class="text-center"><a href="/mqscout/<?php echo $thisarray['p1'];?>/{{ d.appcode }}"
                                 target="_parent">{{ d.appcode }}</a></td>
                         <td class="text-center">{{ d.appinfo }}</td>
                         <td class="text-center">{{ d.appcreated }}</td>

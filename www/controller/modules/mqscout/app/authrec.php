@@ -41,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody
-                    ng-init="getAll('<?php echo $page=="env"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $page;?>')">
+                    ng-init="getAll('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $page;?>')">
                     <tr ng-hide="contentLoaded">
                         <td colspan="7" style="text-align:center;font-size:1.1em;"><i
                                 class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
@@ -66,7 +66,7 @@
                         <td class="text-center">
                             <div class="text-start d-grid gap-2 d-md-block">
                                 <button type="button"
-                                    ng-click="readOne('<?php echo $page=="env"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $page;?>')"
+                                    ng-click="readOne('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $page;?>')"
                                     class="btn btn-light btn-sm bg waves-effect"><i
                                         class="mdi mdi-pencil mdi-18px"></i></button>
                                 <?php if($_SESSION['user_level']>="3"){?>
@@ -75,7 +75,7 @@
                                     class="btn btn-light btn-sm bg waves-effect" title="Duplicate"><i
                                         class="mdi mdi-content-duplicate mdi-18px"></i></button>
                                 <button type="button"
-                                    ng-click="delete('<?php echo $page=="env"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
+                                    ng-click="delete('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
                                     class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button>
                                 <?php } ?>
                             </div>
@@ -470,11 +470,11 @@ $stmt->execute(array($thisarray['p2']));
                                     <?php if($_SESSION['user_level']>="3"){?>
                                     <button type="button" id="btn-create-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="form.$valid && create('<?php echo $page=="env"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
+                                        ng-click="form.$valid && create('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
                                             class="mdi mdi-check"></i>&nbsp;Create</button>
                                     <button type="button" id="btn-update-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="update('<?php echo $page=="env"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
+                                        ng-click="update('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
                                             class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
                                     <?php } ?>
                                     <?php } ?>
