@@ -297,7 +297,7 @@ $brarr = array();
             "icon" => "mdi-upload",
             "active" => ($page == "docimport") ? "active" : "",
         ));
-        if (sessionClass::checkAcc($acclist, "odfiles") && !empty($website['odappid'])) {
+        if (!empty($website['odappid'])) {
             array_push($brarr, array(
                 "title" => "View/Map OneDrive files",
                 "link" => "/onedrive",
@@ -305,7 +305,7 @@ $brarr = array();
                 "active" => ($page == "onedrive") ? "active" : "",
             ));
         }
-        if (sessionClass::checkAcc($acclist, "dbfiles") && !empty($website['dbclid'])) {
+        if (!empty($website['dbclid'])) {
             array_push($brarr, array(
                 "title" => "View/Map Dropbox files",
                 "link" => "/dropbox",

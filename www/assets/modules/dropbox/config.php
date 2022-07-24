@@ -59,7 +59,7 @@ class Class_dropbox
                     "active" => ($page == "draw") ? "active" : "",
                 ));
             }
-            if (sessionClass::checkAcc($acclist, "odfiles") && !empty($website['odappid'])) {
+            if (!empty($website['odappid'])) {
                 array_push($brarr, array(
                     "title" => "View/Map OneDrive files",
                     "link" => "/onedrive",

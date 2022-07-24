@@ -72,7 +72,8 @@ class Class_appconfig
         if ($thisarray['p1'] == "modules") {?>
 <?php }
         if ($thisarray['p1'] == "env" || $thisarray['p1'] == "main") {?>
-<link rel="stylesheet" type="text/css" href="/<?php echo $website['corebase'];?>assets/css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" type="text/css"
+    href="/<?php echo $website['corebase'];?>assets/css/bootstrap-datetimepicker.css">
 <?php }
         echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/tinyreset.css">';
         echo '<style type="text/css">';
@@ -93,28 +94,27 @@ class Class_appconfig
                     "active"=>($thisarray['p1'] == "users")?"active":"",
                 )
               );
-              if (sessionClass::checkAcc($acclist, "odfiles")) {
-                array_push($brenvarr,array(
+              array_push($brenvarr,
+              array(
                     "title"=>"View/Edit groups",
                     "link"=>"/".$page."/groups",
                     "icon"=>false,
                     "text"=>"Groups",
                     "active"=>($thisarray['p1'] == "groups")?"active":"",
+                  ), 
+                  array(
+                    "title"=>"Core Configuration",
+                    "link"=>"/".$page."/main",
+                    "icon"=>false,
+                    "text"=>"Core",
+                    "active"=>($thisarray['p1'] == "main")?"active":"",
                   ));
-              }
               array_push($brenvarr,array(
                 "title"=>"LDAP entries",
                 "link"=>"/".$page."/ldap",
                 "icon"=>false,
                 "text"=>"LDAP",
                 "active"=>($thisarray['p1'] == "ldap")?"active":"",
-              ),
-              array(
-                "title"=>"External connections",
-                "link"=>"/".$page."/external",
-                "icon"=>false,
-                "text"=>"External",
-                "active"=>($thisarray['p1'] == "external")?"active":"",
               ),
               array(
                 "title"=>"MAIL Configuration",
@@ -124,19 +124,19 @@ class Class_appconfig
                 "active"=>($thisarray['p1'] == "mail")?"active":"",
               ),
               array(
-                "title"=>"Core Configuration",
-                "link"=>"/".$page."/main",
-                "icon"=>false,
-                "text"=>"Core",
-                "active"=>($thisarray['p1'] == "main")?"active":"",
-              ),
-              array(
                 "title"=>"Core Modules",
                 "link"=>"/".$page."/modules",
                 "icon"=>false,
                 "text"=>"Modules",
                 "active"=>($thisarray['p1'] == "modules")?"active":"",
-              )
+              ),
+              array(
+                "title"=>"External connections",
+                "link"=>"/".$page."/external",
+                "icon"=>false,
+                "text"=>"External",
+                "active"=>($thisarray['p1'] == "external")?"active":"",
+              ),
             );
         }
         ?>
@@ -145,80 +145,81 @@ class Class_appconfig
         <?php include "public/modules/sidebar.php"; ?>
     </div>
     <div class="col-lg-10">
-    <?php if(in_array($thisarray['p1'], array("external","users","groups"))){?>
+        <?php if(in_array($thisarray['p1'], array("external","users","groups"))){?>
         <div class="row ngctrl" id="ngApp" ng-app="ngApp" ng-controller="ngCtrl">
             <?php } else { ?><div class="row"><?php } ?>
-            <div class="col-md-9">
-                <?php include $website['corebase']."public/modules/breadcrumb.php"; ?><br>
-                <?php if (file_exists(__DIR__ . "/app/" . $thisarray['p1'] . ".php")) {include "app/" . $thisarray['p1'] . ".php";} else {textClass::PageNotFound();}?>
-            </div>
-            <div class="col-md-3">
-                <?php if(!in_array($thisarray['p1'], array("external","mail","main"))){?>
+                <div class="col-md-9">
+                    <?php include $website['corebase']."public/modules/breadcrumb.php"; ?>
+                    <?php if (file_exists(__DIR__ . "/app/" . $thisarray['p1'] . ".php")) {include "app/" . $thisarray['p1'] . ".php";} else {textClass::PageNotFound();}?>
+                </div>
+                <div class="col-md-3">
+                    <?php if(!in_array($thisarray['p1'], array("external","mail","main"))){?>
                     <?php include $website['corebase']."public/modules/filterbar.php"; ?>
-                <?php } ?>
-                <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
+                    <?php } ?>
+                    <?php include $website['corebase']."public/modules/breadcrumbin.php"; ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<?php
+    <?php
 include $website['corebase']."public/modules/footer.php";
         echo "</div></div>";
         include $website['corebase']."public/modules/js.php";?>
-<?php if ($thisarray['p1'] == "users" || $thisarray['p1'] == "groups") {?>
-<script src="/<?php echo $website['corebase'];?>assets/js/dirPagination.js" type="text/javascript"></script>
-<script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/ng-controller.js"></script>
-<?php }   if ($thisarray['p1'] == "external") {?>
-<script type="text/javascript">
-var app = angular.module('ngApp', []);
-app.config(['$compileProvider',
-    function($compileProvider) {
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
-    }
-]);
-app.controller('ngCtrl', function($scope, $http) {
-    $scope.ext = [];
-    $scope.ext.gittype = "<?php echo $website['gittype'];?>";
-});
-</script>
-<?php }  ?>
-<?php if ($thisarray['p1'] == "modules") {?>
-<script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
-<script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    let table = $('#data-table').DataTable({
-        "oLanguage": {
-            "sSearch": "",
-            "sSearchPlaceholder": "Find a module",
-        },
-        dom: 'Bfrtip',
-        //  responsive: true,
-        columnDefs: [{
-            targets: -1,
-            "data": null,
-            "render": function(data, type, row, meta) {
-                return (row[2] == "*" ?
-                    "<button type=\"button\" class=\"btn btn-light btn-sm\" disabled><i class='mdi mdi-close'></i></button>" :
-                    "<button type=\"button\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Delete module\" class=\"btn btn-light btn-sm command-delete\" data-row-id=\"" +
-                    row[0] +
-                    "\"><i class='mdi mdi-close'></i></button>"
+    <?php if ($thisarray['p1'] == "users" || $thisarray['p1'] == "groups") {?>
+    <script src="/<?php echo $website['corebase'];?>assets/js/dirPagination.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/ng-controller.js"></script>
+    <?php }   if ($thisarray['p1'] == "external") {?>
+    <script type="text/javascript">
+    var app = angular.module('ngApp', []);
+    app.config(['$compileProvider',
+        function($compileProvider) {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
+        }
+    ]);
+    app.controller('ngCtrl', function($scope, $http) {
+        $scope.ext = [];
+        $scope.ext.gittype = "<?php echo $website['gittype'];?>";
+    });
+    </script>
+    <?php }  ?>
+    <?php if ($thisarray['p1'] == "modules") {?>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        let table = $('#data-table').DataTable({
+            "oLanguage": {
+                "sSearch": "",
+                "sSearchPlaceholder": "Find a module",
+            },
+            dom: 'Bfrtip',
+            //  responsive: true,
+            columnDefs: [{
+                targets: -1,
+                "data": null,
+                "render": function(data, type, row, meta) {
+                    return (row[2] == "*" ?
+                        "<button type=\"button\" class=\"btn btn-light btn-sm\" disabled><i class='mdi mdi-close'></i></button>" :
+                        "<button type=\"button\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Delete module\" class=\"btn btn-light btn-sm command-delete\" data-row-id=\"" +
+                        row[0] +
+                        "\"><i class='mdi mdi-close'></i></button>"
                     );
-            }
-        }]
-    });
-    $('.dtfilter').keyup(function() {
-        table.search($(this).val()).draw();
-    });
-    $('.command-delete').on('click', function() {
-        var thisid = $(this).data("row-id");
-        $("#mod" + thisid).hide();
-        delmodule(thisid);
-    });
+                }
+            }]
+        });
+        $('.dtfilter').keyup(function() {
+            table.search($(this).val()).draw();
+        });
+        $('.command-delete').on('click', function() {
+            var thisid = $(this).data("row-id");
+            $("#mod" + thisid).hide();
+            delmodule(thisid);
+        });
 
-});
-</script>
-<?php }  ?><script src="/<?php echo $website['corebase'];?>assets/js/tagsinput.min.js" type="text/javascript"></script><?php 
+    });
+    </script>
+    <?php }  ?><script src="/<?php echo $website['corebase'];?>assets/js/tagsinput.min.js" type="text/javascript">
+    </script><?php 
         include $website['corebase']."public/modules/template_end.php";
         echo '</body></html>';
     }

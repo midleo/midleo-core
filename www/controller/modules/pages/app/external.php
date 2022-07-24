@@ -14,7 +14,8 @@
             <div class="card">
                 <div class="card-header">
                     <h4><i class="mdi mdi-git"></i>&nbsp;Version control
-                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i class="mdi mdi-alert-outline"></i>&nbsp;for package automation
+                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i
+                                class="mdi mdi-alert-outline"></i>&nbsp;for package automation
                         </div>
                     </h4>
                 </div>
@@ -137,7 +138,7 @@
                                 class="form-control">
                         </div>
                     </div>
-                    <button type="submit" name="saveadm" id="saveadm" style="display:none;" >save</button>
+                    <button type="submit" name="saveadm" id="saveadm" style="display:none;">save</button>
 
                 </div>
             </div>
@@ -146,7 +147,8 @@
             <div class="card">
                 <div class="card-header">
                     <h4><i class="mdi mdi-microsoft-onedrive"></i>&nbsp;Microsoft OneDrive
-                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i class="mdi mdi-alert-outline"></i>&nbsp;For OneDrive documents collaboration
+                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i
+                                class="mdi mdi-alert-outline"></i>&nbsp;For OneDrive documents collaboration
                         </div>
                     </h4>
                 </div>
@@ -190,7 +192,8 @@
             <div class="card">
                 <div class="card-header">
                     <h4><i class="mdi mdi-dropbox"></i>&nbsp;Dropbox
-                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i class="mdi mdi-alert-outline"></i>&nbsp;For Dropbox documents collaboration
+                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i
+                                class="mdi mdi-alert-outline"></i>&nbsp;For Dropbox documents collaboration
                         </div>
                     </h4>
                 </div>
@@ -213,6 +216,41 @@
                 </div>
             </div>
             <?php } ?>
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="mdi mdi-account-circle-outline"></i>&nbsp;Service NOW
+                        <div class="ribbon ribbon-default ribbon-right" style="font-size:small;"><i
+                                class="mdi mdi-alert-outline"></i>&nbsp;For Service now implementation
+                        </div>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-4">SNOW API Endpoint</label>
+                        <div class="col-md-8">
+                            <input type="text" name="conf#snowapi"
+                                value="<?php echo isset($_POST['conf#snowapi'])?$_POST['conf#snowapi']:$website['snowapi'];?>"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-4">SNOW User</label>
+                        <div class="col-md-8">
+                            <input type="text" name="conf#snowuser"
+                                value="<?php echo isset($_POST['conf#snowuser'])?$_POST['conf#snowuser']:$website['snowuser'];?>"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-4">SNOW Password</label>
+                        <div class="col-md-8">
+                            <input type="password" name="conf#snowpass"
+                                value="<?php echo isset($_POST['conf#snowpass'])?$_POST['conf#snowpass']:$website['snowpass'];?>"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <div class="col-md-4">
@@ -220,8 +258,8 @@
             <div class="card-header">
                 <h4>Eternal module Status</h4>
             </div>
-            <div class="card-body">
-                <table class="table browser mt-3 table-borderless">
+            <div class="card-body p-1">
+                <table class="table browser mt-0 mb-0 table-borderless">
                     <tbody>
                         <tr>
                             <td style="width:40px"><i class="mdi mdi-git"></i></td>
@@ -242,6 +280,13 @@
                             <td>Dropbox</td>
                             <td class="text-end"><span
                                     class="badge badge-<?php echo !empty($website['dbclid'])?"success":"danger";?>"><?php echo !empty($website['dbclid'])?"Enabled":"Disabled";?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:40px"><i class="mdi mdi-account-circle-outline"></i></td>
+                            <td>Service NOW</td>
+                            <td class="text-end"><span
+                                    class="badge badge-<?php echo !empty($website['snowapi'])?"success":"danger";?>"><?php echo !empty($website['snowapi'])?"Enabled":"Disabled";?></span>
                             </td>
                         </tr>
                     </tbody>

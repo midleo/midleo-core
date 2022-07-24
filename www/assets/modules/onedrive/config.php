@@ -68,9 +68,9 @@ class Class_onedrive
             "active"=>($page=="draw")?"active":"",
              ));
              }
-              if (sessionClass::checkAcc($acclist, "dbfiles")) {
+              if (!empty($website['dbclid'])) {
                 array_push($brarr,array(
-                    "title"=>"View/Map Dropbox files",
+                  "title"=>"View/Map Dropbox files",
                   "link"=>"/dropbox",
                   "icon"=>"mdi-dropbox",
                   "active"=>($page=="dropbox")?"active":"",
