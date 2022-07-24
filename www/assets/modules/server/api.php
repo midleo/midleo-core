@@ -4,7 +4,7 @@ $reltypes=array(
     "ibmace"=>"IBM App connect (11, 12)",
     "ibmiib"=>"IBM Integration Bus (9, 10)",
     "imbwas"=>"IBM Websphere AS (v70, v85 or traditional-v9-0)",
-    "jboss"=>"Oracle Jboss EAP",
+    "jboss"=>"Oracle Jboss EAP (7.0, 7.1, 7.2, 7.3, 7.4)",
     "wildfly"=>"Oracle Wildfly server",
     "tomcat"=>"Apache Tomcat server",
     "nginx"=>"Nginx Web server",
@@ -64,19 +64,33 @@ class serverApi{
              }
         }
     }
-    public static function jboss($ver=null){
-        $dom = new DOMDocument();
-        @$html = file_get_contents("https://developers.redhat.com/products/eap/download");
-        $dom->loadHTML($html);
-        $grabber = new DOMXPath($dom);
-        $cols = $grabber->query("//*[contains(@class, 'rhd-c-product-download-hero-footer--version')]");
-        $data=str_replace(array("Version ","\n","\t"," "),"",$cols->item(0)->nodeValue?$cols->item(0)->nodeValue:"");
-        if($data){
-            $pdo = pdodb::connect();
-            $sql = "update env_releases set latestver=?, lastcheck=now() where reltype='jboss'";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($data));
-            pdodb::disconnect();
+    public static function jboss($ver=null,$arrver=array("7.4"=>0,"7.3"=>1,"7.2"=>2,"7.1"=>3,"7.0"=>4)){
+        if($ver){
+            $dom = new DOMDocument();
+            $data="";
+            libxml_use_internal_errors(true);
+            $html=file_get_contents("https://access.redhat.com/articles/2332721");
+            $html=preg_replace('%<sup.*?</sup>%i', '', $html);
+            $dom->loadHTML($html);
+            $dom->preserveWhiteSpace = false;
+            $tables = $dom->getElementsByTagName('table'); 
+            $rows = $tables->item($arrver[$ver])->getElementsByTagName('tr'); 
+            $i=0;
+            foreach ($rows as $row) 
+            {
+                $cols = $row->getElementsByTagName('td'); 
+                if (DateTime::createFromFormat('F j, Y', $cols->item(1)->nodeValue) !== false) {
+                    $i++;
+                    if($i==1){ $data=$ver.".".str_replace(array("Update ","Refresh Pack","Latest Release","\n","\t"," "),"",$cols->item(0)->nodeValue);}
+                }
+            }
+            if($data){
+                $pdo = pdodb::connect();
+                $sql = "update env_releases set latestver=?, lastcheck=now() where reltype='jboss' and relversion=?";
+                $q = $pdo->prepare($sql);
+                $q->execute(array($data,$ver));
+                pdodb::disconnect();
+            }
         }
     }
     public static function wildfly($ver=null){

@@ -5,7 +5,6 @@
         "icon"=>"mdi-plus",
         "active"=>false,
       ));
-      serverApi::jboss();
     ?>
 <?php  if($_GET["type"]=="new"){ ?>
 <div class="row">
