@@ -835,6 +835,7 @@ CREATE TABLE IF NOT EXISTS `env_releases` (
   `versionmatch` varchar(50) DEFAULT NULL,
   `releasename` varchar(80) NOT NULL,
   `relperiod` varchar(20) DEFAULT NULL,
+  `inpmethod` int(1)  DEFAULT NULL,
   `reltype` varchar(20) DEFAULT NULL,
   `relcontact` varchar(255) DEFAULT NULL,
   `relversion` varchar(25)  DEFAULT NULL,

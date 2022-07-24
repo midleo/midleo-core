@@ -5,6 +5,7 @@
         "icon"=>"mdi-plus",
         "active"=>false,
       ));
+      serverApi::jboss();
     ?>
 <?php  if($_GET["type"]=="new"){ ?>
 <div class="row">
@@ -35,6 +36,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-5">Input method</label>
+                        <div class="col-md-7">
+                            <select name="inpmethod" class="form-control">
+                               <option value="1">Automatic with cron</option>
+                               <option value="0" onclick="$('#latestver').show();">Manual input</option>
+                            </select>
+                        </div>
+                    </div>     
+                    <div class="form-group row">
                         <label class="form-control-label text-lg-right col-md-5">Type</label>
                         <div class="col-md-7">
                             <select name="reltype" class="form-control">
@@ -61,6 +71,12 @@
                             <button type="button" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Some releases require additional matching text to be specified. For example LTS or z/OS"><i
                                     class="mdi mdi-information-variant mdi-18px"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="latestver" style="display:none;">
+                        <label class="form-control-label text-lg-right col-md-5">Latest version</label>
+                        <div class="col-md-7">
+                            <input type="text" name="latestver"  value="" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -127,6 +143,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="form-control-label text-lg-right col-md-5">Input method</label>
+                        <div class="col-md-7">
+                            <select name="inpmethod" class="form-control">
+                               <option value="1" <?php echo $zobj["inpmethod"]=="1"?"selected":"";?>>Automatic with cron</option>
+                               <option value="0" onclick="$('#latestver').show();" <?php echo $zobj["inpmethod"]=="0"?"selected":"";?>>Manual input</option>
+                            </select>
+                        </div>
+                    </div>  
+                    <div class="form-group row">
                         <label class="form-control-label text-lg-right col-md-5">Type</label>
                         <div class="col-md-7">
                             <select name="reltype" class="form-control">
@@ -154,6 +179,12 @@
                             <button type="button" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Some releases require additional matching text to be specified. For example LTS or z/OS"><i
                                     class="mdi mdi-information-variant mdi-18px"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="latestver" style="display:none;">
+                        <label class="form-control-label text-lg-right col-md-5">Latest version</label>
+                        <div class="col-md-7">
+                            <input type="text" name="latestver"  value="<?php echo $zobj["latestver"];?>" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">

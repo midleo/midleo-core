@@ -1367,6 +1367,7 @@ CREATE TABLE env_releases (
   relid varchar2(10) NOT NULL,
   releasename varchar2(80) DEFAULT NULL,
   relperiod varchar2(20) DEFAULT NULL,
+  inpmethod number(1)  DEFAULT NULL,
   reltype varchar2(20) DEFAULT NULL,
   relcontact varchar2(255) DEFAULT NULL,
   relversion varchar2(25) DEFAULT NULL,

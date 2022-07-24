@@ -96,12 +96,14 @@ class Class_env
           }
         }
         if(isset($_POST["updrelease"])){
-          $sql="update env_releases set versionmatch=?, releasename=?, relperiod=?, relversion=?, reltype=?".(!empty($_POST["contact"])?",relcontact='".htmlspecialchars($_POST["contact"])."'":"")." where relid=?";
+          $sql="update env_releases set versionmatch=?, releasename=?, relperiod=?, inpmethod=?, latestver=?, relversion=?, reltype=?".(!empty($_POST["contact"])?",relcontact='".htmlspecialchars($_POST["contact"])."'":"")." where relid=?";
           $stmt = $pdo->prepare($sql); 
           if($stmt->execute(array(
             htmlspecialchars($_POST["versionmatch"]),
             htmlspecialchars($_POST["release"]),
             htmlspecialchars($_POST["relperiod"]),
+            htmlspecialchars($_POST["inpmethod"]),
+            htmlspecialchars($_POST["latestver"]),
             htmlspecialchars($_POST["relversion"]),
             htmlspecialchars($_POST["reltype"]),
             htmlspecialchars($_GET["uid"])
@@ -113,13 +115,15 @@ class Class_env
         }
         if(isset($_POST["saverelease"])){
           $hash = textClass::getRandomStr(8);
-          $sql="insert into env_releases (relid,versionmatch,releasename,relperiod,reltype,relcontact,relversion,created_by) values(?,?,?,?,?,?,?,?)";
+          $sql="insert into env_releases (relid,versionmatch,releasename,relperiod,inpmethod,latestver,reltype,relcontact,relversion,created_by) values(?,?,?,?,?,?,?,?,?,?)";
           $stmt = $pdo->prepare($sql);
           if($stmt->execute(array(
               $hash,
               htmlspecialchars($_POST["versionmatch"]),
               htmlspecialchars($_POST["release"]),
               htmlspecialchars($_POST["relperiod"]),
+              htmlspecialchars($_POST["inpmethod"]),
+              htmlspecialchars($_POST["latestver"]),
               htmlspecialchars($_POST["reltype"]),
               htmlspecialchars($_POST["contact"]),
               htmlspecialchars($_POST["relversion"]),
@@ -241,7 +245,14 @@ class Class_env
               "link"=>"/".$page."/release/",
               "icon"=>false,
               "text"=>"Releases",
-              "active"=>($thisarray['p1'] == "release")?"release":"",
+              "active"=>($thisarray['p1'] == "release")?"active":"",
+            ));
+            array_push($brenvarr,array(
+              "title"=>"Release status on servers",
+              "link"=>"/".$page."/relstatus/",
+              "icon"=>false,
+              "text"=>"Release status",
+              "active"=>($thisarray['p1'] == "relstatus")?"active":"",
             ));
         }
     
@@ -282,15 +293,28 @@ include $website['corebase']."public/modules/js.php";?>
 <script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="/<?php echo $website['corebase'];?>assets/js/tinymce/mentions.min.js"></script>
 <?php } ?>
-<?php if($thisarray["p1"]=="places"){?>
+<?php if($thisarray["p1"]=="relstatus"){?>
 <script src="/<?php echo $website['corebase'];?>assets/js/datatables/jquery.dataTables.min.js"></script>
 <script src="/<?php echo $website['corebase'];?>assets/js/datatables/dataTables.responsive.min.js"></script>
 <script>
-$('#data-table').DataTable({
+let dtable = $('.datainfo').DataTable({
     "oLanguage": {
         "sSearch": ""
     },
-    dom: 'Bfrtip'
+    dom: 'Bfrtip',
+    responsive: true,
+    columnDefs: [{
+            responsivePriority: 3,
+            targets: 0
+        },
+        {
+            responsivePriority: 2,
+            targets: -1
+        }
+    ]
+});
+$('.dtfilter').keyup(function() {
+    dtable.search($(this).val()).draw();
 });
 </script>
 <?php }
