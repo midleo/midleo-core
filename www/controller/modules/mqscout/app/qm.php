@@ -23,7 +23,7 @@ if($row["appid"]){
 <table class="table table-vmiddle table-hover mb-0">
     <tbody>
     <?php foreach($zobj as $val)  { ?>
-<tr><td><a href="/env/apps/?app=<?php echo $val["appcode"];?>" target="_blank"><?php echo $val["appcode"];?></a></td><td><?php echo $val["appname"];?></td><td><a href="/browse/user/<?php echo $val["owner"];?>" target="_blank"><?php echo $val["owner"];?></a></td></tr>
+<tr><td><a href="/mqscout/qm/<?php echo $thisarray['p2'];?>/<?php echo $val["appcode"];?>" target="_parent"><?php echo $val["appcode"];?></a></td><td><?php echo $val["appname"];?></td><td><a href="/browse/user/<?php echo $val["owner"];?>" target="_blank"><?php echo $val["owner"];?></a></td></tr>
        <?php } ?>
         </tbody>
         </table>
@@ -61,7 +61,8 @@ $tmp["lrun"]=$row["lrun"];
                 </table>
             </div>
         </div>
-        <?php } ?>
+        <?php     
+    } ?>
     </div>
 </div>
 

@@ -46,4 +46,7 @@
         <?php  } ?>
     </div>
     <?php  } ?>
+    <?php if($brtemp){ echo '<ul class="list-group listdoc">'; foreach($brtemp as $key=>$val){ ?>
+        <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $val;?></li>
+    <?php } echo "</ul>"; } ?>
 </div>

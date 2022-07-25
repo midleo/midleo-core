@@ -38,7 +38,6 @@
                     <tr>
                         <th class="text-center" style="width:50px;"></th>
                         <th class="text-center">Job</th>
-                        <th class="text-center">QM</th>
                         <th class="text-center">Queue</th>
                         <th class="text-center">Type</th>
                         <th class="text-center" style="width:130px;">Action</th>
@@ -47,8 +46,11 @@
                 <tbody
                     ng-init="getAll('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $page;?>')">
                     <tr ng-hide="contentLoaded">
-                        <td colspan="6" style="text-align:center;font-size:1.1em;"><i
-                                class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     </tr>
                     <tr id="contloaded" class="hide"
                         dir-paginate="d in names | filter:search | orderBy:'qm':reverse | itemsPerPage:10"
@@ -64,7 +66,6 @@
                         </td>
                         <td class="text-center" style="padding: .5rem;"><a href="/automation/{{d.jobid}}"
                                 ng-show="d.jobrun==1"><i class="mdi mdi-play-circle-outline mdi-24px"></i></a></td>
-                        <td class="text-center">{{ d.qm }}</td>
                         <td class="text-center">{{ d.name}}</td>
                         <td class="text-center">{{ d.type }}</td>
                         <td class="text-center">
@@ -122,38 +123,12 @@
                                     <div class="tab-content container form-material"
                                         style="width:100%;min-height:300px;max-height:500px;overflow-x:hidden;overflow-y:scroll;">
                                         <div role="tabpanel" class="tab-pane active" id="base">
-
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3">Active</label>
-                                                <div class="col-md-9"><select class="form-control"
-                                                        ng-init="mq.active='yes'" ng-model="mq.active">
-                                                        <option value="">Please select</option>
-                                                        <option value="yes">Yes</option>
-                                                        <option value="no">No</option>
-                                                    </select></div>
-                                            </div>
-                                            <?php if(isset($modulelist["budget"]) && !empty($modulelist["budget"])){ ?>
+                                            <input ng-model="mq.active" value="yes" type="text"
+                                            style="display:none;">
                                             <input ng-model="mq.proj" style="display:none;"
-                                                value="<?php echo $thisarray['p2'];?>">
-                                            <?php } ?>
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3">QMGR</label>
-                                                <div class="col-md-9">
-                                                    <?php 
- $sql="select serverdns,qmname from env_appservers where (serv_type='qm' or serv_type='fte') and proj=? group by qmname";
- $stmt = $pdo->prepare($sql);
- $stmt->execute(array($thisarray['p2']));
- if($zobjfte = $stmt->fetchAll()){
- ?>
-                                                    <select class="form-control" ng-model="mq.qm" ng-required="true">
-                                                        <option value="">Please select</option>
-                                                        <?php foreach($zobjfte as $val) { echo '<option value="'.$val["qmname"].'">'.$val['qmname'].' ('.$val['serverdns'].')</option>'; } ?>
-                                                    </select><?php } else { ?>
-                                                    <input ng-model="mq.qm" ng-required="true" type="text"
-                                                        class="form-control">
-                                                    <?php } ?>
-                                                </div>
-                                            </div>
+                                                value="<?php echo $thisarray['p3'];?>">
+                                            <input ng-model="mq.qm" value="<?php echo $thisarray['p2'];?>" type="text"
+                                            style="display:none;">
                                             <div class="form-group row">
                                                 <label class="form-control-label text-lg-right col-md-3">Tags</label>
                                                 <div class="col-md-8"><input id="tags" data-role="tagsinput" type="text"
