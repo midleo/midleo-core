@@ -33,7 +33,7 @@
                     </tr>
                 </thead>
                 <tbody
-                    ng-init="getAll('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $page;?>')">
+                ng-init="getAll('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p3'];?>','<?php echo $page;?>','<?php echo $thisarray['p2'];?>')">
                     <tr ng-hide="contentLoaded">
                         <td colspan="4" style="text-align:center;font-size:1.1em;"><i
                                 class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
@@ -50,16 +50,11 @@
                                     ng-click="readOne('<?php echo $thisarray['p1'];?>',d.varid,d.varid,'<?php echo $page;?>')"
                                     style="" class="btn btn-light btn-sm bg waves-effect"><i
                                         class="mdi mdi-pencil mdi-18px"></i></button>
-                                <?php if($zobj['lockedby']==$_SESSION['user']){?>
+                        
                                 <?php if($_SESSION['user_level']>="3"){?><button type="button"
-                                    ng-click="deletevar(d.varname,d.varid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')"
+                                    ng-click="deletevar(d.varname,d.varid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p3'];?>')"
                                     class="btn btn-light btn-sm bg waves-effect"><i
                                         class="mdi mdi-close"></i></button><?php } ?>
-                                <?php } else {?>
-                                <?php if($_SESSION['user_level']>="3"){?><button type="button"
-                                    class="btn btn-light btn-sm bg waves-effect"><i
-                                        class="mdi mdi-close"></i></button><?php } ?>
-                                <?php } ?>
                             </div>
                         </td>
                     </tr>
@@ -122,28 +117,24 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i
                                         class="mdi mdi-close"></i>&nbsp;Close</button>
-                                <?php if($zobj['lockedby']==$_SESSION['user']){?>
                                 <?php if($_SESSION['user_level']>="3"){?>
                                 <button type="button" id="btn-create-obj"
                                     class="waves-effect waves-light btn btn-info btn-sm"
-                                    ng-click="form.$valid && createvar('<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')"><i
+                                    ng-click="form.$valid && createvar('<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p3'];?>')"><i
                                         class="mdi mdi-check"></i>&nbsp;Create</button>
                                 <button type="button" id="btn-update-obj"
                                     class="waves-effect waves-light btn btn-info btn-sm"
-                                    ng-click="updatevar('<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')"><i
+                                    ng-click="updatevar('<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p3'];?>')"><i
                                         class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
-                                <?php } ?>
                                 <?php } ?>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <?php if($zobj['lockedby']==$_SESSION['user']){?>
             <?php if($_SESSION['user_level']>="3"){?>
             <?php include $maindir."/public/modules/deplform.php";?>
             <?php include $maindir."/public/modules/respform.php";?>
-            <?php } ?>
             <?php } ?>
         </div>
     </div>

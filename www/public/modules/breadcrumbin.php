@@ -1,4 +1,8 @@
-<div class="sticky-top" style="top:70px;z-index:100;"><?php if($breadcrumb["special"] || $brarr){ ?>
+<div class="sticky-top" style="top:70px;z-index:100;">
+<?php if($brtemp){ echo '<ul class="list-group listdoc">'; foreach($brtemp as $key=>$val){ ?>
+        <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $val;?></li>
+    <?php } echo "</ul><br>"; } ?>
+    <?php if($breadcrumb["special"] || $brarr){ ?>
     <div class="list-group">
         <?php  if($brarr){ foreach($brarr as $key=>$val){ ?>
         <a href="<?php echo $val["link"];?>" <?php if($val["tab"]){?>data-bs-toggle="tab" role="tab" <?php } ?>
@@ -46,7 +50,4 @@
         <?php  } ?>
     </div>
     <?php  } ?>
-    <?php if($brtemp){ echo '<ul class="list-group listdoc">'; foreach($brtemp as $key=>$val){ ?>
-        <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $val;?></li>
-    <?php } echo "</ul>"; } ?>
 </div>

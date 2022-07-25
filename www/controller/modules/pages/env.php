@@ -247,7 +247,6 @@ class Class_env
         }
     
             $zobj['projid'] == "";
-            $zobj['lockedby'] = $_SESSION['user'];
 ?>
 <div class="row pt-3">
     <div class="col-lg-2 bg-white leftsidebar">

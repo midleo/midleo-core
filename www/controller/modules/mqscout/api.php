@@ -207,7 +207,7 @@ class Class_mqapi
                     $newdata[] = $data;
                 }
             } else {
-                $sql = "SELECT id,jobrun,jobid,qmgr,proj,objname,objtype," . (DBTYPE == 'oracle' ? "to_char(objdata) as objdata" : "objdata") . " FROM mqenv_mq_" . $d1 . " " . (!empty($data->projid) ? " where qmgr='" . $data->projid . "'" : "");
+                $sql = "SELECT id,jobrun,jobid,qmgr,proj,objname,objtype," . (DBTYPE == 'oracle' ? "to_char(objdata) as objdata" : "objdata") . " FROM mqenv_mq_" . $d1 . " where 1=1" .(!empty($data->qm) ? " and qmgr='" . $data->qm . "'" : ""). (!empty($data->projid) ? " and proj='" . $data->projid . "'" : "");
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
                 $zobj = $stmt->fetchAll();
@@ -342,7 +342,7 @@ class Class_mqapi
     {
         $pdo = pdodb::connect();
         $data = json_decode(file_get_contents("php://input"));
-        $sql = "insert into mqenv_mq_" . $d1 . " (proj,qmgr,objname,objtype,objdata,lockedby,projinfo) select proj,qmgr,concat(objname,'.COPY'),objtype,objdata,lockedby,projinfo from mqenv_mq_" . $d1 . " where id=?";
+        $sql = "insert into mqenv_mq_" . $d1 . " (proj,qmgr,objname,objtype,objdata,projinfo) select proj,qmgr,concat(objname,'.COPY'),objtype,objdata,projinfo from mqenv_mq_" . $d1 . " where id=?";
         $stmt = $pdo->prepare($sql);
         if ($stmt->execute(array($data->qmid))) {
             echo "Object was copied.";
@@ -484,7 +484,7 @@ class Class_mqapi
         $pdo = pdodb::connect();
         $data = json_decode(file_get_contents("php://input"));
         if ($data->type == "env") {
-            $sql = "select id,flowid,flowname,info," . (DBTYPE == 'oracle' ? "to_char(reqinfo) as reqinfo" : "reqinfo") . ",modified,lockedby from iibenv_flows where projid=?";
+            $sql = "select id,flowid,flowname,info," . (DBTYPE == 'oracle' ? "to_char(reqinfo) as reqinfo" : "reqinfo") . ",modified from iibenv_flows where projid=?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array(htmlspecialchars($data->projid)));
         } else {

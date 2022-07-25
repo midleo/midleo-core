@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_authrec (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(20) DEFAULT NULL
@@ -41,7 +40,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_cert (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(50) DEFAULT NULL
@@ -55,7 +53,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_channels (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
@@ -69,7 +66,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_clusters (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(50) DEFAULT NULL
@@ -83,7 +79,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_dlqh (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(50) DEFAULT NULL
@@ -97,7 +92,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_nl (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(50) DEFAULT NULL
@@ -111,7 +105,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_prepost (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(50) DEFAULT NULL
@@ -125,7 +118,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_process (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
@@ -139,7 +131,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_qm (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
@@ -153,7 +144,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_queues (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
@@ -167,7 +157,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_service (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
@@ -181,7 +170,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_subs (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
@@ -195,7 +183,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_topics (
   objtype varchar(50) NOT NULL,
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   projinfo text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
@@ -240,7 +227,6 @@ CREATE TABLE IF NOT EXISTS mqenv_mqfte (
   postdestcmdarg varchar(255)  DEFAULT '',
   info varchar(255) DEFAULT NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
 );
@@ -251,8 +237,7 @@ CREATE TABLE IF NOT EXISTS mqjms (
   bindings text NULL,
   connfactory text NULL,
   objects text NULL,
-  changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT ''
+  changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 )  ;
 
 CREATE TABLE IF NOT EXISTS requests (
@@ -357,7 +342,6 @@ CREATE TABLE IF NOT EXISTS iibenv_flows (
   insvn NUMERIC(1) NOT NULL DEFAULT '0',
   reqinfo text NULL,
   modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT '',
   UNIQUE(flowid)
 )  ;
 
@@ -392,8 +376,7 @@ CREATE TABLE IF NOT EXISTS env_appservers (
   sslcipher varchar(100) DEFAULT NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   srvuser varchar(200) DEFAULT NULL,
-  srvpass varchar(255) DEFAULT NULL,
-  lockedby varchar(50)  DEFAULT ''
+  srvpass varchar(255) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS knowledge_categories (
@@ -466,8 +449,7 @@ CREATE TABLE IF NOT EXISTS env_firewall (
    srcdns varchar(120) NOT NULL,
   destdns varchar(120) NOT NULL,
   info varchar(255)  DEFAULT '',
-  changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lockedby varchar(50)  DEFAULT ''
+  changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS requests_deployments (

@@ -12,7 +12,6 @@ begin
   objtype varchar(50) NOT NULL,
   objdata clob DEFAULT '''',
   changed timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
-  lockedby varchar2(50) DEFAULT '''',
   projinfo clob DEFAULT '''',
   jobrun number(1) DEFAULT NULL,
   jobid varchar2(10) DEFAULT NULL,

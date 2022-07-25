@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_authrec` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -49,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_cert` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -62,7 +60,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_channels` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -77,7 +74,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_clusters` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -90,7 +86,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_dlqh` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -105,7 +100,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_nl` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -118,7 +112,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_prepost` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -131,7 +124,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_process` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -146,7 +138,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_qm` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -161,7 +152,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_queues` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -205,7 +195,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_service` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -220,7 +209,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_subs` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -235,7 +223,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_topics` (
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `projinfo` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
@@ -281,7 +268,6 @@ CREATE TABLE IF NOT EXISTS `mqenv_mqfte` (
   `postdestcmdarg` varchar(255) NOT NULL DEFAULT '',
   `info` varchar(255) DEFAULT NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -294,7 +280,6 @@ CREATE TABLE IF NOT EXISTS `mqjms` (
   `connfactory` text NULL,
   `objects` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -405,7 +390,6 @@ CREATE TABLE IF NOT EXISTS `iibenv_flows` (
   `insvn` int(1) NOT NULL DEFAULT '0',
   `reqinfo` text NULL,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `flowid` (`flowid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -443,7 +427,6 @@ CREATE TABLE IF NOT EXISTS `env_appservers` (
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `srvuser` VARCHAR(200) DEFAULT NULL,
   `srvpass` VARCHAR(255) DEFAULT NULL,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -523,7 +506,6 @@ CREATE TABLE IF NOT EXISTS `env_firewall` (
   `destdns` varchar(120) NOT NULL,
   `info` varchar(255) DEFAULT NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lockedby` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

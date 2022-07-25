@@ -44,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody
-                    ng-init="getAll('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $page;?>')">
+                ng-init="getAll('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p3'];?>','<?php echo $page;?>','<?php echo $thisarray['p2'];?>')">
                     <tr ng-hide="contentLoaded">
                         <td colspan="4" style="text-align:center;font-size:1.1em;"><i
                                 class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
@@ -181,7 +181,6 @@ $stmt->execute(array($thisarray['p2']));
                                         class="waves-effect waves-light btn btn-info btn-sm"
                                         ng-click="mqsc('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>',mq.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
                                         ng-href="{{ url }}"><i class="mdi mdi-download"></i>&nbsp;Create mqsc</button>
-                                    <?php if($zobj['lockedby']==$_SESSION['user']){?>
                                     <?php if($_SESSION['user_level']>="3"){?>
                                     <button type="button" id="btn-create-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
@@ -192,18 +191,15 @@ $stmt->execute(array($thisarray['p2']));
                                         ng-click="update('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
                                             class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
                                     <?php } ?>
-                                    <?php } ?>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <?php if($zobj['lockedby']==$_SESSION['user']){?>
             <?php if($_SESSION['user_level']>="3"){?>
             <?php include $maindir."/public/modules/deplform.php";?>
             <?php include $maindir."/public/modules/respform.php";?>
-            <?php } ?>
             <?php } ?>
         </div>
     </div>

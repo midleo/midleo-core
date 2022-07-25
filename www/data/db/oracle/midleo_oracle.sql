@@ -102,7 +102,6 @@ CREATE TABLE mqenv_mqfte (
   postdestcmdarg varchar2(255) DEFAULT '',
   info varchar2(255) DEFAULT '',
   changed timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
-  lockedby varchar2(50) DEFAULT '',
   jobrun number(1) DEFAULT NULL,
   jobid varchar2(20) DEFAULT NULL,
   PRIMARY KEY (id)
@@ -128,7 +127,6 @@ CREATE TABLE mqjms (
   connfactory clob DEFAULT '',
   objects clob DEFAULT '',
   changed timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
-  lockedby varchar2(50) DEFAULT '',
   PRIMARY KEY (id)
 )   ;
 BEGIN EXECUTE IMMEDIATE 'drop sequence mqjms_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -318,7 +316,6 @@ CREATE TABLE iibenv_flows (
   insvn number(1) DEFAULT '0',
   reqinfo clob DEFAULT '',
   modified timestamp(0) DEFAULT SYSTIMESTAMP,
-  lockedby varchar2(50) DEFAULT '',
   PRIMARY KEY (id),
   CONSTRAINT mqenvflowid UNIQUE  (flowid)
 )   ;
@@ -382,7 +379,6 @@ CREATE TABLE env_appservers (
   changed timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
   srvuser varchar2(200) DEFAULT '',
   srvpass varchar2(255) DEFAULT '',
-  lockedby varchar2(50) DEFAULT '',
   PRIMARY KEY (id)
 )    ;
 BEGIN EXECUTE IMMEDIATE 'drop sequence env_appservers_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -505,7 +501,6 @@ CREATE TABLE env_firewall (
   destdns varchar2(120) DEFAULT '',
   info varchar2(255) DEFAULT '',
   changed timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
-  lockedby varchar2(50) DEFAULT '',
   PRIMARY KEY (id)
 )    ;
 BEGIN EXECUTE IMMEDIATE 'drop sequence env_firewall_seq'; EXCEPTION WHEN OTHERS THEN NULL; END;

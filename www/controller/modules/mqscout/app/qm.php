@@ -6,6 +6,73 @@
     </div>
     <div class="col-md-9">
         <div class="card p-0">
+            <?php if(!empty($thisarray['p3'])){ 
+            $sql="select id,tags,appcode,appname,".(DBTYPE=='oracle'?"to_char(appinfo) as appinfo":"appinfo").",owner,".(DBTYPE=='oracle'?"to_char(appusers) as appusers":"appusers")." from config_app_codes where appcode=?";
+            $q = $pdo->prepare($sql); 
+            $q->execute(array(htmlspecialchars($thisarray['p3']))); 
+            if($zobj = $q->fetch(PDO::FETCH_ASSOC)){ 
+    ?>
+            <div class="card-header border-bottom">
+                <?php echo $zobj["appname"];?>
+            </div>
+            <div class="body">
+                <table class="table table-vmiddle table-hover mb-0">
+                    <tbody>
+                        <tr>
+                            <td class="bg-light" style="max-width:25%;width:25%;">Details</td>
+                            <td><?php echo $zobj["appinfo"];?></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-light" style="max-width:25%;width:25%;">Owner</td>
+                            <td><?php 
+$sql="select avatar,fullname,utitle,user_online,user_online_show from users where mainuser=?";
+$qin = $pdo->prepare($sql); 
+$qin->execute(array($zobj["owner"])); 
+if($zobjin = $qin->fetch(PDO::FETCH_ASSOC)){ ?>
+                <div class="position-relative">
+                    <a href="/browse/user/<?php echo $zobj["owner"];?>" target="_blank"
+                        class="py-3 px-2 text-decoration-none">
+                        <div class="user-img position-relative d-inline-block me-2">
+                            <img src="<?php echo !empty($zobjin["avatar"])?(file_get_contents('/'.$website['corebase'].substr($zobjin["avatar"],1))?'/'.$website['corebase'].substr($zobjin["avatar"],1):'/'.$website['corebase'].'assets/images/avatar.svg') : '/'.$website['corebase'].'assets/images/avatar.svg' ;?>"
+                                width="40" alt="<?php echo $zobjin["fullname"];?>" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="<?php echo $zobjin["fullname"];?>"
+                                class="rounded-circle">
+                            <span
+                                class="profile-status pull-right d-inline-block position-absolute bg-<?php echo $zobjin["user_online_show"]==0?"secondary":($zobjin["user_online"]==1?"success":"danger");?> rounded-circle"></span>
+                        </div>
+                        <div class="mail-contnet d-inline-block align-middle">
+                            <h5 class="my-1"><?php echo $zobjin["fullname"];?></h5> <span
+                                class="mail-desc font-12 text-truncate overflow-hidden badge badge-info"><?php echo !empty($zobjin["utitle"])?$zobjin["utitle"]:"No title";?></span>
+                        </div>
+                    </a>
+                </div>
+                <?php } ?></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-light" style="max-width:25%;width:25%;">Members</td>
+                            <td>
+                            <?php if($zobj["appusers"]){ ?>
+                <div class="position-relative">
+                    <?php
+   foreach(json_decode($zobj["appusers"],true) as $key=>$val){?>
+                    <a href="/browse/user/<?php echo $key;?>" target="_blank"
+                        class="py-3 px-2 text-decoration-none">
+                        <div class="user-img position-relative d-inline-block me-2">
+                            <img src="<?php echo !empty($val["uavatar"])?(file_get_contents('/'.$website['corebase'].'assets/images/users/'.$val["uavatar"])?'/'.$website['corebase'].'assets/images/users/'.$val["uavatar"]:'/'.$website['corebase'].'assets/images/avatar.svg') : '/'.$website['corebase'].'assets/images/avatar.svg' ;?>"
+                                width="40" alt="<?php echo $val["uname"];?>" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="<?php echo $val["uname"];?>" class="rounded-circle">
+                        </div>
+                    </a>
+                    <?php } ?>
+                </div>
+                <?php } else { echo "<div class='alert'>No members yet</div>"; } ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <?php } 
+} else { ?>
             <div class="card-header border-bottom">
                 Connected projects
             </div>
@@ -20,18 +87,25 @@ if($row["appid"]){
     $q->execute(array_keys(json_decode($row["appid"],true)));
     $zobj = $q->fetchAll();
     if(is_array($zobj)){ ?>
-<table class="table table-vmiddle table-hover mb-0">
-    <tbody>
-    <?php foreach($zobj as $val)  { ?>
-<tr><td><a href="/mqscout/qm/<?php echo $thisarray['p2'];?>/<?php echo $val["appcode"];?>" target="_parent"><?php echo $val["appcode"];?></a></td><td><?php echo $val["appname"];?></td><td><a href="/browse/user/<?php echo $val["owner"];?>" target="_blank"><?php echo $val["owner"];?></a></td></tr>
-       <?php } ?>
-        </tbody>
-        </table>
-<?php    }
+                <table class="table table-vmiddle table-hover mb-0">
+                    <tbody>
+                        <?php foreach($zobj as $val)  { ?>
+                        <tr>
+                            <td><a href="/mqscout/qm/<?php echo $thisarray['p2'];?>/<?php echo $val["appcode"];?>"
+                                    target="_parent"><?php echo $val["appcode"];?></a></td>
+                            <td><?php echo $val["appname"];?></td>
+                            <td><a href="/browse/user/<?php echo $val["owner"];?>"
+                                    target="_blank"><?php echo $val["owner"];?></a></td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <?php    }
 }
 }
 ?>
             </div>
+            <?php } ?>
         </div>
         <?php $sql="select qminv,lrun from env_jobs_mq where qmgr=?";
 $q = $pdo->prepare($sql);
@@ -271,7 +345,6 @@ $stmt->execute(array($thisarray['p2']));
                                         class="waves-effect waves-light btn btn-primary btn-sm"
                                         ng-click="mqsc('<?php echo $thisarray['p1'];?>',mq.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
                                         ng-href="{{ url }}"><i class="mdi mdi-download"></i>&nbsp;Create mqsc</button>
-                                    <?php if($zobj['lockedby']==$_SESSION['user']){?>
                                     <?php if($_SESSION['user_level']>="3"){?>
                                     <button type="button" id="btn-create-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
@@ -281,7 +354,6 @@ $stmt->execute(array($thisarray['p2']));
                                         class="waves-effect waves-light btn btn-info btn-sm"
                                         ng-click="update('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
                                             class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
-                                    <?php } ?>
                                     <?php } ?>
                                 </div>
                             </div>

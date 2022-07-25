@@ -44,11 +44,11 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
   };
   $scope.exportData = function (what) { alasql('SELECT * INTO XLSX("MidleoData_' + what + '.xlsx",{sheetid:"' + what + '",headers:true}) FROM ?', [$scope.names]); };
   //end main functions 
-  $scope.getAll = function (what, projid, type) {
+  $scope.getAll = function (what, projid, type, qm=null) {
     if ($('#contloaded')[0]) { angular.element(document.querySelector('#contloaded')).removeClass('hide'); }
     $http({
       method: 'POST',
-      data: { 'projid': projid, 'type': type },
+      data: { 'projid': projid, 'type': type , 'qm': qm},
       url: '/mqapi/read/' + what
     }).then(function successCallback(response) {
       $scope.contentLoaded = true;

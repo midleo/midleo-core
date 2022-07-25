@@ -44,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody
-                    ng-init="getAll('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $page;?>')">
+                    ng-init="getAll('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p3'];?>','<?php echo $page;?>','<?php echo $thisarray['p2'];?>')">
                     <tr ng-hide="contentLoaded">
                     <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
@@ -76,7 +76,7 @@
                                         class="mdi mdi-pencil mdi-18px"></i></button>
                                 <?php if($_SESSION['user_level']>="3"){?>
                                 <button type="button"
-                                    ng-click="duplicate('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')"
+                                    ng-click="duplicate('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p3'];?>')"
                                     class="btn btn-light btn-sm bg waves-effect" title="Duplicate"><i
                                         class="mdi mdi-content-duplicate mdi-18px"></i></button>
                                 <button type="button"
@@ -523,17 +523,15 @@
                                         class="waves-effect waves-light btn btn-info btn-sm"
                                         ng-click="mqsc('<?php echo $thisarray['p1'];?>',mq.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
                                         ng-href="{{ url }}"><i class="mdi mdi-download"></i>&nbsp;Create mqsc</button>
-                                    <?php if($zobj['lockedby']==$_SESSION['user']){?>
                                     <?php if($_SESSION['user_level']>="3"){?>
                                     <button type="button" id="btn-create-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="form.$valid && create('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
+                                        ng-click="form.$valid && create('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p3'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
                                             class="mdi mdi-check"></i>&nbsp;Create</button>
                                     <button type="button" id="btn-update-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="update('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
+                                        ng-click="update('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p3'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
                                             class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
-                                    <?php } ?>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -541,11 +539,9 @@
                     </div>
                 </div>
             </div>
-            <?php if($zobj['lockedby']==$_SESSION['user']){?>
             <?php if($_SESSION['user_level']>="3"){?>
             <?php include $maindir."/public/modules/deplform.php";?>
             <?php include $maindir."/public/modules/respform.php";?>
-            <?php } ?>
             <?php } ?>
         </div>
     </div>
