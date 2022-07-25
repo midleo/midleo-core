@@ -1,4 +1,7 @@
-<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { 
+<?php if(empty($thisarray['p2'])){ ?>
+
+
+<?php } else { 
    array_push($brarr,array(
       "title"=>"Export in excel",
       "link"=>"#",
@@ -26,7 +29,10 @@
    
    ?>
 <div class="row">
-    <div class="col-lg-12 ">
+<div class="col-md-3">
+        <?php include "mqsidebar.php";?>
+    </div>
+    <div class="col-md-9">
         <div class="card p-0">
             <table class="table table-vmiddle table-hover stylish-table mb-0">
                 <thead>

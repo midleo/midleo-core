@@ -213,16 +213,6 @@ class Class_env
             "active"=>($thisarray['p1'] == "appservers")?"active":"",
           ));
         }
-        if (sessionClass::checkAcc($acclist, "appadm,appview")) {
-          array_push($brenvarr,array(
-            "title"=>"Variables",
-            "link"=>"/".$page."/vars/".(!empty($thisarray['p2'])?$thisarray['p2']:(!empty($_SESSION["userdata"]["lastappid"])?$_SESSION["userdata"]["lastappid"]:"")),
-            "icon"=>false,
-            "text"=>"Variables",
-            "disabled"=>!empty($thisarray['p2'])?"":"disabled",
-            "active"=>($thisarray['p1'] == "vars")?"active":"",
-          ));
-        }
         if (sessionClass::checkAcc($acclist, "unixadm,unixview")) {
           array_push($brenvarr,array(
             "title"=>"Server information",

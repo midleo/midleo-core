@@ -9,7 +9,7 @@
     <a href="/webstat/charts" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action <?php echo $page=="webstat"?"active":"";?>"><i class="mdi mdi-chart-multiple"></i>&nbsp;Statistics</a>
     <a href="/monitoring" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action <?php echo $page=="monitoring"?"active":"";?>"><i class="mdi mdi-monitor-eye"></i>&nbsp;Monitoring</a>
     <a href="/appconfig" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action <?php echo $page=="appconfig"?"active":"";?>"><i class="mdi mdi-cogs"></i>&nbsp;Midleo Configuration</a>
-<hr> 
+    <hr class="mt-0 mb-0">
 <?php if (method_exists("IBMMQ", "execJava") && is_callable(array("IBMMQ", "execJava"))) { ?>
     <a href="/mqscout/qm" class="waves-effect waves-light list-group-item list-group-item-light list-group-item-action <?php echo $page=="mqscout"?"active":"";?>"><i class="mdi mdi-application-cog-outline"></i>&nbsp;MQScout</a>
    <?php } ?>

@@ -1,4 +1,71 @@
-<?php if(empty($thisarray['p2'])){ include "applist.php"; } else { 
+<?php if(!empty($thisarray['p2'])){ 
+    ?>
+<div class="row">
+    <div class="col-md-3">
+        <?php include "mqsidebar.php";?>
+    </div>
+    <div class="col-md-9">
+        <div class="card p-0">
+            <div class="card-header border-bottom">
+                Connected projects
+            </div>
+            <div class="body">
+                <?php $sql="select appid from mqenv_mq_qm where qmgr=?";
+$q = $pdo->prepare($sql);
+$q->execute(array($thisarray['p2']));
+if ($row = $q->fetch(PDO::FETCH_ASSOC)) {  
+if($row["appid"]){
+    $sql="select appcode,appname,owner from config_app_codes where appcode in (" . str_repeat('?,', count(array_keys(json_decode($row["appid"],true))) - 1) . '?' . ")";
+    $q = $pdo->prepare($sql);
+    $q->execute(array_keys(json_decode($row["appid"],true)));
+    $zobj = $q->fetchAll();
+    if(is_array($zobj)){ ?>
+<table class="table table-vmiddle table-hover mb-0">
+    <tbody>
+    <?php foreach($zobj as $val)  { ?>
+<tr><td><a href="/env/apps/?app=<?php echo $val["appcode"];?>" target="_blank"><?php echo $val["appcode"];?></a></td><td><?php echo $val["appname"];?></td><td><a href="/browse/user/<?php echo $val["owner"];?>" target="_blank"><?php echo $val["owner"];?></a></td></tr>
+       <?php } ?>
+        </tbody>
+        </table>
+<?php    }
+}
+}
+?>
+            </div>
+        </div>
+        <?php $sql="select qminv,lrun from env_jobs_mq where qmgr=?";
+$q = $pdo->prepare($sql);
+$q->execute(array($thisarray['p2']));
+if ($row = $q->fetch(PDO::FETCH_ASSOC)) { 
+$tmp["qminv"]=!empty($row["qminv"])?json_decode($row["qminv"],true)["QMINFO"]:array();
+$tmp["lrun"]=$row["lrun"];
+?>
+        <div class="card p-0">
+            <div class="card-header border-bottom">
+                Queue manager information
+            </div>
+            <div class="body">
+                <table class="table table-vmiddle table-hover mb-0">
+                    <tbody>
+                        <tr>
+                            <td class="bg-light" style="max-width:25%;width:25%;">Last check</td>
+                            <td class="bg-light"><?php echo textClass::ago($tmp["lrun"]);?></td>
+                        </tr>
+                        <?php foreach($tmp["qminv"] as $key=>$val){ if($val){?>
+                        <tr>
+                            <td class="bg-light" style="max-width:25%;width:25%;"><?php echo $key;?></td>
+                            <td><?php echo $val;?></td>
+                        </tr>
+                        <?php }} ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <?php } ?>
+    </div>
+</div>
+
+<?php } else { 
   array_push($brarr,array(
     "title"=>"Export in excel",
     "link"=>"#",
@@ -30,54 +97,29 @@
             <table class="table table-vmiddle table-hover stylish-table mb-0">
                 <thead>
                     <tr>
-                        <th class="text-center">App code</th>
-                        <th class="text-center">Group</th>
-                        <th class="text-center">Environment</th>
                         <th class="text-center">Name</th>
-                        <th class="text-center">Maxmsgl</th>
-                        <th class="text-center">Maxumsgs</th>
-                        <th class="text-center">Deadq</th>
-                        <th class="text-center" style="width:130px;">Action</th>
+                        <th class="text-center">Environment</th>
+                        <th class="text-center">Server</th>
                     </tr>
                 </thead>
-                <tbody
-                    ng-init="getAll('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p2'];?>','<?php echo $page;?>')">
+                <tbody ng-init="getAll('<?php echo $thisarray['p1'];?>','','')">
                     <tr ng-hide="contentLoaded">
-                        <td colspan="8" style="text-align:center;font-size:1.1em;"><i
-                                class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     </tr>
                     <tr id="contloaded" class="hide"
                         dir-paginate="d in names | filter:search | orderBy:'qm':reverse | itemsPerPage:10"
-                        pagination-id="prodx" ng-hide="d.qm==''">
-                        <td class="text-center">{{ d.proj }}</td>
-                        <td class="text-center">{{ d.qm }}</td>
+                        pagination-id="prodx" ng-hide="d.name==''">
+                        <td class="text-center"><a href="/mqscout/qm/{{ d.name }}">{{ d.name }}</a></td>
                         <td class="text-center">{{ d.env}}</td>
-                        <td class="text-center">{{ d.name }}</td>
-                        <td class="text-center">{{ d.maxmsgl }}</td>
-                        <td class="text-center">{{ d.maxumsgs }}</td>
-                        <td class="text-center">{{ d.deadq }}</td>
-                        <td class="text-center">
-                            <div class="text-start d-grid gap-2 d-md-block">
-                                <button type="button"
-                                    ng-click="readOne('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $page;?>')"
-                                    style="" class="btn btn-light btn-sm bg waves-effect"><i
-                                        class="mdi mdi-pencil mdi-18px"></i></button>
-                                <?php if($_SESSION['user_level']>="3"){?>
-                                <button type="button"
-                                    ng-click="duplicate('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')"
-                                    class="btn btn-light btn-sm bg waves-effect" title="Duplicate"><i
-                                        class="mdi mdi-content-duplicate mdi-18px"></i></button>
-                                <button type="button"
-                                    ng-click="delete('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
-                                    class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button>
-                                <?php } ?>
-                            </div>
-                        </td>
+                        <td class="text-center"><a href="/browse/server/{{ d.serverid }}">{{ d.server }}</a></td>
                     </tr>
                 </tbody>
             </table>
             <dir-pagination-controls pagination-id="prodx" boundary-links="true"
-                on-page-change="pageChangeHandler(newPageNumber)" template-url="/<?php echo $website['corebase'];?>assets/templ/pagination.tpl.html">
+                on-page-change="pageChangeHandler(newPageNumber)"
+                template-url="/<?php echo $website['corebase'];?>assets/templ/pagination.tpl.html">
             </dir-pagination-controls>
             <div class="modal" id="modal-obj-form" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -150,7 +192,8 @@ $stmt->execute(array($thisarray['p2']));
                                             </div>
                                             <div class="form-group row">
                                                 <label class="form-control-label text-lg-right col-md-3">ENV</label>
-                                                <div class="col-md-9"><select class="form-control" ng-model="mq.mqscout">
+                                                <div class="col-md-9"><select class="form-control"
+                                                        ng-model="mq.mqscout">
                                                         <option value="">Please select</option>
                                                         <?php foreach($menudataenv as $key=>$val){  ?>
                                                         <option value="<?php echo $val['nameshort'];?>">
