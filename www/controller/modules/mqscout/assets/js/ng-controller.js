@@ -66,7 +66,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       if (response.data != "null") { $scope.names = response.data; } else { $scope.names = {}; }
     });
   };
-  $scope.delete = function (what, qid, qmid, projid, user, type) {
+  $scope.delete = function (what, qid, qmid, projid, user, type, qm=null) {
     Swal.fire({
       title: 'Delete this object?',
       icon: 'error',
@@ -84,12 +84,12 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
           url: '/mqapi/dell/' + what
         }).then(function successCallback(response) {
           notify(response.data, 'success');
-          $scope.getAll(what, projid, type);
+          $scope.getAll(what, projid, type, qm);
         });
       }
     })
   };
-  $scope.duplicate = function (what, qid, qmid, user, appid) {
+  $scope.duplicate = function (what, qid, qmid, user, appid, qm=null) {
     Swal.fire({
       title: 'Copy this object',
       icon: 'question',
@@ -110,7 +110,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
           if (what == "tibco") {
             $scope.getAllTib(qid, appid);
           } else {
-            $scope.getAll(what, appid, 'env');
+            $scope.getAll(what, appid, 'env', qm);
           }
         });
       }
@@ -185,8 +185,11 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       }
     })
   };
-  $scope.update = function (what, projid, user, type) {
+  $scope.update = function (what, projid, user, type, qm=null) {
     if ($("#tags").val()) { $scope.mq.tags = $("#tags").val(); }
+    if ($("#thisproj").val()) { $scope.mq.proj = $("#thisproj").val(); }
+    if ($("#thisqm").val()) { $scope.mq.qm = $("#thisqm").val(); }
+    if ($("#thisact").val()) { $scope.mq.active = $("#thisact").val(); }
     $http({
       method: 'POST',
       data: { 'mq': $scope.mq, 'projid': projid, 'user': user, 'type': type },
@@ -195,7 +198,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       notify(response.data, 'success');
       $('#modal-obj-form').modal('hide');
       $scope.clearForm();
-      $scope.getAll(what, projid, type);
+      $scope.getAll(what, projid, type, qm);
     });
   };
   $scope.updatefte = function (projid, user, type, bstep) {
@@ -312,11 +315,14 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
       $('#serverid').val();
     }
   };
-  $scope.create = function (what, projid, user, type) {
+  $scope.create = function (what, projid, user, type, qm=null) {
     if ($("#tags").val()) { $scope.mq.tags = $("#tags").val(); }
+    if ($("#thisproj").val()) { $scope.mq.proj = $("#thisproj").val(); }
+    if ($("#thisqm").val()) { $scope.mq.qm = $("#thisqm").val(); }
+    if ($("#thisact").val()) { $scope.mq.active = $("#thisact").val(); }
     var addToArray = true;
     for (var i = 0; i < $scope.names.length; i++) {
-      if ($scope.names[i].name === $scope.mq.name && $scope.names[i].qm === $scope.mq.qm) {
+      if ($scope.names[i].name === $scope.mq.name) {
         addToArray = false;
       }
     }
@@ -329,7 +335,7 @@ app.controller('ngCtrl', function ($scope, $http, $location, $window, $sce) {
         notify(response.data, 'success');
         $('#modal-obj-form').modal('hide');
         $scope.clearForm();
-        $scope.getAll(what, projid, type);
+        $scope.getAll(what, projid, type, qm);
       });
     } else {
       notify("Object already exist!", 'warning');

@@ -132,6 +132,7 @@ CREATE TABLE IF NOT EXISTS mqenv_mq_qm (
   objdata text NULL,
   changed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   projinfo text NULL,
+  appid text NULL,
   jobrun INT DEFAULT NULL,
   jobid varchar(10) DEFAULT NULL
 );

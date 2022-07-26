@@ -278,24 +278,22 @@ class Class_api
                     if (count($tmparr) >= 5) {
                         array_pop($tmparr);
                     }
-                    $tmparrn = array(
+                    $tmparr[$data->appid] = array(
                         "name" => $data->appname,
                         "link" => $data->link,
-                        "id" => $data->appid,
                     );
-                    array_unshift($tmparr, $tmparrn);
+                    //array_unshift($tmparr, $tmparrn);
                     $sql = "update users_recent set recentdata=? where uuid=?";
                     $q = $pdo->prepare($sql);
                     $q->execute(array(json_encode($tmparr, true), $_SESSION["user_id"]));
                 }
             } else {
                 $tmparr = array();
-                $tmparrn = array(
+                $tmparr[$data->appid] = array(
                     "name" => $data->appname,
                     "link" => $data->link,
-                    "id" => $data->appid,
                 );
-                array_unshift($tmparr, $tmparrn);
+                //array_unshift($tmparr, $tmparrn);
                 $sql = "insert into users_recent (uuid,recentdata) values (?,?)";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($_SESSION["user_id"], json_encode($tmparr, true)));
@@ -1006,7 +1004,7 @@ class Class_api
                 }
 
             }
-            gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($data->appcode)), "Added user <b>" . htmlspecialchars($data->uname) . "</b> to application <a href='/env/apps/?app=" . $data->appcode . ">" . $data->appcode . "</a>");
+            gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($data->appcode)), "Added user <b>" . htmlspecialchars($data->uname) . "</b> to application <a href='/env/apps/?app=" . $data->appcode . "'>" . $data->appcode . "</a>");
             echo "User added successfully";
             pdodb::disconnect();
             exit;

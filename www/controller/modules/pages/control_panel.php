@@ -123,7 +123,8 @@ class Class_cp
                             </tbody>
                         </table>
                     </div>
-                </div>
+                    </div>
+                   
                 <div class="card">
                     <div class="card-body p-0">
                         <table class="table table-vmiddle table-hover stylish-table mb-0">
@@ -145,16 +146,16 @@ $sql = "select " . (DBTYPE == 'oracle' ? "to_char(recentdata) as recentdata" : "
         $q = $pdo->prepare($sql);
         $q->execute(array($_SESSION["user_id"]));
         if ($zobj = $q->fetch(PDO::FETCH_ASSOC)) {
-            foreach (json_decode($zobj["recentdata"], true) as $key => $val) {
+            foreach (json_decode($zobj["recentdata"], true) as $key => $val) { if($key){
                 ?>
                                 <tr style="cursor:pointer;"
-                                    onclick="location.href='/env/apps/<?php echo $val["id"]; ?>'">
+                                    onclick="location.href='/env/apps/<?php echo $key; ?>'">
                                     <td class="text-start"><?php echo $val["name"]; ?></td>
                                     <td></td>
                                     <td style="width:50px" class="text-end"><a target="_parent"
-                                            href="/env/apps/<?php echo $val["id"]; ?>"><i class="mdi mdi-chevron-triple-right"></i></a></td>
+                                            href="/env/apps/<?php echo $key; ?>"><i class="mdi mdi-chevron-triple-right"></i></a></td>
                                 </tr>
-                                <?php }
+                                <?php }}
         }?>
                             </tbody>
                         </table>

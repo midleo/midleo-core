@@ -35,8 +35,14 @@
                 </thead>
                 <tbody ng-init="getAllfte('<?php echo $thisarray['p2'];?>','env')">
                     <tr ng-hide="contentLoaded">
-                        <td colspan="8" style="text-align:center;font-size:1.1em;"><i
-                                class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     </tr>
                     <tr id="contloaded" class="hide"
                         dir-paginate="d in names | filter:search | orderBy:'name':reverse | itemsPerPage:10"
@@ -83,9 +89,6 @@
             <div class="modal" id="modal-fte-form" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>Define MQ FTE definition</h4>
-                        </div>
                         <form name="form" ng-app>
                             <div class="modal-body">
                                 <div role="tabpanel">
@@ -98,10 +101,10 @@
                                     <div class="tab-content container"
                                         style="width:100%;min-height:300px;max-height:500px;overflow-x:hidden;overflow-y:scroll;">
                                         <div role="tabpanel" class="tab-pane active" id="base">
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     ng-class="{'has-error':!mqfte.mqftetype}">Type</label>
-                                                <div class="col-md-8"><select class="form-control" ng-required="true"
+                                                <div class="col-md-8"><select class="form-control form-control-sm" ng-required="true"
                                                         ng-model="mqfte.mqftetype">
                                                         <option value="">Please select</option>
                                                         <option value="f2f">File to File</option>
@@ -115,10 +118,10 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">Tags</label>
                                                 <div class="col-md-8"><input id="tags" data-role="tagsinput" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -126,22 +129,22 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     ng-class="{'has-error':!mqfte.mqftename}">Name</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.mqftename"
-                                                        ng-required="true" type="text" class="form-control"></div>
+                                                        ng-required="true" type="text" class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" title="Name of the transfer"><i
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">BatchSize</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.batchsize" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -149,7 +152,7 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     ng-class="{'has-error':!mqfte.sourceagt}">SourceAGT</label>
                                                 <div class="col-md-8">
@@ -159,13 +162,13 @@
  $stmt->execute(array($thisarray['p2']));
  if($zobjin = $stmt->fetchAll()){
  ?>
-                                                    <select class="form-control" ng-model="mqfte.sourceagt"
+                                                    <select class="form-control form-control-sm" ng-model="mqfte.sourceagt"
                                                         ng-required="true">
                                                         <option value="">Please select</option>
                                                         <?php foreach($zobjin as $val) { echo '<option value="'.$val["agentname"].'">'.$val['agentname'].' ('.$val['serverdns'].')</option>'; } ?>
                                                     </select><?php } else { ?>
                                                     <input ng-model="mqfte.sourceagt" ng-required="true" type="text"
-                                                        class="form-control">
+                                                        class="form-control form-control-sm">
                                                     <?php } ?>
                                                 </div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
@@ -175,7 +178,7 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     ng-class="{'has-error':!mqfte.sourceagtqmgr}">SAGTQM</label>
                                                 <div class="col-md-8">
@@ -185,13 +188,13 @@
  $stmt->execute(array($thisarray['p2']));
  if($zobjin = $stmt->fetchAll()){
  ?>
-                                                    <select class="form-control" ng-model="mqfte.sourceagtqmgr"
+                                                    <select class="form-control form-control-sm" ng-model="mqfte.sourceagtqmgr"
                                                         ng-required="true">
                                                         <option value="">Please select</option>
                                                         <?php foreach($zobjin as $val) { echo '<option value="'.$val["qmname"].'">'.$val['qmname'].' ('.$val['serverdns'].')</option>'; } ?>
                                                     </select><?php } else { ?>
                                                     <input ng-model="mqfte.sourceagtqmgr" ng-required="true" type="text"
-                                                        class="form-control">
+                                                        class="form-control form-control-sm">
                                                     <?php } ?>
                                                 </div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
@@ -201,7 +204,7 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     ng-class="{'has-error':!mqfte.destagt}">DestAGT</label>
                                                 <div class="col-md-8">
@@ -211,13 +214,13 @@
  $stmt->execute(array($thisarray['p2']));
  if($zobjin = $stmt->fetchAll()){
  ?>
-                                                    <select class="form-control" ng-model="mqfte.destagt"
+                                                    <select class="form-control form-control-sm" ng-model="mqfte.destagt"
                                                         ng-required="true">
                                                         <option value="">Please select</option>
                                                         <?php foreach($zobjin as $val) { echo '<option value="'.$val["agentname"].'">'.$val['agentname'].' ('.$val['serverdns'].')</option>'; } ?>
                                                     </select><?php } else { ?>
                                                     <input ng-model="mqfte.destagt" ng-required="true" type="text"
-                                                        class="form-control">
+                                                        class="form-control form-control-sm">
                                                     <?php } ?>
                                                 </div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
@@ -227,7 +230,7 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     ng-class="{'has-error':!mqfte.destagtqmgr}">DAGTQM</label>
                                                 <div class="col-md-8">
@@ -237,13 +240,13 @@
  $stmt->execute(array($thisarray['p2']));
  if($zobjin = $stmt->fetchAll()){
  ?>
-                                                    <select class="form-control" ng-model="mqfte.destagtqmgr"
+                                                    <select class="form-control form-control-sm" ng-model="mqfte.destagtqmgr"
                                                         ng-required="true">
                                                         <option value="">Please select</option>
                                                         <?php foreach($zobjin as $val) { echo '<option value="'.$val["qmname"].'">'.$val['qmname'].' ('.$val['serverdns'].')</option>'; } ?>
                                                     </select><?php } else { ?>
                                                     <input ng-model="mqfte.destagtqmgr" ng-required="true" type="text"
-                                                        class="form-control">
+                                                        class="form-control form-control-sm">
                                                     <?php } ?>
                                                 </div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
@@ -253,10 +256,10 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     ng-class="{'has-error':!mqfte.sourcedisp}">sourceDisp</label>
-                                                <div class="col-md-8"><select class="form-control" ng-required="true"
+                                                <div class="col-md-8"><select class="form-control form-control-sm" ng-required="true"
                                                         ng-model="mqfte.sourcedisp">
                                                         <option value="">Please select</option>
                                                         <option value="leave">Leave</option>
@@ -269,10 +272,10 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">textOrBinary</label>
-                                                <div class="col-md-8"><select class="form-control" ng-required="true"
+                                                <div class="col-md-8"><select class="form-control form-control-sm" ng-required="true"
                                                         ng-model="mqfte.textorbinary">
                                                         <option value="">Please select</option>
                                                         <option value="text">Text</option>
@@ -285,22 +288,22 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" ng-show="mqfte.textorbinary=='text'">
+                                            <div class=" row" ng-show="mqfte.textorbinary=='text'">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">sourceCCSID</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.sourceccsid" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" title="The CCSID of the source file"><i
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" ng-show="mqfte.textorbinary=='text'">
+                                            <div class=" row" ng-show="mqfte.textorbinary=='text'">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">destCCSID</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.destccsid" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -308,11 +311,11 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row"
+                                            <div class=" row"
                                                 ng-show="mqfte.mqftetype=='f2f' || mqfte.mqftetype=='f2q'">
                                                 <label class="form-control-label text-lg-right col-md-3">MonDir</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.sourcedir" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -320,11 +323,11 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row"
+                                            <div class=" row"
                                                 ng-show="mqfte.mqftetype=='f2f' || mqfte.mqftetype=='f2q'">
                                                 <label class="form-control-label text-lg-right col-md-3">MonFile</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.sourcefile" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -332,10 +335,10 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row"
+                                            <div class=" row"
                                                 ng-show="mqfte.mqftetype=='f2f' || mqfte.mqftetype=='f2q'">
                                                 <label class="form-control-label text-lg-right col-md-3">Regex</label>
-                                                <div class="col-md-8"><select class="form-control"
+                                                <div class="col-md-8"><select class="form-control form-control-sm"
                                                         ng-model="mqfte.regex">
                                                         <option value="">No</option>
                                                         <option value="1">Yes</option>
@@ -347,11 +350,11 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" ng-show="mqfte.mqftetype=='q2f'">
+                                            <div class=" row" ng-show="mqfte.mqftetype=='q2f'">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">MonQueue</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.sourcequeue" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" data-html="true"
@@ -359,11 +362,11 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row"
+                                            <div class=" row"
                                                 ng-show="mqfte.mqftetype=='f2f' || mqfte.mqftetype=='q2f'">
                                                 <label class="form-control-label text-lg-right col-md-3">DestDir</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.destdir" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -371,12 +374,12 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row"
+                                            <div class=" row"
                                                 ng-show="mqfte.mqftetype=='f2f' || mqfte.mqftetype=='q2f'">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">DestFile</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.destfile" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" data-html="true"
@@ -384,11 +387,11 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" ng-show="mqfte.mqftetype=='f2q'">
+                                            <div class=" row" ng-show="mqfte.mqftetype=='f2q'">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">DestQueue</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.destqueue" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -396,11 +399,11 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" ng-show="mqfte.mqftetype!='q2f'">
+                                            <div class=" row" ng-show="mqfte.mqftetype!='q2f'">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">SourceCMD</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.postsourcecmd" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -408,10 +411,10 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" ng-show="mqfte.mqftetype!='q2f'">
+                                            <div class=" row" ng-show="mqfte.mqftetype!='q2f'">
                                                 <label class="form-control-label text-lg-right col-md-3">SCMDARG</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.postsourcecmdarg"
-                                                        type="text" class="form-control"></div>
+                                                        type="text" class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -419,10 +422,10 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" ng-show="mqfte.mqftetype!='f2q'">
+                                            <div class=" row" ng-show="mqfte.mqftetype!='f2q'">
                                                 <label class="form-control-label text-lg-right col-md-3">DestCMD</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.postdestcmd" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -431,10 +434,10 @@
                                                 </div>
 
                                             </div>
-                                            <div class="form-group row" ng-show="mqfte.mqftetype!='f2q'">
+                                            <div class=" row" ng-show="mqfte.mqftetype!='f2q'">
                                                 <label class="form-control-label text-lg-right col-md-3">DCMDARG</label>
                                                 <div class="col-md-8"><input ng-model="mqfte.postdestcmdarg" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -443,13 +446,13 @@
                                                 </div>
 
                                             </div>
-                                            <div class="form-group"><br></div>
+                                            <div class=""><br></div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="info">
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">Comment</label>
                                                 <div class="col-md-8"><textarea ng-model="mqfte.info"
-                                                        class="form-control" rows="6"></textarea></div>
+                                                        class="form-control form-control-sm" rows="6"></textarea></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -490,12 +493,12 @@
                         <form action="" method="post" name="form">
                             <div class="modal-header">Deploy MQ FTE monitor</div>
                             <div class="modal-body container form-material">
-                                <div class="form-group row">
+                                <div class=" row">
                                     <input style="display:none;" id="selectedobj" value="{{selectedid | json}}">
                                     <label class="form-control-label text-lg-right col-md-3">Environment</label>
                                     <?php if(is_array($menudataenv)){?>
                                     <div class="col-md-8"> <select ng-required="true" ng-model="depl.deplenv"
-                                            class="form-control">
+                                            class="form-control form-control-sm">
                                             <option value="">Please select</option>
                                             <?php 
  foreach($menudataenv as $keyenv=>$valenv) { ?>
@@ -507,14 +510,14 @@
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <div class="form-group row" ng-show="depl.deplenv">
+                                <div class=" row" ng-show="depl.deplenv">
                                     <label class="form-control-label text-lg-right col-md-3">Request Number</label>
                                     <div class="col-md-9"> <input type="text" ng-model="depl.reqname" id="reqauto"
-                                            class="form-control" />
+                                            class="form-control form-control-sm" />
                                         <input type="text" id="reqname" name="reqname" style="display:none;" />
                                     </div>
                                 </div>
-                                <div class="form-group row" ng-show="depl.deplenv">
+                                <div class=" row" ng-show="depl.deplenv">
                                     <label class="form-control-label text-lg-right col-md-3">Job time</label>
                                     <div class="col-md-9">
                                         <input name="jobnextrun" class="form-control date-time-picker-depl"

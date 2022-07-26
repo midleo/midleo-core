@@ -38,20 +38,21 @@
                     <tr>
                         <th class="text-center" style="width:50px;"></th>
                         <th class="text-center">Job</th>
-                        <th class="text-center">QM</th>
                         <th class="text-center">Channel</th>
                         <th class="text-center">Type</th>
-                        <th class="text-center">Cluster</th>
                         <th class="text-center">Maxmsgl</th>
-                        <th class="text-center">SSL</th>
                         <th class="text-center" style="width:130px;">Action</th>
                     </tr>
                 </thead>
                 <tbody
                     ng-init="getAll('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p3'];?>','<?php echo $page;?>','<?php echo $thisarray['p2'];?>')">
                     <tr ng-hide="contentLoaded">
-                        <td colspan="8" style="text-align:center;font-size:1.1em;"><i
-                                class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     </tr>
                     <tr id="contloaded" class="hide"
                         dir-paginate="d in names | filter:search | orderBy:sortKey:reverse | itemsPerPage:10"
@@ -66,25 +67,22 @@
                         </td>
                         <td class="text-center" style="padding: .5rem;"><a href="/automation/{{d.jobid}}"
                                 ng-show="d.jobrun==1"><i class="mdi mdi-play-circle-outline mdi-24px"></i></a></td>
-                        <td class="text-center">{{ d.qm }}</td>
                         <td class="text-center">{{ d.name }}</td>
                         <td class="text-center">{{ d.chltype }}</td>
-                        <td class="text-center">{{ d.cluster }}</td>
                         <td class="text-center">{{ d.maxmsgl }}</td>
-                        <td class="text-center">{{ d.ssl }}</td>
                         <td class="text-center">
                             <div class="text-start d-grid gap-2 d-md-block">
                                 <button type="button"
-                                    ng-click="readOne('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $page;?>')"
+                                    ng-click="readOne('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $thisarray['p3'];?>','<?php echo $page;?>')"
                                     style="" class="btn btn-light btn-sm bg waves-effect"><i
                                         class="mdi mdi-pencil mdi-18px"></i></button>
                                 <?php if($_SESSION['user_level']>="3"){?>
                                 <button type="button"
-                                    ng-click="duplicate('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p2'];?>')"
+                                    ng-click="duplicate('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,'<?php echo $_SESSION['user'];?>','<?php echo $thisarray['p3'];?>','<?php echo $thisarray['p2'];?>')"
                                     class="btn btn-light btn-sm bg waves-effect" title="Duplicate"><i
                                         class="mdi mdi-content-duplicate mdi-18px"></i></button>
                                 <button type="button"
-                                    ng-click="delete('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>',d.qid,d.qmid,'<?php echo $thisarray['p2'];?>','<?php echo $page;?>')"
+                                ng-click="delete('<?php echo $thisarray['p1'];?>',d.qid,d.qmid,d.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>','<?php echo $thisarray['p2'];?>')"
                                     class="btn btn-light btn-sm bg waves-effect"><i class="mdi mdi-close"></i></button>
                                 <?php } ?>
                             </div>
@@ -98,9 +96,6 @@
             <div class="modal" id="modal-obj-form" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>Define Channel definition</h4>
-                        </div>
                         <form name="form" ng-app>
                             <div class="modal-body">
 
@@ -121,41 +116,16 @@
                                     <div class="tab-content container form-material"
                                         style="width:100%;min-height:300px;max-height:500px;overflow-x:hidden;overflow-y:scroll;">
                                         <div role="tabpanel" class="tab-pane active" id="base">
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3"
-                                                    data-trigger="hover" data-bs-toggle="popover"
-                                                    data-bs-placement="top">Active</label>
-                                                <div class="col-md-9"><select class="form-control"
-                                                        ng-init="mq.active='yes'" ng-model="mq.active">
-                                                        <option value="">Please select</option>
-                                                        <option value="yes" ng-selected="mq.active==yes">Yes</option>
-                                                        <option value="no">No</option>
-                                                    </select></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="form-control-label text-lg-right col-md-3"
-                                                    data-trigger="hover" data-bs-toggle="popover"
-                                                    data-bs-placement="top">QMGR</label>
-                                                <div class="col-md-9">
-                                                    <?php
- $sql="select serverdns,qmname from env_appservers where (serv_type='qm' or serv_type='fte') and proj=? group by qmname";
- $stmt = $pdo->prepare($sql);
- $stmt->execute(array($thisarray['p2']));
- if($zobjfte = $stmt->fetchAll()){
- ?>
-                                                    <select class="form-control" ng-model="mq.qm" ng-required="true">
-                                                        <option value="">Please select</option>
-                                                        <?php foreach($zobjfte as $val) { echo '<option value="'.$val["qmname"].'">'.$val['qmname'].' ('.$val['serverdns'].')</option>'; } ?>
-                                                    </select><?php } else { ?>
-                                                    <input ng-model="mq.qm" ng-required="true" type="text"
-                                                        class="form-control">
-                                                    <?php } ?>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
+                                        <input id="thisact" value="yes" type="text"
+                                            style="display:none;">
+                                            <input id="thisproj" style="display:none;"
+                                                value="<?php echo $thisarray['p3'];?>">
+                                            <input id="thisqm" value="<?php echo $thisarray['p2'];?>" type="text"
+                                            style="display:none;">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">Tags</label>
                                                 <div class="col-md-8"><input id="tags" data-role="tagsinput" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                                 <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                         class="btn btn-light" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -163,18 +133,18 @@
                                                             class="mdi mdi-information-variant mdi-18px"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     data-trigger="hover" data-bs-toggle="popover"
                                                     data-bs-placement="top">Name</label>
                                                 <div class="col-md-9"><input ng-maxlength="20" ng-model="mq.name"
-                                                        ng-required="true" type="text" class="form-control"></div>
+                                                        ng-required="true" type="text" class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     data-trigger="hover" data-bs-toggle="popover"
                                                     data-bs-placement="top">Type</label>
-                                                <div class="col-md-9"><select class="form-control" ng-model="mq.chltype"
+                                                <div class="col-md-9"><select class="form-control form-control-sm" ng-model="mq.chltype"
                                                         ng-required="true">
                                                         <option value="" ng-click="mq.sslcauth='';mq.convert=''">Please
                                                             select</option>
@@ -199,46 +169,46 @@
                                                         </option>
                                                     </select></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     data-trigger="hover" data-bs-toggle="popover"
                                                     data-bs-placement="top">Descr</label>
                                                 <div class="col-md-9"><input ng-maxlength="64" ng-model="mq.descr"
-                                                        ng-required="true" type="text" class="form-control"></div>
+                                                        ng-required="true" type="text" class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">XMITQ</label>
                                                 <div class="col-md-9"> <input ng-model="mq.xmitq" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3"
                                                     data-html="true" data-trigger="hover" data-bs-toggle="popover"
                                                     data-bs-placement="top"
                                                     data-content="The name of the cluster to which the channel belongs"
                                                     title="" data-original-title="Cluster">Cluster</label>
                                                 <div class="col-md-9"><input ng-maxlength="48" ng-model="mq.cluster"
-                                                        type="text" class="form-control"></div>
+                                                        type="text" class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">CLUSNL</label>
                                                 <div class="col-md-9"> <input ng-model="mq.clusnl" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">CONNAME</label>
                                                 <div class="col-md-9"> <input ng-maxlength="264" ng-model="mq.conname"
-                                                        type="text" class="form-control"></div>
+                                                        type="text" class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">MAXMSGL</label>
                                                 <div class="col-md-9"><input ng-model="mq.maxmsgl" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">SSLCAUTH</label>
-                                                <div class="col-md-9"><select class="form-control"
+                                                <div class="col-md-9"><select class="form-control form-control-sm"
                                                         ng-model="mq.sslcauth">
                                                         <option value="" ng-click="mq.sslciph='';mq.sslpeer=''">Disabled
                                                         </option>
@@ -246,10 +216,10 @@
                                                         <option value="required">Required</option>
                                                     </select></div>
                                             </div>
-                                            <div class="form-group row"
+                                            <div class=" row"
                                                 ng-show="mq.sslcauth=='optional' || mq.sslcauth=='required'">
                                                 <label class="form-control-label text-lg-right col-md-3">SSLCIPH</label>
-                                                <div class="col-md-9"><select class="form-control"
+                                                <div class="col-md-9"><select class="form-control form-control-sm"
                                                         ng-model="mq.sslciph">
                                                         <option value="">Please select</option>
                                                         <?php foreach($ibmmqchlciph as $keyin=>$valin){ ?>
@@ -259,30 +229,30 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="form-group row"
+                                            <div class=" row"
                                                 ng-show="mq.sslcauth=='optional' || mq.sslcauth=='required'">
                                                 <label class="form-control-label text-lg-right col-md-3">SSLPEER</label>
                                                 <div class="col-md-9"> <input ng-model="mq.sslpeer" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group"><br></div>
+                                            <div class=""><br></div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="net">
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">LOCLADDR</label>
                                                 <div class="col-md-9"> <input ng-model="mq.locladdr" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">NETPRTY</label>
                                                 <div class="col-md-9"> <input ng-model="mq.netprty" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row"
+                                            <div class=" row"
                                                 ng-show="mq.chltype=='clussdr' || mq.chltype=='clusrcvr' || mq.chltype=='svr' || mq.chltype=='sdr'">
                                                 <label class="form-control-label text-lg-right col-md-3">CONVERT</label>
-                                                <div class="col-md-9"><select class="form-control"
+                                                <div class="col-md-9"><select class="form-control form-control-sm"
                                                         ng-model="mq.convert">
                                                         <option value="">Please select</option>
                                                         <option value="no">Disabled</option>
@@ -290,51 +260,51 @@
                                                     </select></div>
                                             </div>
 
-                                            <div class="form-group"><br></div>
+                                            <div class=""><br></div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="cluster"
                                             ng-show="mq.chltype=='clussdr' || mq.chltype=='clusrcvr'">
 
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">CLWLPRTY</label>
                                                 <div class="col-md-9"><input ng-model="mq.clwlprty" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">CLWLRANK</label>
                                                 <div class="col-md-9"> <input ng-model="mq.clwlrank" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">CLWLWGHT</label>
                                                 <div class="col-md-9"><input ng-model="mq.clwlwght" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
 
-                                            <div class="form-group"><br></div>
+                                            <div class=""><br></div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="misc">
-                                            <div class="form-group row">
+                                            <div class=" row">
                                                 <label class="form-control-label text-lg-right col-md-3">MCAUSER</label>
                                                 <div class="col-md-9"><input ng-model="mq.mcauser" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row" ng-show="mq.chltype=='svrconn'">
+                                            <div class=" row" ng-show="mq.chltype=='svrconn'">
                                                 <label class="form-control-label text-lg-right col-md-3">MAXINST</label>
                                                 <div class="col-md-9"><input ng-model="mq.maxinst" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
-                                            <div class="form-group row" ng-show="mq.chltype=='svrconn'">
+                                            <div class=" row" ng-show="mq.chltype=='svrconn'">
                                                 <label
                                                     class="form-control-label text-lg-right col-md-3">MAXINSTC</label>
                                                 <div class="col-md-9"><input ng-model="mq.maxinstc" type="text"
-                                                        class="form-control"></div>
+                                                        class="form-control form-control-sm"></div>
                                             </div>
 
-                                            <div class="form-group"><br></div>
+                                            <div class=""><br></div>
                                         </div>
 
                                     </div>
@@ -351,16 +321,16 @@
                                             class="mdi mdi-close"></i>&nbsp;Close</button>
                                     <button type="button" id="btn-mqsc-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="mqsc('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>',mq.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
+                                        ng-click="mqsc('<?php echo $thisarray['p1'];?>',mq.proj,'<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"
                                         ng-href="{{ url }}"><i class="mdi mdi-download"></i>&nbsp;Create mqsc</button>
                                     <?php if($_SESSION['user_level']>="3"){?>
                                     <button type="button" id="btn-create-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="form.$valid && create('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
+                                        ng-click="form.$valid && create('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p3'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>','<?php echo $thisarray['p2'];?>')"><i
                                             class="mdi mdi-plus mdi-18px"></i>&nbsp;Create</button>
                                     <button type="button" id="btn-update-obj"
                                         class="waves-effect waves-light btn btn-info btn-sm"
-                                        ng-click="update('<?php echo $page=="mqscout"?$thisarray['p1']:$thisarray['p3'];?>','<?php echo $thisarray['p2'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>')"><i
+                                        ng-click="update('<?php echo $thisarray['p1'];?>','<?php echo $thisarray['p3'];?>','<?php echo $_SESSION['user'];?>','<?php echo $page;?>','<?php echo $thisarray['p2'];?>')"><i
                                             class="mdi mdi-content-save-outline"></i>&nbsp;Save Changes</button>
                                     <?php } ?>
                                 </div>

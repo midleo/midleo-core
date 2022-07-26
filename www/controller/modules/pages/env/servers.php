@@ -55,49 +55,48 @@ if(!empty($ugroups)){
                         <form name="form" ng-app>
                             <div class="modal-body container form-material"
                                 style="width:100%;min-height:300px;max-height:500px;overflow-x:hidden;overflow-y:scroll;">
-                                <div class="form-group row">
+                                <div class=" row mb-1">
                                     <label class="form-control-label text-lg-right col-md-3">Tags</label>
                                     <div class="col-md-8"><input id="tags" data-role="tagsinput" type="text"
-                                            class="form-control"></div>
+                                            class="form-control form-control-sm"></div>
                                     <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                             class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="You can search this object with tags"><i
                                                 class="mdi mdi-information-variant mdi-18px"></i></button></div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-3">Shared to Public</label>
-                                    <div class="col-md-9"><select class="form-control" ng-model="serv.srvpublic">
-                                            <option value="">Please select</option>
+                                    <div class="col-md-9"><select class="form-control form-control-sm" ng-model="serv.srvpublic">
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
                                         </select></div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-3">Place</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control placeauto" placeholder="place name" />
+                                        <input type="text" class="form-control form-control-sm placeauto" placeholder="place name" />
                                         <input type="text" id="pluid" style="display:none;" />
                                     </div>
                                 </div>
-                                <div class="form-group row" style="margin-bottom:0px;">
+                                <div class=" row" style="margin-bottom:0px;">
                                     <label class="form-control-label text-lg-right col-md-3">Update period</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static text-uppercase">{{serv.updperiod}} min.</p>
                                     </div>
                                 </div>
-                                <div class="form-group row" style="margin-bottom:0px;">
+                                <div class=" row" style="margin-bottom:0px;">
                                     <label class="form-control-label text-lg-right col-md-3">DNS</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static text-uppercase">{{serv.serverdns}}</p>
                                     </div>
                                 </div>
-                                <div class="form-group row" style="margin-bottom:0px;">
+                                <div class=" row" style="margin-bottom:0px;">
                                     <label class="form-control-label text-lg-right col-md-3">IP</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static text-uppercase">{{serv.serverip}}</p>
                                     </div>
                                 </div>
-                                <div class="form-group row" style="margin-bottom:0px;">
+                                <div class=" row" style="margin-bottom:0px;">
                                     <label class="form-control-label text-lg-right col-md-3">OS</label>
                                     <div class="col-md-9">
                                         <p class="form-control-static text-uppercase">{{serv.servertype}}</p>

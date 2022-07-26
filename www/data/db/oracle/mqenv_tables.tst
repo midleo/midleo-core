@@ -13,6 +13,7 @@ begin
   objdata clob DEFAULT '''',
   changed timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
   projinfo clob DEFAULT '''',
+  appid  clob DEFAULT '''',
   jobrun number(1) DEFAULT NULL,
   jobid varchar2(10) DEFAULT NULL,
   PRIMARY KEY (id)

@@ -247,7 +247,7 @@ class Class_deplapi{
       $q = $pdo->prepare($sql);
       $q->execute(array($val));  
       if($zobj = $q->fetch(PDO::FETCH_ASSOC)){
-        $str=Class_api::generateFteXML($zobj['mqftetype'],$zobj['mqftename'],$zobj['batchsize'],$zobj['sourceagt'],$zobj['sourcequeue'],$zobj['sourcedir'],$zobj['regex'],$zobj['sourcefile'],$zobj['sourceagtqmgr'],$zobj['destagtqmgr'],$zobj['destagt'],$zobj['destqueue'],$zobj['postsourcecmd'],$zobj['postsourcecmdarg'],$zobj['postdestcmd'],$zobj['postdestcmdarg'],$zobj['sourcedisp'],$zobj['sourceccsid'],$zobj['destccsid'],$zobj['destdir'],$zobj['destfile'],$zobj['textorbinary']);
+        $str=Class_mqapi::generateFteXML($zobj['mqftetype'],$zobj['mqftename'],$zobj['batchsize'],$zobj['sourceagt'],$zobj['sourcequeue'],$zobj['sourcedir'],$zobj['regex'],$zobj['sourcefile'],$zobj['sourceagtqmgr'],$zobj['destagtqmgr'],$zobj['destagt'],$zobj['destqueue'],$zobj['postsourcecmd'],$zobj['postsourcecmdarg'],$zobj['postdestcmd'],$zobj['postdestcmdarg'],$zobj['sourcedisp'],$zobj['sourceccsid'],$zobj['destccsid'],$zobj['destdir'],$zobj['destfile'],$zobj['textorbinary']);
         $str=textClass::stage_array($str,$arrayvars,$data->env);
         $sql="select * from env_appservers where proj=? and agentname=?";
         $stmt = $pdo->prepare($sql);
@@ -303,7 +303,7 @@ class Class_deplapi{
                 $pkgarr["job"]=true;
                 $pkgarr["what"]=$k;
                 $pkgarr["mq"]["qmid"]=$vobj;
-                $return=Class_api::createAuth("one",$key,"yes",json_encode($pkgarr));
+                $return=Class_mqapi::createAuth("one",$key,"yes",json_encode($pkgarr));
                 if(json_decode($return,true)["resp"]){
                   foreach(json_decode($return,true)["resp"] as $kresp=>$vresp){
                     file_put_contents("data/packages/".$zobj['packuid']."/".$kresp."_".$keyin."-auth.sh",$vresp,FILE_APPEND);
@@ -316,7 +316,7 @@ class Class_deplapi{
                 $pkgarr["job"]=true;
                 $pkgarr["what"]=$k;
                 $pkgarr["mq"]["qmid"]=$vobj;
-                $return=Class_api::createDlqh("","yes",json_encode($pkgarr));
+                $return=Class_mqapi::createDlqh("","yes",json_encode($pkgarr));
                 if(json_decode($return,true)["resp"]){
                   foreach(json_decode($return,true)["resp"] as $kresp=>$vresp){
                     file_put_contents("data/packages/".$zobj['packuid']."/".$kresp."_".$keyin.".dlq",$vresp,FILE_APPEND);
@@ -335,7 +335,7 @@ class Class_deplapi{
                   $pkgarr["job"]=true;
                   $pkgarr["what"]=$k;
                   $pkgarr["mq"]["qmid"]=$vobj;
-                  $return=Class_api::createMqsc("one",$key,"no",json_encode($pkgarr));
+                  $return=Class_mqapi::createMqsc("one",$key,"no",json_encode($pkgarr));
                   foreach(json_decode($return,true)["resp"] as $kresp=>$vresp){
                     file_put_contents("data/packages/".$zobj['packuid']."/".$kresp."_".$keyin.".mqsc",$vresp,FILE_APPEND);
                   }
@@ -353,7 +353,7 @@ class Class_deplapi{
                 $pkgarr=array();
                 $pkgarr["job"]=true;
                 $pkgarr["mqfte"]["fteid"]=$vobj;
-                $return=Class_api::createFte("one",$zobj['proj'],"yes",json_encode($pkgarr));
+                $return=Class_mqapi::createFte("one",$zobj['proj'],"yes",json_encode($pkgarr));
                 if(!empty($return)){
                   if (!is_dir("data/packages/".$zobj['packuid'])) { mkdir("data/packages/".$zobj['packuid'],0755); }
                   foreach(json_decode($return,true)["resp"] as $kresp=>$vresp){

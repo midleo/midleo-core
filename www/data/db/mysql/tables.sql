@@ -132,13 +132,14 @@ CREATE TABLE IF NOT EXISTS `mqenv_mq_process` (
 
 CREATE TABLE IF NOT EXISTS `mqenv_mq_qm` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-   `proj` varchar(20) DEFAULT NULL,
+  `proj` varchar(20) DEFAULT NULL,
   `qmgr` varchar(100) NOT NULL,
   `objname` varchar(200) NOT NULL,
   `objtype` varchar(50) NOT NULL,
   `objdata` longtext NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `projinfo` text NULL,
+  `appid ` text NULL,
   `jobrun` INT(1) DEFAULT NULL,
   `jobid` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)

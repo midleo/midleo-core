@@ -58,28 +58,6 @@ class Class_env
       }
 
         }
-        if(isset($_POST["createpack"])){
-          $hash = textClass::getRandomStr(16);
-          $sql="insert into env_packages (tags,proj,packname,srvtype,packuid,pkgobjects,created_by) values(?,?,?,?,?,?,?)";
-          $stmt = $pdo->prepare($sql);
-          if($stmt->execute(array(
-              htmlspecialchars($_POST["tags"]),
-              htmlspecialchars($_POST["appname"]),
-              htmlspecialchars($_POST["pkgname"]),
-              htmlspecialchars($_POST["objtype"]),
-              $hash,
-              $_POST["finalobj"],
-              $_SESSION["user"]
-          ))){
-              $msg[]="Package created";
-              if(!empty(htmlspecialchars($_POST["tags"]))){
-                gTable::dbsearch(htmlspecialchars($_POST["pkgname"]),"/env/packages/?pkgid=".$hash,htmlspecialchars($_POST["tags"]));
-              }
-          } else {
-              $err[]="Error occured. Please try again.";
-          }
-          header("Location:/env/packages/".$thisarray['p2']);
-        }
         if(isset($_POST["updplace"])){
           $sql="update env_places set tags=?, placename=?, plregion=?, pltype=?".(!empty($_POST["contact"])?",plcontact='".htmlspecialchars($_POST["contact"])."'":"")." where pluid=?";
           $stmt = $pdo->prepare($sql); 

@@ -27,6 +27,8 @@ class Class_mqapi
                     break;
                 case 'dellflows':Class_mqapi::dellFlows();
                     break;
+                case 'applications':Class_mqapi::Applications($thisarray["p2"]);
+                    break;
                 case 'dellflow':Class_mqapi::dellFlow();
                     break;
                 case 'update':Class_mqapi::update($thisarray["p2"]);
@@ -208,7 +210,7 @@ class Class_mqapi
                 }
             } else {
                 $sql = "SELECT id,jobrun,jobid,qmgr,proj,objname,objtype," . (DBTYPE == 'oracle' ? "to_char(objdata) as objdata" : "objdata") . " FROM mqenv_mq_" . $d1 . " where 1=1" .(!empty($data->qm) ? " and qmgr='" . $data->qm . "'" : ""). (!empty($data->projid) ? " and proj='" . $data->projid . "'" : "");
-                $stmt = $pdo->prepare($sql);
+                $stmt = $pdo->prepare($sql); 
                 $stmt->execute();
                 $zobj = $stmt->fetchAll();
                 $data = array();
@@ -267,7 +269,7 @@ class Class_mqapi
             $varvalue = $data->mq->varvaluesame;}
         $sql = "insert into mqenv_vars (proj,varname,varvalue,isarray) values (?,?,?,?)";
         $q = $pdo->prepare($sql);
-        if ($q->execute(array(htmlspecialchars($data->projid), htmlspecialchars($data->mq->name), $varvalue, $vartype))) {
+        if ($q->execute(array(htmlspecialchars($data->projid), strtoupper(htmlspecialchars($data->mq->name)), $varvalue, $vartype))) {
             gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($data->projid)), "Defined new variable:<a href='/env/vars/" . htmlspecialchars($data->projid) . "'>" . htmlspecialchars($data->mq->name) . "</a>");
             if (!empty(htmlspecialchars($data->mq->tags))) {
                 gTable::dbsearch(htmlspecialchars($data->mq->name), $_SERVER["HTTP_REFERER"], htmlspecialchars($data->mq->tags));
@@ -291,7 +293,7 @@ class Class_mqapi
             $varvalue = $data->mq->varvaluesame;}
         $sql = "update mqenv_vars set varname=?, varvalue=?, isarray=?, tags=? where id=?";
         $q = $pdo->prepare($sql);
-        if ($q->execute(array(htmlspecialchars($data->mq->name), $varvalue, $vartype, htmlspecialchars($data->mq->tags), htmlspecialchars($data->mq->varid)))) {
+        if ($q->execute(array(strtoupper(htmlspecialchars($data->mq->name)), $varvalue, $vartype, htmlspecialchars($data->mq->tags), htmlspecialchars($data->mq->varid)))) {
             gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($data->projid)), "Updated variable:<a href='/env/vars/" . htmlspecialchars($data->projid) . "'>" . htmlspecialchars($data->mq->name) . "</a>");
             if (!empty(htmlspecialchars($data->mq->tags))) {
                 gTable::dbsearch(htmlspecialchars($data->mq->name), $_SERVER["HTTP_REFERER"], htmlspecialchars($data->mq->tags));
@@ -1003,6 +1005,63 @@ class Class_mqapi
             -->'; */
             $txt = '';
             $myfile = file_put_contents($isfile, $txt . PHP_EOL, FILE_APPEND | LOCK_EX);
+        }
+    }
+    public static function Applications($d1)
+    {
+        if ($d1 == "qmlist") {
+            $pdo = pdodb::connect();
+            $data = json_decode(file_get_contents("php://input"));
+
+            if (!empty(htmlspecialchars($data->pkg))) {
+                $sql = "select " . (DBTYPE == 'oracle' ? "to_char(pkgobjects) as pkgobjects" : "pkgobjects") . " from env_packages where packuid=? and proj=?";
+                $q = $pdo->prepare($sql);
+                $q->execute(array(htmlspecialchars($data->pkg), htmlspecialchars($data->appl)));
+                if ($zobjin = $q->fetch(PDO::FETCH_ASSOC)) {
+                    $tmp = array();
+                    foreach (json_decode($zobjin["pkgobjects"], true)[htmlspecialchars($data->appl)] as $keyin => $valin) {
+                        $tmp[] = $keyin;
+
+                    }
+                }
+            }
+            echo json_encode($tmp, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            pdodb::disconnect();
+            exit;
+        } elseif ($d1 == "delete") {
+            $pdo = pdodb::connect();
+            $data = json_decode(file_get_contents("php://input"));
+            $sql = "delete from config_app_codes where id=?";
+            $q = $pdo->prepare($sql);
+            if ($q->execute(array(htmlspecialchars($data->id)))) {
+                gTable::track($_SESSION["userdata"]["usname"], $_SESSION['user'], array("appid" => htmlspecialchars($data->appcode)), "Deleted application:" . htmlspecialchars($data->appcode));
+                echo "Application was deleted";
+            } else {
+                echo "Error deleting application";
+            }
+            pdodb::disconnect();
+        } else {
+            $pdo = pdodb::connect();
+            $data = json_decode(file_get_contents("php://input"));
+            $sql = "select id,tags,appcode,appcreated,appname,owner from config_app_codes";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            if ($zobj = $stmt->fetchAll()) {
+                foreach ($zobj as $val) {
+                    $d['appcode'] = $val['appcode'];
+                    $d['owner'] = $val['owner'];
+                    $d['id'] = $val['id'];
+                    $d['appcreated'] = $val['appcreated'];
+                    $d['tags'] = !empty($val['tags']) ? explode(',', $val['tags']) : "";
+                    $d['appname'] = strip_tags(textClass::word_limiter($val['appname'], 20, 80));
+                    $newdata[] = $d;
+                }
+                pdodb::disconnect();
+                echo json_encode($newdata, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);exit;
+            } else {
+                pdodb::disconnect();
+                echo json_encode(array(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);exit;
+            }
         }
     }
 }

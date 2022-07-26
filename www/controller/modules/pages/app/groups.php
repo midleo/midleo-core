@@ -66,27 +66,27 @@ array_push($brarr,array(
                     <div class="modal-body form-horizontal form-material">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group row" ng-show="group.latname">
+                                <div class=" row" ng-show="group.latname">
                                     <label class="form-control-label text-lg-right col-md-3">GroupID</label>
                                     <div class="col-md-9"><input ng-model="group.latname" type="text"
-                                            disabled="disabled" class="form-control"></div>
+                                            disabled="disabled" class="form-control form-control-sm"></div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-3"
-                                        ng-class="{'has-error':!group.name}">Group name</label>
+                                        ng-class="{'has-error':!group.name}">Name</label>
                                     <div class="col-md-9"><input ng-required="true" ng-model="group.name" type="text"
-                                            class="form-control">
+                                            class="form-control form-control-sm">
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-3">Email</label>
                                     <div class="col-md-9"><input ng-model="group.email" type="text"
-                                            class="form-control"></div>
+                                            class="form-control form-control-sm"></div>
                                 </div>
-                                <div class="form-group row usersdiv">
+                                <div class=" row usersdiv">
                                     <label class="form-control-label text-lg-right col-md-3">Users</label>
                                     <div class="col-md-6">
-                                        <input name="users" id="groupuser" type="text" class="form-control">
+                                        <input name="users" id="groupuser" type="text" class="form-control form-control-sm">
                                     </div>
                                     <div class="col-md-3">
                                         <button type="button"
@@ -95,7 +95,7 @@ array_push($brarr,array(
                                                 class="mdi mdi-account-multiple-plus-outline"></i>Add</button>
                                     </div>
                                 </div>
-                                <div class="form-group row usersdiv">
+                                <div class=" row usersdiv">
                                     <div class="col-md-3"></div>
                                     <div class="col-md-9">
                                         <input type="text" ng-model="group.user" id="groupuserselected"
@@ -109,7 +109,7 @@ array_push($brarr,array(
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-4">Access
                                         groups</label>
                                     <div class="col-md-8" style="overflow-y:auto;max-height:500px;">

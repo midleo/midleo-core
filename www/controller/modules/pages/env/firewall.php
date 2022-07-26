@@ -40,7 +40,15 @@
       </tr>
     </thead>
     <tbody ng-init="getAllfw('<?php echo $thisarray['p2'];?>')">
-      <tr ng-hide="contentLoaded"><td colspan="6" style="text-align:center;font-size:1.1em;"><i class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td></tr>
+      <tr ng-hide="contentLoaded">
+      <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+      <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+      <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+      <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+      <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+      <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+      <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+    </tr>
       <tr id="contloaded" class="hide" dir-paginate="d in names | filter:search | orderBy:'srcdns':reverse | itemsPerPage:10" pagination-id="prodx">
         <td class="text-center">{{ d.proj }}</td>
         <td class="text-center">{{ d.port}}</td>
@@ -61,40 +69,39 @@
   <div class="modal" id="modal-obj-form" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-      <div class="modal-header"><h4>Firewall rule</h4></div>
         <form name="form" ng-app>
           <div class="modal-body container form-material" style="width:100%;min-height:300px;max-height:500px;overflow-x:hidden;overflow-y:scroll;">
-          <div class="form-group row">
+          <div class=" row">
                     <label class="form-control-label text-lg-right col-md-3">Tags</label>
-                    <div class="col-md-8"><input id="tags" data-role="tagsinput" type="text" class="form-control"></div>
+                    <div class="col-md-8"><input id="tags" data-role="tagsinput" type="text" class="form-control form-control-sm"></div>
                     <div class="col-md-1" style="padding-left:0px;"><button type="button" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="You can search this object with tags" ><i class="mdi mdi-information-variant mdi-18px"></i></button></div>
               </div>
              <?php if(isset($modulelist["budget"]) && !empty($modulelist["budget"])){ ?>
                   <input ng-model="fw.proj" style="display:none;" value="<?php echo $thisarray['p2'];?>">
               <?php } ?>
-            <div class="form-group row">
+            <div class=" row">
               <label class="form-control-label text-lg-right col-md-3" >Port</label>
-              <div class="col-md-9"> <input ng-model="fw.port" ng-required="true" type="text" class="form-control"></div>
+              <div class="col-md-9"> <input ng-model="fw.port" ng-required="true" type="text" class="form-control form-control-sm"></div>
             </div>
-            <div class="form-group row">
+            <div class=" row">
               <label  class="form-control-label text-lg-right col-md-3">Source IP</label>
-              <div class="col-md-9"> <input ng-model="fw.srcip" ng-required="true" type="text" class="form-control"></div>
+              <div class="col-md-9"> <input ng-model="fw.srcip" ng-required="true" type="text" class="form-control form-control-sm"></div>
             </div>
-            <div class="form-group row">
+            <div class=" row">
               <label class="form-control-label text-lg-right col-md-3" >Source DNS</label>
-              <div class="col-md-9"> <input ng-model="fw.srcdns" ng-required="true" type="text" class="form-control"></div>
+              <div class="col-md-9"> <input ng-model="fw.srcdns" ng-required="true" type="text" class="form-control form-control-sm"></div>
             </div>
-            <div class="form-group row">
+            <div class=" row">
               <label  class="form-control-label text-lg-right col-md-3">Destination IP</label>
-              <div class="col-md-9"> <input ng-model="fw.destip" ng-required="true" type="text" class="form-control"></div>
+              <div class="col-md-9"> <input ng-model="fw.destip" ng-required="true" type="text" class="form-control form-control-sm"></div>
             </div>
-            <div class="form-group row">
+            <div class=" row">
               <label class="form-control-label text-lg-right col-md-3" >Destination DNS</label>
-              <div class="col-md-9"> <input ng-model="fw.destdns" ng-required="true" type="text" class="form-control"></div>
+              <div class="col-md-9"> <input ng-model="fw.destdns" ng-required="true" type="text" class="form-control form-control-sm"></div>
             </div>
-            <div class="form-group row">
+            <div class=" row">
               <label  class="form-control-label text-lg-right col-md-3" data-trigger="hover" data-bs-toggle="popover" data-bs-placement="right" data-html="true" data-content="Info about this rule" title="" data-original-title="Info">Comment</label>
-              <div class="col-md-9"> <input ng-model="fw.info" type="text" class="form-control"></div>
+              <div class="col-md-9"> <input ng-model="fw.info" type="text" class="form-control form-control-sm"></div>
             </div>
           </div>
           <div class="modal-footer">
@@ -117,18 +124,18 @@
       <div class="modal-content">
         <form id="XMLUpload" >
           <div class="modal-body container">
-            <div class="form-group">
+            <div class="">
               <div class="col-md-12">
                 <button type="button" id="docupload" onClick="getFile('dfile')" class="btn btn-primary btn-block"><i class="mdi mdi-plus mdi-18px"></i>&nbsp;upload file</button>
                 <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file" name="dfile[]" id="dfile" onChange="sub(this,'docupload')"/></div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="">
               <div class="col-md-12">
                 <ul id="fileList" class="list-unstyled"><li>No Files Selected</li></ul>
               </div>
             </div>
-            <div class="form-group">
+            <div class="">
               <div class="col-md-12">
                 <b>Please use the correct format for the import.<br> Sample file</b> -> <a href="/data/env/samples/importfw.xlsx">Download</a>
               </div>

@@ -21,8 +21,9 @@
                 </thead>
                 <tbody ng-init="getAllflows('<?php echo $thisarray['p2'];?>','env')">
                     <tr ng-hide="contentLoaded">
-                        <td colspan="3" style="text-align:center;font-size:1.1em;"><i
-                                class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                    <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                     </tr>
                     <tr id="contloaded" class="hide"
                         dir-paginate="d in names | filter:search | orderBy:'name':reverse | itemsPerPage:10"
@@ -69,28 +70,28 @@
                                 <h4>Message flow info</h4>
                             </div>
                             <div class="modal-body container">
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-3">Tags</label>
                                     <div class="col-md-8"><input id="tags" data-role="tagsinput" type="text"
-                                            class="form-control"></div>
+                                            class="form-control form-control-sm"></div>
                                     <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                             class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="You can search this object with tags"><i
                                                 class="mdi mdi-information-variant mdi-18px"></i></button></div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-3" data-trigger="hover"
                                         data-bs-toggle="popover" data-bs-placement="right" data-html="true"
                                         data-content="Please use unique names. The name is limited to 256 chars/numbers"
                                         title="" data-original-title="Name of the message flow/set"
                                         ng-class="{'has-error':!flow.name}">Name</label>
                                     <div class="col-md-9"><input ng-required="true" ng-maxlength="256"
-                                            ng-model="flow.name" type="text" class="form-control"></div>
+                                            ng-model="flow.name" type="text" class="form-control form-control-sm"></div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-3">Comment</label>
                                     <div class="col-md-9"><textarea ng-model="flow.info" rows="2"
-                                            class="form-control"></textarea></div>
+                                            class="form-control form-control-sm"></textarea></div>
                                 </div>
                             </div>
                             <div class="modal-footer">

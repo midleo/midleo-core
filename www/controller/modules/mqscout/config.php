@@ -21,6 +21,28 @@ class Class_mqscout
         $pdo = pdodb::connect();
         $data = sessionClass::getSessUserData();foreach ($data as $key => $val) {${$key} = $val;}
         if (!empty($env)) {$menudataenv = json_decode($env, true);} else { $menudataenv = array();}
+        if(isset($_POST["createpack"])){
+          $hash = textClass::getRandomStr(16);
+          $sql="insert into env_packages (tags,proj,packname,srvtype,packuid,pkgobjects,created_by) values(?,?,?,?,?,?,?)";
+          $stmt = $pdo->prepare($sql);
+          if($stmt->execute(array(
+              htmlspecialchars($_POST["tags"]),
+              htmlspecialchars($_POST["appname"]),
+              htmlspecialchars($_POST["pkgname"]),
+              htmlspecialchars($_POST["objtype"]),
+              $hash,
+              $_POST["finalobj"],
+              $_SESSION["user"]
+          ))){
+              $msg[]="Package created";
+              if(!empty(htmlspecialchars($_POST["tags"]))){
+                gTable::dbsearch(htmlspecialchars($_POST["pkgname"]),"/mqscout/packages/?pkgid=".$hash,htmlspecialchars($_POST["tags"]));
+              }
+          } else {
+              $err[]="Error occured. Please try again.";
+          }
+          header("Location:/mqscout/packages/".$thisarray['p2']);
+        }
         include $website['corebase']."public/modules/css.php";
         echo '<link rel="stylesheet" type="text/css" href="/'.$website['corebase'].'assets/css/jquery-ui.min.css">';
         echo '</head><body class="fix-header card-no-border"><div id="main-wrapper">';
@@ -43,7 +65,7 @@ class Class_mqscout
               "link"=>"/".$page."/qm/",
               "icon"=>false,
               "text"=>"IBM MQ",
-              "active"=>($thisarray['p1'] == "mq")?"active":"",
+              "active"=>($thisarray['p1'] == "qm")?"active":"",
             ),
             array(
               "title"=>"IBM MQ File transfer",

@@ -23,7 +23,11 @@ array_push($brarr,array(
         </thead>
         <tbody ng-init="getAllusers('<?php echo $_SESSION['user'];?>')">
             <tr ng-hide="contentLoaded">
-                <td class="text-center" style="padding: .5rem;"><img src="..." class="card-img-top" alt="..."></td>
+            <td class="text-center">
+                    <p class="card-text text-center placeholder-glow"><span class="placeholder col-7"></span></p>
+                </td>                <td class="text-center">
+                    <p class="card-text text-center placeholder-glow"><span class="placeholder col-7"></span></p>
+                </td>
                 <td class="text-center">
                     <p class="card-text text-center placeholder-glow"><span class="placeholder col-7"></span></p>
                 </td>
@@ -70,55 +74,55 @@ array_push($brarr,array(
                 <form name="form" ng-app>
                     <div class="modal-body form-horizontal form-material">
 
-                        <div class="form-group row" ng-show="user.shortname">
+                        <div class=" row" ng-show="user.shortname">
                             <div class="col-md-3"><span class="uavatar float-end uabig"
                                     style="background-color:var(--usercolor)">{{user.shortname}}</span></div>
                             <div class="col-md-9"></div>
                         </div>
-                        <div class="form-group row">
+                        <div class=" row">
                             <label class="form-control-label text-lg-right col-md-3"
                                 ng-class="{'has-error':!user.name}">User</label>
                             <div class="col-md-9"><input ng-required="true" ng-model="user.name" type="text"
-                                    class="form-control"></div>
+                                    class="form-control form-control-sm"></div>
                         </div>
-                        <div class="form-group row" ng-hide="user.authtype">
+                        <div class=" row" ng-hide="user.authtype">
                             <label class="form-control-label text-lg-right col-md-3">Fullname</label>
-                            <div class="col-md-9"><input ng-model="user.fullname" type="text" class="form-control">
+                            <div class="col-md-9"><input ng-model="user.fullname" type="text" class="form-control form-control-sm">
                             </div>
                         </div>
-                        <div class="form-group row" ng-hide="user.authtype">
+                        <div class=" row" ng-hide="user.authtype">
                             <label class="form-control-label text-lg-right col-md-3">Email</label>
-                            <div class="col-md-9"><input ng-model="user.email" type="text" class="form-control"></div>
+                            <div class="col-md-9"><input ng-model="user.email" type="text" class="form-control form-control-sm"></div>
                         </div>
                         <?php $sql="select ldapserver,ldapinfo from ldap_config";
                                          $q = $pdo->prepare($sql);              
                                          $q->execute();      
                                          if($zobj = $q->fetchAll()){?>
-                        <div class="form-group row ldap-group">
+                        <div class=" row ldap-group">
                             <label class="form-control-label text-lg-right col-md-3">Auth type</label>
-                            <div class="col-md-9"> <select class="form-control" ng-model="user.authtype">
+                            <div class="col-md-9"> <select class="form-control form-control-sm" ng-model="user.authtype">
                                     <option value="">Default</option>
                                     <?php foreach($zobj as $val) { ?><option value="<?php echo $val['ldapserver'];?>">
                                         <?php echo $val['ldapinfo'];?></option><?php } ?>
                                 </select></div>
                         </div>
                         <?php } ?>
-                        <div class="form-group row">
+                        <div class=" row">
                             <label class="form-control-label text-lg-right col-md-3">Title</label>
-                            <div class="col-md-9"><input class="form-control" ng-model="user.title" type="text"></div>
+                            <div class="col-md-9"><input class="form-control form-control-sm" ng-model="user.title" type="text"></div>
                         </div>
-                        <div class="form-group row">
+                        <div class=" row">
                             <label class="form-control-label text-lg-right col-md-3"
                                 ng-class="{'has-error':!user.rights}">Rights</label>
-                            <div class="col-md-9"><select class="form-control" ng-model="user.rights">
+                            <div class="col-md-9"><select class="form-control form-control-sm" ng-model="user.rights">
                                     <option value="">Please select</option>
                                     <?php foreach($accrights as $keyin=>$valin){?><option value="<?php echo $keyin;?>">
                                         <?php echo $valin;?></option><?php } ?>
                                 </select></div>
                         </div>
-                        <div class="form-group row" ng-hide="user.authtype">
+                        <div class=" row" ng-hide="user.authtype">
                             <label class="form-control-label text-lg-right col-md-3">Password</label>
-                            <div class="col-md-9"><input ng-model="user.pass" type="password" class="form-control">
+                            <div class="col-md-9"><input ng-model="user.pass" type="password" class="form-control form-control-sm">
                             </div>
                         </div>
                     </div>

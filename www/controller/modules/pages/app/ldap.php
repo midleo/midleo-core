@@ -15,30 +15,30 @@ array_push($brarr,array(
                     <div class="modal-content">
                         <div class="modal-header">Ldap server configuration</div>
                         <div class="modal-body form-horizontal form-material">
-                            <div class="form-group row">
+                            <div class=" row">
                                 <label class="form-control-label text-lg-right col-md-4">Ldap server</label>
                                 <div class="col-md-8"> <input type="text" name="ldapserver" value=""
-                                        class="form-control" placeholder="eg. ldap.server.lan"></div>
+                                        class="form-control form-control-sm" placeholder="eg. ldap.server.lan"></div>
                             </div>
-                            <div class="form-group row">
+                            <div class=" row">
                                 <label class="form-control-label text-lg-right col-md-4">Ldap port</label>
-                                <div class="col-md-8"> <input type="text" name="ldapport" value="" class="form-control"
+                                <div class="col-md-8"> <input type="text" name="ldapport" value="" class="form-control form-control-sm"
                                         placeholder="eg 389"></div>
                             </div>
-                            <div class="form-group row">
+                            <div class=" row">
                                 <label class="form-control-label text-lg-right col-md-4">Users ldap tree</label>
-                                <div class="col-md-8"> <input type="text" name="ldaptree" value="" class="form-control"
+                                <div class="col-md-8"> <input type="text" name="ldaptree" value="" class="form-control form-control-sm"
                                         placeholder="eg. ou=people,dc=domain,dc=com"></div>
                             </div>
-                            <div class="form-group row">
+                            <div class=" row">
                                 <label class="form-control-label text-lg-right col-md-4">Groups ldap
                                     tree</label>
-                                <div class="col-md-8"> <input type="text" name="ldapgtree" value="" class="form-control"
+                                <div class="col-md-8"> <input type="text" name="ldapgtree" value="" class="form-control form-control-sm"
                                         placeholder="eg. ou=groups,dc=domain,dc=com"></div>
                             </div>
-                            <div class="form-group row">
+                            <div class=" row">
                                 <label class="form-control-label text-lg-right col-md-4">Information</label>
-                                <div class="col-md-8"> <input type="text" name="ldapinfo" value="" class="form-control"
+                                <div class="col-md-8"> <input type="text" name="ldapinfo" value="" class="form-control form-control-sm"
                                         placeholder="Domain Com"></div>
                             </div>
                         </div>

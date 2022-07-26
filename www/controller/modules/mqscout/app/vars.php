@@ -66,32 +66,29 @@
             <div class="modal" id="modal-obj-form" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>Variable</h4>
-                        </div>
                         <form name="form" ng-app>
                             <div class="modal-body container"
                                 style="width:100%;min-height:120px;max-height:500px;overflow-x:hidden;overflow-y:scroll;">
                                 <input ng-model="mq.type" ng-init="mq.type='var'" style="display:none;">
-                                <div class="form-group row">
+                                <div class=" row mb-1">
                                     <label class="form-control-label text-lg-right col-md-5">Tags</label>
                                     <div class="col-md-6"><input id="tags" data-role="tagsinput" type="text"
-                                            class="form-control"></div>
+                                            class="form-control form-control-sm"></div>
                                     <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                             class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="You can search this object with tags"><i
                                                 class="mdi mdi-information-variant mdi-18px"></i></button></div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-5"
                                         ng-class="{'has-error':!mq.varname}">Variable</label>
                                     <div class="col-md-7"> <input ng-model="mq.name" ng-required="true" type="text"
-                                            class="form-control"></div>
+                                            class="form-control form-control-sm"></div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" row">
                                     <label class="form-control-label text-lg-right col-md-5"
                                         ng-class="{'has-error':!mq.type}">Type</label>
-                                    <div class="col-md-7"><select class="form-control" ng-model="mq.vartype"
+                                    <div class="col-md-7"><select class="form-control form-control-sm" ng-model="mq.vartype"
                                             ng-minlength="1" ng-required="true">
                                             <option value="">Please select</option>
                                             <option value="envrelated">Different for each environment</option>
@@ -99,19 +96,19 @@
                                         </select></div>
                                 </div>
                                 <?php foreach($menudataenv as $key=>$val){  ?>
-                                <div class="form-group row" ng-show="mq.vartype=='envrelated'">
+                                <div class=" row" ng-show="mq.vartype=='envrelated'">
                                     <label
                                         class="form-control-label text-lg-right col-md-5"><?php echo $val['name'];?></label>
                                     <div class="col-md-7"><input ng-model="mq.env.<?php echo $val['nameshort'];?>"
-                                            type="text" class="form-control"></div>
+                                            type="text" class="form-control form-control-sm"></div>
                                 </div>
                                 <?php } ?>
-                                <div class="form-group row" ng-show="mq.vartype=='envsame'">
+                                <div class=" row" ng-show="mq.vartype=='envsame'">
                                     <label class="form-control-label text-lg-right col-md-5">Value</label>
                                     <div class="col-md-7"><input ng-model="mq.varvaluesame" type="text"
-                                            class="form-control"></div>
+                                            class="form-control form-control-sm"></div>
                                 </div>
-                                <div class="form-group"><br></div>
+                                <div class=""><br></div>
 
                             </div>
                             <div class="modal-footer">

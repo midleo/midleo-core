@@ -1,7 +1,7 @@
 <?php if (sessionClass::checkAcc($acclist, "appadm,appview")) { 
     array_push($brarr,array(
         "title"=>"Create new package",
-        "link"=>"/env/packages/".$thisarray['p2']."/?type=new",
+        "link"=>"/mqscout/packages/".$thisarray['p2']."/?type=new",
         "icon"=>"mdi-plus",
         "active"=>false,
       ));
@@ -146,7 +146,7 @@
                         <th class="text-center" width="100px">Action</th>
                     </tr>
                 </thead>
-                <tbody ng-init="getAllpack('<?php echo $thisarray['p2'];?>')">
+                <tbody ng-init="getAllpack('<?php echo $thisarray['p3'];?>')">
                     <tr ng-hide="contentLoaded">
                         <td colspan="9" style="text-align:center;font-size:1.1em;"><i
                                 class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
@@ -171,7 +171,7 @@
                                 <i class="mdi mdi-dots-horizontal"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><button ng-click="getQMlist('<?php echo $thisarray['p2'];?>',d.packuid,d.id)"
+                                <li><button ng-click="getQMlist('<?php echo $thisarray['p3'];?>',d.packuid,d.id)"
                                         class="dropdown-item mql{{d.id}}" ng-show="d.srvtype=='qm'"><i
                                             class="mdi mdi-eye-outline"></i>&nbsp; Preview</button></li>
                                 <li> <button ng-show="d.isgitprepared" ng-click="getGitInfo(d.packuid,d.id)"
@@ -180,7 +180,7 @@
                                             class="mdi mdi-git"></i>&nbsp;Version history</button></li>
                                 <li> <button data-bs-toggle="tooltip" onmouseenter="$(this).tooltip('show')"
                                         title="Prepare a package" type="button"
-                                        ng-click="preparepack('<?php echo $thisarray['p2'];?>',d.id)"
+                                        ng-click="preparepack('<?php echo $thisarray['p3'];?>',d.id)"
                                         class="dropdown-item btn-sm waves-effect prepb{{d.id}}"><i
                                             class="mdi mdi-file-document-multiple-outline"></i>&nbsp;Prepare</button>
                                 </li>
@@ -292,7 +292,7 @@
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i
                         class="mdi mdi-close"></i>&nbsp;Close</button>
                 <button ng-show="depl.deplenv" type="button" class="waves-effect waves-light btn btn-info btn-sm"
-                    ng-click="mqpreview('<?php echo $thisarray['p2'];?>')"><i class="mdi mdi-eye-outline"></i>&nbsp;Make
+                    ng-click="mqpreview('<?php echo $thisarray['p3'];?>')"><i class="mdi mdi-eye-outline"></i>&nbsp;Make
                     preview</button>
             </div>
         </div>

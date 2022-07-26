@@ -32,8 +32,13 @@
                     </thead>
                     <tbody ng-init="getAlldns('<?php echo $thisarray['p2'];?>')">
                         <tr ng-hide="contentLoaded">
-                            <td colspan="7" style="text-align:center;font-size:1.1em;"><i
-                                    class="mdi mdi-loading iconspin"></i>&nbsp;Loading...</td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
+                        <td class="text-center placeholder-glow"><small class="placeholder col-12"></small></td>
                         </tr>
                         <tr id="contloaded" class="hide"
                             dir-paginate="d in names | filter:search | orderBy:'dnsname':reverse | itemsPerPage:10"
@@ -62,14 +67,13 @@
                 <div class="modal" id="modal-obj-form" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        <div class="modal-header"><h4>DNS Entry</h4></div>
                             <form name="form" ng-app>
                                 <div class="modal-body container form-material"
                                     style="width:100%;min-height:300px;max-height:500px;overflow-x:hidden;overflow-y:scroll;">
-                                    <div class="form-group row">
+                                    <div class=" row">
                                         <label class="form-control-label text-lg-right col-md-3">Tags</label>
                                         <div class="col-md-8"><input id="tags" data-role="tagsinput" type="text"
-                                                class="form-control"></div>
+                                                class="form-control form-control-sm"></div>
                                         <div class="col-md-1" style="padding-left:0px;"><button type="button"
                                                 class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top"
                                                 title="You can search this object with tags"><i
@@ -79,42 +83,42 @@
                                     <input ng-model="dns.proj" style="display:none;"
                                         value="<?php echo $thisarray['p2'];?>">
                                     <?php } ?>
-                                    <div class="form-group row">
+                                    <div class=" row">
                                         <label class="form-control-label text-lg-right col-md-3">Server</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control autocomplsrv"
+                                            <input type="text" class="form-control form-control-sm autocomplsrv"
                                                 placeholder="write the server name" />
                                             <input type="text" id="server" style="display:none;" />
                                             <input type="text" id="serverid" style="display:none;" />
                                             <input type="text" id="serverip" style="display:none;" />
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class=" row">
                                         <label class="form-control-label text-lg-right col-md-3">DNS name</label>
                                         <div class="col-md-9"> <input ng-model="dns.dnsname" ng-required="true"
-                                                type="text" class="form-control"></div>
+                                                type="text" class="form-control form-control-sm"></div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class=" row">
                                         <label class="form-control-label text-lg-right col-md-3">TTL</label>
                                         <div class="col-md-9"> <input ng-model="dns.ttl" ng-required="true" type="text"
-                                                class="form-control"></div>
+                                                class="form-control form-control-sm"></div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class=" row">
                                         <label class="form-control-label text-lg-right col-md-3">Class</label>
                                         <div class="col-md-9">
                                             <select name="dnsclass" ng-model="dns.dnsclass" ng-required="true"
-                                                class="form-control">
+                                                class="form-control form-control-sm">
                                                 <option value="">Please select</option>
                                                 <option value="IN">Internet</option>
                                                 <option value="CH">Chaos</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class=" row">
                                         <label class="form-control-label text-lg-right col-md-3">DNS Type</label>
                                         <div class="col-md-9">
                                             <select name="dnsclass" ng-model="dns.dnstype" ng-required="true"
-                                                class="form-control">
+                                                class="form-control form-control-sm">
                                                 <option value="">Please select</option>
                                                 <option value="A">Address record</option>
                                                 <option value="AAAA">IPv6 address record</option>
@@ -149,10 +153,10 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class=" row">
                                         <label class="form-control-label text-lg-right col-md-3">Record</label>
                                         <div class="col-md-9"> <textarea ng-model="dns.dnsrecord" ng-required="true"
-                                                class="form-control"></textarea></div>
+                                                class="form-control form-control-sm"></textarea></div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
