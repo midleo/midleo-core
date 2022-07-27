@@ -1,9 +1,17 @@
 <?php
-/*ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);*/
-include "config.db.php";
-include "config.vars.php";
+$debug=false;
+if($debug){
+   ini_set('display_errors', 1);
+   ini_set('display_startup_errors', 1);
+   error_reporting(E_ALL);
+} else {
+   ini_set('display_errors','Off');
+   ini_set('display_startup_errors', 0);
+}
+if(!$corebaseurl){
+    include "config.db.php";
+    include "config.vars.php";
+}
 $modulelist = array();
 if (!empty($website) && !is_array($website)) {$website = json_decode($website, true);}
 if (!empty($website['varheader'])) {define("varheader", $website['varheader']);}
